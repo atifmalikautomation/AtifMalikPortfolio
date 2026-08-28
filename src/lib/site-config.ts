@@ -40,7 +40,7 @@ export const siteConfig = {
 
   stats: [
     { label: "Projects Delivered", value: "800+", emoji: "\uD83D\uDE80" },
-    { label: "Years Experience", value: "5+", emoji: "\uD83D\uDCC5" },
+    { label: "Years Experience", value: "5+", emoji: "\uD83D\uDDD3\uFE0F" },
     { label: "Fiverr & Upwork", value: "5\u2605", emoji: "\u2B50" },
   ],
 
