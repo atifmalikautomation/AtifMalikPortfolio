@@ -91,7 +91,7 @@ export function ServicesGrid() {
                 <span className="w-10 h-10 rounded-xl bg-pink/10 flex items-center justify-center text-lg shrink-0">
                   {service.icon}
                 </span>
-                <span className="inline-flex px-3 py-1 rounded-full bg-pink text-white text-xs font-display font-bold whitespace-nowrap">
+                <span className="inline-flex px-3 py-1 rounded-full bg-pink text-white text-xs font-display font-bold">
                   {service.title}
                 </span>
               </div>

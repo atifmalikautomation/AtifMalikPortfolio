@@ -53,7 +53,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.55 }}
-            className="font-display font-extrabold text-[3rem] leading-[1] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-wh tracking-[-0.03em]"
+            className="font-display font-extrabold text-[2.5rem] leading-[1] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-wh tracking-[-0.03em]"
           >
             <span
               className="text-pink inline-block -rotate-2 align-middle mr-2 sm:mr-3 text-[0.55em] font-bold"
@@ -78,7 +78,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.55 }}
-            className="font-display font-extrabold text-[1.9rem] leading-[1] sm:text-[2.6rem] md:text-[3.3rem] lg:text-[4rem] xl:text-[4.5rem] text-wh tracking-[-0.05em] whitespace-nowrap mt-1"
+            className="font-display font-extrabold text-[1.35rem] leading-[1.1] sm:text-[2.6rem] md:text-[3.3rem] lg:text-[4rem] xl:text-[4.5rem] text-wh tracking-[-0.05em] sm:whitespace-nowrap mt-1"
           >
             <span>&amp; AI Video Systems That </span>
             <span className="relative inline-block">
