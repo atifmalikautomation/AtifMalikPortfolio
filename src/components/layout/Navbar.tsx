@@ -73,9 +73,11 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Burger */}
+          {/* Mobile: theme toggle + burger */}
+          <div className="lg:hidden flex items-center gap-3 z-[101]">
+            <ThemeToggle />
           <button
-            className="lg:hidden flex flex-col gap-[5px] p-2 z-[101]"
+            className="flex flex-col gap-[5px] p-2"
             onClick={toggleMobile}
             aria-label="Toggle menu"
           >
@@ -83,6 +85,7 @@ export function Navbar() {
             <span className={clsx("w-5 h-[1.5px] bg-wh transition-all duration-300", mobileOpen && "opacity-0")} />
             <span className={clsx("w-5 h-[1.5px] bg-wh transition-all duration-300", mobileOpen && "-rotate-45 -translate-y-[6.5px]")} />
           </button>
+          </div>
         </div>
       </nav>
 

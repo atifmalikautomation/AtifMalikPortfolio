@@ -92,7 +92,7 @@ export function Hero() {
               >
                 Convert
               </span>
-              <span className="absolute -right-5 -top-3 text-pink sm:-right-7 sm:-top-4" aria-hidden="true">
+              <span className="absolute -right-5 -top-3 text-pink sm:-right-7 sm:-top-4 hidden sm:block" aria-hidden="true">
                 <Sparkles size={22} />
               </span>
             </span>
