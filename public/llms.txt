@@ -1,0 +1,38 @@
+# Atif Malik — AI Video Production & Automation Agency
+# https://atifmalik.me
+
+## Who
+Atif Malik is Pakistan's No.1 AI Video Production and Automation specialist. He builds cinematic AI video content, end-to-end automation systems, and intelligent AI agents for businesses worldwide.
+
+## Services
+- AI Video Production: Cinematic AI videos, product ads, social content using Higgsfield AI, Seedance 2.0, Kling 3.0, Nano Banana Pro, Google VEO, ElevenLabs, Remotion
+- AI Automation: n8n workflows, GoHighLevel, API integrations, CRM automation, business process automation
+- AI Agents: Customer support agents, sales qualification, lead capture, appointment booking
+- AI Chatbots: Multi-platform bots for WhatsApp, Instagram, Messenger, Telegram, websites
+- AI Content Systems: Automated content pipelines, social media automation, publishing workflows
+- AI Websites & Web Apps: Premium Next.js sites, SaaS MVPs, dashboards, custom tools
+- Lead & Sales Automation: Lead capture, qualification, follow-up sequences, CRM, booking automation
+- Custom AI Systems: Bespoke architecture for complex requirements
+
+## Key Pages
+- Home: https://atifmalik.me/
+- Portfolio: https://atifmalik.me/portfolio
+- Services: https://atifmalik.me/services
+- About: https://atifmalik.me/about
+- Contact: https://atifmalik.me/contact
+- ROI Calculator: https://atifmalik.me/calculator
+- Insights: https://atifmalik.me/insights
+- Chat: https://atifmalik.me/chat
+
+## Pricing
+- Foundation: From $500 (single automation/chatbot, 2-week delivery)
+- Production: From $2,000 (up to 5 workflows + AI video, 4-week delivery)
+- Scale: From $5,000 (full AI infrastructure, 6-8 weeks)
+- Enterprise: Custom quote
+
+## Location
+Based in Pakistan, serving clients in 12+ countries worldwide.
+
+## Contact
+- Website: https://atifmalik.me/contact
+- Chat: https://atifmalik.me/chat
