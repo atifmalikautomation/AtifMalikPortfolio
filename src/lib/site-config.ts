@@ -15,11 +15,11 @@ export const siteConfig = {
 
   social: {
     youtube: "https://youtube.com/@atifmalikfreelancer",
-    instagram: "https://instagram.com/atifmalikfreelancer",
-    linkedin: "https://linkedin.com/in/atif-malik-/",
-    twitter: "https://tiktok.com/@atifmalikautomation",
+    instagram: "https://www.instagram.com/atifmalik_ai/",
+    linkedin: "https://www.linkedin.com/in/atif-malik-745096324/",
+    twitter: "https://www.tiktok.com/@atifmalikautomation",
     fiverr: "https://fiverr.com/atifmalik",
-    facebook: "https://facebook.com/profile.php?id=100087796622999",
+    facebook: "https://web.facebook.com/profile.php?id=100087796622999",
   },
 
   nav: [
