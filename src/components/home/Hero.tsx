@@ -53,7 +53,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.55 }}
-            className="font-display font-extrabold text-[2.5rem] leading-[1] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-wh tracking-[-0.03em]"
+            className="font-display font-extrabold text-[2.8rem] leading-[0.95] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-wh tracking-[-0.03em]"
           >
             <span
               className="text-pink inline-block -rotate-2 align-middle mr-2 sm:mr-3 text-[0.55em] font-bold"
@@ -78,7 +78,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.55 }}
-            className="font-display font-extrabold text-[1.35rem] leading-[1.1] sm:text-[2.6rem] md:text-[3.3rem] lg:text-[4rem] xl:text-[4.5rem] text-wh tracking-[-0.05em] sm:whitespace-nowrap mt-1"
+            className="font-display font-extrabold text-[1.7rem] leading-[1.1] sm:text-[2.6rem] md:text-[3.3rem] lg:text-[4rem] xl:text-[4.5rem] text-wh tracking-[-0.03em] sm:whitespace-nowrap mt-1"
           >
             <span>&amp; AI Video Systems That </span>
             <span className="relative inline-block">
@@ -98,23 +98,23 @@ export function Hero() {
             </span>
           </motion.h1>
 
-          {/* Stats */}
+          {/* Stats — Yasir style: icon top, value, label */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65 }}
-            className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-5 mb-5"
+            className="grid grid-cols-3 gap-3 sm:gap-6 mt-6 mb-6 w-full max-w-md md:max-w-xl mx-auto"
           >
             {siteConfig.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex items-center gap-2.5"
+                className="flex flex-col items-center text-center gap-1"
               >
-                <span className="w-10 h-10 rounded-xl bg-pink/15 flex items-center justify-center text-lg shrink-0">
+                <span className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-pink/15 flex items-center justify-center text-xl mb-1">
                   {stat.emoji}
                 </span>
-                <span className="font-display text-xl md:text-2xl font-extrabold text-pink leading-none">{stat.value}</span>
-                <span className="font-mono text-[9px] md:text-[10px] text-gr tracking-[0.06em] uppercase">{stat.label}</span>
+                <span className="font-display text-xl sm:text-2xl font-extrabold text-pink leading-none">{stat.value}</span>
+                <span className="font-mono text-[8px] sm:text-[10px] text-gr tracking-[0.08em] uppercase leading-tight">{stat.label}</span>
               </div>
             ))}
           </motion.div>
@@ -124,13 +124,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="mb-3"
+            className="mb-3 w-full sm:w-auto px-2 sm:px-0"
           >
             <Link
               href="/book"
-              className="hero-cta-btn"
+              className="hero-cta-btn w-full sm:w-auto"
             >
-              <span className="hero-cta-inner-btn">
+              <span className="hero-cta-inner-btn w-full sm:w-auto justify-center">
                 <Sparkles size={18} /> Schedule a Free 1:1 Call <span className="ml-1">&rarr;</span>
               </span>
             </Link>
