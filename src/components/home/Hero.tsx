@@ -92,8 +92,8 @@ export function Hero() {
               >
                 Convert
               </span>
-              <span className="absolute -right-5 -top-3 text-pink sm:-right-7 sm:-top-4 hidden sm:block" aria-hidden="true">
-                <Sparkles size={22} />
+              <span className="absolute -right-4 -top-1 text-pink sm:-right-7 sm:-top-4" aria-hidden="true">
+                <Sparkles className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </span>
             </span>
           </motion.h1>
