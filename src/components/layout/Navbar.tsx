@@ -64,12 +64,10 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-4">
             <ThemeToggle />
             <Link
-              href={siteConfig.contact.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2 rounded-[10px] bg-pink text-white text-sm font-semibold hover:brightness-[1.15] transition-all"
+              href="/book"
+              className="px-5 py-2 rounded-full border border-pink text-pink text-sm font-semibold hover:bg-pink hover:text-white transition-all inline-flex items-center gap-1.5"
             >
-              Book Free Audit
+              Book Free Audit <span>&rarr;</span>
             </Link>
           </div>
 
@@ -108,12 +106,10 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href={siteConfig.contact.calendly}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 px-8 py-3 rounded-full bg-pink text-white font-semibold"
+              href="/book"
+              className="mt-4 px-8 py-3 rounded-full border border-pink text-pink font-semibold inline-flex items-center gap-2 hover:bg-pink hover:text-white transition-all"
             >
-              Book Free Audit
+              Book Free Audit <span>&rarr;</span>
             </Link>
           </motion.div>
         )}
