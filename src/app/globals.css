@@ -397,6 +397,15 @@ img.emoji {
   background: linear-gradient(90deg, var(--pink) 0%, #EAB308 50%, #EF4444 100%);
 }
 
+/* ═══ Nav scrolled ═══ */
+.nav-scrolled {
+  background: rgba(10, 0, 8, 0.92);
+}
+html.light .nav-scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+}
+
 /* ═══ Footer ═══ */
 .footer-bg {
   background: #0D000A;

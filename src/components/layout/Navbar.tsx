@@ -34,7 +34,7 @@ export function Navbar() {
       <nav
         className={clsx(
           "fixed top-0 left-0 right-0 z-[100] py-4 transition-all duration-[350ms]",
-          scrolled && "bg-[rgba(10,0,8,0.92)] backdrop-blur-[20px] border-b border-bd"
+          scrolled && "nav-scrolled backdrop-blur-[20px] border-b border-bd"
         )}
       >
         <div className="flex justify-between items-center max-w-[1200px] mx-auto px-4 sm:px-8">
