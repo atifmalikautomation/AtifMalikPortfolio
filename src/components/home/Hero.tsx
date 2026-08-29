@@ -151,7 +151,7 @@ export function Hero() {
           >
             <a href="#about" className="inline-flex flex-col items-center gap-0.5 text-gr hover:text-wh transition-colors">
               <span className="font-mono text-[11px] tracking-[0.14em] uppercase">Meet Atif</span>
-              <span className="text-sm">&darr;</span>
+              <span className="text-sm animate-bounce">&darr;</span>
             </a>
           </motion.div>
         </div>
