@@ -65,7 +65,7 @@ export function Navbar() {
             <ThemeToggle />
             <Link
               href="/book"
-              className="px-5 py-2 rounded-full border border-pink text-pink text-sm font-semibold hover:bg-pink hover:text-white transition-all inline-flex items-center gap-1.5"
+              className="nav-book-btn px-5 py-2 rounded-full text-sm font-semibold transition-all inline-flex items-center gap-1.5"
             >
               Book Free Audit <span>&rarr;</span>
             </Link>
@@ -107,7 +107,7 @@ export function Navbar() {
             ))}
             <Link
               href="/book"
-              className="mt-4 px-8 py-3 rounded-full border border-pink text-pink font-semibold inline-flex items-center gap-2 hover:bg-pink hover:text-white transition-all"
+              className="nav-book-btn mt-4 px-8 py-3 rounded-full font-semibold inline-flex items-center gap-2 transition-all"
             >
               Book Free Audit <span>&rarr;</span>
             </Link>

@@ -397,6 +397,26 @@ img.emoji {
   background: linear-gradient(90deg, var(--pink) 0%, #EAB308 50%, #EF4444 100%);
 }
 
+/* ═══ Nav Book Button ═══ */
+.nav-book-btn {
+  background: var(--pink);
+  color: #fff;
+  border: 1.5px solid var(--pink);
+}
+.nav-book-btn:hover {
+  background: var(--pink-hover);
+  border-color: var(--pink-hover);
+}
+html.light .nav-book-btn {
+  background: transparent;
+  color: var(--pink);
+  border: 1.5px solid var(--pink);
+}
+html.light .nav-book-btn:hover {
+  background: var(--pink);
+  color: #fff;
+}
+
 /* ═══ Hero CTA Button (Yasir-style gradient border + shimmer) ═══ */
 .hero-cta-btn {
   position: relative;
