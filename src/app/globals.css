@@ -397,6 +397,14 @@ img.emoji {
   background: linear-gradient(90deg, var(--pink) 0%, #EAB308 50%, #EF4444 100%);
 }
 
+/* ═══ Footer ═══ */
+.footer-bg {
+  background: #0D000A;
+}
+html.light .footer-bg {
+  background: #F5F0EB;
+}
+
 /* ═══ Nav Book Button ═══ */
 .nav-book-btn {
   background: var(--pink);
