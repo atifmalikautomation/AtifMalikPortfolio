@@ -9,39 +9,45 @@ export function CallPopup() {
   const [countdown, setCountdown] = useState(30);
   const [accepted, setAccepted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const wantsPlayRef = useRef(false);
 
   // Stop ringtone
   const stopRingtone = useCallback(() => {
+    wantsPlayRef.current = false;
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
   }, []);
 
-  // Play ringtone
+  // Preload ringtone on mount
+  useEffect(() => {
+    const audio = new Audio("/ringtone.mp3");
+    audio.loop = true;
+    audio.volume = 0.5;
+    audio.preload = "auto";
+    audioRef.current = audio;
+  }, []);
+
+  // Play ringtone — if blocked, retry on next user click/tap/keydown
   const playRingtone = useCallback(() => {
-    try {
-      if (!audioRef.current) {
-        audioRef.current = new Audio("/ringtone.mp3");
-        audioRef.current.loop = true;
-        audioRef.current.volume = 0.5;
-      }
-      const playPromise = audioRef.current.play();
-      if (playPromise) {
-        playPromise.catch(() => {
-          // Browser blocked autoplay — retry on next user interaction
-          const tryPlay = () => {
-            audioRef.current?.play().catch(() => {});
-            document.removeEventListener("click", tryPlay);
-            document.removeEventListener("touchstart", tryPlay);
-            document.removeEventListener("scroll", tryPlay);
-          };
-          document.addEventListener("click", tryPlay, { once: true });
-          document.addEventListener("touchstart", tryPlay, { once: true });
-          document.addEventListener("scroll", tryPlay, { once: true });
-        });
-      }
-    } catch {}
+    if (!audioRef.current) return;
+    wantsPlayRef.current = true;
+    audioRef.current.currentTime = 0;
+    audioRef.current.play().catch(() => {
+      // Browser blocked — retry on next real user gesture
+      const retryPlay = () => {
+        if (wantsPlayRef.current && audioRef.current) {
+          audioRef.current.play().catch(() => {});
+        }
+        document.removeEventListener("click", retryPlay);
+        document.removeEventListener("touchstart", retryPlay);
+        document.removeEventListener("keydown", retryPlay);
+      };
+      document.addEventListener("click", retryPlay, { once: true });
+      document.addEventListener("touchstart", retryPlay, { once: true });
+      document.addEventListener("keydown", retryPlay, { once: true });
+    });
   }, []);
 
   useEffect(() => {
