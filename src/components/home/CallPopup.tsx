@@ -26,7 +26,21 @@ export function CallPopup() {
         audioRef.current.loop = true;
         audioRef.current.volume = 0.5;
       }
-      audioRef.current.play().catch(() => {});
+      const playPromise = audioRef.current.play();
+      if (playPromise) {
+        playPromise.catch(() => {
+          // Browser blocked autoplay — retry on next user interaction
+          const tryPlay = () => {
+            audioRef.current?.play().catch(() => {});
+            document.removeEventListener("click", tryPlay);
+            document.removeEventListener("touchstart", tryPlay);
+            document.removeEventListener("scroll", tryPlay);
+          };
+          document.addEventListener("click", tryPlay, { once: true });
+          document.addEventListener("touchstart", tryPlay, { once: true });
+          document.addEventListener("scroll", tryPlay, { once: true });
+        });
+      }
     } catch {}
   }, []);
 
@@ -81,7 +95,7 @@ export function CallPopup() {
           animate={{ y: 0 }}
           exit={{ y: "140%" }}
           transition={{ type: "spring", damping: 20, stiffness: 200 }}
-          className="fixed bottom-6 left-6 w-[320px] max-w-[calc(100vw-3rem)] z-[9999]"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 w-[300px] sm:w-[320px] max-w-[calc(100vw-2rem)] z-[9999]"
         >
           {/* Card — white in light, dark in dark */}
           <div className="rounded-[28px] bg-card border border-bd shadow-[0_24px_60px_-12px_rgba(224,0,138,0.15),0_0_0_1px_var(--bd)] overflow-hidden pb-2">

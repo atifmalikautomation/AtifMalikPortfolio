@@ -135,7 +135,7 @@ export function ChatPageContent() {
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="w-full max-w-md md:max-w-3xl rounded-[2rem] md:grid md:grid-cols-2 md:gap-0 overflow-hidden"
+          className="w-full max-w-md md:max-w-3xl rounded-2xl sm:rounded-[2rem] md:grid md:grid-cols-2 md:gap-0 overflow-hidden mx-4 sm:mx-0"
           style={{
             background: "#ffffff",
             border: "1px solid rgba(0,0,0,0.06)",
@@ -270,9 +270,9 @@ export function ChatPageContent() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Link href="/" className="text-[11px] font-mono transition-colors" style={{ color: "#bbb" }}>🌐 Visit site ↗</Link>
-          <a href="https://wa.me/923196780720" target="_blank" rel="noopener noreferrer" className="ml-2 px-3 py-1.5 rounded-full bg-[#25D366] text-white text-[11px] font-semibold hover:brightness-110 transition-all flex items-center gap-1">
-            📞 WhatsApp call
+          <Link href="/" className="hidden sm:inline text-[11px] font-mono transition-colors" style={{ color: "#bbb" }}>🌐 Site ↗</Link>
+          <a href="https://wa.me/923196780720" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-full bg-[#25D366] text-white text-[11px] font-semibold hover:brightness-110 transition-all flex items-center gap-1">
+            📞 <span className="hidden sm:inline">WhatsApp</span> Call
           </a>
         </div>
       </div>

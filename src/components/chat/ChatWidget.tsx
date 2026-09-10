@@ -57,15 +57,15 @@ export function ChatWidget() {
           initial={{ y: 16, opacity: 0, scale: 0.97 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.2 }}
-          className="chat-popup-border"
+          className="chat-popup-border w-[calc(100vw-40px)] sm:w-[326px]"
           style={{
-            width: 326,
+            maxWidth: 326,
             borderRadius: 23,
             padding: 3,
             boxShadow: "0 16px 50px rgba(0,0,0,0.14)",
           }}
         >
-          <div style={{ borderRadius: 20, overflow: "hidden", background: "linear-gradient(170deg, #fce8f1 0%, #f5d4e6 40%, #edd0e2 70%, #f0d8e8 100%)" }}>
+          <div style={{ borderRadius: 20, overflow: "hidden", background: "linear-gradient(170deg, #fce8f1 0%, #f5d4e6 40%, #edd0e2 70%, #f0d8e8 100%)", width: "100%" }}>
           {/* Header */}
           <div style={{ padding: "20px 20px 8px 20px", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>

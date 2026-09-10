@@ -111,7 +111,7 @@ export function Footer() {
 
             {/* Contact */}
             <div className="space-y-2.5 mb-5">
-              <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2.5 text-[13px] hover:brightness-125 transition-all" style={{ color: "rgba(255,255,255,0.9)" }}>
+              <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-2.5 text-[12px] sm:text-[13px] hover:brightness-125 transition-all break-all" style={{ color: "rgba(255,255,255,0.9)" }}>
                 <span className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(255,255,255,0.1)" }}>
                   <Mail size={13} />
                 </span>

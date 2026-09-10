@@ -26,7 +26,7 @@ export function WhatsAppButton() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25 }}
-            className="fixed bottom-24 right-6 z-50 w-[340px] rounded-2xl overflow-hidden shadow-[0_16px_60px_rgba(0,0,0,0.5)]"
+            className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-32px)] sm:w-[340px] max-w-[340px] rounded-2xl overflow-hidden shadow-[0_16px_60px_rgba(0,0,0,0.5)]"
             style={{ border: "1px solid rgba(37,211,102,0.15)" }}
           >
             {/* Header — WhatsApp green */}
