@@ -267,8 +267,7 @@ export function ChatPageContent() {
           <div className="flex flex-wrap gap-2 py-1">
             {bubble.items.map(a => (
               <button key={a.panel} onClick={() => setPanel(a.panel)}
-                className="cg-accent cg-gold rounded-2xl px-4 py-2.5 text-white font-display font-bold text-[14px] transition-transform hover:scale-[1.03] active:scale-95 cursor-pointer"
-                style={{ border: "1px solid rgba(255,255,255,0.3)" }}>
+                className="cg-accent cg-gold rounded-2xl px-4 py-2.5 text-white font-display font-bold text-[14px] transition-transform hover:scale-[1.03] active:scale-95 cursor-pointer">
                 {a.label}
               </button>
             ))}
@@ -450,15 +449,12 @@ export function ChatPageContent() {
                     transition={{ type: "spring", stiffness: 380, damping: 28 }}
                     className={clsx("flex gap-2.5", isMe ? "flex-row-reverse" : "flex-row")}>
                     {!isMe ? (
-                      <div className="relative shrink-0">
-                        <div className="w-9 h-9 rounded-full overflow-hidden"><Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" /></div>
-                        <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-[10px]" style={{ background: "#1a1a1a", border: "2px solid #fff" }}>💬</span>
-                      </div>
+                      <div className="w-9 h-9 rounded-full overflow-hidden shrink-0"><Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" /></div>
                     ) : <Av emoji={userAvatar} color={userColor} size={36} />}
                     <div className={clsx("flex flex-col", isMe ? "items-end" : "items-start")} style={{ maxWidth: "min(78%, 520px)" }}>
                       {!isMe && <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>}
-                      <div className={clsx("px-4 py-2.5", isMe ? "cg-accent text-white rounded-3xl rounded-tr-md" : "rounded-3xl rounded-tl-md")}
-                        style={!isMe ? { color: "#444", background: "#fff", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" } : undefined}>
+                      <div className={clsx("px-4 py-2.5", isMe ? "cg-accent text-white rounded-3xl rounded-tr-md" : "cg rounded-3xl rounded-tl-md")}
+                        style={!isMe ? { color: "#444" } : undefined}>
                         {msg.bubbles.map((b, j) => <div key={j}>{renderBubble(b)}</div>)}
                       </div>
                       <div className={clsx("flex items-center gap-1 mt-0.5 px-1 text-[10px]", isMe && "flex-row-reverse")} style={{ color: "rgba(0,0,0,0.3)" }}>
@@ -479,7 +475,7 @@ export function ChatPageContent() {
                   <div className="w-9 h-9 rounded-full overflow-hidden shrink-0"><Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" /></div>
                   <div className="flex flex-col items-start" style={{ maxWidth: "min(78%, 520px)" }}>
                     <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>
-                    <div className="rounded-3xl rounded-tl-md px-4 py-2.5 text-[15px] whitespace-pre-wrap leading-relaxed break-words" style={{ color: "#444", background: "#fff", border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}>
+                    <div className="cg rounded-3xl rounded-tl-md px-4 py-2.5 text-[15px] whitespace-pre-wrap leading-relaxed break-words" style={{ color: "#444" }}>
                       {streamingText}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse rounded-sm" style={{ background: "rgba(224,0,138,0.4)" }} />
                     </div>
                   </div>
@@ -494,8 +490,8 @@ export function ChatPageContent() {
             </div>
           </div>
 
-          {/* Row 1: Panel action pills — open modals */}
-          <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto">
+          {/* Row 1: Panel action pills — open modals (Yasir: glass rounded-full) */}
+          <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto pb-0.5">
             {[
               { label: "📅 Book a call", panel: "book" },
               { label: "🚀 Start a project", panel: "project" },
@@ -503,15 +499,15 @@ export function ChatPageContent() {
               { label: "💰 Pricing", panel: "pricing" },
             ].map(a => (
               <button key={a.panel} onClick={() => setPanel(a.panel)}
-                className="rounded-full px-3.5 py-1.5 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
-                style={{ color: "#E0008A", background: "rgba(255,255,255,0.55)", border: "1px solid rgba(224,0,138,0.15)", backdropFilter: "blur(12px)" }}>
+                className="cg rounded-full px-3.5 py-1.5 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
+                style={{ color: "#E0008A" }}>
                 {a.label}
               </button>
             ))}
           </div>
 
-          {/* Row 2: Topic chip suggestions — send messages to AI */}
-          <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto">
+          {/* Row 2: Topic chips — send to AI (Yasir: glass rounded-full) */}
+          <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto pb-0.5">
             {[
               { label: "About me 👋", msg: "Tell me about yourself" },
               { label: "Services 🛠️", msg: "What services do you offer?" },
@@ -521,8 +517,8 @@ export function ChatPageContent() {
               { label: "Work with me 🤝", msg: "How can I work with you? I want to hire you" },
             ].map(c => (
               <button key={c.label} onClick={() => sendMessage(c.msg)}
-                className="rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
-                style={{ color: "#E0008A", background: "rgba(255,255,255,0.55)", border: "1px solid rgba(224,0,138,0.12)", backdropFilter: "blur(12px)" }}>
+                className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
+                style={{ color: "#E0008A" }}>
                 {c.label}
               </button>
             ))}
