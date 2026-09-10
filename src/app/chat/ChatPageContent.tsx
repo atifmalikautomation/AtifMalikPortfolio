@@ -41,6 +41,73 @@ const WELCOME_BUBBLES: BubbleKind[] = [
   { kind: "actions", items: [{ label: "📅 Book a call", panel: "book" }, { label: "🚀 Start a project", panel: "project" }, { label: "👀 See my work", panel: "portfolio" }, { label: "💰 Pricing", panel: "pricing" }] },
 ];
 
+/* Predefined topic responses — Yasir exact system: chips trigger LOCAL responses, NOT AI */
+const INITIAL_CHIPS = ["about", "services", "work", "pricing", "process", "hire"];
+
+interface Topic {
+  id: string;
+  chip: string;
+  bubbles: BubbleKind[];
+  followups: string[];
+}
+
+const TOPICS: Topic[] = [
+  {
+    id: "about", chip: "About me 👋",
+    bubbles: [
+      { kind: "text", text: "Sure, quick version. I'm Atif, an AI video production and automation specialist. I've been doing this for over 5 years now, shipped 800+ projects for clients all over the world, and I'm 5-star rated on Fiverr and Upwork." },
+      { kind: "text", text: "Here's what makes me different. I don't just hand you a pretty website or video. I build the smart stuff behind it too — the AI and automation that actually captures leads and turns them into clients. So your system earns its keep." },
+    ],
+    followups: ["services", "work", "process", "hire"],
+  },
+  {
+    id: "services", chip: "Services 🛠️",
+    bubbles: [
+      { kind: "text", text: "Happy to walk you through it. Here's everything I build 👇" },
+      { kind: "text", text: "🎬 AI Video Production\n⚙️ AI Automation (n8n)\n💬 AI Chatbots\n🤖 AI Agents\n📊 GoHighLevel CRM\n🌐 Websites & Web Apps\n📈 Lead & Sales Automation\n🔧 Custom AI Systems" },
+      { kind: "text", text: "Most folks end up combining a few of these. The website and the automation system that runs it usually ship together." },
+    ],
+    followups: ["work", "pricing", "hire", "process"],
+  },
+  {
+    id: "work", chip: "My work 👀",
+    bubbles: [
+      { kind: "text", text: "Love showing this off 😄 I've done 800+ projects across all kinds of industries. A few highlights:" },
+      { kind: "text", text: "🎬 AI Commercial for The Optician Project — cinematic 30s ad\n📖 Bayou Savage — full AI graphic novel (120 pages)\n⚡ n8n Lead Automation — 40hrs/wk saved\n💬 WhatsApp AI Chatbot — 80% automated\n🎓 Academic Support Platform — 40 routes, full-stack\n🛠️ ToolVault — AI tools marketplace SaaS" },
+      { kind: "actions", items: [{ label: "👀 See full portfolio", panel: "portfolio" }, { label: "🚀 Start a project", panel: "project" }] },
+    ],
+    followups: ["services", "pricing", "hire"],
+  },
+  {
+    id: "pricing", chip: "Pricing 💰",
+    bubbles: [
+      { kind: "text", text: "Straight to the point, I like it 😅 I've got clear packages:" },
+      { kind: "stat", items: [{ value: "$300+", label: "AI Starter" }, { value: "$1,500+", label: "Full System" }, { value: "Custom", label: "Enterprise" }] },
+      { kind: "text", text: "AI Starter gets you one focused system (video, chatbot, or automation). Full AI System is the complete build — multiple workflows, chatbot, CRM, the works. Custom builds are scoped individually." },
+      { kind: "actions", items: [{ label: "💰 See detailed pricing", panel: "pricing" }, { label: "📅 Book a call", panel: "book" }] },
+    ],
+    followups: ["work", "services", "hire"],
+  },
+  {
+    id: "process", chip: "How you work ⚙️",
+    bubbles: [
+      { kind: "text", text: "Nice and simple, no drama. It goes like this:" },
+      { kind: "text", text: "1️⃣ Discover — we hop on a call, I audit your business and map out opportunities\n2️⃣ Architect — I design the system, UX strategy, and technical plan\n3️⃣ Build — I implement everything (AI, automation, software)\n4️⃣ Launch — testing, deployment, integrations, handoff\n5️⃣ Optimize — analytics, iteration, and continuous scaling" },
+      { kind: "text", text: "Most projects deliver in 1-4 weeks depending on scope. You get updates throughout, and unlimited revisions are included." },
+    ],
+    followups: ["pricing", "work", "hire"],
+  },
+  {
+    id: "hire", chip: "Work with me 🤝",
+    bubbles: [
+      { kind: "text", text: "Let's build something good together 🙌 Easiest way in is to grab a quick call, or just drop me your project details right here. I'll scope it out and get back to you within 24 hours." },
+      { kind: "actions", items: [{ label: "📅 Book a call", panel: "book" }, { label: "🚀 Start a project", panel: "project" }] },
+      { kind: "text", text: "Or reach me directly:\n📧 atifmalikfreelancer@gmail.com\n📱 WhatsApp: +92-319-678-0720" },
+    ],
+    followups: ["pricing", "work", "services"],
+  },
+];
+
 function getTime() {
   return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
@@ -142,6 +209,8 @@ export function ChatPageContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [chips, setChips] = useState<string[]>([]);
+  const topicBusy = useRef(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -175,6 +244,8 @@ export function ChatPageContent() {
         if (soundOn) playReceiveSound();
         await wait(180);
       }
+      // Show initial chips after welcome
+      if (!cancelled) setChips(INITIAL_CHIPS);
     })();
 
     return () => { cancelled = true; };
@@ -244,6 +315,26 @@ export function ChatPageContent() {
     } finally {
       setLoading(false);
     }
+  }
+
+  /* Trigger predefined topic response — Yasir exact: local, no API */
+  async function triggerTopic(topicId: string) {
+    const topic = TOPICS.find(t => t.id === topicId);
+    if (!topic || topicBusy.current) return;
+    topicBusy.current = true;
+    setChips([]);
+
+    for (const bubble of topic.bubbles) {
+      setTyping(true);
+      await wait(bubble.kind === "text" ? 650 : 820);
+      setTyping(false);
+      setMessages(prev => [...prev, { senderId: "atif", bubbles: [bubble], time: getTime() }]);
+      if (soundOn) playReceiveSound();
+      await wait(180);
+    }
+
+    setChips(topic.followups);
+    topicBusy.current = false;
   }
 
   /* ── Render a single bubble ── */
@@ -506,23 +597,22 @@ export function ChatPageContent() {
             ))}
           </div>
 
-          {/* Row 2: Topic chips — only show after user has sent a message */}
-          {messages.some(m => m.senderId === "me") && (
-            <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto pb-0.5">
-              {[
-                { label: "About me 👋", msg: "Tell me about yourself" },
-                { label: "Services 🛠️", msg: "What services do you offer?" },
-                { label: "My work 👀", msg: "Show me your work and portfolio" },
-                { label: "Pricing 💰", msg: "What are your prices and packages?" },
-                { label: "How you work ⚙️", msg: "What is your process for working with clients?" },
-                { label: "Work with me 🤝", msg: "How can I work with you? I want to hire you" },
-              ].map(c => (
-                <button key={c.label} onClick={() => sendMessage(c.msg)}
-                  className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
-                  style={{ color: "#E0008A" }}>
-                  {c.label}
-                </button>
-              ))}
+          {/* Row 2: Dynamic topic chips — predefined responses, animated */}
+          {chips.length > 0 && (
+            <div className="flex flex-wrap gap-2 px-4 sm:px-6 py-1.5 min-h-[2rem]">
+              {chips.map(chipId => {
+                const topic = TOPICS.find(t => t.id === chipId);
+                if (!topic) return null;
+                return (
+                  <motion.button key={chipId}
+                    initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
+                    onClick={() => triggerTopic(chipId)}
+                    className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 cursor-pointer"
+                    style={{ color: "#E0008A" }}>
+                    {topic.chip}
+                  </motion.button>
+                );
+              })}
             </div>
           )}
 
