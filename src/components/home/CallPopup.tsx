@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, PhoneOff } from "lucide-react";
 
@@ -8,6 +8,27 @@ export function CallPopup() {
   const [show, setShow] = useState(false);
   const [countdown, setCountdown] = useState(30);
   const [accepted, setAccepted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Stop ringtone
+  const stopRingtone = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, []);
+
+  // Play ringtone
+  const playRingtone = useCallback(() => {
+    try {
+      if (!audioRef.current) {
+        audioRef.current = new Audio("/ringtone.mp3");
+        audioRef.current.loop = true;
+        audioRef.current.volume = 0.5;
+      }
+      audioRef.current.play().catch(() => {});
+    } catch {}
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -16,16 +37,18 @@ export function CallPopup() {
     const timer = setTimeout(() => {
       sessionStorage.setItem("am_call", "1");
       setShow(true);
+      playRingtone();
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [playRingtone]);
 
   useEffect(() => {
     if (!show || accepted) return;
     const interval = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
+          stopRingtone();
           setShow(false);
           clearInterval(interval);
           return 0;
@@ -34,17 +57,21 @@ export function CallPopup() {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [show, accepted]);
+  }, [show, accepted, stopRingtone]);
 
-  const decline = useCallback(() => setShow(false), []);
+  const decline = useCallback(() => {
+    stopRingtone();
+    setShow(false);
+  }, [stopRingtone]);
 
   const accept = useCallback(() => {
+    stopRingtone();
     setAccepted(true);
     setTimeout(() => {
       window.open("https://wa.me/923196780720?text=Hi%20Atif!%20I%20came%20from%20your%20website.", "_blank");
       setTimeout(() => setShow(false), 2000);
     }, 1500);
-  }, []);
+  }, [stopRingtone]);
 
   return (
     <AnimatePresence>

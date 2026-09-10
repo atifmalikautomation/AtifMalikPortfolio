@@ -91,7 +91,9 @@ export function ServicesGrid() {
                 <span className="w-10 h-10 rounded-xl bg-pink/10 flex items-center justify-center text-lg shrink-0">
                   {service.icon}
                 </span>
-                <span className="inline-flex px-3 py-1 rounded-full bg-pink text-white text-xs font-display font-bold">
+                <span className="inline-flex px-3 py-1 rounded-full text-white text-xs font-display font-bold"
+                  style={{ background: "linear-gradient(135deg, var(--pink) 0%, #FF4DA6 100%)" }}
+                >
                   {service.title}
                 </span>
               </div>

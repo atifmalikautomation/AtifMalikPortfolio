@@ -188,9 +188,9 @@ body {
   background: linear-gradient(160deg, #0A0008 0%, #10000E 30%, #0D0012 55%, #120010 80%, #0A0008 100%);
   background-attachment: fixed;
   color: var(--gr);
-  font-family: var(--fb);
+  font-family: 'Inter', var(--fb);
   font-size: 16px;
-  line-height: 1.65;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
@@ -211,7 +211,8 @@ html.light body::before {
     linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
 }
-body > main, body > nav, body > footer, body > header { position: relative; z-index: 1; }
+body > main, body > footer, body > header { position: relative; z-index: 1; }
+body > nav { position: relative; z-index: 200; }
 
 ::selection {
   background: var(--pink);
@@ -236,11 +237,11 @@ body > main, body > nav, body > footer, body > header { position: relative; z-in
 
 /* ═══ Typography ═══ */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--fd);
+  font-family: 'Bricolage Grotesque', var(--fd);
   font-weight: 800;
   color: var(--wh);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
 }
 
 /* ═══ Utilities ═══ */
@@ -307,8 +308,8 @@ h1, h2, h3, h4, h5, h6 {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(10px) rotate(-3deg); }
 }
-.animate-float { animation: float 6s ease-in-out infinite; }
-.animate-float-reverse { animation: float-reverse 7s ease-in-out infinite; }
+.animate-float { animation: float 5s ease-in-out infinite; }
+.animate-float-reverse { animation: float-reverse 6s ease-in-out infinite; }
 .animate-float-slow { animation: float 10s ease-in-out infinite; }
 
 /* ═══ Marquee ═══ */
@@ -501,9 +502,26 @@ html.light .nav-book-btn:hover {
   pointer-events: none;
 }
 
-/* ═══ Pulse ═══ */
-@keyframes pulse-dot {
-  50% { opacity: 0.4; }
+/* ═══ Chat Popup Animated Border ═══ */
+.chat-popup-border {
+  position: relative;
+  isolation: isolate;
+}
+.chat-popup-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #E0008A, #FF4DA6 22%, #fff 40%, #FF4DA6 58%, #E0008A 78%, #FF4DA6);
+  background-size: 250% 250%;
+  animation: chat-border-move 3s ease-in-out infinite;
+  z-index: -1;
+}
+@keyframes chat-border-move {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
 }
 
 /* ═══ Chat Wave Animation ═══ */
@@ -518,4 +536,63 @@ html.light .nav-book-btn:hover {
 @keyframes chatWave3 {
   0%, 100% { height: 8px; }
   50% { height: 12px; }
+}
+
+/* ═══ Calculator Slider (Yasir style) ═══ */
+.calc-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 3px solid var(--pink);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(224, 0, 138, 0.4);
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+}
+.calc-slider::-webkit-slider-thumb:hover,
+.calc-slider:active::-webkit-slider-thumb {
+  box-shadow: 0 0 20px rgba(224, 0, 138, 0.6);
+}
+.calc-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border: 3px solid var(--pink);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(224, 0, 138, 0.4);
+  cursor: grab;
+}
+
+/* ═══ Light mode overrides ═══ */
+html.light .hero-cta-btn {
+  box-shadow: 0 14px 36px -10px rgba(209, 0, 120, 0.35), 0 0 24px rgba(209, 0, 120, 0.15);
+}
+html.light .hero-cta-btn:hover {
+  box-shadow: 0 22px 50px -10px rgba(209, 0, 120, 0.45), 0 0 32px rgba(209, 0, 120, 0.25);
+}
+html.light .glow {
+  box-shadow: 0 0 40px rgba(209, 0, 120, 0.1);
+}
+html.light .glow-text {
+  text-shadow: 0 0 30px rgba(209, 0, 120, 0.2);
+}
+html.light .calc-slider::-webkit-slider-thumb {
+  background: #fff;
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(209, 0, 120, 0.3);
+}
+html.light .calc-slider::-moz-range-thumb {
+  background: #fff;
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(209, 0, 120, 0.3);
 }

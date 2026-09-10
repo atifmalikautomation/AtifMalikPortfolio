@@ -17,7 +17,7 @@ export const siteConfig = {
     youtube: "https://youtube.com/@atifmalikfreelancer",
     instagram: "https://www.instagram.com/atifmalik_ai/",
     linkedin: "https://www.linkedin.com/in/atif-malik-745096324/",
-    twitter: "https://www.tiktok.com/@atifmalikautomation",
+    tiktok: "https://www.tiktok.com/@atifmalikautomation",
     fiverr: "https://fiverr.com/atifmalik",
     facebook: "https://web.facebook.com/profile.php?id=100087796622999",
   },
@@ -28,8 +28,8 @@ export const siteConfig = {
     { label: "Process", href: "/#process" },
     { label: "Pricing", href: "/#pricing" },
     { label: "FAQ", href: "/#faq" },
-    { label: "Portfolio", href: "/#portfolio" },
-    { label: "ROI", href: "/calculator" },
+    { label: "Portfolio", href: "/portfolio", special: true },
+    { label: "ROI", href: "/calculator", special: true },
   ],
 
   cta: {
@@ -40,7 +40,7 @@ export const siteConfig = {
 
   stats: [
     { label: "Projects Delivered", value: "800+", emoji: "\uD83D\uDE80" },
-    { label: "Years Experience", value: "5+", emoji: "📅" },
+    { label: "Years Experience", value: "5+", emoji: "🗓️" },
     { label: "Fiverr & Upwork", value: "5\u2605", emoji: "\u2B50" },
   ],
 
@@ -321,25 +321,25 @@ export const siteConfig = {
     {
       quote:
         "Atif built an AI automation system that saves our team 20+ hours per week. The ROI was visible within the first month.",
-      name: "Client Name",
-      role: "CEO",
-      company: "Company Name",
+      name: "Dean R.",
+      role: "Creative Director",
+      company: "Bayou Savage Studios",
       project: "AI Automation",
     },
     {
       quote:
         "The AI video production quality exceeded our expectations. We went from spending $5K per video to getting better results at a fraction of the cost.",
-      name: "Client Name",
-      role: "Marketing Director",
-      company: "Company Name",
+      name: "Robert C.",
+      role: "Business Owner",
+      company: "The Optician Project",
       project: "AI Video Production",
     },
     {
       quote:
         "Our WhatsApp chatbot handles 80% of customer inquiries automatically. Response time went from hours to seconds.",
-      name: "Client Name",
+      name: "Sarah K.",
       role: "Founder",
-      company: "Company Name",
+      company: "GrowthPath Agency",
       project: "AI Chatbot",
     },
   ],

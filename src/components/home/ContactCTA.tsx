@@ -73,10 +73,10 @@ export function ContactCTA() {
                 </p>
                 <div className="flex gap-2 sm:gap-3 w-full">
                   <a
-                    href="https://linkedin.com/in/atif-malik-/"
+                    href="https://www.linkedin.com/in/atif-malik-745096324/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 bg-pink/10 border border-pink/30 text-pink font-display font-bold text-sm rounded-full px-4 py-3 hover:bg-pink hover:border-pink transition-all" style={{ color: undefined }}
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 bg-pink/10 border border-pink/30 text-pink font-display font-bold text-sm rounded-full px-4 py-3 hover:bg-pink hover:border-pink transition-all"
                   >
                     LinkedIn
                   </a>
