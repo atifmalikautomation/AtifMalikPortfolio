@@ -523,9 +523,17 @@ html.light .nav-book-btn:hover {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: none;
-  box-shadow: none;
-  outline: none;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.cg-flat *,
+.cg-flat *:focus,
+.cg-flat *:focus-visible,
+.cg-flat *:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
 }
 
 /* ═══ Chat Popup Animated Border ═══ */
