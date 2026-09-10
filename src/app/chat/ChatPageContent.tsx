@@ -141,6 +141,7 @@ export function ChatPageContent() {
   const [soundOn, setSoundOn] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [emojiOpen, setEmojiOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -416,8 +417,8 @@ export function ChatPageContent() {
             </div>
             {/* + button */}
             <button onClick={() => setPanel("invite")} className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">＋</button>
-            {/* User's avatar — click to logout */}
-            <button onClick={() => { setJoined(false); setMessages([]); }} title="Logout" className="hidden md:block shrink-0 rounded-full ring-2 ring-white transition-transform hover:scale-110 active:scale-90 cursor-pointer">
+            {/* User's avatar — click to open profile */}
+            <button onClick={() => setProfileOpen(true)} title="Your profile" className="hidden md:block shrink-0 rounded-full ring-2 ring-white transition-transform hover:scale-110 active:scale-90 cursor-pointer">
               <Av emoji={userAvatar} color={userColor} size={34} />
             </button>
           </header>
@@ -586,6 +587,36 @@ export function ChatPageContent() {
           ))}
         </div>
       </div>
+
+      {/* Profile popup — Yasir exact */}
+      {profileOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6" onClick={() => setProfileOpen(false)}>
+          <div className="absolute inset-0 backdrop-blur-sm" style={{ background: "rgba(15,46,39,0.25)" }} />
+          <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+            onClick={e => e.stopPropagation()}
+            className="cg rounded-3xl w-full max-w-sm p-5 relative text-center">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>👤 Your profile</h3>
+              <button onClick={() => setProfileOpen(false)} className="w-8 h-8 rounded-full hover:bg-black/5 flex items-center justify-center text-lg transition active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}>✕</button>
+            </div>
+            <div className="flex flex-col items-center gap-3 py-4">
+              <Av emoji={userAvatar} color={userColor} size={56} />
+              <div>
+                <div className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>{userName}</div>
+                {userEmail && <div className="text-[13px]" style={{ color: "rgba(0,0,0,0.4)" }}>{userEmail}</div>}
+                <div className="text-[12px] mt-0.5" style={{ color: "#E0008A" }}>Signed in</div>
+              </div>
+            </div>
+            <button onClick={() => { setProfileOpen(false); setJoined(false); setMessages([]); }}
+              className="w-full cg rounded-2xl py-3 font-display font-bold text-red-500 hover:bg-red-500/10 transition active:scale-[0.98] cursor-pointer">
+              Sign out
+            </button>
+            <p className="text-[11px] text-center mt-2" style={{ color: "rgba(0,0,0,0.35)" }}>
+              Signing out ends this chat. You can sign back in anytime.
+            </p>
+          </motion.div>
+        </div>
+      )}
 
       {/* Modals */}
       <BookCallModal open={panel === "book"} onClose={() => setPanel(null)} />
