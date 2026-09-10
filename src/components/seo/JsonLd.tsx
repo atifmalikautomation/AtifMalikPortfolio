@@ -6,6 +6,7 @@ export function JsonLd() {
     "@type": "Person",
     name: "Atif Malik",
     url: siteConfig.url,
+    image: `${siteConfig.url}/images/atif.jpeg`,
     jobTitle: "AI Video Production & Automation Specialist",
     description:
       "Pakistan's No.1 AI Video Production and Automation expert. Building cinematic AI content, end-to-end automation systems, and intelligent agents for businesses worldwide.",
@@ -26,6 +27,11 @@ export function JsonLd() {
       "@type": "PostalAddress",
       addressCountry: "PK",
     },
+    worksFor: {
+      "@type": "Organization",
+      name: "Atif Malik AI Agency",
+      url: siteConfig.url,
+    },
   };
 
   const professionalServiceSchema = {
@@ -33,6 +39,8 @@ export function JsonLd() {
     "@type": "ProfessionalService",
     name: "Atif Malik — AI Video Production & Automation Agency",
     url: siteConfig.url,
+    image: `${siteConfig.url}/images/atif.jpeg`,
+    logo: `${siteConfig.url}/favicon.ico`,
     description:
       "Premium AI video production, cinematic content creation, and end-to-end automation systems. Pakistan's leading AI video and automation agency.",
     founder: { "@type": "Person", name: "Atif Malik" },
@@ -41,6 +49,8 @@ export function JsonLd() {
       { "@type": "Country", name: "United Arab Emirates" },
       { "@type": "Country", name: "United States" },
       { "@type": "Country", name: "United Kingdom" },
+      { "@type": "Country", name: "Saudi Arabia" },
+      { "@type": "Country", name: "Canada" },
       "Worldwide",
     ],
     serviceType: [
@@ -53,28 +63,34 @@ export function JsonLd() {
       "GoHighLevel Implementation",
       "Web Application Development",
     ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "AI Services",
+      itemListElement: siteConfig.pricing.map((plan) => ({
+        "@type": "Offer",
+        name: plan.name,
+        description: plan.description,
+        priceCurrency: "USD",
+        price: plan.price === "Custom Quote" ? undefined : plan.price.replace("From $", ""),
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          priceCurrency: "USD",
+          price: plan.price === "Custom Quote" ? undefined : plan.price.replace("From $", ""),
+        },
+      })),
+    },
     address: {
       "@type": "PostalAddress",
       addressCountry: "PK",
     },
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phone,
-  };
-
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Atif Malik AI Agency",
-    description:
-      "Pakistan's No.1 AI Video Production and Automation agency. Premium cinematic AI video content and intelligent automation systems.",
-    url: siteConfig.url,
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "PK",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: "800",
+      bestRating: "5",
     },
-    email: siteConfig.contact.email,
-    telephone: siteConfig.contact.phone,
-    priceRange: "$$$$",
   };
 
   const websiteSchema = {
@@ -84,36 +100,22 @@ export function JsonLd() {
     url: siteConfig.url,
     description: siteConfig.description,
     author: { "@type": "Person", name: "Atif Malik" },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${siteConfig.url}/insights?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: siteConfig.url,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Portfolio",
-        item: `${siteConfig.url}/portfolio`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: "Services",
-        item: `${siteConfig.url}/services`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: "Contact",
-        item: `${siteConfig.url}/contact`,
-      },
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${siteConfig.url}/services` },
+      { "@type": "ListItem", position: 3, name: "Portfolio", item: `${siteConfig.url}/portfolio` },
+      { "@type": "ListItem", position: 4, name: "Insights", item: `${siteConfig.url}/insights` },
+      { "@type": "ListItem", position: 5, name: "Contact", item: `${siteConfig.url}/contact` },
     ],
   };
 
@@ -130,7 +132,6 @@ export function JsonLd() {
   const schemas = [
     personSchema,
     professionalServiceSchema,
-    localBusinessSchema,
     websiteSchema,
     breadcrumbSchema,
     faqSchema,

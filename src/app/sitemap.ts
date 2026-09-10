@@ -4,29 +4,33 @@ import { siteConfig } from "@/lib/site-config";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url;
 
-  const staticPages = [
-    "",
-    "/about",
-    "/services",
-    "/portfolio",
-    "/calculator",
-    "/insights",
-    "/contact",
-    "/chat",
-    "/privacy",
-    "/terms",
-  ].map((path) => ({
+  const priorityMap: Record<string, number> = {
+    "": 1,
+    "/services": 0.9,
+    "/portfolio": 0.9,
+    "/about": 0.8,
+    "/insights": 0.8,
+    "/calculator": 0.7,
+    "/contact": 0.7,
+    "/book": 0.7,
+    "/privacy": 0.3,
+    "/terms": 0.3,
+  };
+
+  const weeklyPages = new Set(["", "/insights", "/services"]);
+
+  const staticPages = Object.keys(priorityMap).map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path === "/portfolio" || path === "/services" ? 0.9 : 0.7,
+    changeFrequency: weeklyPages.has(path) ? "weekly" as const : "monthly" as const,
+    priority: priorityMap[path],
   }));
 
   const servicePages = siteConfig.services.map((s) => ({
     url: `${base}/services/${s.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.8,
   }));
 
   const portfolioPages = siteConfig.portfolio.map((p) => ({

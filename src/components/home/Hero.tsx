@@ -47,22 +47,25 @@ export function Hero() {
             </span>
           </motion.div>
 
-          {/* Headline — Both lines same size like Yasir */}
+          {/* Headline — Single h1 with two visual lines for SEO */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.55 }}
-            className="font-display font-extrabold text-[2.25rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[1.02] text-wh tracking-tight"
+            className="font-display font-extrabold text-[2.75rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[1.02] text-wh tracking-tight w-full"
           >
-            <span
-              className="inline-block -rotate-2 align-middle mr-2 sm:mr-3 text-[0.55em] font-bold text-pink"
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontStyle: "italic",
-              }}
-            >
-              Build
-            </span>{" "}
+            {/* "Build" on its own line on mobile, inline on desktop */}
+            <span className="block sm:inline">
+              <span
+                className="inline-block sm:-rotate-2 align-middle sm:mr-3 text-[0.7em] sm:text-[0.55em] font-bold text-pink mb-1 sm:mb-0"
+                style={{
+                  fontFamily: "'Playfair Display', Georgia, serif",
+                  fontStyle: "italic",
+                }}
+              >
+                Build
+              </span>{" "}
+            </span>
             <span className="relative inline-block">
               <span
                 className="absolute inset-x-[-0.1em] bottom-[0.08em] h-[0.28em] -rotate-1 rounded-full bg-pink/15"
@@ -70,16 +73,12 @@ export function Hero() {
               />
               <span className="relative">AI Growth Systems</span>
             </span>
-          </motion.h1>
-
-          {/* Headline Line 2 */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.55 }}
-            className="font-display font-extrabold text-[2.25rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] xl:leading-[1.02] text-wh tracking-tight mt-1"
-          >
-            <span className="whitespace-nowrap">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.55 }}
+              className="block mt-1"
+            >
               &amp; Automation That{" "}
               <span className="relative inline-block">
                 <span
@@ -96,7 +95,7 @@ export function Hero() {
                   <Sparkles className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
                 </span>
               </span>
-            </span>
+            </motion.span>
           </motion.h1>
 
           {/* Thin gradient line — Yasir style */}
@@ -104,26 +103,26 @@ export function Hero() {
             <div className="h-[2px] w-40 sm:w-72 md:w-96 bg-gradient-to-r from-transparent via-pink/60 to-transparent rounded-full shadow-[0_0_14px_rgba(224,0,138,0.3)]" />
           </div>
 
-          {/* Stats — Yasir exact style: emoji box + value/label left-aligned */}
+          {/* Stats — Yasir exact style: vertical on mobile, horizontal on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65 }}
-            className="flex items-center justify-center gap-6 sm:gap-10 mt-6 mb-6"
+            className="flex items-start justify-center gap-8 sm:gap-10 mt-6 mb-6 w-full"
           >
             {siteConfig.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex items-center gap-2.5"
+                className="flex flex-col items-center gap-1.5 sm:flex-row sm:gap-2.5"
               >
-                <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-base sm:text-lg shrink-0"
+                <span className="w-10 h-10 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
                   style={{ background: "linear-gradient(135deg, var(--pink) 0%, #FF4DA6 100%)" }}
                 >
                   {stat.emoji}
                 </span>
-                <div className="flex flex-col items-start">
-                  <span className="font-display text-base sm:text-2xl font-extrabold text-pink leading-none">{stat.value}</span>
-                  <span className="mt-0.5 hidden sm:block font-display text-[10px] font-bold uppercase tracking-wide text-gr/60">{stat.label}</span>
+                <div className="flex flex-col items-center sm:items-start">
+                  <span className="font-display text-xl sm:text-2xl font-extrabold text-pink leading-none">{stat.value}</span>
+                  <span className="mt-0.5 font-display text-[9px] sm:text-[10px] font-bold uppercase tracking-wide text-gr/60">{stat.label}</span>
                 </div>
               </div>
             ))}

@@ -15,14 +15,18 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = siteConfig.insights.find((a) => a.slug === slug);
   if (!article) return {};
+  const url = `${siteConfig.url}/insights/${slug}`;
   return {
     title: article.title,
     description: article.excerpt,
+    alternates: { canonical: url },
     openGraph: {
       type: "article",
       title: article.title,
       description: article.excerpt,
       publishedTime: article.date,
+      url,
+      authors: ["Atif Malik"],
     },
   };
 }

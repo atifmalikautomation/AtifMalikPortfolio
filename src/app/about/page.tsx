@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "About Atif Malik — AI Growth Systems Expert",
   description:
     "Meet Atif Malik. AI video production specialist, automation architect, and full-stack builder helping businesses scale with intelligent AI systems. Based in Pakistan, serving clients worldwide.",
+  alternates: { canonical: "https://atifmalik.me/about" },
   openGraph: {
     title: "About Atif Malik — AI Growth Systems Expert",
     description:

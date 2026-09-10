@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "AI Growth Lab — Insights on AI Video, Automation & Agents",
   description:
     "Expert insights on AI video production, business automation, AI agents, n8n workflows, and AI-powered growth systems. By Atif Malik.",
+  alternates: { canonical: "https://atifmalik.me/insights" },
 };
 
 export default function InsightsPage() {

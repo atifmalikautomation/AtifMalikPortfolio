@@ -15,9 +15,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = siteConfig.portfolio.find((p) => p.slug === slug);
   if (!project) return {};
+  const url = `${siteConfig.url}/portfolio/${slug}`;
   return {
-    title: `${project.title} — Case Study`,
-    description: project.description,
+    title: `${project.title} — Case Study | Atif Malik`,
+    description: `${project.description} Result: ${project.result}`,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${project.title} — Atif Malik Portfolio`,
+      description: project.description,
+      url,
+      type: "article",
+    },
   };
 }
 

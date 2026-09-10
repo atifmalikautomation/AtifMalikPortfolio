@@ -15,12 +15,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const service = siteConfig.services.find((s) => s.slug === slug);
   if (!service) return {};
+  const url = `${siteConfig.url}/services/${slug}`;
   return {
     title: `${service.title} — Atif Malik AI Services`,
     description: service.description,
+    alternates: { canonical: url },
     openGraph: {
       title: `${service.title} — Atif Malik`,
       description: service.description,
+      url,
+      type: "website",
     },
   };
 }

@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description: "The page you're looking for doesn't exist or has been moved. Return to Atif Malik's AI Video Production & Automation Agency.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (
