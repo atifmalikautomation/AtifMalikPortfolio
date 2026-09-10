@@ -47,6 +47,52 @@ function getTime() {
 
 const wait = (ms: number) => new Promise(r => setTimeout(r, ms));
 
+/* ── Sound system (Yasir exact — Web Audio API) ── */
+let audioCtx: AudioContext | null = null;
+function getAudioCtx() {
+  if (typeof window === "undefined") return null;
+  if (!audioCtx) {
+    const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!AC) return null;
+    audioCtx = new AC();
+  }
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  return audioCtx;
+}
+function tone(freq: number, time: number, dur: number, opts: { type?: OscillatorType; gain?: number; glideTo?: number } = {}) {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  const { type = "sine", gain = 0.14, glideTo } = opts;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, time);
+  if (glideTo) osc.frequency.exponentialRampToValueAtTime(glideTo, time + dur);
+  g.gain.setValueAtTime(0.0001, time);
+  g.gain.exponentialRampToValueAtTime(gain, time + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, time + dur);
+  osc.connect(g); g.connect(ctx.destination);
+  osc.start(time); osc.stop(time + dur + 0.03);
+}
+function playJoinSound() {
+  const ctx = getAudioCtx(); if (!ctx) return;
+  const t = ctx.currentTime;
+  tone(523.25, t, 0.5, { gain: 0.11 });
+  tone(659.25, t + 0.09, 0.5, { gain: 0.11 });
+  tone(783.99, t + 0.18, 0.6, { gain: 0.12 });
+  tone(1046.5, t + 0.27, 0.75, { gain: 0.09 });
+}
+function playReceiveSound() {
+  const ctx = getAudioCtx(); if (!ctx) return;
+  const t = ctx.currentTime;
+  tone(880, t, 0.22, { gain: 0.11 });
+  tone(1174.66, t + 0.1, 0.32, { gain: 0.10 });
+}
+function playSendSound() {
+  const ctx = getAudioCtx(); if (!ctx) return;
+  tone(440, ctx.currentTime, 0.18, { type: "triangle", gain: 0.13, glideTo: 880 });
+}
+
 /* ── Avatar bubble (Yasir Rn clone) ── */
 function Av({ emoji, color, size = 40 }: { emoji: string; color: string; size?: number }) {
   return (
@@ -114,6 +160,7 @@ export function ChatPageContent() {
     (async () => {
       // System message: "X joined the chat 🎉"
       setMessages([{ senderId: "sys", bubbles: [{ kind: "system", text: `${userName} joined the chat 🎉` }], time: getTime() }]);
+      if (soundOn) playJoinSound();
       await wait(400);
 
       // Send welcome bubbles one by one with typing
@@ -124,6 +171,7 @@ export function ChatPageContent() {
         if (cancelled) return;
         setTyping(false);
         setMessages(prev => [...prev, { senderId: "atif", bubbles: [bubble], time: getTime() }]);
+        if (soundOn) playReceiveSound();
         await wait(180);
       }
     })();
@@ -136,6 +184,7 @@ export function ChatPageContent() {
     if (!text.trim() || loading) return;
     const userMsg: ChatMsg = { senderId: "me", bubbles: [{ kind: "text", text: text.trim() }], time: getTime() };
     setMessages(prev => [...prev, userMsg]);
+    if (soundOn) playSendSound();
     setInput("");
     setLoading(true);
     setStreamingText("");
@@ -180,10 +229,12 @@ export function ChatPageContent() {
           }
         }
         setMessages(prev => [...prev, { senderId: "atif", bubbles: [{ kind: "text", text: accumulated || "Couldn't generate a response." }], time: getTime() }]);
+        if (soundOn) playReceiveSound();
         setStreamingText("");
       } else {
         const data = await res.json();
         setMessages(prev => [...prev, { senderId: "atif", bubbles: [{ kind: "text", text: data.content }], time: getTime() }]);
+        if (soundOn) playReceiveSound();
       }
     } catch {
       setTyping(false);
