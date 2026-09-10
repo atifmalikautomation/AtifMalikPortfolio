@@ -561,31 +561,25 @@ export function ChatPageContent() {
           {[
             { icon: soundOn ? "🔊" : "🔇", label: soundOn ? "Sound on" : "Sound off", onClick: () => setSoundOn(!soundOn) },
             { icon: "📄", label: "Save as PDF", onClick: () => {
-              const win = window.open("", "_blank");
-              if (!win) return;
+              const esc = (s: string) => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
               const msgs = messages.map(m => {
                 if (m.senderId === "sys") {
-                  const sysText = (m.bubbles[0] as { kind: "system"; text: string }).text;
-                  return `<div style="text-align:center;margin:12px 0"><span style="background:rgba(0,0,0,0.05);padding:4px 16px;border-radius:20px;font-size:12px;color:#999">${sysText}</span></div>`;
+                  const t = (m.bubbles[0] as { kind: "system"; text: string }).text;
+                  return `<div class="sys">${esc(t)}</div>`;
                 }
                 const isMe = m.senderId === "me";
                 const name = isMe ? userName : "Atif Malik";
-                const avatar = isMe
-                  ? `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,${userColor},${userColor}cc);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${userAvatar}</div>`
-                  : `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#E0008A,#FF4DA6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">AM</div>`;
-                const bubbleStyle = isMe
-                  ? "background:linear-gradient(135deg,rgba(224,0,138,0.92),rgba(255,77,166,0.92));color:#fff;border-radius:24px 24px 6px 24px"
-                  : "background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.06);color:#444;border-radius:24px 24px 24px 6px";
                 const texts = m.bubbles.map(b => {
-                  if (b.kind === "text") return `<p style="margin:0;white-space:pre-wrap;font-size:15px;line-height:1.6">${b.text}</p>`;
-                  if (b.kind === "stat") return `<div style="display:flex;gap:20px;padding:8px 0">${b.items.map(s => `<div style="text-align:center"><div style="font-weight:800;font-size:18px;color:#E0008A">${s.value}</div><div style="font-size:11px;color:#999;margin-top:2px">${s.label}</div></div>`).join("")}</div>`;
+                  if (b.kind === "text") return `<p>${esc(b.text)}</p>`;
+                  if (b.kind === "stat") return `<p class="muted">${b.items.map(s => `${s.value} ${s.label}`).join(" · ")}</p>`;
                   return "";
                 }).join("");
-                return `<div style="display:flex;gap:10px;margin-bottom:12px;${isMe ? "flex-direction:row-reverse" : ""}">${avatar}<div style="max-width:70%"><div style="font-size:12px;font-weight:600;color:#999;margin-bottom:2px;${isMe ? "text-align:right" : ""}">${name} · ${m.time || ""}</div><div style="padding:10px 16px;${bubbleStyle}">${texts}</div></div></div>`;
+                return `<div class="row ${isMe ? "me" : "them"}"><div class="who">${esc(name)}</div><div class="bubble">${texts}</div></div>`;
               }).join("");
-              win.document.write(`<!DOCTYPE html><html><head><title>Atif's Studio — Chat Export</title><style>*{margin:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#fce4f0 0%,#fff5f9 25%,#fff 50%,#f0fdf4 80%,#d1fae5 100%);min-height:100vh;padding:40px 20px}@media print{body{background:#fff !important}}</style></head><body><div style="max-width:700px;margin:0 auto"><div style="text-align:center;margin-bottom:24px"><div style="font-size:22px;font-weight:800;color:#1a1a1a">Atif's Studio 💬</div><div style="font-size:13px;color:#E0008A;margin-top:4px">Chat Export · ${new Date().toLocaleString()}</div></div><div style="background:rgba(255,255,255,0.4);border-radius:24px;padding:24px;backdrop-filter:blur(10px)">${msgs}</div><div style="text-align:center;margin-top:20px;font-size:11px;color:#999">Exported from atifmalik.me/chat</div></div></body></html>`);
-              win.document.close();
-              win.print();
+              const html = `<!doctype html><html><head><meta charset="utf-8"/><title>Atif's Studio — conversation</title><style>*{box-sizing:border-box}body{font-family:-apple-system,"Segoe UI",Inter,sans-serif;color:#1a1a1a;margin:0;padding:40px;background:#FFF5F9}.head{text-align:center;margin-bottom:28px}.logo{display:inline-flex;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#E0008A,#FF4DA6);color:#fff;align-items:center;justify-content:center;font-weight:800;font-size:20px}h1{font-size:20px;margin:12px 0 2px}.head .muted{color:#1a1a1aaa;font-size:13px;margin:0}.row{margin:14px 0;max-width:78%}.row.them{margin-right:auto}.row.me{margin-left:auto;text-align:right}.who{font-size:11px;font-weight:700;color:#E0008A;margin-bottom:3px}.bubble{display:inline-block;text-align:left;padding:10px 14px;border-radius:16px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.08)}.row.me .bubble{background:#E0008A;color:#fff}.bubble p{margin:0 0 4px;font-size:14px;line-height:1.5}.bubble p:last-child{margin-bottom:0}.bubble .muted{color:#1a1a1a99;font-size:12.5px}.row.me .bubble .muted{color:#ffffffcc}.sys{text-align:center;color:#1a1a1a77;font-size:12px;margin:16px 0}.foot{text-align:center;color:#1a1a1a66;font-size:11px;margin-top:30px}@media print{body{background:#fff}.bubble{box-shadow:none;border:1px solid #1a1a1a22}}</style></head><body><div class="head"><div class="logo">AM</div><h1>Atif's Studio — conversation</h1><p class="muted">${userName}${userEmail ? ` · ${esc(userEmail)}` : ""}</p></div>${msgs}<div class="foot">Saved from Atif's Studio · atifmalik.me</div><script>window.onload=function(){setTimeout(function(){window.print()},300)};<\/script></body></html>`;
+              const w = window.open("", "_blank", "width=720,height=900");
+              if (!w) { alert("Please allow pop-ups to save the conversation as PDF."); return; }
+              w.document.open(); w.document.write(html); w.document.close();
             } },
             { icon: "⏸️", label: "Pause & exit", onClick: () => { setJoined(false); setMessages([]); } },
             { icon: "🗑️", label: "Start over", onClick: () => { setMessages([]); setJoined(false); }, danger: true },
