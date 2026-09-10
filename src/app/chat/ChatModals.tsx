@@ -2,6 +2,46 @@
 
 import { useState } from "react";
 
+/* ── Invite Modal ── */
+export function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
+  if (!open) return null;
+
+  const handleInvite = () => {
+    if (!name.trim() || !email.trim()) return;
+    const subject = encodeURIComponent(`Join Atif's Studio chat`);
+    const body = encodeURIComponent(`Hey ${name},\n\nAtif invited you to join the chat!\n\nJoin here: ${window.location.href}\n\nSee you there 👋`);
+    window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_blank");
+    setSent(true);
+    setTimeout(() => { setSent(false); onClose(); }, 2000);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6" onClick={onClose}>
+      <div className="absolute inset-0 backdrop-blur-sm" style={{ background: "rgba(15,46,39,0.25)" }} />
+      <div className="cg rounded-3xl w-full max-w-sm p-5 relative max-h-[88vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+        <h3 className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>Invite a teammate</h3>
+        <p className="text-sm mb-3" style={{ color: "rgba(0,0,0,0.4)" }}>Bring a partner or colleague in, we&apos;ll open an email so you can send the link.</p>
+        <div className="flex flex-col gap-2.5">
+          <input className="w-full cg rounded-2xl px-4 py-2.5 text-[15px] outline-none" style={{ color: "#1a1a1a" }}
+            value={name} onChange={e => setName(e.target.value)} placeholder="Their name" />
+          <input className="w-full cg rounded-2xl px-4 py-2.5 text-[15px] outline-none" style={{ color: "#1a1a1a" }}
+            type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="their@email.com"
+            onKeyDown={e => e.key === "Enter" && handleInvite()} />
+          <button onClick={handleInvite} disabled={!name.trim() || !email.trim() || sent}
+            className="cg-accent cg-gold rounded-2xl py-2.5 text-white font-display font-bold transition-transform hover:scale-[1.01] active:scale-95 cursor-pointer disabled:opacity-40">
+            {sent ? "Sent! ✓" : "Send invite ✉️"}
+          </button>
+        </div>
+        <button onClick={onClose} className="mt-4 w-full rounded-2xl py-2.5 text-sm font-semibold hover:bg-black/5 transition cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}>Done</button>
+      </div>
+    </div>
+  );
+}
+
 function Modal({ onClose, title, subtitle, emoji, maxWidth = "max-w-md", children, footer }: {
   onClose: () => void; title: string; subtitle?: string; emoji?: string; maxWidth?: string;
   children: React.ReactNode; footer?: React.ReactNode;

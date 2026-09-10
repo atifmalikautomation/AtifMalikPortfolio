@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { clsx } from "clsx";
 import Link from "next/link";
-import { BookCallModal, ProjectModal, PortfolioModal, PricingModal } from "./ChatModals";
+import { BookCallModal, ProjectModal, PortfolioModal, PricingModal, InviteModal } from "./ChatModals";
 
 /* ── Types ── */
 type BubbleKind =
@@ -30,6 +30,8 @@ const accentColors = [
   { value: "#2563EB", label: "Blue" }, { value: "#EF4444", label: "Red" },
   { value: "#F97316", label: "Orange" }, { value: "#EC4899", label: "Rose" },
 ];
+
+const EMOJI_GRID = ["😀","😁","😂","🤣","😊","😍","😎","🤩","🥳","😇","🤔","😏","😅","🤯","👍","👎","👏","🙌","🤝","🙏","💪","✌️","🤙","👋","🔥","✨","⚡","💯","🎉","🚀","💸","💰","📈","❤️","💛","💚","💙","💜","🤍","💖"];
 
 /* Initial welcome messages — Yasir exact flow */
 const WELCOME_BUBBLES: BubbleKind[] = [
@@ -91,8 +93,11 @@ export function ChatPageContent() {
   const [typing, setTyping] = useState(false);
   const [panel, setPanel] = useState<string | null>(null);
   const [soundOn, setSoundOn] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [emojiOpen, setEmojiOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = useCallback(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -286,8 +291,14 @@ export function ChatPageContent() {
   return (
     <>
       <div className="h-screen flex" style={{ background: "linear-gradient(180deg, #fce4f0 0%, #fff5f9 25%, #ffffff 50%, #f0fdf4 80%, #d1fae5 100%)" }}>
+        {/* Mobile sidebar overlay */}
+        {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm md:hidden" onClick={() => setSidebarOpen(false)} />}
+
         {/* Sidebar */}
-        <aside className="hidden md:block w-72 shrink-0 p-3">
+        <aside className={clsx(
+          "fixed md:static z-40 top-0 left-0 h-full w-72 shrink-0 p-3 transition-transform md:translate-x-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
           <div className="cg rounded-3xl h-full flex flex-col p-4">
             <div className="flex items-center gap-2.5 px-1">
               <div className="w-10 h-10 rounded-2xl cg-accent cg-gold overflow-hidden">
@@ -322,7 +333,7 @@ export function ChatPageContent() {
                 </div>
               </div>
             </div>
-            <button className="mt-3 cg-accent cg-gold rounded-2xl py-3 font-display font-bold text-white text-sm transition-transform hover:scale-[1.02] active:scale-95 cursor-pointer">➕ Add member</button>
+            <button onClick={() => setPanel("invite")} className="mt-3 cg-accent cg-gold rounded-2xl py-3 font-display font-bold text-white text-sm transition-transform hover:scale-[1.02] active:scale-95 cursor-pointer">➕ Add member</button>
           </div>
         </aside>
 
@@ -331,7 +342,7 @@ export function ChatPageContent() {
           {/* Header — Yasir exact */}
           <header className="cg flex items-center px-4 sm:px-5 py-3 shrink-0 gap-3" style={{ borderRadius: 0, border: "none", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
             {/* Mobile hamburger */}
-            <button className="md:hidden w-9 h-9 rounded-xl hover:bg-black/5 flex items-center justify-center cursor-pointer" style={{ color: "#1a1a1a" }}>☰</button>
+            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden w-9 h-9 rounded-xl hover:bg-black/5 flex items-center justify-center cursor-pointer" style={{ color: "#1a1a1a" }}>☰</button>
             {/* Title */}
             <div className="leading-tight min-w-0">
               <div className="font-display font-extrabold truncate flex items-center gap-1.5" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio 💬</div>
@@ -353,7 +364,7 @@ export function ChatPageContent() {
               <div className="ring-2 ring-white rounded-full"><Av emoji={userAvatar} color={userColor} size={32} /></div>
             </div>
             {/* + button */}
-            <button className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">＋</button>
+            <button onClick={() => setPanel("invite")} className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">＋</button>
             {/* User's own avatar */}
             <button className="hidden md:block shrink-0 rounded-full ring-2 ring-white transition-transform hover:scale-110 active:scale-90 cursor-pointer">
               <Av emoji={userAvatar} color={userColor} size={34} />
@@ -445,19 +456,45 @@ export function ChatPageContent() {
 
           {/* Input bar — Yasir exact: footer with glass container */}
           <footer className="px-3 pb-4 pt-1">
-            <div className="max-w-4xl mx-auto w-full">
+            <div className="max-w-4xl mx-auto w-full relative">
+              {/* Emoji picker popup */}
+              {emojiOpen && (
+                <motion.div initial={{ opacity: 0, y: 10, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }}
+                  className="absolute bottom-full mb-3 left-0 z-30 cg rounded-2xl p-3 w-[320px] max-w-[80vw]">
+                  <div className="grid grid-cols-10 gap-1 max-h-48 overflow-y-auto">
+                    {EMOJI_GRID.map(e => (
+                      <button key={e} type="button" onClick={() => { setInput(prev => prev + e); setEmojiOpen(false); inputRef.current?.focus(); }}
+                        className="aspect-square rounded-lg text-lg flex items-center justify-center hover:bg-pink/15 transition active:scale-90 cursor-pointer">{e}</button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Hidden file input */}
+              <input ref={fileRef} type="file" className="hidden" onChange={e => {
+                const file = e.target.files?.[0];
+                if (file) sendMessage(`📎 Sent a file: ${file.name}`);
+                e.target.value = "";
+              }} />
+
               <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg rounded-[1.75rem] p-2 flex items-center gap-1" style={{ border: "none" }}>
-                <button type="button" className="w-10 h-10 rounded-full text-xl flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">😊</button>
-                <button type="button" className="h-10 px-2.5 rounded-full text-[12px] font-extrabold tracking-wide flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}>GIF</button>
-                <button type="button" className="w-10 h-10 rounded-full text-lg flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">📎</button>
-                <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Message Atif's Studio…" disabled={loading}
+                <button type="button" onClick={() => setEmojiOpen(!emojiOpen)}
+                  className={clsx("w-10 h-10 rounded-full text-xl flex items-center justify-center transition active:scale-90 cursor-pointer", emojiOpen ? "bg-pink/20" : "hover:bg-black/5")}>😊</button>
+                <button type="button" onClick={() => sendMessage("Show me some fun GIFs!")}
+                  className={clsx("h-10 px-2.5 rounded-full text-[12px] font-extrabold tracking-wide flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer")}
+                  style={{ color: "rgba(0,0,0,0.4)" }}>GIF</button>
+                <button type="button" onClick={() => fileRef.current?.click()}
+                  className="w-10 h-10 rounded-full text-lg flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">📎</button>
+                <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)}
+                  onFocus={() => setEmojiOpen(false)} placeholder="Message Atif's Studio…" disabled={loading}
                   className="flex-1 bg-transparent px-3 py-2.5 text-[15px] placeholder:opacity-40 outline-none min-w-0" style={{ color: "#1a1a1a" }} />
                 {input.trim() ? (
                   <button type="submit" disabled={loading} className="cg-accent cg-gold w-11 h-11 rounded-full flex items-center justify-center text-white disabled:opacity-40 transition-transform active:scale-90 shrink-0 cursor-pointer" aria-label="Send">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7z" /></svg>
                   </button>
                 ) : (
-                  <button type="button" className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-pink/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#E0008A" }} aria-label="Voice">
+                  <button type="button" onClick={() => sendMessage("🎤 Voice message (feature coming soon)")}
+                    className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-pink/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#E0008A" }} aria-label="Voice">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
                   </button>
                 )}
@@ -490,6 +527,7 @@ export function ChatPageContent() {
       <ProjectModal open={panel === "project"} onClose={() => setPanel(null)} userName={userName} userEmail={userEmail} />
       <PortfolioModal open={panel === "portfolio"} onClose={() => setPanel(null)} />
       <PricingModal open={panel === "pricing"} onClose={() => setPanel(null)} />
+      <InviteModal open={panel === "invite"} onClose={() => setPanel(null)} />
     </>
   );
 }
