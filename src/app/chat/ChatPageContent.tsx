@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, Smile, Mic, Paperclip, Volume2, Smartphone, Pause, UserCircle, Plus } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { clsx } from "clsx";
 import Link from "next/link";
@@ -27,18 +27,32 @@ const accentColors = [
 ];
 
 const quickActions = [
-  { label: "Book a call", emoji: "📅", action: "I want to book a call" },
-  { label: "Start a project", emoji: "🚀", action: "I want to start a project" },
-  { label: "Portfolio", emoji: "👀", action: "Show me your portfolio" },
-  { label: "Pricing", emoji: "💰", action: "What are your prices?" },
+  { label: "📅 Book a call", panel: "book", action: "I want to book a call" },
+  { label: "🚀 Start a project", panel: "project", action: "I want to start a project" },
+  { label: "👀 Portfolio", panel: "portfolio", action: "Show me your portfolio" },
+  { label: "💰 Pricing", panel: "pricing", action: "What are your prices?" },
 ];
 
 function getTime() {
   return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
-function getToday() {
-  return new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+/* Avatar bubble — Yasir Rn component exact clone */
+function AvatarBubble({ emoji, color, size = 40 }: { emoji: string; color: string; size?: number }) {
+  return (
+    <div
+      className="rounded-full flex items-center justify-center shrink-0"
+      style={{
+        width: size,
+        height: size,
+        background: `linear-gradient(135deg, ${color}, ${color}cc)`,
+        fontSize: size * 0.5,
+        boxShadow: `0 2px 8px ${color}55`,
+      }}
+    >
+      <span style={{ lineHeight: 1 }}>{emoji}</span>
+    </div>
+  );
 }
 
 export function ChatPageContent() {
@@ -51,6 +65,7 @@ export function ChatPageContent() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [streamingText, setStreamingText] = useState("");
+  const [emojiOpen, setEmojiOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -65,7 +80,6 @@ export function ChatPageContent() {
 
   useEffect(() => {
     if (!joined) return;
-    // Add "joined the chat" system message
     setMessages([{
       role: "system",
       content: `${userName || "Guest"} joined the chat 🎉`,
@@ -130,7 +144,7 @@ export function ChatPageContent() {
     }
   }
 
-  // ─── ONBOARDING SCREEN (Yasir-exact style) ───
+  // ─── ONBOARDING SCREEN (Yasir-exact) ───
   if (!joined) {
     return (
       <div
@@ -149,7 +163,7 @@ export function ChatPageContent() {
         >
           {/* Left — Branding */}
           <div className="p-6 md:p-10 flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #ffffff 0%, #fdf2f8 50%, #ecfdf5 100%)" }}>
-            <div className="mx-auto md:mx-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl overflow-hidden" style={{ border: "2px solid rgba(224,0,138,0.2)" }}>
+            <div className="mx-auto md:mx-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl overflow-hidden cg-gold" style={{ border: "2px solid rgba(224,0,138,0.2)" }}>
               <Image src="/images/atif-face.jpeg" alt="Atif Malik" width={80} height={80} className="w-full h-full object-cover object-top" />
             </div>
             <h1 className="font-display font-extrabold text-2xl md:text-[2rem] mt-4 md:mt-5 text-center md:text-left" style={{ color: "#1a1a1a" }}>
@@ -159,15 +173,8 @@ export function ChatPageContent() {
               Premium websites &amp; AI growth systems,{" "}
               <em style={{ color: "#E0008A", fontStyle: "italic" }}>engineered to convert.</em>
             </p>
-
-            {/* Preview avatar */}
-            <div className="flex items-center justify-center md:justify-start gap-3 mt-6 md:mt-8">
-              <div
-                className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center text-2xl md:text-3xl"
-                style={{ border: `2px solid ${userColor}20`, background: `${userColor}10` }}
-              >
-                {userAvatar}
-              </div>
+            <div className="flex items-center justify-center md:justify-start gap-3 mt-3 md:mt-6">
+              <AvatarBubble emoji={userAvatar} color={userColor} size={56} />
               <div className="text-left leading-tight">
                 <div className="font-display font-bold" style={{ color: "#1a1a1a" }}>{userName || "Your name"}</div>
                 <div className="text-[12px]" style={{ color: "#bbb" }}>{userEmail || "you@email.com"}</div>
@@ -175,79 +182,74 @@ export function ChatPageContent() {
             </div>
           </div>
 
-          {/* Divider mobile */}
           <div className="md:hidden h-px" style={{ background: "rgba(0,0,0,0.06)" }} />
 
           {/* Right — Form */}
           <div className="p-6 md:p-10">
-            <p className="font-display font-bold text-sm mb-4" style={{ color: "#1a1a1a" }}>Choose your vibe to join the chat</p>
+            <p className="font-display font-bold text-sm mb-2" style={{ color: "#1a1a1a" }}>Choose your vibe to join the chat</p>
             <input
               type="text"
-              placeholder="Your name..."
+              placeholder="Your name…"
               aria-label="Your name"
               maxLength={28}
               value={userName}
               onChange={e => setUserName(e.target.value)}
-              className="w-full rounded-2xl px-4 py-3 text-[14px] outline-none mb-2.5 transition-colors"
-              style={{ background: "#f8f8f8", border: "1px solid rgba(0,0,0,0.08)", color: "#1a1a1a" }}
+              onKeyDown={e => e.key === "Enter" && userName.trim() && setJoined(true)}
+              className="w-full cg rounded-2xl px-4 py-2.5 text-[15px] outline-none mb-2 placeholder:opacity-40"
+              style={{ color: "#1a1a1a" }}
             />
             <input
               type="email"
-              placeholder="Your email..."
+              placeholder="Your email…"
               aria-label="Your email"
               value={userEmail}
               onChange={e => setUserEmail(e.target.value)}
-              className="w-full rounded-2xl px-4 py-3 text-[14px] outline-none mb-1.5 transition-colors"
-              style={{ background: "#f8f8f8", border: "1px solid rgba(0,0,0,0.08)", color: "#1a1a1a" }}
+              onKeyDown={e => e.key === "Enter" && userName.trim() && setJoined(true)}
+              className="w-full cg rounded-2xl px-4 py-2.5 text-[15px] outline-none mb-1 placeholder:opacity-40"
+              style={{ color: "#1a1a1a" }}
             />
-            <p className="text-[11px] mb-4" style={{ color: "#bbb" }}>No spam, ever. Your chat may be saved so Atif can jump in and help.</p>
+            <p className="text-[11px] mb-3" style={{ color: "#bbb" }}>No spam, ever. Your chat may be saved so Atif can jump in and help.</p>
 
-            <div className="text-[12px] font-semibold mb-2.5" style={{ color: "#999" }}>Pick an avatar</div>
-            <div className="grid grid-cols-8 gap-[6px] mb-5">
+            <div className="text-[12px] font-semibold mb-1.5" style={{ color: "#999" }}>Pick an avatar</div>
+            <div className="grid grid-cols-8 gap-1.5 mb-3">
               {avatars.map(a => (
                 <button
                   key={a}
                   onClick={() => setUserAvatar(a)}
-                  className="w-9 h-9 rounded-lg text-[18px] flex items-center justify-center transition-all cursor-pointer"
-                  style={{
-                    background: userAvatar === a ? `${userColor}18` : "#f5f5f5",
-                    border: userAvatar === a ? `2px solid ${userColor}50` : "2px solid transparent",
-                    transform: userAvatar === a ? "scale(1.12)" : "scale(1)",
-                  }}
+                  className={clsx(
+                    "aspect-square rounded-xl text-lg md:text-xl flex items-center justify-center transition cursor-pointer",
+                    userAvatar === a ? "scale-110" : "hover:bg-black/5"
+                  )}
+                  style={userAvatar === a ? { background: `${userColor}20` } : undefined}
                 >
                   {a}
                 </button>
               ))}
             </div>
 
-            <div className="text-[12px] font-semibold mb-2.5" style={{ color: "#999" }}>Pick a color</div>
-            <div className="flex items-center gap-3 mb-6">
-              {accentColors.map(c => {
-                const selected = userColor === c.value;
-                return (
-                  <button
-                    key={c.value}
-                    onClick={() => setUserColor(c.value)}
-                    className="rounded-full transition-all cursor-pointer flex-shrink-0 flex items-center justify-center"
-                    style={{
-                      width: selected ? 34 : 28,
-                      height: selected ? 34 : 28,
-                      background: c.value,
-                      boxShadow: selected ? `0 0 0 3px #fff, 0 0 0 5px ${c.value}` : "0 1px 3px rgba(0,0,0,0.12)",
-                    }}
-                    aria-label={c.label}
-                  />
-                );
-              })}
+            <div className="text-[12px] font-semibold mb-1.5" style={{ color: "#999" }}>Pick a color</div>
+            <div className="grid grid-cols-8 gap-2 mb-4">
+              {accentColors.map(c => (
+                <button
+                  key={c.value}
+                  onClick={() => setUserColor(c.value)}
+                  className={clsx(
+                    "w-7 h-7 rounded-full transition mx-auto cursor-pointer",
+                    userColor === c.value && "ring-2 ring-offset-2 scale-110"
+                  )}
+                  style={{
+                    background: c.value,
+                    ...(userColor === c.value ? { "--tw-ring-color": "rgba(15,46,39,0.4)" } as React.CSSProperties : {}),
+                  }}
+                  aria-label={c.label}
+                />
+              ))}
             </div>
 
             <button
               onClick={() => { if (userName.trim()) setJoined(true); }}
               disabled={!userName.trim()}
-              className="w-full py-3.5 rounded-2xl text-white font-display font-bold text-[14px] transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed hover:brightness-105 hover:shadow-lg"
-              style={{
-                background: `linear-gradient(135deg, ${userColor}90, ${userColor}60)`,
-              }}
+              className="cg-accent cg-gold w-full rounded-2xl py-3 font-display font-bold text-white text-base transition-transform hover:scale-[1.02] active:scale-95 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Join the chat →
             </button>
@@ -259,265 +261,293 @@ export function ChatPageContent() {
 
   // ─── CHAT SCREEN (Yasir-exact clone) ───
   return (
-    <div className="h-screen flex flex-col" style={{ background: "linear-gradient(180deg, #fce4f0 0%, #fff5f9 25%, #ffffff 50%, #f0fdf4 80%, #d1fae5 100%)" }}>
-      {/* Header — frosted glass */}
-      <div
-        className="flex items-center justify-between px-4 sm:px-6 py-3"
-        style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(224,0,138,0.2)" }}>
-            <Image src="/images/atif-face.jpeg" alt="Atif Malik" width={36} height={36} className="w-full h-full object-cover object-top" />
-          </div>
-          <div>
-            <div className="text-sm font-display font-bold flex items-center gap-1.5" style={{ color: "#1a1a1a" }}>
-              Atif&apos;s Studio <span className="text-sm">💬</span>
+    <div className="h-screen flex" style={{ background: "linear-gradient(180deg, #fce4f0 0%, #fff5f9 25%, #ffffff 50%, #f0fdf4 80%, #d1fae5 100%)" }}>
+      {/* Sidebar (desktop) — Yasir exact: glass container, w-72 */}
+      <aside className="hidden md:block w-72 shrink-0 p-3">
+        <div className="cg rounded-3xl h-full flex flex-col p-4">
+          {/* Studio header */}
+          <div className="flex items-center gap-2.5 px-1">
+            <div className="w-10 h-10 rounded-2xl cg-accent cg-gold flex items-center justify-center overflow-hidden">
+              <Image src="/images/atif-face.jpeg" alt="Atif" width={40} height={40} className="w-full h-full object-cover object-top" />
             </div>
-            <div className="text-[11px]" style={{ color: "#999" }}>2 members · live</div>
-          </div>
-        </div>
-        <div className="flex items-center gap-2.5">
-          <Link href="/" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-medium transition-colors hover:opacity-80" style={{ color: "#666" }}>
-            <span className="w-2 h-2 rounded-full bg-[#22C55E] inline-block" />
-            Visit site ↗
-          </Link>
-          <a
-            href="https://wa.me/923196780720"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3.5 py-1.5 rounded-full text-white text-[12px] font-semibold hover:brightness-110 transition-all flex items-center gap-1.5"
-            style={{ background: "linear-gradient(135deg, #E0008A, #FF4DA6)" }}
-          >
-            📞 <span className="hidden sm:inline">WhatsApp</span> call
-          </a>
-          {/* Avatar row */}
-          <div className="hidden sm:flex items-center -space-x-2">
-            <div className="w-7 h-7 rounded-full overflow-hidden" style={{ border: "2px solid #fff" }}>
-              <Image src="/images/atif-face.jpeg" alt="Atif" width={28} height={28} className="w-full h-full object-cover object-top" />
-            </div>
-            <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs" style={{ background: `${userColor}20`, border: "2px solid #fff" }}>
-              {userAvatar}
-            </div>
-          </div>
-          <button className="hidden sm:flex w-7 h-7 rounded-full items-center justify-center text-white" style={{ background: userColor }}>
-            <Plus size={14} />
-          </button>
-        </div>
-      </div>
-
-      <div className="flex flex-1 overflow-hidden relative">
-        {/* Sidebar (desktop only) — Yasir exact */}
-        <div className="hidden md:flex flex-col w-[240px] shrink-0" style={{ background: "rgba(255,255,255,0.7)", borderRight: "1px solid rgba(0,0,0,0.06)" }}>
-          <div className="p-5 pb-4" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-            <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0" style={{ border: "2px solid rgba(224,0,138,0.2)" }}>
-                <Image src="/images/atif-face.jpeg" alt="Atif" width={40} height={40} className="w-full h-full object-cover object-top" />
-              </div>
-              <div>
-                <div className="font-display font-bold text-sm" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio</div>
-                <div className="text-[11px]" style={{ color: "#999" }}>2 in the group</div>
-              </div>
+            <div className="leading-tight">
+              <div className="font-display font-extrabold text-[15px]" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio</div>
+              <div className="text-[11px]" style={{ color: "#E0008A" }}>2 in the group</div>
             </div>
           </div>
 
-          <div className="flex-1 p-5">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] mb-4" style={{ color: "#bbb" }}>Members</div>
+          <div className="h-px my-4" style={{ background: "rgba(0,0,0,0.08)" }} />
 
+          <div className="text-[11px] font-bold uppercase tracking-wider px-1 mb-2" style={{ color: "rgba(0,0,0,0.3)" }}>Members</div>
+
+          <div className="flex-1 overflow-y-auto flex flex-col gap-1">
             {/* Atif — Host */}
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center gap-3 px-1.5 py-1.5 rounded-2xl hover:bg-black/5">
               <div className="relative">
-                <div className="w-9 h-9 rounded-full overflow-hidden" style={{ border: "1.5px solid rgba(224,0,138,0.2)" }}>
+                <div className="w-9 h-9 rounded-full overflow-hidden">
                   <Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" />
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#22C55E]" style={{ border: "2px solid #fff" }} />
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white" style={{ background: "#36c9ab" }} />
               </div>
-              <div>
-                <div className="text-[13px] font-semibold" style={{ color: "#1a1a1a" }}>Atif Malik</div>
-                <div className="text-[10px] flex items-center gap-1" style={{ color: "#bbb" }}>
-                  <span>👑</span> Host
-                </div>
+              <div className="min-w-0">
+                <div className="font-semibold text-sm truncate" style={{ color: "#1a1a1a" }}>Atif Malik</div>
+                <div className="text-[11px] truncate" style={{ color: "rgba(0,0,0,0.4)" }}>👑 Host</div>
               </div>
             </div>
 
             {/* User — Guest */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-3 px-1.5 py-1.5 rounded-2xl hover:bg-black/5">
               <div className="relative">
-                <div className="w-9 h-9 rounded-full flex items-center justify-center text-base" style={{ background: `${userColor}15`, border: `1.5px solid ${userColor}30` }}>
-                  {userAvatar}
-                </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#22C55E]" style={{ border: "2px solid #fff" }} />
+                <AvatarBubble emoji={userAvatar} color={userColor} size={36} />
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white" style={{ background: "#36c9ab" }} />
               </div>
-              <div>
-                <div className="text-[13px] font-semibold" style={{ color: "#1a1a1a" }}>{userName} <span className="font-normal text-[11px]" style={{ color: "#bbb" }}>(you)</span></div>
-                <div className="text-[10px]" style={{ color: "#bbb" }}>Guest</div>
+              <div className="min-w-0">
+                <div className="font-semibold text-sm truncate" style={{ color: "#1a1a1a" }}>
+                  {userName}<span className="font-normal" style={{ color: "rgba(0,0,0,0.3)" }}> (you)</span>
+                </div>
+                <div className="text-[11px] truncate" style={{ color: "rgba(0,0,0,0.4)" }}>Guest</div>
               </div>
             </div>
           </div>
 
-          {/* Add member button */}
-          <div className="p-5 pt-0">
-            <button
-              className="w-full py-2.5 rounded-full text-white text-[13px] font-semibold flex items-center justify-center gap-1.5 hover:brightness-110 transition-all cursor-pointer"
-              style={{ background: `linear-gradient(135deg, ${userColor}, ${userColor}cc)` }}
+          {/* Add member */}
+          <button className="mt-3 cg-accent cg-gold rounded-2xl py-3 font-display font-bold text-white text-sm transition-transform hover:scale-[1.02] active:scale-95 cursor-pointer">
+            ➕ Add member
+          </button>
+        </div>
+      </aside>
+
+      {/* Main area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header — frosted glass */}
+        <header className="cg flex items-center justify-between px-4 sm:px-5 py-3 shrink-0" style={{ borderRadius: 0, border: "none", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl overflow-hidden md:hidden" style={{ border: "1px solid rgba(224,0,138,0.2)" }}>
+              <Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" />
+            </div>
+            <div>
+              <div className="text-sm font-display font-bold flex items-center gap-1.5" style={{ color: "#1a1a1a" }}>
+                Atif&apos;s Studio <span className="text-sm">💬</span>
+              </div>
+              <div className="text-[11px]" style={{ color: "#999" }}>2 members · live</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <Link href="/" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-semibold hover:bg-black/5 transition-colors rounded-full px-2.5 py-1.5" style={{ color: "#666" }}>
+              🌐 <span>Visit site ↗</span>
+            </Link>
+            <a
+              href="https://wa.me/923196780720"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cg-accent cg-gold rounded-full pl-2.5 pr-3 h-9 flex items-center gap-1.5 text-white text-[13px] font-semibold transition-transform hover:scale-105 active:scale-95"
             >
-              <Plus size={15} /> Add member
+              📞 <span className="hidden sm:inline">WhatsApp call</span>
+            </a>
+            {/* Avatar stack */}
+            <div className="hidden md:flex -space-x-2.5">
+              <div className="ring-2 ring-white rounded-full">
+                <div className="w-8 h-8 rounded-full overflow-hidden">
+                  <Image src="/images/atif-face.jpeg" alt="Atif" width={32} height={32} className="w-full h-full object-cover object-top" />
+                </div>
+              </div>
+              <div className="ring-2 ring-white rounded-full">
+                <AvatarBubble emoji={userAvatar} color={userColor} size={32} />
+              </div>
+            </div>
+            {/* + button */}
+            <button className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">
+              ＋
             </button>
+          </div>
+        </header>
+
+        {/* Chat body */}
+        <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6">
+          {/* Today divider */}
+          <div className="flex justify-center mb-4">
+            <span className="cg rounded-full px-4 py-1 text-[11px] font-medium" style={{ color: "#999" }}>
+              Today
+            </span>
+          </div>
+
+          <div className="space-y-3">
+            {messages.map((msg, i) => {
+              if (msg.role === "system") {
+                return (
+                  <div key={i} className="flex justify-center my-1">
+                    <span className="cg rounded-full px-3.5 py-1 text-[12px]" style={{ color: "rgba(0,0,0,0.4)" }}>
+                      {msg.content}
+                    </span>
+                  </div>
+                );
+              }
+
+              const isMe = msg.role === "user";
+
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                  className={clsx("flex gap-2.5", isMe ? "flex-row-reverse" : "flex-row")}
+                >
+                  {!isMe && (
+                    <div className="w-9 h-9 rounded-full overflow-hidden shrink-0">
+                      <Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" />
+                    </div>
+                  )}
+                  {isMe && <AvatarBubble emoji={userAvatar} color={userColor} size={36} />}
+
+                  <div className={clsx("flex flex-col", isMe ? "items-end" : "items-start")} style={{ maxWidth: "min(78%, 520px)" }}>
+                    {!isMe && (
+                      <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>
+                    )}
+                    <div
+                      className={clsx(
+                        "px-4 py-2.5 text-[15px] leading-relaxed whitespace-pre-wrap break-words",
+                        isMe ? "cg-accent text-white rounded-3xl rounded-tr-md" : "cg rounded-3xl rounded-tl-md"
+                      )}
+                      style={!isMe ? { color: "#444" } : undefined}
+                    >
+                      {msg.content}
+                    </div>
+                    <div className={clsx("flex items-center gap-1 mt-0.5 px-1 text-[10px]", isMe && "flex-row-reverse")} style={{ color: "rgba(0,0,0,0.3)" }}>
+                      <span>{msg.time}</span>
+                      {isMe && <span className="font-bold" style={{ color: "#E0008A" }}>✓</span>}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+
+            {/* Streaming */}
+            {streamingText && (
+              <div className="flex gap-2.5">
+                <div className="w-9 h-9 rounded-full overflow-hidden shrink-0">
+                  <Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" />
+                </div>
+                <div className="flex flex-col items-start" style={{ maxWidth: "min(78%, 520px)" }}>
+                  <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>
+                  <div className="cg rounded-3xl rounded-tl-md px-4 py-2.5 text-[15px] whitespace-pre-wrap leading-relaxed break-words" style={{ color: "#444" }}>
+                    {streamingText}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse rounded-sm" style={{ background: "rgba(224,0,138,0.4)" }} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {loading && !streamingText && (
+              <div className="flex items-center gap-2 text-sm ml-12" style={{ color: "#bbb" }}>
+                <Loader2 size={14} className="animate-spin" /> Thinking...
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Chat area */}
-        <div className="flex-1 flex flex-col min-w-0">
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6">
-            {/* Today divider */}
-            <div className="flex justify-center mb-6">
-              <span className="px-4 py-1 rounded-full text-[11px] font-medium" style={{ background: "rgba(255,255,255,0.8)", color: "#999", border: "1px solid rgba(0,0,0,0.06)" }}>
-                Today
-              </span>
-            </div>
+        {/* Quick actions — Yasir uses glass-teal gold-ring filled buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-2 px-4 sm:px-6 py-2.5">
+          {quickActions.map(a => (
+            <button
+              key={a.panel}
+              onClick={() => sendMessage(a.action)}
+              className="cg-accent cg-gold rounded-2xl px-4 py-2.5 text-white font-display font-bold text-[14px] transition-transform hover:scale-[1.03] active:scale-95 cursor-pointer"
+            >
+              {a.label}
+            </button>
+          ))}
+        </div>
 
-            {/* Messages */}
-            <div className="space-y-4">
-              {messages.map((msg, i) => {
-                // System message (joined the chat)
-                if (msg.role === "system") {
-                  return (
-                    <div key={i} className="flex justify-center">
-                      <span className="px-4 py-1.5 rounded-full text-[12px]" style={{ background: "rgba(0,0,0,0.04)", color: "#999" }}>
-                        {msg.content}
-                      </span>
-                    </div>
-                  );
-                }
-
-                return (
-                  <div key={i}>
-                    {(i === 0 || messages[i-1]?.role !== msg.role) && (
-                      <div className="text-[10px] mb-1 ml-11" style={{ color: "#ccc" }}>{msg.time}</div>
-                    )}
-                    <div className={clsx("flex gap-2.5", msg.role === "user" && "flex-row-reverse")}>
-                      {msg.role === "assistant" ? (
-                        <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: "1.5px solid rgba(224,0,138,0.2)" }}>
-                          <Image src="/images/atif-face.jpeg" alt="Atif" width={32} height={32} className="w-full h-full object-cover object-top" />
-                        </div>
-                      ) : (
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-base flex-shrink-0" style={{ background: `${userColor}15`, border: `1.5px solid ${userColor}30` }}>{userAvatar}</div>
-                      )}
-                      <div>
-                        <div className={clsx("text-[11px] font-medium mb-0.5", msg.role === "user" ? "text-right" : "")} style={{ color: "#bbb" }}>
-                          {msg.role === "assistant" ? "Atif Malik" : userName}
-                        </div>
-                        <div
-                          className={clsx("max-w-md rounded-[16px] px-4 py-2.5 text-[14px] leading-relaxed whitespace-pre-wrap", msg.role === "user" ? "rounded-tr-[4px]" : "rounded-tl-[4px]")}
-                          style={msg.role === "user"
-                            ? { background: userColor, color: "#fff" }
-                            : { background: "#ffffff", border: "1px solid rgba(0,0,0,0.06)", color: "#444" }
-                          }
-                        >
-                          {msg.content}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* Streaming */}
-              {streamingText && (
-                <div className="flex gap-2.5">
-                  <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" style={{ border: "1.5px solid rgba(224,0,138,0.2)" }}>
-                    <Image src="/images/atif-face.jpeg" alt="Atif" width={32} height={32} className="w-full h-full object-cover object-top" />
-                  </div>
-                  <div>
-                    <div className="text-[11px] mb-0.5" style={{ color: "#bbb" }}>Atif Malik</div>
-                    <div className="max-w-md rounded-[16px] rounded-tl-[4px] px-4 py-2.5 text-[14px] whitespace-pre-wrap leading-relaxed" style={{ background: "#ffffff", border: "1px solid rgba(0,0,0,0.06)", color: "#444" }}>
-                      {streamingText}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse" style={{ background: `${userColor}60` }} />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {loading && !streamingText && (
-                <div className="flex items-center gap-2 text-sm ml-11" style={{ color: "#bbb" }}>
-                  <Loader2 size={14} className="animate-spin" /> Thinking...
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Quick actions — outlined pills like Yasir */}
-          <div className="flex flex-wrap items-center justify-center gap-2 px-4 sm:px-6 py-2.5" style={{ borderTop: "1px solid rgba(0,0,0,0.04)" }}>
-            {quickActions.map(a => (
-              <button
-                key={a.label}
-                onClick={() => sendMessage(a.action)}
-                className="px-4 py-2 text-[13px] rounded-full transition-all cursor-pointer hover:shadow-sm flex items-center gap-1.5 font-medium"
-                style={{
-                  border: "1px solid rgba(0,0,0,0.1)",
-                  color: "#555",
-                  background: "rgba(255,255,255,0.9)",
-                }}
-              >
-                <span>{a.emoji}</span> {a.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Input bar — Yasir exact with emoji, GIF, attachment, mic */}
+        {/* Input bar — Yasir exact: glass container */}
+        <div className="px-3 sm:px-4 pb-3 pt-1">
           <form
             onSubmit={e => { e.preventDefault(); sendMessage(input); }}
-            className="flex items-center gap-2 px-4 sm:px-6 py-3"
-            style={{ borderTop: "1px solid rgba(0,0,0,0.06)", background: "rgba(255,255,255,0.7)" }}
+            className="cg rounded-[1.75rem] p-2 flex items-center gap-1"
+            style={{ border: "none" }}
           >
-            <button type="button" className="p-1.5 rounded-full transition-colors cursor-pointer hover:bg-black/5" style={{ color: "#bbb" }} aria-label="Emoji">
-              <Smile size={20} />
+            <button
+              type="button"
+              onClick={() => setEmojiOpen(!emojiOpen)}
+              className={clsx(
+                "w-10 h-10 rounded-full text-xl flex items-center justify-center transition active:scale-90 cursor-pointer",
+                emojiOpen ? "bg-pink/20" : "hover:bg-black/5"
+              )}
+            >
+              😊
             </button>
-            <span className="text-[13px] font-semibold cursor-pointer hover:opacity-70 transition-opacity select-none" style={{ color: "#bbb" }}>GIF</span>
-            <button type="button" className="p-1.5 rounded-full transition-colors cursor-pointer hover:bg-black/5" style={{ color: "#bbb" }} aria-label="Attach">
-              <Paperclip size={18} />
+            <button
+              type="button"
+              className="h-10 px-2.5 rounded-full text-[12px] font-extrabold tracking-wide flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer"
+              style={{ color: "rgba(0,0,0,0.4)" }}
+            >
+              GIF
+            </button>
+            <button
+              type="button"
+              className="w-10 h-10 rounded-full text-lg flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer"
+            >
+              📎
             </button>
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="Message Atif's Studio..."
+              onFocus={() => setEmojiOpen(false)}
+              placeholder="Message Atif's Studio…"
               disabled={loading}
-              className="flex-1 px-4 py-2.5 text-sm outline-none transition-colors bg-transparent"
+              className="flex-1 bg-transparent px-3 py-2.5 text-[15px] placeholder:opacity-40 outline-none min-w-0"
               style={{ color: "#1a1a1a" }}
             />
             {input.trim() ? (
               <button
                 type="submit"
                 disabled={loading}
-                className="p-2.5 rounded-full text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer hover:brightness-110"
-                style={{ background: userColor }}
+                className="cg-accent cg-gold w-11 h-11 rounded-full flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed transition-transform active:scale-90 shrink-0 cursor-pointer"
                 aria-label="Send"
               >
-                <Send size={16} />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 2 11 13" />
+                  <path d="M22 2 15 22l-4-9-9-4 20-7z" />
+                </svg>
               </button>
             ) : (
-              <button type="button" className="p-1.5 rounded-full transition-colors cursor-pointer hover:bg-black/5" style={{ color: "#bbb" }} aria-label="Voice">
-                <Mic size={20} />
+              <button
+                type="button"
+                className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-pink/15 transition-transform active:scale-90 shrink-0 cursor-pointer"
+                style={{ color: "#E0008A" }}
+                aria-label="Record voice"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="22" />
+                </svg>
               </button>
             )}
           </form>
         </div>
+      </div>
 
-        {/* Right side icons — Yasir exact vertical strip */}
-        <div className="hidden md:flex flex-col items-center gap-3 py-6 px-3">
-          <button className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-black/5" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(0,0,0,0.06)", color: "#999" }} aria-label="Sound">
-            <Volume2 size={18} />
+      {/* Right side icons strip */}
+      <div className="hidden md:flex flex-col items-center gap-3 py-6 px-3 shrink-0">
+        {[
+          { icon: "🔊", active: false },
+          { icon: "📋", active: false },
+          { icon: "⏸", active: true },
+          { icon: "👤", active: false },
+        ].map((btn, i) => (
+          <button
+            key={i}
+            className={clsx(
+              "w-10 h-10 rounded-full flex items-center justify-center text-lg transition-transform active:scale-90 shrink-0 cursor-pointer",
+              btn.active ? "cg-accent cg-gold text-white" : "cg hover:bg-black/5"
+            )}
+            style={!btn.active ? { color: "rgba(0,0,0,0.4)" } : undefined}
+          >
+            {btn.icon}
           </button>
-          <button className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-black/5" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(0,0,0,0.06)", color: "#999" }} aria-label="Device">
-            <Smartphone size={18} />
-          </button>
-          <button className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer" style={{ background: userColor, color: "#fff" }} aria-label="Pause">
-            <Pause size={18} />
-          </button>
-          <button className="w-10 h-10 rounded-full flex items-center justify-center transition-all cursor-pointer hover:bg-black/5" style={{ background: "rgba(255,255,255,0.8)", border: "1px solid rgba(0,0,0,0.06)", color: "#999" }} aria-label="Profile">
-            <UserCircle size={18} />
-          </button>
-        </div>
+        ))}
       </div>
     </div>
   );
