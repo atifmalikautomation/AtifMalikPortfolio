@@ -529,7 +529,7 @@ export function ChatPageContent() {
                 e.target.value = "";
               }} />
 
-              <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg rounded-[1.75rem] p-2 flex items-center gap-1" style={{ border: "none" }}>
+              <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg-flat rounded-[1.75rem] p-2 flex items-center gap-1">
                 <button type="button" onClick={() => setEmojiOpen(!emojiOpen)}
                   className={clsx("w-10 h-10 rounded-full text-xl flex items-center justify-center transition active:scale-90 cursor-pointer", emojiOpen ? "bg-pink/20" : "hover:bg-black/5")}>😊</button>
                 <button type="button" onClick={() => sendMessage("Show me some fun GIFs!")}
@@ -561,16 +561,29 @@ export function ChatPageContent() {
           {[
             { icon: soundOn ? "🔊" : "🔇", label: soundOn ? "Sound on" : "Sound off", onClick: () => setSoundOn(!soundOn) },
             { icon: "📄", label: "Save as PDF", onClick: () => {
-              const chatEl = scrollRef.current;
-              if (!chatEl) return;
               const win = window.open("", "_blank");
               if (!win) return;
-              const msgs = messages.filter(m => m.senderId !== "sys").map(m => {
-                const name = m.senderId === "me" ? userName : "Atif Malik";
-                const texts = m.bubbles.filter((b): b is { kind: "text"; text: string } => b.kind === "text").map(b => b.text).join("\n");
-                return `<div style="margin-bottom:16px"><strong>${name}</strong> <span style="color:#999;font-size:12px">${m.time || ""}</span><p style="margin:4px 0;white-space:pre-wrap">${texts}</p></div>`;
+              const msgs = messages.map(m => {
+                if (m.senderId === "sys") {
+                  const sysText = (m.bubbles[0] as { kind: "system"; text: string }).text;
+                  return `<div style="text-align:center;margin:12px 0"><span style="background:rgba(0,0,0,0.05);padding:4px 16px;border-radius:20px;font-size:12px;color:#999">${sysText}</span></div>`;
+                }
+                const isMe = m.senderId === "me";
+                const name = isMe ? userName : "Atif Malik";
+                const avatar = isMe
+                  ? `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,${userColor},${userColor}cc);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">${userAvatar}</div>`
+                  : `<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#E0008A,#FF4DA6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">AM</div>`;
+                const bubbleStyle = isMe
+                  ? "background:linear-gradient(135deg,rgba(224,0,138,0.92),rgba(255,77,166,0.92));color:#fff;border-radius:24px 24px 6px 24px"
+                  : "background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.06);color:#444;border-radius:24px 24px 24px 6px";
+                const texts = m.bubbles.map(b => {
+                  if (b.kind === "text") return `<p style="margin:0;white-space:pre-wrap;font-size:15px;line-height:1.6">${b.text}</p>`;
+                  if (b.kind === "stat") return `<div style="display:flex;gap:20px;padding:8px 0">${b.items.map(s => `<div style="text-align:center"><div style="font-weight:800;font-size:18px;color:#E0008A">${s.value}</div><div style="font-size:11px;color:#999;margin-top:2px">${s.label}</div></div>`).join("")}</div>`;
+                  return "";
+                }).join("");
+                return `<div style="display:flex;gap:10px;margin-bottom:12px;${isMe ? "flex-direction:row-reverse" : ""}">${avatar}<div style="max-width:70%"><div style="font-size:12px;font-weight:600;color:#999;margin-bottom:2px;${isMe ? "text-align:right" : ""}">${name} · ${m.time || ""}</div><div style="padding:10px 16px;${bubbleStyle}">${texts}</div></div></div>`;
               }).join("");
-              win.document.write(`<!DOCTYPE html><html><head><title>Chat with Atif - ${new Date().toLocaleDateString()}</title><style>body{font-family:system-ui,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;color:#333}h1{font-size:20px;color:#E0008A}hr{border:none;border-top:1px solid #eee;margin:20px 0}</style></head><body><h1>Atif's Studio — Chat Export</h1><p style="color:#999">${new Date().toLocaleString()}</p><hr/>${msgs}<hr/><p style="color:#999;font-size:12px">Exported from atifmalik.me/chat</p></body></html>`);
+              win.document.write(`<!DOCTYPE html><html><head><title>Atif's Studio — Chat Export</title><style>*{margin:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#fce4f0 0%,#fff5f9 25%,#fff 50%,#f0fdf4 80%,#d1fae5 100%);min-height:100vh;padding:40px 20px}@media print{body{background:#fff !important}}</style></head><body><div style="max-width:700px;margin:0 auto"><div style="text-align:center;margin-bottom:24px"><div style="font-size:22px;font-weight:800;color:#1a1a1a">Atif's Studio 💬</div><div style="font-size:13px;color:#E0008A;margin-top:4px">Chat Export · ${new Date().toLocaleString()}</div></div><div style="background:rgba(255,255,255,0.4);border-radius:24px;padding:24px;backdrop-filter:blur(10px)">${msgs}</div><div style="text-align:center;margin-top:20px;font-size:11px;color:#999">Exported from atifmalik.me/chat</div></div></body></html>`);
               win.document.close();
               win.print();
             } },
