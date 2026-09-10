@@ -365,8 +365,8 @@ export function ChatPageContent() {
             </div>
             {/* + button */}
             <button onClick={() => setPanel("invite")} className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">＋</button>
-            {/* User's own avatar */}
-            <button className="hidden md:block shrink-0 rounded-full ring-2 ring-white transition-transform hover:scale-110 active:scale-90 cursor-pointer">
+            {/* User's avatar — click to logout */}
+            <button onClick={() => { setJoined(false); setMessages([]); }} title="Logout" className="hidden md:block shrink-0 rounded-full ring-2 ring-white transition-transform hover:scale-110 active:scale-90 cursor-pointer">
               <Av emoji={userAvatar} color={userColor} size={34} />
             </button>
           </header>
