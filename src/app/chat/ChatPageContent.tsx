@@ -352,7 +352,7 @@ export function ChatPageContent() {
         )}>
           <div className="cg rounded-3xl h-full flex flex-col p-4">
             <div className="flex items-center gap-2.5 px-1">
-              <div className="w-10 h-10 rounded-2xl cg-accent cg-gold overflow-hidden">
+              <div className="w-10 h-10 rounded-full cg-accent cg-gold overflow-hidden shrink-0">
                 <Image src="/images/atif-face.jpeg" alt="Atif" width={40} height={40} className="w-full h-full object-cover object-top" />
               </div>
               <div className="leading-tight">
