@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Loader2 } from "lucide-react";
+import { Loader2, Volume2, Copy, Pause, User } from "lucide-react";
 import Image from "next/image";
 import { clsx } from "clsx";
 import Link from "next/link";
@@ -419,6 +419,22 @@ export function ChatPageContent() {
             </div>
           </div>
 
+          {/* Standalone quick action buttons — outlined pills like Yasir */}
+          <div className="flex flex-wrap items-center justify-center gap-2 px-4 sm:px-6 py-2">
+            {[
+              { label: "📅 Book a call", panel: "book" },
+              { label: "🚀 Start a project", panel: "project" },
+              { label: "👀 Portfolio", panel: "portfolio" },
+              { label: "💰 Pricing", panel: "pricing" },
+            ].map(a => (
+              <button key={a.panel} onClick={() => setPanel(a.panel)}
+                className="cg rounded-full px-4 py-2 text-[13px] font-medium transition hover:scale-105 active:scale-95 cursor-pointer"
+                style={{ color: "#E0008A" }}>
+                {a.label}
+              </button>
+            ))}
+          </div>
+
           {/* Input bar */}
           <div className="px-3 sm:px-4 pb-3 pt-1">
             <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg rounded-[1.75rem] p-2 flex items-center gap-1" style={{ border: "none" }}>
@@ -440,12 +456,12 @@ export function ChatPageContent() {
           </div>
         </div>
 
-        {/* Right icons */}
+        {/* Right icons — Yasir exact: Lucide icons in circles */}
         <div className="hidden md:flex flex-col items-center gap-3 py-6 px-3 shrink-0">
-          {[{ icon: "🔊", active: false }, { icon: "📋", active: false }, { icon: "⏸", active: true }, { icon: "👤", active: false }].map((btn, i) => (
-            <button key={i} className={clsx("w-10 h-10 rounded-full flex items-center justify-center text-lg transition-transform active:scale-90 shrink-0 cursor-pointer",
-              btn.active ? "cg-accent cg-gold text-white" : "cg hover:bg-black/5")} style={!btn.active ? { color: "rgba(0,0,0,0.4)" } : undefined}>{btn.icon}</button>
-          ))}
+          <button className="w-10 h-10 rounded-full flex items-center justify-center cg hover:bg-black/5 transition-transform active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}><Volume2 size={18} /></button>
+          <button className="w-10 h-10 rounded-full flex items-center justify-center cg hover:bg-black/5 transition-transform active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}><Copy size={18} /></button>
+          <button className="w-10 h-10 rounded-full flex items-center justify-center cg-accent cg-gold text-white transition-transform active:scale-90 cursor-pointer"><Pause size={18} /></button>
+          <button className="w-10 h-10 rounded-full flex items-center justify-center cg hover:bg-black/5 transition-transform active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}><User size={18} /></button>
         </div>
       </div>
 
