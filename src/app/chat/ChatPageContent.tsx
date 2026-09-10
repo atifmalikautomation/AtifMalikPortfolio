@@ -391,7 +391,7 @@ export function ChatPageContent() {
         {/* Main */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Header — Yasir exact */}
-          <header className="cg flex items-center px-4 sm:px-5 py-3 shrink-0 gap-3" style={{ borderRadius: 0, border: "none", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+          <header className="cg flex items-center px-4 sm:px-5 py-3 shrink-0 gap-3 mx-3 mt-3 rounded-full" style={{ border: "none" }}>
             {/* Mobile hamburger */}
             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden w-9 h-9 rounded-xl hover:bg-black/5 flex items-center justify-center cursor-pointer" style={{ color: "#1a1a1a" }}>☰</button>
             {/* Title */}
