@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Loader2, Volume2, Copy, Pause, User } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { clsx } from "clsx";
 import Link from "next/link";
@@ -90,6 +90,7 @@ export function ChatPageContent() {
   const [streamingText, setStreamingText] = useState("");
   const [typing, setTyping] = useState(false);
   const [panel, setPanel] = useState<string | null>(null);
+  const [soundOn, setSoundOn] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -327,29 +328,36 @@ export function ChatPageContent() {
 
         {/* Main */}
         <div className="flex-1 flex flex-col min-w-0">
-          {/* Header */}
-          <header className="cg flex items-center justify-between px-4 sm:px-5 py-3 shrink-0" style={{ borderRadius: 0, border: "none", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl overflow-hidden md:hidden" style={{ border: "1px solid rgba(224,0,138,0.2)" }}>
-                <Image src="/images/atif-face.jpeg" alt="Atif" width={36} height={36} className="w-full h-full object-cover object-top" />
-              </div>
-              <div>
-                <div className="text-sm font-display font-bold flex items-center gap-1.5" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio <span>💬</span></div>
-                <div className="text-[11px]" style={{ color: "#999" }}>2 members · live</div>
-              </div>
+          {/* Header — Yasir exact */}
+          <header className="cg flex items-center px-4 sm:px-5 py-3 shrink-0 gap-3" style={{ borderRadius: 0, border: "none", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
+            {/* Mobile hamburger */}
+            <button className="md:hidden w-9 h-9 rounded-xl hover:bg-black/5 flex items-center justify-center cursor-pointer" style={{ color: "#1a1a1a" }}>☰</button>
+            {/* Title */}
+            <div className="leading-tight min-w-0">
+              <div className="font-display font-extrabold truncate flex items-center gap-1.5" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio 💬</div>
+              <div className="text-[12px]" style={{ color: "#E0008A" }}>2 members · live</div>
             </div>
-            <div className="flex items-center gap-2.5">
-              <Link href="/" className="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-semibold hover:bg-black/5 transition-colors rounded-full px-2.5 py-1.5" style={{ color: "#666" }}>🌐 Visit site ↗</Link>
+            {/* Right actions */}
+            <div className="ml-auto flex items-center gap-2 shrink-0">
+              <Link href="/" className="hidden sm:inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-[13px] font-semibold hover:bg-black/5 transition-colors" style={{ color: "#E0008A" }}>
+                🌐 <span>Visit site ↗</span>
+              </Link>
               <a href="https://wa.me/923196780720" target="_blank" rel="noopener noreferrer"
                 className="cg-accent cg-gold rounded-full pl-2.5 pr-3 h-9 flex items-center gap-1.5 text-white text-[13px] font-semibold transition-transform hover:scale-105 active:scale-95">
                 📞 <span className="hidden sm:inline">WhatsApp call</span>
               </a>
-              <div className="hidden md:flex -space-x-2.5">
-                <div className="ring-2 ring-white rounded-full"><div className="w-8 h-8 rounded-full overflow-hidden"><Image src="/images/atif-face.jpeg" alt="Atif" width={32} height={32} className="w-full h-full object-cover object-top" /></div></div>
-                <div className="ring-2 ring-white rounded-full"><Av emoji={userAvatar} color={userColor} size={32} /></div>
-              </div>
-              <button className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">＋</button>
             </div>
+            {/* Avatar stack */}
+            <div className="hidden md:flex -space-x-2.5">
+              <div className="ring-2 ring-white rounded-full"><div className="w-8 h-8 rounded-full overflow-hidden"><Image src="/images/atif-face.jpeg" alt="Atif" width={32} height={32} className="w-full h-full object-cover object-top" /></div></div>
+              <div className="ring-2 ring-white rounded-full"><Av emoji={userAvatar} color={userColor} size={32} /></div>
+            </div>
+            {/* + button */}
+            <button className="hidden md:flex cg-accent cg-gold w-9 h-9 rounded-full items-center justify-center text-white text-lg transition-transform hover:scale-110 active:scale-90 shrink-0 cursor-pointer">＋</button>
+            {/* User's own avatar */}
+            <button className="hidden md:block shrink-0 rounded-full ring-2 ring-white transition-transform hover:scale-110 active:scale-90 cursor-pointer">
+              <Av emoji={userAvatar} color={userColor} size={34} />
+            </button>
           </header>
 
           {/* Chat body */}
@@ -419,8 +427,8 @@ export function ChatPageContent() {
             </div>
           </div>
 
-          {/* Standalone quick action buttons — outlined pills like Yasir */}
-          <div className="flex flex-wrap items-center justify-center gap-2 px-4 sm:px-6 py-2">
+          {/* Standalone quick action pills — Yasir exact: glass rounded-full */}
+          <div className="flex gap-2 px-4 sm:px-6 py-2 overflow-x-auto">
             {[
               { label: "📅 Book a call", panel: "book" },
               { label: "🚀 Start a project", panel: "project" },
@@ -428,40 +436,52 @@ export function ChatPageContent() {
               { label: "💰 Pricing", panel: "pricing" },
             ].map(a => (
               <button key={a.panel} onClick={() => setPanel(a.panel)}
-                className="cg rounded-full px-4 py-2 text-[13px] font-medium transition hover:scale-105 active:scale-95 cursor-pointer"
+                className="cg rounded-full px-3.5 py-1.5 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
                 style={{ color: "#E0008A" }}>
                 {a.label}
               </button>
             ))}
           </div>
 
-          {/* Input bar */}
-          <div className="px-3 sm:px-4 pb-3 pt-1">
-            <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg rounded-[1.75rem] p-2 flex items-center gap-1" style={{ border: "none" }}>
-              <button type="button" className="w-10 h-10 rounded-full text-xl flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">😊</button>
-              <button type="button" className="h-10 px-2.5 rounded-full text-[12px] font-extrabold tracking-wide flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}>GIF</button>
-              <button type="button" className="w-10 h-10 rounded-full text-lg flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">📎</button>
-              <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Message Atif's Studio…" disabled={loading}
-                className="flex-1 bg-transparent px-3 py-2.5 text-[15px] placeholder:opacity-40 outline-none min-w-0" style={{ color: "#1a1a1a" }} />
-              {input.trim() ? (
-                <button type="submit" disabled={loading} className="cg-accent cg-gold w-11 h-11 rounded-full flex items-center justify-center text-white disabled:opacity-40 transition-transform active:scale-90 shrink-0 cursor-pointer" aria-label="Send">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7z" /></svg>
-                </button>
-              ) : (
-                <button type="button" className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-pink/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#E0008A" }} aria-label="Voice">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
-                </button>
-              )}
-            </form>
-          </div>
+          {/* Input bar — Yasir exact: footer with glass container */}
+          <footer className="px-3 pb-4 pt-1">
+            <div className="max-w-4xl mx-auto w-full">
+              <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg rounded-[1.75rem] p-2 flex items-center gap-1" style={{ border: "none" }}>
+                <button type="button" className="w-10 h-10 rounded-full text-xl flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">😊</button>
+                <button type="button" className="h-10 px-2.5 rounded-full text-[12px] font-extrabold tracking-wide flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}>GIF</button>
+                <button type="button" className="w-10 h-10 rounded-full text-lg flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">📎</button>
+                <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="Message Atif's Studio…" disabled={loading}
+                  className="flex-1 bg-transparent px-3 py-2.5 text-[15px] placeholder:opacity-40 outline-none min-w-0" style={{ color: "#1a1a1a" }} />
+                {input.trim() ? (
+                  <button type="submit" disabled={loading} className="cg-accent cg-gold w-11 h-11 rounded-full flex items-center justify-center text-white disabled:opacity-40 transition-transform active:scale-90 shrink-0 cursor-pointer" aria-label="Send">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7z" /></svg>
+                  </button>
+                ) : (
+                  <button type="button" className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-pink/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#E0008A" }} aria-label="Voice">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
+                  </button>
+                )}
+              </form>
+            </div>
+          </footer>
         </div>
 
-        {/* Right icons — Yasir exact: Lucide icons in circles */}
-        <div className="hidden md:flex flex-col items-center gap-3 py-6 px-3 shrink-0">
-          <button className="w-10 h-10 rounded-full flex items-center justify-center cg hover:bg-black/5 transition-transform active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}><Volume2 size={18} /></button>
-          <button className="w-10 h-10 rounded-full flex items-center justify-center cg hover:bg-black/5 transition-transform active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}><Copy size={18} /></button>
-          <button className="w-10 h-10 rounded-full flex items-center justify-center cg-accent cg-gold text-white transition-transform active:scale-90 cursor-pointer"><Pause size={18} /></button>
-          <button className="w-10 h-10 rounded-full flex items-center justify-center cg hover:bg-black/5 transition-transform active:scale-90 cursor-pointer" style={{ color: "rgba(0,0,0,0.4)" }}><User size={18} /></button>
+        {/* Right side — Yasir exact: fixed, functional buttons with emoji */}
+        <div className="hidden md:flex fixed right-3 top-1/2 -translate-y-1/2 z-30 flex-col gap-2.5">
+          {[
+            { icon: soundOn ? "🔊" : "🔇", label: soundOn ? "Sound on" : "Sound off", onClick: () => setSoundOn(!soundOn) },
+            { icon: "📄", label: "Save as PDF", onClick: () => window.print() },
+            { icon: "⏸️", label: "Pause & exit", onClick: () => { setJoined(false); setMessages([]); } },
+            { icon: "🗑️", label: "Start over", onClick: () => { setMessages([]); setJoined(false); }, danger: true },
+          ].map((btn, i) => (
+            <button key={i} onClick={btn.onClick} title={btn.label}
+              className={clsx(
+                "w-10 h-10 rounded-full flex items-center justify-center text-lg transition active:scale-90 cursor-pointer",
+                "danger" in btn && btn.danger ? "cg hover:bg-red-500/10" : "cg hover:bg-black/5"
+              )}>
+              {btn.icon}
+            </button>
+          ))}
         </div>
       </div>
 
