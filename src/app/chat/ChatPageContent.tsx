@@ -559,7 +559,20 @@ export function ChatPageContent() {
         <div className="hidden md:flex fixed right-3 top-1/2 -translate-y-1/2 z-30 flex-col gap-2.5">
           {[
             { icon: soundOn ? "🔊" : "🔇", label: soundOn ? "Sound on" : "Sound off", onClick: () => setSoundOn(!soundOn) },
-            { icon: "📄", label: "Save as PDF", onClick: () => window.print() },
+            { icon: "📄", label: "Save as PDF", onClick: () => {
+              const chatEl = scrollRef.current;
+              if (!chatEl) return;
+              const win = window.open("", "_blank");
+              if (!win) return;
+              const msgs = messages.filter(m => m.senderId !== "sys").map(m => {
+                const name = m.senderId === "me" ? userName : "Atif Malik";
+                const texts = m.bubbles.filter((b): b is { kind: "text"; text: string } => b.kind === "text").map(b => b.text).join("\n");
+                return `<div style="margin-bottom:16px"><strong>${name}</strong> <span style="color:#999;font-size:12px">${m.time || ""}</span><p style="margin:4px 0;white-space:pre-wrap">${texts}</p></div>`;
+              }).join("");
+              win.document.write(`<!DOCTYPE html><html><head><title>Chat with Atif - ${new Date().toLocaleDateString()}</title><style>body{font-family:system-ui,sans-serif;max-width:700px;margin:40px auto;padding:0 20px;color:#333}h1{font-size:20px;color:#E0008A}hr{border:none;border-top:1px solid #eee;margin:20px 0}</style></head><body><h1>Atif's Studio — Chat Export</h1><p style="color:#999">${new Date().toLocaleString()}</p><hr/>${msgs}<hr/><p style="color:#999;font-size:12px">Exported from atifmalik.me/chat</p></body></html>`);
+              win.document.close();
+              win.print();
+            } },
             { icon: "⏸️", label: "Pause & exit", onClick: () => { setJoined(false); setMessages([]); } },
             { icon: "🗑️", label: "Start over", onClick: () => { setMessages([]); setJoined(false); }, danger: true },
           ].map((btn, i) => (
