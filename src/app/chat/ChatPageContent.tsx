@@ -490,7 +490,7 @@ export function ChatPageContent() {
             </div>
           </div>
 
-          {/* Row 1: Panel action pills — open modals (Yasir: glass rounded-full) */}
+          {/* Row 1: Panel action pills — always visible */}
           <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto pb-0.5">
             {[
               { label: "📅 Book a call", panel: "book" },
@@ -506,23 +506,25 @@ export function ChatPageContent() {
             ))}
           </div>
 
-          {/* Row 2: Topic chips — send to AI (Yasir: glass rounded-full) */}
-          <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto pb-0.5">
-            {[
-              { label: "About me 👋", msg: "Tell me about yourself" },
-              { label: "Services 🛠️", msg: "What services do you offer?" },
-              { label: "My work 👀", msg: "Show me your work and portfolio" },
-              { label: "Pricing 💰", msg: "What are your prices and packages?" },
-              { label: "How you work ⚙️", msg: "What is your process for working with clients?" },
-              { label: "Work with me 🤝", msg: "How can I work with you? I want to hire you" },
-            ].map(c => (
-              <button key={c.label} onClick={() => sendMessage(c.msg)}
-                className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
-                style={{ color: "#E0008A" }}>
-                {c.label}
-              </button>
-            ))}
-          </div>
+          {/* Row 2: Topic chips — only show after user has sent a message */}
+          {messages.some(m => m.senderId === "me") && (
+            <div className="flex gap-2 px-4 sm:px-6 py-1.5 overflow-x-auto pb-0.5">
+              {[
+                { label: "About me 👋", msg: "Tell me about yourself" },
+                { label: "Services 🛠️", msg: "What services do you offer?" },
+                { label: "My work 👀", msg: "Show me your work and portfolio" },
+                { label: "Pricing 💰", msg: "What are your prices and packages?" },
+                { label: "How you work ⚙️", msg: "What is your process for working with clients?" },
+                { label: "Work with me 🤝", msg: "How can I work with you? I want to hire you" },
+              ].map(c => (
+                <button key={c.label} onClick={() => sendMessage(c.msg)}
+                  className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
+                  style={{ color: "#E0008A" }}>
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Input bar — Yasir exact: footer with glass container */}
           <footer className="px-3 pb-4 pt-1">
