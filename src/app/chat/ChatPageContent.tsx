@@ -164,7 +164,7 @@ function playSendSound() {
 function Av({ emoji, color, size = 40 }: { emoji: string; color: string; size?: number }) {
   return (
     <div className="rounded-full flex items-center justify-center shrink-0"
-      style={{ width: size, height: size, background: `linear-gradient(135deg, ${color}, ${color}cc)`, fontSize: size * 0.5, boxShadow: `0 2px 8px ${color}55` }}>
+      style={{ width: size, height: size, background: color, fontSize: size * 0.5, boxShadow: `0 2px 8px ${color}55` }}>
       <span style={{ lineHeight: 1 }}>{emoji}</span>
     </div>
   );
@@ -373,11 +373,11 @@ export function ChatPageContent() {
   if (!joined) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4 py-8 relative overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #fce4f0 0%, #fff5f9 25%, #ffffff 50%, #f0fdf4 80%, #d1fae5 100%)" }}>
+        style={{ background: "#FBF8F4" }}>
         <motion.div initial={{ opacity: 0, y: 20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }}
           className="w-full max-w-md md:max-w-3xl rounded-2xl sm:rounded-[2rem] md:grid md:grid-cols-2 overflow-hidden mx-4 sm:mx-0"
           style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 25px 80px rgba(0,0,0,0.1)" }}>
-          <div className="p-6 md:p-10 flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #ffffff 0%, #fdf2f8 50%, #ecfdf5 100%)" }}>
+          <div className="p-6 md:p-10 flex flex-col justify-center" style={{ background: "#FBF8F4" }}>
             <div className="mx-auto md:mx-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl overflow-hidden cg-gold" style={{ border: "2px solid rgba(224,122,95,0.2)" }}>
               <Image src="/images/atif-face.jpeg" alt="Atif Malik" width={80} height={80} className="w-full h-full object-cover object-top" />
             </div>
@@ -433,7 +433,7 @@ export function ChatPageContent() {
   // ─── CHAT SCREEN ───
   return (
     <>
-      <div className="h-screen flex" style={{ background: "linear-gradient(180deg, #fce4f0 0%, #fff5f9 25%, #ffffff 50%, #f0fdf4 80%, #d1fae5 100%)" }}>
+      <div className="h-screen flex" style={{ background: "#FBF8F4" }}>
         {/* Mobile sidebar overlay */}
         {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm md:hidden" onClick={() => setSidebarOpen(false)} />}
 

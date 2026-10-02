@@ -215,7 +215,7 @@ export function PricingModal({ open, onClose }: { open: boolean; onClose: () => 
           </ul>
           <a href="/book" className="mt-5 w-full cg-accent cg-gold rounded-2xl py-3 text-white font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block">Book a strategy call</a>
         </div>
-        <div className="rounded-2xl p-6 flex flex-col relative" style={{ background: "linear-gradient(135deg, #E07A5F 0%, #C05A35 40%, #B85A35 100%)" }}>
+        <div className="rounded-2xl p-6 flex flex-col relative" style={{ background: "#E07A5F" }}>
           <span className="absolute -top-3 right-6 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full cg" style={{ color: "#E07A5F" }}>Most popular</span>
           <h3 className="font-display font-extrabold text-lg text-white">Full AI System</h3>
           <p className="text-[13px] mt-1" style={{ color: "rgba(255,255,255,0.75)" }}>The complete AI system, done for you, end to end.</p>

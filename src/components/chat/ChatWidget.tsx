@@ -65,7 +65,7 @@ export function ChatWidget() {
             boxShadow: "0 16px 50px rgba(0,0,0,0.14)",
           }}
         >
-          <div style={{ borderRadius: 20, overflow: "hidden", background: "linear-gradient(170deg, #fce8f1 0%, #f5d4e6 40%, #edd0e2 70%, #f0d8e8 100%)", width: "100%" }}>
+          <div style={{ borderRadius: 20, overflow: "hidden", background: "#FBF8F4", width: "100%" }}>
           {/* Header */}
           <div style={{ padding: "20px 20px 8px 20px", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>

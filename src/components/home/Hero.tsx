@@ -40,7 +40,7 @@ export function Hero() {
             <span className="inline-block -rotate-3 hero-cta-btn !p-[2px]">
               <span
                 className="inline-flex items-center gap-1.5 rounded-full px-3.5 md:px-5 py-1 md:py-1.5 font-display font-bold text-xs md:text-base text-white"
-                style={{ background: "linear-gradient(135deg, var(--pink) 0%, #F09070 100%)" }}
+                style={{ background: "var(--pink)" }}
               >
                 <Sparkles size={14} /> Helping Service Businesses
               </span>
@@ -116,7 +116,7 @@ export function Hero() {
                 className="flex flex-col items-center gap-1.5 sm:flex-row sm:gap-2.5"
               >
                 <span className="w-10 h-10 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
-                  style={{ background: "linear-gradient(135deg, var(--pink) 0%, #F09070 100%)" }}
+                  style={{ background: "var(--pink)" }}
                 >
                   {stat.emoji}
                 </span>

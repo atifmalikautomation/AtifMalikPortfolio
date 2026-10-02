@@ -18,7 +18,7 @@ export default async function OGImage() {
           justifyContent: "center",
           alignItems: "center",
           background:
-            "linear-gradient(135deg, #0A0008 0%, #1A0018 40%, #0A0008 100%)",
+            "#141210",
           fontFamily: "system-ui, sans-serif",
           position: "relative",
           overflow: "hidden",
@@ -98,7 +98,7 @@ export default async function OGImage() {
             style={{
               fontSize: 26,
               fontWeight: 600,
-              background: "linear-gradient(90deg, #E07A5F, #F09070)",
+              background: "#E07A5F",
               backgroundClip: "text",
               color: "transparent",
               textAlign: "center",
@@ -178,7 +178,7 @@ export default async function OGImage() {
             left: 0,
             right: 0,
             height: 4,
-            background: "linear-gradient(90deg, transparent, #E07A5F, transparent)",
+            background: "#E07A5F",
             display: "flex",
           }}
         />

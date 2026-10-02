@@ -60,7 +60,7 @@ export function ProblemsSection() {
             transition={{ duration: 0.6 }}
             className="rounded-2xl p-6 md:p-8 text-white"
             style={{
-              background: "linear-gradient(135deg, #E07A5F 0%, #C20076 40%, #A00062 100%)",
+              background: "#E07A5F",
             }}
           >
             <h3 className="font-display text-lg font-bold mb-6 flex items-center gap-2" style={{ color: "#FFFFFF" }}>

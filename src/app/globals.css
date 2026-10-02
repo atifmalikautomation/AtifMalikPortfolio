@@ -111,7 +111,7 @@ html[data-theme="maroon"].light {
 }
 
 html.light body {
-  background: linear-gradient(160deg, #FBF8F4 0%, #F5EDE0 25%, #F8F0E5 50%, #F2E8DA 75%, #FBF8F4 100%);
+  background: var(--bg);
   background-attachment: fixed;
   color: var(--gr);
 }
@@ -120,16 +120,13 @@ html.light .glass {
   border-color: var(--bd);
 }
 html.light .text-gradient {
-  background: linear-gradient(135deg, #C05A35, #E07A5F, #8B5A2B);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--pink);
 }
 html.light .hero-glow {
   background: rgba(208, 104, 66, 0.06);
 }
 html.light .stress-gradient {
-  background: linear-gradient(90deg, var(--pink) 0%, #E07A5F 50%, #C05A35 100%);
+  background: var(--pink);
 }
 html.light .btn-g {
   background: rgba(0, 0, 0, 0.04);
@@ -186,7 +183,7 @@ html {
 }
 
 body {
-  background: linear-gradient(160deg, #141210 0%, #1A1610 30%, #171310 55%, #1E1812 80%, #141210 100%);
+  background: var(--bg);
   background-attachment: fixed;
   color: var(--gr);
   font-family: 'Inter', var(--fb);
@@ -247,10 +244,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ═══ Utilities ═══ */
 .text-gradient {
-  background: linear-gradient(135deg, #E07A5F, #F09070, #C05A35);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--pink);
 }
 
 .glass {
@@ -396,7 +390,7 @@ img.emoji {
 
 /* ═══ Stress Meter ═══ */
 .stress-gradient {
-  background: linear-gradient(90deg, var(--pink) 0%, #F09070 50%, #C05A35 100%);
+  background: var(--pink);
 }
 
 /* ═══ Nav scrolled ═══ */
@@ -436,27 +430,24 @@ html.light .nav-book-btn:hover {
   color: #fff;
 }
 
-/* ═══ Hero CTA Button (Yasir-style gradient border + shimmer) ═══ */
+/* ═══ Hero CTA Button — flat solid ═══ */
 .hero-cta-btn {
   position: relative;
   display: inline-flex;
   padding: 3px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #E07A5F, #F09070 22%, #E07A5F, #F09070 78%, #E07A5F);
-  background-size: 240% 240%;
-  background-position: 0% 50%;
+  background: var(--pink);
   box-shadow: 0 14px 36px -10px rgba(224, 122, 95, 0.45), 0 0 24px rgba(224, 122, 95, 0.25);
   transition: all 0.3s ease;
   isolation: isolate;
   overflow: hidden;
-  animation: hero-cta-pan 5s ease-in-out infinite;
 }
 .hero-cta-btn::after {
   content: "";
   position: absolute;
   top: -2px; right: -2px; bottom: -2px; left: -2px;
   border-radius: inherit;
-  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.6) 50%, transparent 70%);
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
   background-size: 200% 100%;
   animation: hero-cta-shimmer 3.5s linear infinite;
   pointer-events: none;
@@ -471,7 +462,7 @@ html.light .nav-book-btn:hover {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #E07A5F, #F09070);
+  background: var(--pink);
   color: #fff;
   border-radius: 9999px;
   padding: 14px 36px;
@@ -512,7 +503,7 @@ html.light .nav-book-btn:hover {
   box-shadow: 0 8px 32px rgba(42, 42, 40, 0.12), inset 0 1px rgba(255, 255, 255, 0.7);
 }
 .cg-accent {
-  background: linear-gradient(135deg, rgba(224, 122, 95, 0.92), rgba(232, 149, 111, 0.92));
+  background: rgba(224, 122, 95, 0.92);
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
   box-shadow: 0 8px 28px rgba(224, 122, 95, 0.28), inset 0 1px rgba(255, 255, 255, 0.35);
@@ -547,9 +538,7 @@ html.light .nav-book-btn:hover {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #E07A5F, #F09070 22%, #fff 40%, #F09070 58%, #E07A5F 78%, #F09070);
-  background-size: 250% 250%;
-  animation: chat-border-move 3s ease-in-out infinite;
+  background: var(--pink);
   z-index: -1;
 }
 @keyframes chat-border-move {

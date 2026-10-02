@@ -71,7 +71,7 @@ export function GrowthSystem() {
               transition={{ delay: i * 0.1, duration: 0.4 }}
               className="relative rounded-2xl p-5 md:p-6 overflow-hidden group"
               style={{
-                background: `linear-gradient(135deg, rgba(224,122,95,${0.9 - i * 0.15}) 0%, rgba(176,82,47,${0.9 - i * 0.1}) 100%)`,
+                background: `rgba(224,122,95,${0.9 - i * 0.15})`,
               }}
             >
               <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-white/5 blur-2xl pointer-events-none" />

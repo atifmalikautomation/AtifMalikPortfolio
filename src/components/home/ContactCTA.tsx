@@ -10,7 +10,7 @@ export function ContactCTA() {
       <div className="max-w-6xl mx-auto">
         <div
           className="relative rounded-[2rem] overflow-hidden p-8 md:p-14 lg:p-16"
-          style={{ background: "linear-gradient(135deg, #E07A5F 0%, #C20076 50%, #A00062 100%)" }}
+          style={{ background: "#E07A5F" }}
         >
           {/* Decorative blurs */}
           <div className="absolute -top-40 -left-32 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
