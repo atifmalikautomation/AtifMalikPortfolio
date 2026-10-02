@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site-config";
 import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const categories = [
   "All",
@@ -144,21 +144,8 @@ export function PortfolioContent() {
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-bd">
-                        <div className="text-xs text-pink font-display font-bold">
-                          📈 {project.result}
-                        </div>
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1 text-[11px] font-display font-bold text-gr hover:text-pink transition-colors"
-                          >
-                            Visit Site <ExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
+                      <div className="text-xs text-pink font-display font-bold pt-3 mt-3 border-t border-bd">
+                        📈 {project.result}
                       </div>
                     </div>
                   </Link>
