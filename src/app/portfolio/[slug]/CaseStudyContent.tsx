@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { PortfolioItem } from "@/lib/site-config";
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -39,9 +39,22 @@ export function CaseStudyContent({ project }: { project: PortfolioItem }) {
             </h1>
 
             {/* Description */}
-            <p className="text-lg text-gr leading-relaxed mb-8">
+            <p className="text-lg text-gr leading-relaxed mb-4">
               {project.description}
             </p>
+
+            {/* Visit Site Button — Yasir style */}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-bd bg-card text-sm font-display font-bold text-wh hover:border-pink/40 hover:text-pink transition-all mb-8"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Visit Live Site
+              </a>
+            )}
 
             {/* Hero image */}
             <div className="aspect-video rounded-2xl overflow-hidden border border-bd mb-12 relative">
