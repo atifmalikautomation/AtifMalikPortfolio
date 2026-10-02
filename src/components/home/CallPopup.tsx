@@ -104,7 +104,7 @@ export function CallPopup() {
           className="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-6 sm:translate-x-0 w-[300px] sm:w-[320px] max-w-[calc(100vw-2rem)] z-[9999]"
         >
           {/* Card — white in light, dark in dark */}
-          <div className="rounded-[28px] bg-card border border-bd shadow-[0_24px_60px_-12px_rgba(217,119,87,0.15),0_0_0_1px_var(--bd)] overflow-hidden pb-2">
+          <div className="rounded-[28px] bg-card border border-bd shadow-[0_24px_60px_-12px_rgba(224,122,95,0.15),0_0_0_1px_var(--bd)] overflow-hidden pb-2">
             {/* Island pill */}
             <div className="flex justify-center pt-3 pb-1">
               <div className="w-[110px] h-[28px] bg-wh rounded-[18px]" />
@@ -124,7 +124,7 @@ export function CallPopup() {
                   <span className="absolute w-[140px] h-[140px] border-2 border-pink/10 rounded-full animate-ping" style={{ animationDuration: "2s", animationDelay: "1s" }} />
                 </>
               )}
-              <div className="w-[72px] h-[72px] rounded-full bg-gradient-to-br from-pink to-[#651545] flex items-center justify-center relative z-10 shadow-[0_6px_20px_-4px_rgba(217,119,87,0.4)]">
+              <div className="w-[72px] h-[72px] rounded-full bg-gradient-to-br from-pink to-[#651545] flex items-center justify-center relative z-10 shadow-[0_6px_20px_-4px_rgba(224,122,95,0.4)]">
                 <span className="font-display text-[24px] font-extrabold" style={{ color: "#FFFFFF" }}>AM</span>
               </div>
             </div>

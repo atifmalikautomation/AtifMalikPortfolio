@@ -33,9 +33,9 @@ export function SocialSidebar() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1 + i * 0.1, duration: 0.4 }}
-          className="w-12 h-12 rounded-full flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_16px_rgba(217,119,87,0.25)] hover:shadow-[0_8px_30px_rgba(217,119,87,0.4)]"
+          className="w-12 h-12 rounded-full flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-[0_4px_16px_rgba(224,122,95,0.25)] hover:shadow-[0_8px_30px_rgba(224,122,95,0.4)]"
           style={{
-            background: "linear-gradient(135deg, var(--pink) 0%, #E8956F 100%)",
+            background: "linear-gradient(135deg, var(--pink) 0%, #F09070 100%)",
             border: "1.5px solid rgba(232, 149, 111, 0.45)",
           }}
           aria-label={s.label}

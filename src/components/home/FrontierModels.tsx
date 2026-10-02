@@ -95,7 +95,7 @@ export function FrontierModels() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.4 }}
-              className="group relative rounded-2xl border border-bd bg-card p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-pink/30 hover:shadow-[0_8px_32px_rgba(217,119,87,0.1)] overflow-hidden"
+              className="group relative rounded-2xl border border-bd bg-card p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-pink/30 hover:shadow-[0_8px_32px_rgba(224,122,95,0.1)] overflow-hidden"
             >
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-b ${model.gradient} pointer-events-none`} />

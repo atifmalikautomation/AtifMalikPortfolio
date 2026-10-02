@@ -20,7 +20,7 @@ interface ButtonProps {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-accent text-white hover:bg-accent-hover font-semibold shadow-[0_0_20px_rgba(217,119,87,0.2)] hover:shadow-[0_0_30px_rgba(217,119,87,0.3)] hover:brightness-115 hover:-translate-y-0.5",
+    "bg-accent text-white hover:bg-accent-hover font-semibold shadow-[0_0_20px_rgba(224,122,95,0.2)] hover:shadow-[0_0_30px_rgba(224,122,95,0.3)] hover:brightness-115 hover:-translate-y-0.5",
   secondary:
     "bg-bg-surface text-text-primary hover:bg-surface-hover border border-border hover:border-border-hover",
   ghost:

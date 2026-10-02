@@ -223,13 +223,13 @@ function injectTheme(t: ThemePalette) {
     :focus-visible { outline-color: ${t.primary} !important; }
 
     /* === HARDCODED INLINE STYLE OVERRIDES === */
-    [style*="linear-gradient"][style*="#D97757"],
-    [style*="linear-gradient"][style*="#d97757"],
-    [style*="linear-gradient"][style*="#C4603F"],
-    [style*="linear-gradient"][style*="#c4603f"],
-    [style*="linear-gradient"][style*="#B0522F"],
-    [style*="linear-gradient"][style*="#E8956F"],
-    [style*="linear-gradient"][style*="#e8956f"],
+    [style*="linear-gradient"][style*="#E07A5F"],
+    [style*="linear-gradient"][style*="#E07A5F"],
+    [style*="linear-gradient"][style*="#C05A35"],
+    [style*="linear-gradient"][style*="#C05A35"],
+    [style*="linear-gradient"][style*="#B85A35"],
+    [style*="linear-gradient"][style*="#F09070"],
+    [style*="linear-gradient"][style*="#F09070"],
     [style*="linear-gradient"][style*="217, 119, 87"],
     [style*="linear-gradient"][style*="217, 119, 87"],
     [style*="linear-gradient"][style*="176, 82, 47"],
@@ -244,42 +244,42 @@ function injectTheme(t: ThemePalette) {
       box-shadow: 0 8px 24px rgba(${rgb},0.25) !important;
     }
 
-    [style*="border"][style*="#D97757"],
-    [style*="border"][style*="#d97757"],
+    [style*="border"][style*="#E07A5F"],
+    [style*="border"][style*="#E07A5F"],
     [style*="border"][style*="217, 119, 87"],
     [style*="border"][style*="217, 119, 87"] {
       border-color: ${t.primary} !important;
     }
 
-    [style*="color: #D97757"], [style*="color:#D97757"], [style*="color: #d97757"], [style*="color:#d97757"],
-    [style*="color: #C4603F"], [style*="color:#C4603F"], [style*="color: #c4603f"], [style*="color:#c4603f"],
-    [style*="color: #E8956F"], [style*="color:#E8956F"] {
+    [style*="color: #E07A5F"], [style*="color:#E07A5F"], [style*="color: #E07A5F"], [style*="color:#E07A5F"],
+    [style*="color: #C05A35"], [style*="color:#C05A35"], [style*="color: #C05A35"], [style*="color:#C05A35"],
+    [style*="color: #F09070"], [style*="color:#F09070"] {
       color: ${t.primary} !important;
     }
 
-    [style*="background: #D97757"], [style*="background:#D97757"],
-    [style*="background-color: #D97757"], [style*="background-color:#D97757"],
-    [style*="background: #C4603F"], [style*="background:#C4603F"],
-    [style*="background: #E8956F"], [style*="background:#E8956F"] {
+    [style*="background: #E07A5F"], [style*="background:#E07A5F"],
+    [style*="background-color: #E07A5F"], [style*="background-color:#E07A5F"],
+    [style*="background: #C05A35"], [style*="background:#C05A35"],
+    [style*="background: #F09070"], [style*="background:#F09070"] {
       background: ${t.primary} !important;
     }
 
-    [style*="background"][style*="rgba(217, 119, 87"],
-    [style*="background"][style*="rgba(217, 119, 87"],
-    [style*="background"][style*="rgba(196, 96, 63"],
-    [style*="background"][style*="rgba(196, 96, 63"],
-    [style*="background"][style*="rgba(196, 96, 63"],
-    [style*="background"][style*="rgba(196, 96, 63"],
+    [style*="background"][style*="rgba(224, 122, 95"],
+    [style*="background"][style*="rgba(224, 122, 95"],
+    [style*="background"][style*="rgba(208, 104, 66"],
+    [style*="background"][style*="rgba(208, 104, 66"],
+    [style*="background"][style*="rgba(208, 104, 66"],
+    [style*="background"][style*="rgba(208, 104, 66"],
     [style*="background"][style*="rgba(176, 82, 47"],
     [style*="background"][style*="rgba(176, 82, 47"] {
       background: rgba(${rgb},0.12) !important;
     }
 
     [style*="#651545"] { background: ${t.bg2} !important; }
-    [style*="#E8956F"] { color: ${t.g1} !important; }
+    [style*="#F09070"] { color: ${t.g1} !important; }
 
-    [fill="#D97757"], [fill="#C4603F"], [fill="#E8956F"] { fill: ${t.primary} !important; }
-    [stroke="#D97757"], [stroke="#C4603F"], [stroke="#E8956F"] { stroke: ${t.primary} !important; }
+    [fill="#E07A5F"], [fill="#C05A35"], [fill="#F09070"] { fill: ${t.primary} !important; }
+    [stroke="#E07A5F"], [stroke="#C05A35"], [stroke="#F09070"] { stroke: ${t.primary} !important; }
 
     /* Tailwind arbitrary value overrides */
     .border-\\[rgba\\(217\\,119\\,87\\,0\\.3\\)\\],

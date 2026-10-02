@@ -169,7 +169,7 @@ export function BusinessPain() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 40 }}
               transition={{ type: "spring", damping: 20, stiffness: 250 }}
-              className="relative bg-card border border-bd rounded-3xl p-8 md:p-10 max-w-md w-full text-center shadow-[0_24px_60px_rgba(217,119,87,0.2)]"
+              className="relative bg-card border border-bd rounded-3xl p-8 md:p-10 max-w-md w-full text-center shadow-[0_24px_60px_rgba(224,122,95,0.2)]"
             >
               <div className="text-5xl mb-4">🔥</div>
               <h3 className="font-display font-extrabold text-2xl md:text-3xl text-wh mb-2">

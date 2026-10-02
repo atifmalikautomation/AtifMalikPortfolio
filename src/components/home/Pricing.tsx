@@ -100,7 +100,7 @@ export function Pricing() {
               }`}
               style={
                 tier.highlighted
-                  ? { background: "linear-gradient(135deg, #D97757 0%, #C20076 40%, #A00062 100%)" }
+                  ? { background: "linear-gradient(135deg, #E07A5F 0%, #C20076 40%, #A00062 100%)" }
                   : undefined
               }
             >

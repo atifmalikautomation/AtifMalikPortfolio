@@ -26,10 +26,10 @@ export function ChatWidget() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.4 }}
           onClick={() => setOpen(true)}
-          className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-card border border-bd shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[rgba(217,119,87,0.3)] transition-all cursor-pointer animate-float-gentle"
+          className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-card border border-bd shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[rgba(224,122,95,0.3)] transition-all cursor-pointer animate-float-gentle"
         >
           <div className="relative">
-            <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[#D97757]/30">
+            <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[#E07A5F]/30">
               <Image src="/images/atif-face.jpeg" alt="Atif Malik" width={44} height={44} className="w-full h-full object-cover object-top" />
             </div>
             <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-[#22C55E] border-2 border-card" />
@@ -37,7 +37,7 @@ export function ChatWidget() {
           <div className="text-left">
             <div className="text-[13px] font-semibold text-wh flex items-center gap-1">
               Chat with Atif
-              <Sparkles size={12} className="text-[#D97757]" />
+              <Sparkles size={12} className="text-[#E07A5F]" />
             </div>
             <div className="flex items-center gap-1.5">
               <div className="flex items-center gap-[2px]">

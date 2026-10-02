@@ -4,20 +4,20 @@
 
 /* ── DARK MODE (default) ── */
 :root {
-  --bg: #1A1A18;
-  --bg2: #262624;
-  --bg3: #2E2E2C;
-  --card: #2A2A28;
-  --pink: #D97757;
-  --pink-hover: #E8956F;
-  --pink12: rgba(217, 119, 87, 0.12);
-  --pink06: rgba(217, 119, 87, 0.06);
-  --wh: #E8E4DC;
-  --gr: #A8A29E;
-  --dm: #78716C;
-  --dm2: #44403C;
-  --bd: rgba(232, 228, 220, 0.08);
-  --bd2: rgba(232, 228, 220, 0.15);
+  --bg: #141210;
+  --bg2: #1C1914;
+  --bg3: #26221C;
+  --card: #201C16;
+  --pink: #E07A5F;
+  --pink-hover: #F09070;
+  --pink12: rgba(224, 122, 95, 0.14);
+  --pink06: rgba(224, 122, 95, 0.07);
+  --wh: #F5F0E8;
+  --gr: #B5A99A;
+  --dm: #7A6E62;
+  --dm2: #4A4035;
+  --bd: rgba(245, 240, 232, 0.08);
+  --bd2: rgba(245, 240, 232, 0.16);
   --r: 16px;
   --fd: 'Bricolage Grotesque', sans-serif;
   --fb: var(--font-inter), 'Inter', sans-serif;
@@ -26,20 +26,20 @@
 
 /* ── LIGHT MODE ── */
 html.light {
-  --bg: #FAF9F5;
-  --bg2: #F4F3EE;
-  --bg3: #EDECE7;
+  --bg: #FBF8F4;
+  --bg2: #F5F0E8;
+  --bg3: #EDE6DB;
   --card: #FFFFFF;
-  --pink: #C4603F;
-  --pink-hover: #B0522F;
-  --pink12: rgba(196, 96, 63, 0.12);
-  --pink06: rgba(196, 96, 63, 0.06);
-  --wh: #292524;
-  --gr: #57534E;
-  --dm: #A8A29E;
-  --dm2: #D6D3D1;
-  --bd: rgba(41, 37, 36, 0.08);
-  --bd2: rgba(41, 37, 36, 0.14);
+  --pink: #D06842;
+  --pink-hover: #B85A35;
+  --pink12: rgba(208, 104, 66, 0.10);
+  --pink06: rgba(208, 104, 66, 0.05);
+  --wh: #2C1E10;
+  --gr: #5C4A3A;
+  --dm: #A09080;
+  --dm2: #D5CBBD;
+  --bd: rgba(44, 30, 16, 0.08);
+  --bd2: rgba(44, 30, 16, 0.14);
 }
 
 /* ═══ THEME: TEAL GREEN ═══ */
@@ -111,25 +111,25 @@ html[data-theme="maroon"].light {
 }
 
 html.light body {
-  background: linear-gradient(160deg, #FAF9F5 0%, #F4F3EE 25%, #F5F0EB 50%, #F0ECE6 75%, #FAF9F5 100%);
+  background: linear-gradient(160deg, #FBF8F4 0%, #F5EDE0 25%, #F8F0E5 50%, #F2E8DA 75%, #FBF8F4 100%);
   background-attachment: fixed;
   color: var(--gr);
 }
 html.light .glass {
-  background: rgba(250, 249, 245, 0.85);
+  background: rgba(251, 248, 244, 0.88);
   border-color: var(--bd);
 }
 html.light .text-gradient {
-  background: linear-gradient(135deg, #C4603F, #D97757, #8B4513);
+  background: linear-gradient(135deg, #C05A35, #E07A5F, #8B5A2B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 html.light .hero-glow {
-  background: rgba(196, 96, 63, 0.06);
+  background: rgba(208, 104, 66, 0.06);
 }
 html.light .stress-gradient {
-  background: linear-gradient(90deg, var(--pink) 0%, #D97757 50%, #C4603F 100%);
+  background: linear-gradient(90deg, var(--pink) 0%, #E07A5F 50%, #C05A35 100%);
 }
 html.light .btn-g {
   background: rgba(0, 0, 0, 0.04);
@@ -162,7 +162,7 @@ html.light .btn-g:hover {
   --color-bg-elevated: var(--bg2);
   --color-bg-surface: var(--bg3);
   --color-surface: var(--card);
-  --color-surface-hover: #333330;
+  --color-surface-hover: #2E2820;
   --color-border: var(--bd);
   --color-border-hover: var(--bd2);
   --color-text-primary: var(--wh);
@@ -171,7 +171,7 @@ html.light .btn-g:hover {
   --color-accent: var(--pink);
   --color-accent-hover: var(--pink-hover);
   --color-accent-dim: var(--pink12);
-  --color-accent-glow: rgba(217, 119, 87, 0.20);
+  --color-accent-glow: rgba(224, 122, 95, 0.20);
   --font-display: var(--fd);
   --font-body: var(--fb);
   --font-mono: var(--fm);
@@ -186,7 +186,7 @@ html {
 }
 
 body {
-  background: linear-gradient(160deg, #1A1A18 0%, #1E1E1C 30%, #1C1C1A 55%, #201F1D 80%, #1A1A18 100%);
+  background: linear-gradient(160deg, #141210 0%, #1A1610 30%, #171310 55%, #1E1812 80%, #141210 100%);
   background-attachment: fixed;
   color: var(--gr);
   font-family: 'Inter', var(--fb);
@@ -216,14 +216,14 @@ body > main, body > footer, body > header { position: relative; z-index: 1; }
 body > nav { position: relative; z-index: 200; }
 
 ::selection {
-  background: #D97757;
+  background: #E07A5F;
   color: #fff;
 }
 
 /* ═══ Scrollbar ═══ */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #1A1A18; }
-::-webkit-scrollbar-thumb { background: #2E2E2C; border-radius: 3px; }
+::-webkit-scrollbar-track { background: #141210; }
+::-webkit-scrollbar-thumb { background: #26221C; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--dm2); }
 
 /* ═══ Reduced Motion ═══ */
@@ -247,25 +247,25 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ═══ Utilities ═══ */
 .text-gradient {
-  background: linear-gradient(135deg, #D97757, #E8956F, #C4603F);
+  background: linear-gradient(135deg, #E07A5F, #F09070, #C05A35);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass {
-  background: rgba(26, 26, 24, 0.92);
+  background: rgba(20, 18, 16, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--bd);
 }
 
 .glow {
-  box-shadow: 0 0 40px rgba(217, 119, 87, 0.15);
+  box-shadow: 0 0 40px rgba(224, 122, 95, 0.15);
 }
 
 .glow-text {
-  text-shadow: 0 0 30px rgba(217, 119, 87, 0.3);
+  text-shadow: 0 0 30px rgba(224, 122, 95, 0.3);
 }
 
 /* ═══ Button ═══ */
@@ -288,7 +288,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-p:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(217, 119, 87, 0.3);
+  box-shadow: 0 8px 24px rgba(224, 122, 95, 0.3);
 }
 .btn-g {
   background: rgba(255, 255, 255, 0.06);
@@ -396,24 +396,24 @@ img.emoji {
 
 /* ═══ Stress Meter ═══ */
 .stress-gradient {
-  background: linear-gradient(90deg, var(--pink) 0%, #E8956F 50%, #C4603F 100%);
+  background: linear-gradient(90deg, var(--pink) 0%, #F09070 50%, #C05A35 100%);
 }
 
 /* ═══ Nav scrolled ═══ */
 .nav-scrolled {
-  background: rgba(26, 26, 24, 0.92);
+  background: rgba(20, 18, 16, 0.92);
 }
 html.light .nav-scrolled {
-  background: rgba(250, 249, 245, 0.92);
-  box-shadow: 0 1px 8px rgba(41, 37, 36, 0.08);
+  background: rgba(251, 248, 244, 0.92);
+  box-shadow: 0 1px 8px rgba(44, 30, 16, 0.08);
 }
 
 /* ═══ Footer ═══ */
 .footer-bg {
-  background: #161614;
+  background: #100E0C;
 }
 html.light .footer-bg {
-  background: #F4F3EE;
+  background: #F5F0E8;
 }
 
 /* ═══ Nav Book Button ═══ */
@@ -442,10 +442,10 @@ html.light .nav-book-btn:hover {
   display: inline-flex;
   padding: 3px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #D97757, #E8956F 22%, #D97757, #E8956F 78%, #D97757);
+  background: linear-gradient(135deg, #E07A5F, #F09070 22%, #E07A5F, #F09070 78%, #E07A5F);
   background-size: 240% 240%;
   background-position: 0% 50%;
-  box-shadow: 0 14px 36px -10px rgba(217, 119, 87, 0.45), 0 0 24px rgba(217, 119, 87, 0.25);
+  box-shadow: 0 14px 36px -10px rgba(224, 122, 95, 0.45), 0 0 24px rgba(224, 122, 95, 0.25);
   transition: all 0.3s ease;
   isolation: isolate;
   overflow: hidden;
@@ -464,14 +464,14 @@ html.light .nav-book-btn:hover {
 }
 .hero-cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 50px -10px rgba(217, 119, 87, 0.55), 0 0 32px rgba(217, 119, 87, 0.35);
+  box-shadow: 0 22px 50px -10px rgba(224, 122, 95, 0.55), 0 0 32px rgba(224, 122, 95, 0.35);
 }
 .hero-cta-inner-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #D97757, #E8956F);
+  background: linear-gradient(135deg, #E07A5F, #F09070);
   color: #fff;
   border-radius: 9999px;
   padding: 14px 36px;
@@ -512,10 +512,10 @@ html.light .nav-book-btn:hover {
   box-shadow: 0 8px 32px rgba(42, 42, 40, 0.12), inset 0 1px rgba(255, 255, 255, 0.7);
 }
 .cg-accent {
-  background: linear-gradient(135deg, rgba(217, 119, 87, 0.92), rgba(232, 149, 111, 0.92));
+  background: linear-gradient(135deg, rgba(224, 122, 95, 0.92), rgba(232, 149, 111, 0.92));
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
-  box-shadow: 0 8px 28px rgba(217, 119, 87, 0.28), inset 0 1px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 28px rgba(224, 122, 95, 0.28), inset 0 1px rgba(255, 255, 255, 0.35);
 }
 .cg-gold {
   box-shadow: 0 0 0 1.5px rgba(226, 169, 60, 0.9), 0 0 0 4px rgba(247, 208, 110, 0.25) !important;
@@ -547,7 +547,7 @@ html.light .nav-book-btn:hover {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #D97757, #E8956F 22%, #fff 40%, #E8956F 58%, #D97757 78%, #E8956F);
+  background: linear-gradient(135deg, #E07A5F, #F09070 22%, #fff 40%, #F09070 58%, #E07A5F 78%, #F09070);
   background-size: 250% 250%;
   animation: chat-border-move 3s ease-in-out infinite;
   z-index: -1;
@@ -590,13 +590,13 @@ html.light .nav-book-btn:hover {
   background: #fff;
   border: 3px solid var(--pink);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(217, 119, 87, 0.4);
+  box-shadow: 0 0 12px rgba(224, 122, 95, 0.4);
   cursor: grab;
   transition: box-shadow 0.2s ease;
 }
 .calc-slider::-webkit-slider-thumb:hover,
 .calc-slider:active::-webkit-slider-thumb {
-  box-shadow: 0 0 20px rgba(217, 119, 87, 0.6);
+  box-shadow: 0 0 20px rgba(224, 122, 95, 0.6);
 }
 .calc-slider::-moz-range-thumb {
   width: 20px;
@@ -604,30 +604,30 @@ html.light .nav-book-btn:hover {
   background: #fff;
   border: 3px solid var(--pink);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(217, 119, 87, 0.4);
+  box-shadow: 0 0 12px rgba(224, 122, 95, 0.4);
   cursor: grab;
 }
 
 /* ═══ Light mode overrides ═══ */
 html.light .hero-cta-btn {
-  box-shadow: 0 14px 36px -10px rgba(196, 96, 63, 0.35), 0 0 24px rgba(196, 96, 63, 0.15);
+  box-shadow: 0 14px 36px -10px rgba(208, 104, 66, 0.35), 0 0 24px rgba(208, 104, 66, 0.15);
 }
 html.light .hero-cta-btn:hover {
-  box-shadow: 0 22px 50px -10px rgba(196, 96, 63, 0.45), 0 0 32px rgba(196, 96, 63, 0.25);
+  box-shadow: 0 22px 50px -10px rgba(208, 104, 66, 0.45), 0 0 32px rgba(208, 104, 66, 0.25);
 }
 html.light .glow {
-  box-shadow: 0 0 40px rgba(196, 96, 63, 0.1);
+  box-shadow: 0 0 40px rgba(208, 104, 66, 0.1);
 }
 html.light .glow-text {
-  text-shadow: 0 0 30px rgba(196, 96, 63, 0.2);
+  text-shadow: 0 0 30px rgba(208, 104, 66, 0.2);
 }
 html.light .calc-slider::-webkit-slider-thumb {
   background: #fff;
   border-color: var(--pink);
-  box-shadow: 0 0 12px rgba(196, 96, 63, 0.3);
+  box-shadow: 0 0 12px rgba(208, 104, 66, 0.3);
 }
 html.light .calc-slider::-moz-range-thumb {
   background: #fff;
   border-color: var(--pink);
-  box-shadow: 0 0 12px rgba(196, 96, 63, 0.3);
+  box-shadow: 0 0 12px rgba(208, 104, 66, 0.3);
 }

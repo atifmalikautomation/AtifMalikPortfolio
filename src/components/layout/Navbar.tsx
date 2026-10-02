@@ -76,7 +76,7 @@ export function Navbar() {
                             {/* CTA card */}
                             <div className="col-span-12 lg:col-span-4">
                               <div className="relative overflow-hidden rounded-2xl p-5 h-full flex flex-col"
-                                style={{ background: "linear-gradient(155deg, var(--pink) 0%, #E8956F 100%)" }}
+                                style={{ background: "linear-gradient(155deg, var(--pink) 0%, #F09070 100%)" }}
                               >
                                 <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-white/10 blur-3xl pointer-events-none" />
                                 <div className="relative z-10 flex flex-col h-full">
