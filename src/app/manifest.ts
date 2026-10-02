@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "Pakistan's No.1 AI Video Production and Automation Agency. Premium AI video, automation systems, and intelligent agents.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0A0008",
+    background_color: "#141210",
     theme_color: "#E07A5F",
     icons: [
       { src: "/favicon.ico", sizes: "any", type: "image/x-icon" },

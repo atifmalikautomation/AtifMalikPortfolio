@@ -78,7 +78,7 @@ export function Footer() {
     <footer
       className="mt-20 relative overflow-hidden"
       style={{
-        background: "linear-gradient(160deg, var(--pink) 0%, #651545 100%)",
+        background: "#E07A5F",
         color: "#ffffff",
       }}
     >
@@ -194,7 +194,7 @@ export function Footer() {
             <div
               className="rounded-2xl p-6 backdrop-blur-sm"
               style={{
-                background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)",
+                background: "rgba(255,255,255,0.10)",
                 border: "1px solid rgba(255,255,255,0.15)",
                 boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
               }}
@@ -210,8 +210,8 @@ export function Footer() {
                 href="/book"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-display font-bold text-sm transition-all hover:scale-105 hover:shadow-lg w-full justify-center"
                 style={{
-                  background: "linear-gradient(135deg, #ffffff 0%, #f0e6ff 100%)",
-                  color: "#651545",
+                  background: "#ffffff",
+                  color: "#C05A35",
                   boxShadow: "0 4px 20px rgba(255,255,255,0.25)",
                 }}
               >

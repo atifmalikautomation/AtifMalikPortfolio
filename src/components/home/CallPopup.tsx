@@ -124,7 +124,7 @@ export function CallPopup() {
                   <span className="absolute w-[140px] h-[140px] border-2 border-pink/10 rounded-full animate-ping" style={{ animationDuration: "2s", animationDelay: "1s" }} />
                 </>
               )}
-              <div className="w-[72px] h-[72px] rounded-full bg-gradient-to-br from-pink to-[#651545] flex items-center justify-center relative z-10 shadow-[0_6px_20px_-4px_rgba(224,122,95,0.4)]">
+              <div className="w-[72px] h-[72px] rounded-full bg-pink flex items-center justify-center relative z-10 shadow-[0_6px_20px_-4px_rgba(224,122,95,0.4)]">
                 <span className="font-display text-[24px] font-extrabold" style={{ color: "#FFFFFF" }}>AM</span>
               </div>
             </div>
