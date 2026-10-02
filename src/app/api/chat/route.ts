@@ -81,13 +81,15 @@ export async function POST(req: NextRequest) {
 
     const lastMessage = messages[messages.length - 1].content;
 
-    // ── Failover model chain — verified against ListModels API ──
+    // ── Failover model chain — updated Oct 2026 ──
     const candidateModels = Array.from(
       new Set([
-        process.env.GEMINI_MODEL || "gemini-flash-lite-latest",
-        "gemini-flash-lite-latest",
-        "gemini-2.5-flash-lite",
-        "gemini-2.5-flash",
+        process.env.GEMINI_MODEL || "gemini-2.0-flash-lite",
+        "gemini-2.0-flash-lite",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash-latest",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-8b",
       ])
     );
 
