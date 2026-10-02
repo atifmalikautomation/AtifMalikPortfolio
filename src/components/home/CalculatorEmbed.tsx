@@ -13,7 +13,7 @@ export function CalculatorEmbed() {
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           className="relative rounded-[2rem] overflow-hidden p-8 md:p-12 lg:p-14"
           style={{
-            background: "linear-gradient(135deg, #E0008A 0%, #C20076 40%, #A00062 100%)",
+            background: "linear-gradient(135deg, #D97757 0%, #C20076 40%, #A00062 100%)",
           }}
         >
           {/* Decorative stars */}

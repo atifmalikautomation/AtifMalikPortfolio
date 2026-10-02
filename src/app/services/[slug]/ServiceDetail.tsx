@@ -84,7 +84,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                   className={`rounded-2xl p-5 border transition-all hover:-translate-y-1 ${
                     i % 2 === 1 ? "text-white border-transparent" : "bg-card border-bd"
                   }`}
-                  style={i % 2 === 1 ? { background: "linear-gradient(135deg, var(--pink) 0%, #FF4DA6 100%)" } : undefined}
+                  style={i % 2 === 1 ? { background: "linear-gradient(135deg, var(--pink) 0%, #E8956F 100%)" } : undefined}
                 >
                   <span className="text-2xl mb-2 block">{stat.emoji}</span>
                   <span className={`font-display font-extrabold text-3xl block ${i % 2 === 1 ? "" : "text-pink"}`}
@@ -147,7 +147,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                   className={`rounded-2xl p-6 border hover:-translate-y-1 transition-all ${
                     card.highlight ? "text-white border-transparent" : "bg-card border-bd"
                   }`}
-                  style={card.highlight ? { background: "linear-gradient(135deg, var(--pink) 0%, #FF4DA6 100%)" } : undefined}
+                  style={card.highlight ? { background: "linear-gradient(135deg, var(--pink) 0%, #E8956F 100%)" } : undefined}
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${card.highlight ? "bg-white/20" : "bg-pink/10"}`}>
                     <Icon className={`w-6 h-6 ${card.highlight ? "text-white" : "text-pink"}`} strokeWidth={1.5} />
@@ -290,7 +290,7 @@ export function ServiceDetail({ service }: { service: Service }) {
       <section className="section-padding">
         <div className="max-w-4xl mx-auto px-4">
           <div className="relative overflow-hidden rounded-3xl p-10 md:p-14 text-center"
-            style={{ background: "linear-gradient(135deg, var(--pink) 0%, #FF4DA6 100%)" }}>
+            style={{ background: "linear-gradient(135deg, var(--pink) 0%, #E8956F 100%)" }}>
             <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-white/10 blur-3xl pointer-events-none" />
             <div className="relative z-10">
               <Check className="w-14 h-14 mx-auto mb-5 text-white/80" strokeWidth={1.5} />

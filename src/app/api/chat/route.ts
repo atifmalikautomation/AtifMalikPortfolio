@@ -40,7 +40,18 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const body = await req.json();
+    // ── Safely parse the request body ──
+    let body: { messages?: { role: string; content: string }[] };
+    try {
+      body = await req.json();
+    } catch (parseErr) {
+      console.error("Chat API: Failed to parse request body:", parseErr);
+      return new Response(
+        JSON.stringify({ content: "Hey! Something went wrong with your message. Please try again." }),
+        { status: 200, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
     const messages = (body.messages || []).slice(-20).map(
       (m: { role: string; content: string }) => ({
         role: m.role as "user" | "assistant",
@@ -56,10 +67,6 @@ export async function POST(req: NextRequest) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
-      systemInstruction: systemPrompt,
-    });
 
     // Convert messages to Gemini format (history + last message)
     let history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
@@ -74,16 +81,48 @@ export async function POST(req: NextRequest) {
 
     const lastMessage = messages[messages.length - 1].content;
 
-    const chat = model.startChat({
-      history,
-      generationConfig: {
-        maxOutputTokens: chatbotConfig.maxTokens,
-        temperature: 0.7,
-      },
-    });
+    // ── Failover model chain — verified against ListModels API ──
+    const candidateModels = Array.from(
+      new Set([
+        process.env.GEMINI_MODEL || "gemini-flash-lite-latest",
+        "gemini-flash-lite-latest",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash",
+      ])
+    );
 
-    // Streaming response
-    const result = await chat.sendMessageStream(lastMessage);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let result: any = null;
+    let lastErr: unknown = null;
+
+    for (const modelName of candidateModels) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: systemPrompt,
+        });
+
+        const chat = model.startChat({
+          history,
+          generationConfig: {
+            maxOutputTokens: chatbotConfig.maxTokens,
+            temperature: 0.7,
+          },
+        });
+
+        result = await chat.sendMessageStream(lastMessage);
+        break; // Stream successfully started
+      } catch (err: unknown) {
+        lastErr = err;
+        console.warn(`Model ${modelName} unavailable, trying next:`, (err as { status?: number })?.status || (err as Error)?.message);
+        continue;
+      }
+    }
+
+    if (!result) {
+      throw lastErr || new Error("All candidate models failed");
+    }
+
     const encoder = new TextEncoder();
 
     const readable = new ReadableStream({
@@ -103,7 +142,7 @@ export async function POST(req: NextRequest) {
           console.error("Stream error:", err);
           controller.enqueue(
             encoder.encode(
-              `data: ${JSON.stringify({ text: "Sorry, something went wrong. Please try the contact page." })}\n\n`
+              `data: ${JSON.stringify({ text: "Hey! We're experiencing momentary high demand. Feel free to explore the topics above, or connect directly on WhatsApp (+92 319 6780720)!" })}\n\n`
             )
           );
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
@@ -124,7 +163,7 @@ export async function POST(req: NextRequest) {
     return new Response(
       JSON.stringify({
         content:
-          "Something went wrong. Please try the contact form instead.",
+          "Hey! We are currently experiencing high server traffic. Atif specializes in AI Video Production, n8n Automation, and AI Agents. Feel free to use the topics below or reach out directly via WhatsApp (+92 319 6780720) or /book!",
       }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );

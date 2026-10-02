@@ -31,7 +31,7 @@ export default async function OGImage() {
             inset: 0,
             display: "flex",
             backgroundImage:
-              "linear-gradient(rgba(224,0,138,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(224,0,138,0.06) 1px, transparent 1px)",
+              "linear-gradient(rgba(217,119,87,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(217,119,87,0.06) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -44,7 +44,7 @@ export default async function OGImage() {
             height: 500,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(224,0,138,0.18) 0%, transparent 70%)",
+              "radial-gradient(circle, rgba(217,119,87,0.18) 0%, transparent 70%)",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
@@ -72,7 +72,7 @@ export default async function OGImage() {
               fontSize: 14,
               letterSpacing: 3,
               textTransform: "uppercase",
-              color: "#E0008A",
+              color: "#D97757",
             }}
           >
             AI-FIRST AGENCY &middot; PAKISTAN
@@ -98,7 +98,7 @@ export default async function OGImage() {
             style={{
               fontSize: 26,
               fontWeight: 600,
-              background: "linear-gradient(90deg, #E0008A, #FF4DA6)",
+              background: "linear-gradient(90deg, #D97757, #E8956F)",
               backgroundClip: "text",
               color: "transparent",
               textAlign: "center",
@@ -135,7 +135,7 @@ export default async function OGImage() {
                   style={{
                     fontSize: 32,
                     fontWeight: 800,
-                    color: "#E0008A",
+                    color: "#D97757",
                     display: "flex",
                   }}
                 >
@@ -178,7 +178,7 @@ export default async function OGImage() {
             left: 0,
             right: 0,
             height: 4,
-            background: "linear-gradient(90deg, transparent, #E0008A, transparent)",
+            background: "linear-gradient(90deg, transparent, #D97757, transparent)",
             display: "flex",
           }}
         />

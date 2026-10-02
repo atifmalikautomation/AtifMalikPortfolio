@@ -6,9 +6,9 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, Video, Workflow, Mic, Brain, Bot, Code2, Target, Plug } from "lucide-react";
 
 const tools = [
-  { icon: Video, name: "Higgsfield", color: "#E0008A", bg: "rgba(224,0,138,0.12)" },
+  { icon: Video, name: "Higgsfield", color: "#D97757", bg: "rgba(217,119,87,0.12)" },
   { icon: Workflow, name: "n8n", color: "#FF6D5A", bg: "rgba(255,109,90,0.12)" },
-  { icon: Mic, name: "ElevenLabs", color: "#7C3AED", bg: "rgba(124,58,237,0.12)" },
+  { icon: Mic, name: "ElevenLabs", color: "#C4603F", bg: "rgba(124,58,237,0.12)" },
   { icon: Brain, name: "Claude", color: "#D97706", bg: "rgba(217,119,6,0.12)" },
   { icon: Bot, name: "OpenAI", color: "#10A37F", bg: "rgba(16,163,127,0.12)" },
   { icon: Code2, name: "Next.js", color: "#171717", bg: "rgba(23,23,23,0.15)" },
@@ -54,7 +54,7 @@ export function AboutSection() {
       <div
         className="absolute top-0 right-0 w-[40%] h-[50%] z-0 pointer-events-none rounded-tr-3xl"
         style={{
-          background: "radial-gradient(ellipse at top right, rgba(224,0,138,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse at top right, rgba(217,119,87,0.15) 0%, transparent 70%)",
         }}
       />
 
@@ -145,8 +145,8 @@ export function AboutSection() {
                   className="rounded-xl p-3 text-center"
                   style={{
                     backgroundColor: "#ffffff",
-                    border: "1px solid rgba(224, 0, 138, 0.2)",
-                    boxShadow: "0 4px 20px rgba(224, 0, 138, 0.15)",
+                    border: "1px solid rgba(217, 119, 87, 0.2)",
+                    boxShadow: "0 4px 20px rgba(217, 119, 87, 0.15)",
                   }}
                 >
                   <span className="text-base block mb-0.5">{stat.emoji}</span>
@@ -214,8 +214,8 @@ export function AboutSection() {
               className="absolute -top-4 -right-3 lg:-right-5 z-20 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[10px] sm:text-[11px] font-display font-bold uppercase tracking-[0.12em] text-pink whitespace-nowrap"
               style={{
                 backgroundColor: "#ffffff",
-                border: "1px solid rgba(224, 0, 138, 0.2)",
-                boxShadow: "0 4px 20px rgba(224, 0, 138, 0.15)",
+                border: "1px solid rgba(217, 119, 87, 0.2)",
+                boxShadow: "0 4px 20px rgba(217, 119, 87, 0.15)",
               }}
             >
               <Sparkles size={12} className="flex-shrink-0" /> No.1 AI Agency in Pakistan
@@ -236,8 +236,8 @@ export function AboutSection() {
                     className="rounded-2xl p-3 text-center min-w-[88px]"
                     style={{
                       backgroundColor: "#ffffff",
-                      border: "1px solid rgba(224, 0, 138, 0.2)",
-                      boxShadow: "0 4px 20px rgba(224, 0, 138, 0.15)",
+                      border: "1px solid rgba(217, 119, 87, 0.2)",
+                      boxShadow: "0 4px 20px rgba(217, 119, 87, 0.15)",
                     }}
                   >
                     <span className="text-lg block mb-0.5">{stat.emoji}</span>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const themes = [
-  { id: "", label: "Pink", color: "#E0008A" },
+  { id: "", label: "Clay", color: "#D97757" },
   { id: "teal", label: "Teal", color: "#8EB69B" },
   { id: "maroon", label: "Maroon", color: "#59171B" },
 ];

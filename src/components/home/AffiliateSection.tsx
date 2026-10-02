@@ -46,7 +46,7 @@ export function AffiliateSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
-                className="bg-card border border-bd rounded-[var(--r)] p-5 text-center hover:border-[rgba(224,0,138,0.25)] transition-all"
+                className="bg-card border border-bd rounded-[var(--r)] p-5 text-center hover:border-[rgba(217,119,87,0.25)] transition-all"
               >
                 <div className="text-3xl mb-2">{a.emoji}</div>
                 <div className="font-display text-base font-bold text-wh mb-1">{a.name}</div>

@@ -26,7 +26,7 @@ const avatars = ["😎", "🦊", "🐼", "🐱", "🦁", "🐧", "🦄", "🐸",
 
 const accentColors = [
   { value: "#0d9488", label: "Teal" }, { value: "#22C55E", label: "Green" },
-  { value: "#F5D020", label: "Gold" }, { value: "#E0008A", label: "Pink" },
+  { value: "#F5D020", label: "Gold" }, { value: "#D97757", label: "Clay" },
   { value: "#2563EB", label: "Blue" }, { value: "#EF4444", label: "Red" },
   { value: "#F97316", label: "Orange" }, { value: "#EC4899", label: "Rose" },
 ];
@@ -181,7 +181,7 @@ function TypingDots() {
         <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>
         <div className="cg rounded-3xl rounded-tl-md px-4 py-3 flex items-center gap-1.5">
           {[0, 1, 2].map(i => (
-            <motion.span key={i} className="w-2 h-2 rounded-full" style={{ background: "rgba(224,0,138,0.5)" }}
+            <motion.span key={i} className="w-2 h-2 rounded-full" style={{ background: "rgba(217,119,87,0.5)" }}
               animate={{ opacity: [0.4, 1, 0.4], scale: [0.6, 1, 0.6] }}
               transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.2 }}
             />
@@ -347,7 +347,7 @@ export function ChatPageContent() {
           <div className="grid grid-cols-3 gap-3 py-1">
             {bubble.items.map(s => (
               <div key={s.label} className="text-center">
-                <div className="font-display font-extrabold text-xl leading-none" style={{ color: "#E0008A" }}>{s.value}</div>
+                <div className="font-display font-extrabold text-xl leading-none" style={{ color: "#D97757" }}>{s.value}</div>
                 <div className="text-[11px] mt-1 leading-tight" style={{ color: "rgba(0,0,0,0.5)" }}>{s.label}</div>
               </div>
             ))}
@@ -378,12 +378,12 @@ export function ChatPageContent() {
           className="w-full max-w-md md:max-w-3xl rounded-2xl sm:rounded-[2rem] md:grid md:grid-cols-2 overflow-hidden mx-4 sm:mx-0"
           style={{ background: "#fff", border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 25px 80px rgba(0,0,0,0.1)" }}>
           <div className="p-6 md:p-10 flex flex-col justify-center" style={{ background: "linear-gradient(180deg, #ffffff 0%, #fdf2f8 50%, #ecfdf5 100%)" }}>
-            <div className="mx-auto md:mx-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl overflow-hidden cg-gold" style={{ border: "2px solid rgba(224,0,138,0.2)" }}>
+            <div className="mx-auto md:mx-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl overflow-hidden cg-gold" style={{ border: "2px solid rgba(217,119,87,0.2)" }}>
               <Image src="/images/atif-face.jpeg" alt="Atif Malik" width={80} height={80} className="w-full h-full object-cover object-top" />
             </div>
             <h1 className="font-display font-extrabold text-2xl md:text-[2rem] mt-4 md:mt-5 text-center md:text-left" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio</h1>
             <p className="text-sm mt-1 text-center md:text-left" style={{ color: "#888" }}>
-              Premium websites &amp; AI growth systems, <em style={{ color: "#E0008A", fontStyle: "italic" }}>engineered to convert.</em>
+              Premium websites &amp; AI growth systems, <em style={{ color: "#D97757", fontStyle: "italic" }}>engineered to convert.</em>
             </p>
             <div className="flex items-center justify-center md:justify-start gap-3 mt-3 md:mt-6">
               <Av emoji={userAvatar} color={userColor} size={56} />
@@ -449,7 +449,7 @@ export function ChatPageContent() {
               </div>
               <div className="leading-tight">
                 <div className="font-display font-extrabold text-[15px]" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio</div>
-                <div className="text-[11px]" style={{ color: "#E0008A" }}>2 in the group</div>
+                <div className="text-[11px]" style={{ color: "#D97757" }}>2 in the group</div>
               </div>
             </div>
             <div className="h-px my-4" style={{ background: "rgba(0,0,0,0.08)" }} />
@@ -489,11 +489,11 @@ export function ChatPageContent() {
             {/* Title */}
             <div className="leading-tight min-w-0">
               <div className="font-display font-extrabold truncate flex items-center gap-1.5" style={{ color: "#1a1a1a" }}>Atif&apos;s Studio 💬</div>
-              <div className="text-[12px]" style={{ color: "#E0008A" }}>2 members · live</div>
+              <div className="text-[12px]" style={{ color: "#D97757" }}>2 members · live</div>
             </div>
             {/* Right actions */}
             <div className="ml-auto flex items-center gap-2 shrink-0">
-              <Link href="/" className="hidden sm:inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-[13px] font-semibold hover:bg-black/5 transition-colors" style={{ color: "#E0008A" }}>
+              <Link href="/" className="hidden sm:inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-[13px] font-semibold hover:bg-black/5 transition-colors" style={{ color: "#D97757" }}>
                 🌐 <span>Visit site ↗</span>
               </Link>
               <a href="https://wa.me/923196780720" target="_blank" rel="noopener noreferrer"
@@ -550,7 +550,7 @@ export function ChatPageContent() {
                       </div>
                       <div className={clsx("flex items-center gap-1 mt-0.5 px-1 text-[10px]", isMe && "flex-row-reverse")} style={{ color: "rgba(0,0,0,0.3)" }}>
                         <span>{msg.time}</span>
-                        {isMe && <span className="font-bold" style={{ color: "#E0008A" }}>✓</span>}
+                        {isMe && <span className="font-bold" style={{ color: "#D97757" }}>✓</span>}
                       </div>
                     </div>
                   </motion.div>
@@ -567,7 +567,7 @@ export function ChatPageContent() {
                   <div className="flex flex-col items-start" style={{ maxWidth: "min(78%, 520px)" }}>
                     <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>
                     <div className="cg rounded-3xl rounded-tl-md px-4 py-2.5 text-[15px] whitespace-pre-wrap leading-relaxed break-words" style={{ color: "#444" }}>
-                      {streamingText}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse rounded-sm" style={{ background: "rgba(224,0,138,0.4)" }} />
+                      {streamingText}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse rounded-sm" style={{ background: "rgba(217,119,87,0.4)" }} />
                     </div>
                   </div>
                 </div>
@@ -590,8 +590,8 @@ export function ChatPageContent() {
               { label: "💰 Pricing", panel: "pricing" },
             ].map(a => (
               <button key={a.panel} onClick={() => setPanel(a.panel)}
-                className="cg rounded-full px-3.5 py-1.5 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
-                style={{ color: "#E0008A" }}>
+                className="cg rounded-full px-3.5 py-1.5 text-[13px] font-semibold hover:bg-[#D97757]/10 transition active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
+                style={{ color: "#D97757" }}>
                 {a.label}
               </button>
             ))}
@@ -607,8 +607,8 @@ export function ChatPageContent() {
                   <motion.button key={chipId}
                     initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
                     onClick={() => triggerTopic(chipId)}
-                    className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-pink/10 transition active:scale-95 cursor-pointer"
-                    style={{ color: "#E0008A" }}>
+                    className="cg rounded-full px-4 py-2 text-[13px] font-semibold hover:bg-[#D97757]/10 transition active:scale-95 cursor-pointer"
+                    style={{ color: "#D97757" }}>
                     {topic.chip}
                   </motion.button>
                 );
@@ -626,7 +626,7 @@ export function ChatPageContent() {
                   <div className="grid grid-cols-10 gap-1 max-h-48 overflow-y-auto">
                     {EMOJI_GRID.map(e => (
                       <button key={e} type="button" onClick={() => { setInput(prev => prev + e); setEmojiOpen(false); inputRef.current?.focus(); }}
-                        className="aspect-square rounded-lg text-lg flex items-center justify-center hover:bg-pink/15 transition active:scale-90 cursor-pointer">{e}</button>
+                        className="aspect-square rounded-lg text-lg flex items-center justify-center hover:bg-[#D97757]/15 transition active:scale-90 cursor-pointer">{e}</button>
                     ))}
                   </div>
                 </motion.div>
@@ -641,7 +641,7 @@ export function ChatPageContent() {
 
               <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="cg-flat rounded-[1.75rem] p-2 flex items-center gap-1">
                 <button type="button" onClick={() => setEmojiOpen(!emojiOpen)}
-                  className={clsx("w-10 h-10 rounded-full text-xl flex items-center justify-center transition active:scale-90 cursor-pointer", emojiOpen ? "bg-pink/20" : "hover:bg-black/5")}>😊</button>
+                  className={clsx("w-10 h-10 rounded-full text-xl flex items-center justify-center transition active:scale-90 cursor-pointer", emojiOpen ? "bg-[#D97757]/20" : "hover:bg-black/5")}>😊</button>
                 <button type="button" onClick={() => sendMessage("Show me some fun GIFs!")}
                   className={clsx("h-10 px-2.5 rounded-full text-[12px] font-extrabold tracking-wide flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer")}
                   style={{ color: "rgba(0,0,0,0.4)" }}>GIF</button>
@@ -656,7 +656,7 @@ export function ChatPageContent() {
                   </button>
                 ) : (
                   <button type="button"
-                    className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-pink/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#E0008A" }} aria-label="Voice"
+                    className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#D97757]/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#D97757" }} aria-label="Voice"
                     title="Type a message to send">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
                   </button>
@@ -686,7 +686,7 @@ export function ChatPageContent() {
                 }).join("");
                 return `<div class="row ${isMe ? "me" : "them"}"><div class="who">${esc(name)}</div><div class="bubble">${texts}</div></div>`;
               }).join("");
-              const html = `<!doctype html><html><head><meta charset="utf-8"/><title>Atif's Studio — conversation</title><style>*{box-sizing:border-box}body{font-family:-apple-system,"Segoe UI",Inter,sans-serif;color:#1a1a1a;margin:0;padding:40px;background:#FFF5F9}.head{text-align:center;margin-bottom:28px}.logo{display:inline-flex;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#E0008A,#FF4DA6);color:#fff;align-items:center;justify-content:center;font-weight:800;font-size:20px}h1{font-size:20px;margin:12px 0 2px}.head .muted{color:#1a1a1aaa;font-size:13px;margin:0}.row{margin:14px 0;max-width:78%}.row.them{margin-right:auto}.row.me{margin-left:auto;text-align:right}.who{font-size:11px;font-weight:700;color:#E0008A;margin-bottom:3px}.bubble{display:inline-block;text-align:left;padding:10px 14px;border-radius:16px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.08)}.row.me .bubble{background:#E0008A;color:#fff}.bubble p{margin:0 0 4px;font-size:14px;line-height:1.5}.bubble p:last-child{margin-bottom:0}.bubble .muted{color:#1a1a1a99;font-size:12.5px}.row.me .bubble .muted{color:#ffffffcc}.sys{text-align:center;color:#1a1a1a77;font-size:12px;margin:16px 0}.foot{text-align:center;color:#1a1a1a66;font-size:11px;margin-top:30px}@media print{body{background:#fff}.bubble{box-shadow:none;border:1px solid #1a1a1a22}}</style></head><body><div class="head"><div class="logo">AM</div><h1>Atif's Studio — conversation</h1><p class="muted">${userName}${userEmail ? ` · ${esc(userEmail)}` : ""}</p></div>${msgs}<div class="foot">Saved from Atif's Studio · atifmalik.me</div><script>window.onload=function(){setTimeout(function(){window.print()},300)};<\/script></body></html>`;
+              const html = `<!doctype html><html><head><meta charset="utf-8"/><title>Atif's Studio — conversation</title><style>*{box-sizing:border-box}body{font-family:-apple-system,"Segoe UI",Inter,sans-serif;color:#1a1a1a;margin:0;padding:40px;background:#FFF5F9}.head{text-align:center;margin-bottom:28px}.logo{display:inline-flex;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#D97757,#E8956F);color:#fff;align-items:center;justify-content:center;font-weight:800;font-size:20px}h1{font-size:20px;margin:12px 0 2px}.head .muted{color:#1a1a1aaa;font-size:13px;margin:0}.row{margin:14px 0;max-width:78%}.row.them{margin-right:auto}.row.me{margin-left:auto;text-align:right}.who{font-size:11px;font-weight:700;color:#D97757;margin-bottom:3px}.bubble{display:inline-block;text-align:left;padding:10px 14px;border-radius:16px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.08)}.row.me .bubble{background:#D97757;color:#fff}.bubble p{margin:0 0 4px;font-size:14px;line-height:1.5}.bubble p:last-child{margin-bottom:0}.bubble .muted{color:#1a1a1a99;font-size:12.5px}.row.me .bubble .muted{color:#ffffffcc}.sys{text-align:center;color:#1a1a1a77;font-size:12px;margin:16px 0}.foot{text-align:center;color:#1a1a1a66;font-size:11px;margin-top:30px}@media print{body{background:#fff}.bubble{box-shadow:none;border:1px solid #1a1a1a22}}</style></head><body><div class="head"><div class="logo">AM</div><h1>Atif's Studio — conversation</h1><p class="muted">${userName}${userEmail ? ` · ${esc(userEmail)}` : ""}</p></div>${msgs}<div class="foot">Saved from Atif's Studio · atifmalik.me</div><script>window.onload=function(){setTimeout(function(){window.print()},300)};<\/script></body></html>`;
               const w = window.open("", "_blank", "width=720,height=900");
               if (!w) { alert("Please allow pop-ups to save the conversation as PDF."); return; }
               w.document.open(); w.document.write(html); w.document.close();
@@ -721,7 +721,7 @@ export function ChatPageContent() {
               <div>
                 <div className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>{userName}</div>
                 {userEmail && <div className="text-[13px]" style={{ color: "rgba(0,0,0,0.4)" }}>{userEmail}</div>}
-                <div className="text-[12px] mt-0.5" style={{ color: "#E0008A" }}>Signed in</div>
+                <div className="text-[12px] mt-0.5" style={{ color: "#D97757" }}>Signed in</div>
               </div>
             </div>
             <button onClick={() => { setProfileOpen(false); setJoined(false); setMessages([]); }}

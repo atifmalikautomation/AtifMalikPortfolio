@@ -53,7 +53,7 @@ function TestimonialCard({ t }: { t: typeof allTestimonials[0] }) {
       <div className="flex items-center gap-3 mb-4">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: "linear-gradient(135deg, var(--pink), #FF4DA6)" }}
+          style={{ background: "linear-gradient(135deg, var(--pink), #E8956F)" }}
         >
           <span className="text-xs font-bold font-mono" style={{ color: "#FFFFFF" }}>{t.initials}</span>
         </div>

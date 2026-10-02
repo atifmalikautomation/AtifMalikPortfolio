@@ -60,7 +60,7 @@ export function ProblemsSection() {
             transition={{ duration: 0.6 }}
             className="rounded-2xl p-6 md:p-8 text-white"
             style={{
-              background: "linear-gradient(135deg, #E0008A 0%, #C20076 40%, #A00062 100%)",
+              background: "linear-gradient(135deg, #D97757 0%, #C20076 40%, #A00062 100%)",
             }}
           >
             <h3 className="font-display text-lg font-bold mb-6 flex items-center gap-2" style={{ color: "#FFFFFF" }}>
@@ -141,7 +141,7 @@ export function ProblemsSection() {
                     <Lock size={32} className="text-pink/40 mb-4" />
                     <button
                       onClick={() => setShowSolutions(true)}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-pink text-white font-display font-bold text-sm hover:brightness-110 transition-all shadow-[0_0_0_3px_rgba(224,0,138,0.25)]"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-pink text-white font-display font-bold text-sm hover:brightness-110 transition-all shadow-[0_0_0_3px_rgba(217,119,87,0.25)]"
                     >
                       <Lock size={14} /> Unlock My Solutions
                     </button>

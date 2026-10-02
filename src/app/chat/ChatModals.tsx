@@ -75,7 +75,7 @@ export function BookCallModal({ open, onClose }: { open: boolean; onClose: () =>
     <Modal emoji="📅" title="Book a 30-min call" subtitle="Pick a time that works, it lands straight on Atif's calendar." onClose={onClose} maxWidth="48rem"
       footer={
         <div className="flex items-center justify-between gap-3 text-sm">
-          <a href="https://cal.com/atifmalik/30min" target="_blank" rel="noreferrer" className="font-semibold transition" style={{ color: "#E0008A" }}>Open in new tab ↗</a>
+          <a href="https://cal.com/atifmalik/30min" target="_blank" rel="noreferrer" className="font-semibold transition" style={{ color: "#D97757" }}>Open in new tab ↗</a>
           <a href="mailto:atifmalikfreelancer@gmail.com?subject=Booking%20a%20call" className="font-semibold transition" style={{ color: "rgba(0,0,0,0.4)" }}>Prefer email?</a>
         </div>
       }
@@ -163,9 +163,9 @@ export function PortfolioModal({ open, onClose }: { open: boolean; onClose: () =
         {categories.map(cat => (
           <button key={cat} onClick={() => setFilter(cat)} className="px-3 py-1.5 text-[13px] font-semibold rounded-full whitespace-nowrap transition cursor-pointer"
             style={{
-              background: filter === cat ? "#E0008A" : "rgba(224,0,138,0.06)",
-              color: filter === cat ? "#fff" : "#E0008A",
-              border: `1px solid ${filter === cat ? "#E0008A" : "rgba(224,0,138,0.12)"}`,
+              background: filter === cat ? "#D97757" : "rgba(217,119,87,0.06)",
+              color: filter === cat ? "#fff" : "#D97757",
+              border: `1px solid ${filter === cat ? "#D97757" : "rgba(217,119,87,0.12)"}`,
             }}
           >{cat}</button>
         ))}
@@ -173,20 +173,20 @@ export function PortfolioModal({ open, onClose }: { open: boolean; onClose: () =
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {filtered.map(item => (
           <div key={item.title} className="cg rounded-2xl overflow-hidden flex flex-col hover:scale-[1.02] transition-transform cursor-pointer">
-            <div className="aspect-[16/10] flex items-center justify-center text-5xl" style={{ background: "rgba(224,0,138,0.04)" }}>{item.img}</div>
+            <div className="aspect-[16/10] flex items-center justify-center text-5xl" style={{ background: "rgba(217,119,87,0.04)" }}>{item.img}</div>
             <div className="p-4">
               <h3 className="font-display font-bold text-sm" style={{ color: "#1a1a1a" }}>{item.title}</h3>
               <p className="text-[12px] mt-0.5" style={{ color: "rgba(0,0,0,0.35)" }}>{item.category}</p>
               <p className="text-[13px] mt-2" style={{ color: "rgba(0,0,0,0.55)" }}>{item.desc}</p>
               <div className="flex gap-3 mt-3">
-                {item.stats.map(s => <span key={s} className="text-[11px] font-display font-bold" style={{ color: "#E0008A" }}>{s}</span>)}
+                {item.stats.map(s => <span key={s} className="text-[11px] font-display font-bold" style={{ color: "#D97757" }}>{s}</span>)}
               </div>
             </div>
           </div>
         ))}
       </div>
       <div className="text-center mt-4">
-        <a href="/portfolio" className="text-sm font-semibold transition" style={{ color: "#E0008A" }}>See full portfolio on atifmalik.me ↗</a>
+        <a href="/portfolio" className="text-sm font-semibold transition" style={{ color: "#D97757" }}>See full portfolio on atifmalik.me ↗</a>
       </div>
     </Modal>
   );
@@ -202,21 +202,21 @@ export function PricingModal({ open, onClose }: { open: boolean; onClose: () => 
           <h3 className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>AI Starter</h3>
           <p className="text-[13px] mt-1" style={{ color: "rgba(0,0,0,0.4)" }}>Everything you need to start with one focused AI system.</p>
           <div className="flex items-baseline gap-2 mt-4">
-            <span className="font-display font-extrabold text-3xl" style={{ color: "#E0008A" }}>$300</span>
+            <span className="font-display font-extrabold text-3xl" style={{ color: "#D97757" }}>$300</span>
             <span className="text-sm" style={{ color: "rgba(0,0,0,0.35)" }}>starting</span>
           </div>
-          <div className="h-px my-4" style={{ background: "rgba(224,0,138,0.08)" }} />
+          <div className="h-px my-4" style={{ background: "rgba(217,119,87,0.08)" }} />
           <ul className="space-y-2.5 flex-1">
             {["1 AI video OR automation workflow", "Basic AI chatbot setup", "CRM or tool integration", "1 landing page or funnel", "1-2 week delivery", "14-day post-launch support", "Unlimited revisions"].map(f => (
               <li key={f} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(0,0,0,0.55)" }}>
-                <span style={{ color: "#E0008A" }}>✓</span> {f}
+                <span style={{ color: "#D97757" }}>✓</span> {f}
               </li>
             ))}
           </ul>
           <a href="/book" className="mt-5 w-full cg-accent cg-gold rounded-2xl py-3 text-white font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block">Book a strategy call</a>
         </div>
-        <div className="rounded-2xl p-6 flex flex-col relative" style={{ background: "linear-gradient(135deg, #E0008A 0%, #B80068 40%, #B80068 100%)" }}>
-          <span className="absolute -top-3 right-6 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full cg" style={{ color: "#E0008A" }}>Most popular</span>
+        <div className="rounded-2xl p-6 flex flex-col relative" style={{ background: "linear-gradient(135deg, #D97757 0%, #C4603F 40%, #B0522F 100%)" }}>
+          <span className="absolute -top-3 right-6 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full cg" style={{ color: "#D97757" }}>Most popular</span>
           <h3 className="font-display font-extrabold text-lg text-white">Full AI System</h3>
           <p className="text-[13px] mt-1" style={{ color: "rgba(255,255,255,0.75)" }}>The complete AI system, done for you, end to end.</p>
           <div className="flex items-baseline gap-2 mt-4">
@@ -231,7 +231,7 @@ export function PricingModal({ open, onClose }: { open: boolean; onClose: () => 
               </li>
             ))}
           </ul>
-          <a href="/book" className="mt-5 w-full cg rounded-2xl py-3 font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block" style={{ color: "#E0008A" }}>Book a strategy call</a>
+          <a href="/book" className="mt-5 w-full cg rounded-2xl py-3 font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block" style={{ color: "#D97757" }}>Book a strategy call</a>
         </div>
       </div>
     </Modal>

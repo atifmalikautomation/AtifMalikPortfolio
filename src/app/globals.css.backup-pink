@@ -4,20 +4,20 @@
 
 /* ── DARK MODE (default) ── */
 :root {
-  --bg: #1A1A18;
-  --bg2: #262624;
-  --bg3: #2E2E2C;
-  --card: #2A2A28;
-  --pink: #D97757;
-  --pink-hover: #E8956F;
-  --pink12: rgba(217, 119, 87, 0.12);
-  --pink06: rgba(217, 119, 87, 0.06);
-  --wh: #E8E4DC;
-  --gr: #A8A29E;
-  --dm: #78716C;
-  --dm2: #44403C;
-  --bd: rgba(232, 228, 220, 0.08);
-  --bd2: rgba(232, 228, 220, 0.15);
+  --bg: #0A0008;
+  --bg2: #0E000C;
+  --bg3: #140012;
+  --card: #180018;
+  --pink: #E0008A;
+  --pink-hover: #F0009A;
+  --pink12: rgba(224, 0, 138, 0.12);
+  --pink06: rgba(224, 0, 138, 0.06);
+  --wh: #F2F2F0;
+  --gr: #999;
+  --dm: #555;
+  --dm2: #333;
+  --bd: rgba(255, 255, 255, 0.07);
+  --bd2: rgba(255, 255, 255, 0.14);
   --r: 16px;
   --fd: 'Bricolage Grotesque', sans-serif;
   --fb: var(--font-inter), 'Inter', sans-serif;
@@ -26,20 +26,20 @@
 
 /* ── LIGHT MODE ── */
 html.light {
-  --bg: #FAF9F5;
-  --bg2: #F4F3EE;
-  --bg3: #EDECE7;
+  --bg: #FFFAF6;
+  --bg2: #FFF5EE;
+  --bg3: #FFEDE3;
   --card: #FFFFFF;
-  --pink: #C4603F;
-  --pink-hover: #B0522F;
-  --pink12: rgba(196, 96, 63, 0.12);
-  --pink06: rgba(196, 96, 63, 0.06);
-  --wh: #292524;
-  --gr: #57534E;
-  --dm: #A8A29E;
-  --dm2: #D6D3D1;
-  --bd: rgba(41, 37, 36, 0.08);
-  --bd2: rgba(41, 37, 36, 0.14);
+  --pink: #D10078;
+  --pink-hover: #B80068;
+  --pink12: rgba(209, 0, 120, 0.08);
+  --pink06: rgba(209, 0, 120, 0.04);
+  --wh: #3D0028;
+  --gr: #5A4D58;
+  --dm: #8A7F88;
+  --dm2: #C4BCC2;
+  --bd: rgba(0, 0, 0, 0.08);
+  --bd2: rgba(0, 0, 0, 0.14);
 }
 
 /* ═══ THEME: TEAL GREEN ═══ */
@@ -109,27 +109,26 @@ html[data-theme="maroon"].light {
   --bd: rgba(89, 23, 27, 0.08);
   --bd2: rgba(89, 23, 27, 0.14);
 }
-
 html.light body {
-  background: linear-gradient(160deg, #FAF9F5 0%, #F4F3EE 25%, #F5F0EB 50%, #F0ECE6 75%, #FAF9F5 100%);
+  background: linear-gradient(160deg, #FFFAF6 0%, #FFEDE0 25%, #FFE8F0 50%, #F3E6FF 75%, #FFFAF6 100%);
   background-attachment: fixed;
   color: var(--gr);
 }
 html.light .glass {
-  background: rgba(250, 249, 245, 0.85);
+  background: rgba(255, 250, 246, 0.85);
   border-color: var(--bd);
 }
 html.light .text-gradient {
-  background: linear-gradient(135deg, #C4603F, #D97757, #8B4513);
+  background: linear-gradient(135deg, var(--pink), #FF6B9D, #9B2FAF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 html.light .hero-glow {
-  background: rgba(196, 96, 63, 0.06);
+  background: rgba(224, 0, 138, 0.06);
 }
 html.light .stress-gradient {
-  background: linear-gradient(90deg, var(--pink) 0%, #D97757 50%, #C4603F 100%);
+  background: linear-gradient(90deg, var(--pink) 0%, #EAB308 50%, #EF4444 100%);
 }
 html.light .btn-g {
   background: rgba(0, 0, 0, 0.04);
@@ -162,7 +161,7 @@ html.light .btn-g:hover {
   --color-bg-elevated: var(--bg2);
   --color-bg-surface: var(--bg3);
   --color-surface: var(--card);
-  --color-surface-hover: #333330;
+  --color-surface-hover: #1E001E;
   --color-border: var(--bd);
   --color-border-hover: var(--bd2);
   --color-text-primary: var(--wh);
@@ -171,7 +170,7 @@ html.light .btn-g:hover {
   --color-accent: var(--pink);
   --color-accent-hover: var(--pink-hover);
   --color-accent-dim: var(--pink12);
-  --color-accent-glow: rgba(217, 119, 87, 0.20);
+  --color-accent-glow: rgba(224, 0, 138, 0.20);
   --font-display: var(--fd);
   --font-body: var(--fb);
   --font-mono: var(--fm);
@@ -186,7 +185,7 @@ html {
 }
 
 body {
-  background: linear-gradient(160deg, #1A1A18 0%, #1E1E1C 30%, #1C1C1A 55%, #201F1D 80%, #1A1A18 100%);
+  background: linear-gradient(160deg, #0A0008 0%, #10000E 30%, #0D0012 55%, #120010 80%, #0A0008 100%);
   background-attachment: fixed;
   color: var(--gr);
   font-family: 'Inter', var(--fb);
@@ -203,27 +202,27 @@ body::before {
   z-index: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 html.light body::before {
   background-image:
-    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
 }
 body > main, body > footer, body > header { position: relative; z-index: 1; }
 body > nav { position: relative; z-index: 200; }
 
 ::selection {
-  background: #D97757;
+  background: var(--pink);
   color: #fff;
 }
 
 /* ═══ Scrollbar ═══ */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #1A1A18; }
-::-webkit-scrollbar-thumb { background: #2E2E2C; border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--dm2); }
 
 /* ═══ Reduced Motion ═══ */
@@ -247,25 +246,25 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ═══ Utilities ═══ */
 .text-gradient {
-  background: linear-gradient(135deg, #D97757, #E8956F, #C4603F);
+  background: linear-gradient(135deg, var(--pink), #FF6B9D, #7C3AED);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass {
-  background: rgba(26, 26, 24, 0.92);
+  background: rgba(10, 0, 8, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--bd);
 }
 
 .glow {
-  box-shadow: 0 0 40px rgba(217, 119, 87, 0.15);
+  box-shadow: 0 0 40px rgba(224, 0, 138, 0.15);
 }
 
 .glow-text {
-  text-shadow: 0 0 30px rgba(217, 119, 87, 0.3);
+  text-shadow: 0 0 30px rgba(224, 0, 138, 0.3);
 }
 
 /* ═══ Button ═══ */
@@ -288,7 +287,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-p:hover {
   filter: brightness(1.15);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(217, 119, 87, 0.3);
+  box-shadow: 0 8px 24px rgba(224, 0, 138, 0.3);
 }
 .btn-g {
   background: rgba(255, 255, 255, 0.06);
@@ -396,24 +395,24 @@ img.emoji {
 
 /* ═══ Stress Meter ═══ */
 .stress-gradient {
-  background: linear-gradient(90deg, var(--pink) 0%, #E8956F 50%, #C4603F 100%);
+  background: linear-gradient(90deg, var(--pink) 0%, #EAB308 50%, #EF4444 100%);
 }
 
 /* ═══ Nav scrolled ═══ */
 .nav-scrolled {
-  background: rgba(26, 26, 24, 0.92);
+  background: rgba(10, 0, 8, 0.92);
 }
 html.light .nav-scrolled {
-  background: rgba(250, 249, 245, 0.92);
-  box-shadow: 0 1px 8px rgba(41, 37, 36, 0.08);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* ═══ Footer ═══ */
 .footer-bg {
-  background: #161614;
+  background: #0D000A;
 }
 html.light .footer-bg {
-  background: #F4F3EE;
+  background: #F5F0EB;
 }
 
 /* ═══ Nav Book Button ═══ */
@@ -442,10 +441,10 @@ html.light .nav-book-btn:hover {
   display: inline-flex;
   padding: 3px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #D97757, #E8956F 22%, #D97757, #E8956F 78%, #D97757);
+  background: linear-gradient(135deg, var(--pink), #FF4DA6 22%, #E0008A, #FF4DA6 78%, var(--pink));
   background-size: 240% 240%;
   background-position: 0% 50%;
-  box-shadow: 0 14px 36px -10px rgba(217, 119, 87, 0.45), 0 0 24px rgba(217, 119, 87, 0.25);
+  box-shadow: 0 14px 36px -10px rgba(224, 0, 138, 0.45), 0 0 24px rgba(224, 0, 138, 0.25);
   transition: all 0.3s ease;
   isolation: isolate;
   overflow: hidden;
@@ -464,14 +463,14 @@ html.light .nav-book-btn:hover {
 }
 .hero-cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 50px -10px rgba(217, 119, 87, 0.55), 0 0 32px rgba(217, 119, 87, 0.35);
+  box-shadow: 0 22px 50px -10px rgba(224, 0, 138, 0.55), 0 0 32px rgba(224, 0, 138, 0.35);
 }
 .hero-cta-inner-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, #D97757, #E8956F);
+  background: linear-gradient(135deg, var(--pink), #FF4DA6);
   color: #fff;
   border-radius: 9999px;
   padding: 14px 36px;
@@ -509,13 +508,13 @@ html.light .nav-book-btn:hover {
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px rgba(42, 42, 40, 0.12), inset 0 1px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px rgba(15, 46, 39, 0.12), inset 0 1px rgba(255, 255, 255, 0.7);
 }
 .cg-accent {
-  background: linear-gradient(135deg, rgba(217, 119, 87, 0.92), rgba(232, 149, 111, 0.92));
+  background: linear-gradient(135deg, rgba(224, 0, 138, 0.92), rgba(255, 77, 166, 0.92));
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
-  box-shadow: 0 8px 28px rgba(217, 119, 87, 0.28), inset 0 1px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 28px rgba(224, 0, 138, 0.28), inset 0 1px rgba(255, 255, 255, 0.35);
 }
 .cg-gold {
   box-shadow: 0 0 0 1.5px rgba(226, 169, 60, 0.9), 0 0 0 4px rgba(247, 208, 110, 0.25) !important;
@@ -547,7 +546,7 @@ html.light .nav-book-btn:hover {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #D97757, #E8956F 22%, #fff 40%, #E8956F 58%, #D97757 78%, #E8956F);
+  background: linear-gradient(135deg, #E0008A, #FF4DA6 22%, #fff 40%, #FF4DA6 58%, #E0008A 78%, #FF4DA6);
   background-size: 250% 250%;
   animation: chat-border-move 3s ease-in-out infinite;
   z-index: -1;
@@ -590,13 +589,13 @@ html.light .nav-book-btn:hover {
   background: #fff;
   border: 3px solid var(--pink);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(217, 119, 87, 0.4);
+  box-shadow: 0 0 12px rgba(224, 0, 138, 0.4);
   cursor: grab;
   transition: box-shadow 0.2s ease;
 }
 .calc-slider::-webkit-slider-thumb:hover,
 .calc-slider:active::-webkit-slider-thumb {
-  box-shadow: 0 0 20px rgba(217, 119, 87, 0.6);
+  box-shadow: 0 0 20px rgba(224, 0, 138, 0.6);
 }
 .calc-slider::-moz-range-thumb {
   width: 20px;
@@ -604,30 +603,30 @@ html.light .nav-book-btn:hover {
   background: #fff;
   border: 3px solid var(--pink);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(217, 119, 87, 0.4);
+  box-shadow: 0 0 12px rgba(224, 0, 138, 0.4);
   cursor: grab;
 }
 
 /* ═══ Light mode overrides ═══ */
 html.light .hero-cta-btn {
-  box-shadow: 0 14px 36px -10px rgba(196, 96, 63, 0.35), 0 0 24px rgba(196, 96, 63, 0.15);
+  box-shadow: 0 14px 36px -10px rgba(209, 0, 120, 0.35), 0 0 24px rgba(209, 0, 120, 0.15);
 }
 html.light .hero-cta-btn:hover {
-  box-shadow: 0 22px 50px -10px rgba(196, 96, 63, 0.45), 0 0 32px rgba(196, 96, 63, 0.25);
+  box-shadow: 0 22px 50px -10px rgba(209, 0, 120, 0.45), 0 0 32px rgba(209, 0, 120, 0.25);
 }
 html.light .glow {
-  box-shadow: 0 0 40px rgba(196, 96, 63, 0.1);
+  box-shadow: 0 0 40px rgba(209, 0, 120, 0.1);
 }
 html.light .glow-text {
-  text-shadow: 0 0 30px rgba(196, 96, 63, 0.2);
+  text-shadow: 0 0 30px rgba(209, 0, 120, 0.2);
 }
 html.light .calc-slider::-webkit-slider-thumb {
   background: #fff;
   border-color: var(--pink);
-  box-shadow: 0 0 12px rgba(196, 96, 63, 0.3);
+  box-shadow: 0 0 12px rgba(209, 0, 120, 0.3);
 }
 html.light .calc-slider::-moz-range-thumb {
   background: #fff;
   border-color: var(--pink);
-  box-shadow: 0 0 12px rgba(196, 96, 63, 0.3);
+  box-shadow: 0 0 12px rgba(209, 0, 120, 0.3);
 }
