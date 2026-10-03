@@ -7,7 +7,8 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
+    // microphone=(self): needed for the voice button in /chat. Only this site may use it, never embedded third parties.
+    value: "camera=(), microphone=(self), geolocation=()",
   },
   {
     key: "Strict-Transport-Security",
