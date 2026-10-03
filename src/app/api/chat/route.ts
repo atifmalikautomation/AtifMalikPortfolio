@@ -6,6 +6,10 @@ const rateLimitMap = new Map<string, { count: number; reset: number }>();
 const RATE_LIMIT = 20;
 const RATE_WINDOW = 60_000;
 
+// Models that just failed (429 quota / 503 overload) are skipped for a minute.
+const modelCooldown = new Map<string, number>();
+const COOLDOWN_MS = 60_000;
+
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
   const entry = rateLimitMap.get(ip);
@@ -91,25 +95,32 @@ export async function POST(req: NextRequest) {
     const history = merged;
     const lastMessage = last.parts[0].text;
 
-    // ── Failover model chain (verified available Oct 2026) ──
+    // ── Failover model chain (benchmarked Oct 2026) ──
+    // Working + fast models first. The configured model (GEMINI_MODEL) stays in the chain
+    // but no longer goes first: it was hitting 429 quota limits and stalling every reply.
     const candidateModels = Array.from(
       new Set([
+        "gemini-3.5-flash",
+        "gemini-flash-lite-latest",
         process.env.GEMINI_MODEL || chatbotConfig.defaultModel,
-        chatbotConfig.defaultModel,
         ...chatbotConfig.fallbackModels,
       ])
     );
+    // Skip models that failed recently (429/503) so visitors don't wait on them again.
+    const now = Date.now();
+    const available = candidateModels.filter((m) => (modelCooldown.get(m) ?? 0) < now);
+    const ordered = available.length ? available : candidateModels;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let result: any = null;
     let lastErr: unknown = null;
 
-    for (const modelName of candidateModels) {
+    for (const modelName of ordered) {
       try {
-        const model = genAI.getGenerativeModel({
-          model: modelName,
-          systemInstruction: systemPrompt,
-        });
+        const model = genAI.getGenerativeModel(
+          { model: modelName, systemInstruction: systemPrompt },
+          { timeout: 10_000 } // don't let one stuck model hang the reply
+        );
 
         const chat = model.startChat({
           history,
@@ -123,6 +134,7 @@ export async function POST(req: NextRequest) {
         break; // Stream successfully started
       } catch (err: unknown) {
         lastErr = err;
+        modelCooldown.set(modelName, Date.now() + COOLDOWN_MS);
         console.warn(`Model ${modelName} unavailable, trying next:`, (err as { status?: number })?.status || (err as Error)?.message);
         continue;
       }

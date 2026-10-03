@@ -13,7 +13,7 @@ export const chatbotConfig = {
   defaultModel: "gemini-3.8-flash",
 
   /** Fallback chain if the primary model is overloaded / unavailable */
-  fallbackModels: ["gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-flash-latest", "gemini-2.5-flash"],
+  fallbackModels: ["gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-flash-latest"],
 
   /** Max tokens per response (kept generous so "thinking" models never return empty text) */
   maxTokens: 2048,
