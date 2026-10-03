@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI, type GenerationConfig } from "@google/generative-ai";
 import { chatbotConfig } from "@/lib/chatbot/knowledge";
 
 /**
@@ -62,14 +62,21 @@ export async function POST(req: NextRequest) {
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
+  // Transcription needs speed, not reasoning: use a short, fast chain (benchmarked Oct 2026).
+  // gemini-3.7-flash (frequent 503s) and 2.5-* (retired, 404) are deliberately skipped here.
   const models = Array.from(
-    new Set([process.env.GEMINI_MODEL || chatbotConfig.defaultModel, chatbotConfig.defaultModel, ...chatbotConfig.fallbackModels])
+    new Set([
+      process.env.GEMINI_MODEL || chatbotConfig.defaultModel,
+      "gemini-3.5-flash",
+      "gemini-flash-lite-latest",
+    ])
   );
 
   let lastErr: unknown = null;
   for (const modelName of models) {
     try {
-      const model = genAI.getGenerativeModel({ model: modelName });
+      // 8s cap per model so one stuck/overloaded model can't make the visitor wait 15s+
+      const model = genAI.getGenerativeModel({ model: modelName }, { timeout: 8000 });
       const result = await model.generateContent({
         contents: [
           {
@@ -77,7 +84,13 @@ export async function POST(req: NextRequest) {
             parts: [{ inlineData: { mimeType, data: audio } }, { text: TRANSCRIBE_PROMPT }],
           },
         ],
-        generationConfig: { temperature: 0, maxOutputTokens: 1024 },
+        // thinkingLevel "low": cuts latency ~6.5s → ~1.8s with identical transcript quality.
+        // Cast because the installed SDK's types predate thinkingConfig; the API accepts it.
+        generationConfig: {
+          temperature: 0,
+          maxOutputTokens: 1024,
+          thinkingConfig: { thinkingLevel: "low" },
+        } as GenerationConfig,
       });
       const text = result.response.text().trim();
       if (!text || text.includes("[NO_SPEECH]")) {
