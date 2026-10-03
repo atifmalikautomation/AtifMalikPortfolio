@@ -3,14 +3,11 @@
 import { useState, useEffect } from "react";
 
 export function ThemeToggle() {
-  const [light, setLight] = useState(false);
+  const [light, setLight] = useState(true);
 
   useEffect(() => {
-    const saved = localStorage.getItem("theme");
-    if (saved === "light") {
-      setLight(true);
-      document.documentElement.classList.add("light");
-    }
+    // Light is the default; the inline script in layout removes it if the visitor chose dark
+    setLight(document.documentElement.classList.contains("light"));
   }, []);
 
   const toggle = () => {
