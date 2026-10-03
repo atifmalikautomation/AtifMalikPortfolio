@@ -436,7 +436,7 @@ html.light .nav-book-btn:hover {
   display: inline-flex;
   padding: 3px;
   border-radius: 9999px;
-  background: var(--pink-hover);
+  background: #F8C2AC;
   box-shadow: 0 14px 36px -10px rgba(224, 122, 95, 0.45), 0 0 24px rgba(224, 122, 95, 0.25);
   transition: all 0.3s ease;
   isolation: isolate;
