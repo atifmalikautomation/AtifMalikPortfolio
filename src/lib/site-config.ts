@@ -317,6 +317,53 @@ export const siteConfig = {
     },
   ],
 
+  /** Canonical public pricing — shown on the homepage, in the chat pricing panel, and taught to the AI chatbot. */
+  pricingTiers: [
+    {
+      name: "AI Starter System",
+      badge: "QUICK LAUNCH",
+      badgeIcon: false,
+      desc: "Everything you need to start booking calls on autopilot.",
+      setup: "$500",
+      monthly: "$99/mo",
+      highlighted: false,
+      features: [
+        "1 core automation workflow (n8n)",
+        "Basic AI chatbot setup",
+        "CRM integration (GHL or HubSpot)",
+        "1 landing page or funnel",
+        "Email sequence (up to 5 emails)",
+        "Analytics & tracking setup",
+        "2-week delivery",
+        "30-day post-launch support",
+      ],
+      cta: "Get Started",
+    },
+    {
+      name: "Full Growth Engine",
+      badge: "MOST POPULAR",
+      badgeIcon: true,
+      desc: "The complete client-acquisition system, done for you, end to end.",
+      setup: "$2,500",
+      monthly: "$249/mo",
+      highlighted: true,
+      features: [
+        "Up to 10 automation workflows",
+        "AI video production (5 assets)",
+        "Multi-platform AI chatbot",
+        "Full CRM + pipeline automation",
+        "Lead capture & qualification system",
+        "Email + SMS automation sequences",
+        "Custom dashboard & reporting",
+        "Social media automation setup",
+        "Booking system integration",
+        "4-week delivery",
+        "90-day support + optimization",
+      ],
+      cta: "Build My System",
+    },
+  ],
+
   testimonials: [
     {
       quote:

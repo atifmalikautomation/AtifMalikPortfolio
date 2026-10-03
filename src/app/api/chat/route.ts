@@ -52,12 +52,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const messages = (body.messages || []).slice(-20).map(
-      (m: { role: string; content: string }) => ({
-        role: m.role as "user" | "assistant",
-        content: m.content.slice(0, 2000),
-      })
-    );
+    const messages = (body.messages || [])
+      .filter((m) => m && typeof m.content === "string" && m.content.trim())
+      .slice(-30)
+      .map((m: { role: string; content: string }) => ({
+        role: m.role === "assistant" ? ("model" as const) : ("user" as const),
+        content: m.content.slice(0, 4000),
+      }));
 
     if (!messages.length) {
       return new Response(
@@ -68,28 +69,34 @@ export async function POST(req: NextRequest) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
 
-    // Convert messages to Gemini format (history + last message)
-    let history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
-      role: m.role === "assistant" ? "model" : "user",
-      parts: [{ text: m.content }],
-    }));
-
-    // Gemini requires history to start with "user" role — drop leading "model" messages
-    while (history.length > 0 && history[0].role === "model") {
-      history = history.slice(1);
+    // Merge consecutive same-role messages (the chat UI sends multi-bubble replies)
+    // so Gemini always receives a clean user/model alternating history.
+    const merged: { role: "user" | "model"; parts: { text: string }[] }[] = [];
+    for (const m of messages) {
+      const prev = merged[merged.length - 1];
+      if (prev && prev.role === m.role) prev.parts[0].text += `\n\n${m.content}`;
+      else merged.push({ role: m.role, parts: [{ text: m.content }] });
     }
 
-    const lastMessage = messages[messages.length - 1].content;
+    // Gemini requires history to start with "user" — drop leading "model" turns
+    while (merged.length > 0 && merged[0].role === "model") merged.shift();
 
-    // ── Failover model chain — updated Oct 2026 ──
+    const last = merged.pop();
+    if (!last || last.role !== "user") {
+      return new Response(
+        JSON.stringify({ error: "Last message must be from the user" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
+    const history = merged;
+    const lastMessage = last.parts[0].text;
+
+    // ── Failover model chain (verified available Oct 2026) ──
     const candidateModels = Array.from(
       new Set([
-        process.env.GEMINI_MODEL || "gemini-2.0-flash-lite",
-        "gemini-2.0-flash-lite",
-        "gemini-2.0-flash",
-        "gemini-1.5-flash-latest",
-        "gemini-1.5-flash",
-        "gemini-1.5-flash-8b",
+        process.env.GEMINI_MODEL || chatbotConfig.defaultModel,
+        chatbotConfig.defaultModel,
+        ...chatbotConfig.fallbackModels,
       ])
     );
 

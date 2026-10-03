@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { siteConfig } from "@/lib/site-config";
 
 /* ── Invite Modal ── */
 export function InviteModal({ open, onClose }: { open: boolean; onClose: () => void }) {
@@ -138,19 +141,9 @@ export function ProjectModal({ open, onClose, userName, userEmail }: { open: boo
   );
 }
 
-/* ── Portfolio Modal ── */
-const portfolioItems = [
-  { title: "AI Commercial", category: "AI Video", desc: "30s cinematic AI commercial for a brand.", stats: ["HD", "5 days", "ElevenLabs"], img: "🎬" },
-  { title: "Bayou Savage Graphic Novel", category: "AI Video", desc: "Full AI graphic novel with character consistency.", stats: ["120 pages", "AI Art", "Cinematic"], img: "📖" },
-  { title: "n8n Lead Automation", category: "Automation", desc: "Automated lead capture, qualify & follow-up system.", stats: ["40hrs saved/wk", "24/7", "n8n"], img: "⚡" },
-  { title: "WhatsApp AI Chatbot", category: "Chatbots", desc: "AI chatbot handling customer support on WhatsApp.", stats: ["80% automated", "24/7", "Instant"], img: "💬" },
-  { title: "GoHighLevel CRM Setup", category: "Automation", desc: "Full CRM, funnel & pipeline with automation.", stats: ["3x leads", "Auto follow-up", "GHL"], img: "🎯" },
-  { title: "Academic Support Platform", category: "Web Apps", desc: "Full-stack Next.js platform for AIOU students.", stats: ["40 routes", "71 files", "Prisma"], img: "🎓" },
-  { title: "ToolVault AI Marketplace", category: "Web Apps", desc: "AI tools marketplace with auth, billing & admin.", stats: ["9 phases", "SaaS", "Next.js"], img: "🛠️" },
-  { title: "YouTube Automation System", category: "Automation", desc: "Auto-posting and channel management system.", stats: ["Daily posts", "Auto", "n8n"], img: "▶️" },
-];
-
-const categories = ["All", "AI Video", "Automation", "Chatbots", "Web Apps"];
+/* ── Portfolio Modal — driven by site-config so it always matches /portfolio ── */
+const portfolioItems = siteConfig.portfolio;
+const categories = ["All", ...Array.from(new Set(portfolioItems.map(p => p.category)))];
 
 export function PortfolioModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [filter, setFilter] = useState("All");
@@ -158,7 +151,7 @@ export function PortfolioModal({ open, onClose }: { open: boolean; onClose: () =
   const filtered = filter === "All" ? portfolioItems : portfolioItems.filter(p => p.category === filter);
 
   return (
-    <Modal emoji="👀" title="Atif's work" subtitle={`${portfolioItems.length} real builds, tap any to explore.`} onClose={onClose} maxWidth="56rem">
+    <Modal emoji="👀" title="Atif's work" subtitle={`${portfolioItems.length} real builds, tap any to read the full case study.`} onClose={onClose} maxWidth="56rem">
       <div className="flex gap-2 mb-4 overflow-x-auto">
         {categories.map(cat => (
           <button key={cat} onClick={() => setFilter(cat)} className="px-3 py-1.5 text-[13px] font-semibold rounded-full whitespace-nowrap transition cursor-pointer"
@@ -172,68 +165,75 @@ export function PortfolioModal({ open, onClose }: { open: boolean; onClose: () =
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {filtered.map(item => (
-          <div key={item.title} className="cg rounded-2xl overflow-hidden flex flex-col hover:scale-[1.02] transition-transform cursor-pointer">
-            <div className="aspect-[16/10] flex items-center justify-center text-5xl" style={{ background: "rgba(224,122,95,0.04)" }}>{item.img}</div>
+          <Link key={item.slug} href={`/portfolio/${item.slug}`} className="cg rounded-2xl overflow-hidden flex flex-col hover:scale-[1.02] transition-transform cursor-pointer">
+            <div className="relative aspect-[16/10]" style={{ background: "rgba(224,122,95,0.04)" }}>
+              <Image src={item.image} alt={item.title} fill sizes="(max-width: 640px) 90vw, 420px" className="object-cover" />
+            </div>
             <div className="p-4">
               <h3 className="font-display font-bold text-sm" style={{ color: "#1a1a1a" }}>{item.title}</h3>
               <p className="text-[12px] mt-0.5" style={{ color: "rgba(0,0,0,0.35)" }}>{item.category}</p>
-              <p className="text-[13px] mt-2" style={{ color: "rgba(0,0,0,0.55)" }}>{item.desc}</p>
-              <div className="flex gap-3 mt-3">
-                {item.stats.map(s => <span key={s} className="text-[11px] font-display font-bold" style={{ color: "#E07A5F" }}>{s}</span>)}
+              <p className="text-[13px] mt-2 line-clamp-3" style={{ color: "rgba(0,0,0,0.55)" }}>{item.description}</p>
+              <p className="text-[12px] font-display font-bold mt-3" style={{ color: "#E07A5F" }}>📈 {item.result}</p>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2">
+                {item.technologies.slice(0, 4).map(s => <span key={s} className="text-[11px] font-semibold" style={{ color: "rgba(0,0,0,0.4)" }}>{s}</span>)}
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className="text-center mt-4">
-        <a href="/portfolio" className="text-sm font-semibold transition" style={{ color: "#E07A5F" }}>See full portfolio on atifmalik.me ↗</a>
+        <Link href="/portfolio" className="text-sm font-semibold transition" style={{ color: "#E07A5F" }}>See full portfolio on atifmalik.me ↗</Link>
       </div>
     </Modal>
   );
 }
 
-/* ── Pricing Modal ── */
+/* ── Pricing Modal — same tiers as the homepage (site-config) ── */
 export function PricingModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
   return (
     <Modal emoji="💰" title="Packages" subtitle="Project-based systems with clear scope. Custom builds welcome too." onClose={onClose} maxWidth="56rem">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="cg rounded-2xl p-6 flex flex-col">
-          <h3 className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>AI Starter</h3>
-          <p className="text-[13px] mt-1" style={{ color: "rgba(0,0,0,0.4)" }}>Everything you need to start with one focused AI system.</p>
-          <div className="flex items-baseline gap-2 mt-4">
-            <span className="font-display font-extrabold text-3xl" style={{ color: "#E07A5F" }}>$300</span>
-            <span className="text-sm" style={{ color: "rgba(0,0,0,0.35)" }}>starting</span>
+        {siteConfig.pricingTiers.map(tier => tier.highlighted ? (
+          <div key={tier.name} className="rounded-2xl p-6 flex flex-col relative" style={{ background: "#E07A5F" }}>
+            <span className="absolute -top-3 right-6 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full cg" style={{ color: "#E07A5F" }}>{tier.badge}</span>
+            <h3 className="font-display font-extrabold text-lg text-white">{tier.name}</h3>
+            <p className="text-[13px] mt-1" style={{ color: "rgba(255,255,255,0.75)" }}>{tier.desc}</p>
+            <div className="flex items-baseline gap-2 mt-4">
+              <span className="font-display font-extrabold text-3xl text-white">{tier.setup}</span>
+              <span className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>setup + {tier.monthly}</span>
+            </div>
+            <div className="h-px my-4" style={{ background: "rgba(255,255,255,0.15)" }} />
+            <ul className="space-y-2.5 flex-1">
+              {tier.features.map(f => (
+                <li key={f} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(255,255,255,0.85)" }}>
+                  <span style={{ color: "rgba(255,255,255,0.6)" }}>✓</span> {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/book" className="mt-5 w-full cg rounded-2xl py-3 font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block" style={{ color: "#E07A5F" }}>Book a strategy call</a>
           </div>
-          <div className="h-px my-4" style={{ background: "rgba(224,122,95,0.08)" }} />
-          <ul className="space-y-2.5 flex-1">
-            {["1 AI video OR automation workflow", "Basic AI chatbot setup", "CRM or tool integration", "1 landing page or funnel", "1-2 week delivery", "14-day post-launch support", "Unlimited revisions"].map(f => (
-              <li key={f} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(0,0,0,0.55)" }}>
-                <span style={{ color: "#E07A5F" }}>✓</span> {f}
-              </li>
-            ))}
-          </ul>
-          <a href="/book" className="mt-5 w-full cg-accent cg-gold rounded-2xl py-3 text-white font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block">Book a strategy call</a>
-        </div>
-        <div className="rounded-2xl p-6 flex flex-col relative" style={{ background: "#E07A5F" }}>
-          <span className="absolute -top-3 right-6 px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full cg" style={{ color: "#E07A5F" }}>Most popular</span>
-          <h3 className="font-display font-extrabold text-lg text-white">Full AI System</h3>
-          <p className="text-[13px] mt-1" style={{ color: "rgba(255,255,255,0.75)" }}>The complete AI system, done for you, end to end.</p>
-          <div className="flex items-baseline gap-2 mt-4">
-            <span className="font-display font-extrabold text-3xl text-white">$1,500</span>
-            <span className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>starting</span>
+        ) : (
+          <div key={tier.name} className="cg rounded-2xl p-6 flex flex-col">
+            <h3 className="font-display font-extrabold text-lg" style={{ color: "#1a1a1a" }}>{tier.name}</h3>
+            <p className="text-[13px] mt-1" style={{ color: "rgba(0,0,0,0.4)" }}>{tier.desc}</p>
+            <div className="flex items-baseline gap-2 mt-4">
+              <span className="font-display font-extrabold text-3xl" style={{ color: "#E07A5F" }}>{tier.setup}</span>
+              <span className="text-sm" style={{ color: "rgba(0,0,0,0.35)" }}>setup + {tier.monthly}</span>
+            </div>
+            <div className="h-px my-4" style={{ background: "rgba(224,122,95,0.08)" }} />
+            <ul className="space-y-2.5 flex-1">
+              {tier.features.map(f => (
+                <li key={f} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(0,0,0,0.55)" }}>
+                  <span style={{ color: "#E07A5F" }}>✓</span> {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/book" className="mt-5 w-full cg-accent cg-gold rounded-2xl py-3 text-white font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block">Book a strategy call</a>
           </div>
-          <div className="h-px my-4" style={{ background: "rgba(255,255,255,0.15)" }} />
-          <ul className="space-y-2.5 flex-1">
-            {["Everything in Starter, plus:", "AI video production (up to 5 assets)", "Up to 10 n8n automation workflows", "Multi-platform AI chatbot", "GoHighLevel CRM setup", "Email + SMS sequences", "Social media automation", "2-4 week delivery", "30-day support + optimization"].map(f => (
-              <li key={f} className="flex items-start gap-2 text-[13px]" style={{ color: "rgba(255,255,255,0.85)" }}>
-                <span style={{ color: "rgba(255,255,255,0.6)" }}>✓</span> {f}
-              </li>
-            ))}
-          </ul>
-          <a href="/book" className="mt-5 w-full cg rounded-2xl py-3 font-display font-bold text-center transition-transform hover:scale-[1.01] active:scale-95 block" style={{ color: "#E07A5F" }}>Book a strategy call</a>
-        </div>
+        ))}
       </div>
+      <p className="text-center text-[13px] mt-4" style={{ color: "rgba(0,0,0,0.45)" }}>Need something bigger or unique? <a href="/book" className="font-semibold" style={{ color: "#E07A5F" }}>Get a custom quote ↗</a></p>
     </Modal>
   );
 }

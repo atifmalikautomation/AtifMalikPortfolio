@@ -7,6 +7,7 @@ import Image from "next/image";
 import { clsx } from "clsx";
 import Link from "next/link";
 import { BookCallModal, ProjectModal, PortfolioModal, PricingModal, InviteModal } from "./ChatModals";
+import { siteConfig } from "@/lib/site-config";
 
 /* ── Types ── */
 type BubbleKind =
@@ -33,11 +34,26 @@ const accentColors = [
 
 const EMOJI_GRID = ["😀","😁","😂","🤣","😊","😍","😎","🤩","🥳","😇","🤔","😏","😅","🤯","👍","👎","👏","🙌","🤝","🙏","💪","✌️","🤙","👋","🔥","✨","⚡","💯","🎉","🚀","💸","💰","📈","❤️","💛","💚","💙","💜","🤍","💖"];
 
+/* ── Site data (single source of truth: src/lib/site-config.ts) ── */
+const statOf = (label: string, fallback: string) =>
+  siteConfig.stats.find(s => s.label.toLowerCase().includes(label))?.value ?? fallback;
+const STAT_PROJECTS = statOf("project", "800+");
+const STAT_YEARS = statOf("year", "5+");
+
+const CATEGORY_EMOJI: Record<string, string> = {
+  "AI Automation": "⚡", "AI Video": "🎬", "AI Chatbot": "💬", "Lead Automation": "🎯",
+  "AI Content": "📱", "Web Development": "🌐",
+};
+const SERVICE_EMOJI: Record<string, string> = {
+  "ai-video": "🎬", "ai-automation": "⚙️", "ai-agents": "🤖", "ai-chatbots": "💬",
+  "ai-content": "📱", "ai-websites": "🌐", "lead-automation": "📈", "custom-ai": "🔧",
+};
+
 /* Initial welcome messages — Yasir exact flow */
 const WELCOME_BUBBLES: BubbleKind[] = [
   { kind: "text", text: "Hey, so glad you're here 👋 I'm Atif. I build premium websites, AI video content, and automation systems that actually convert." },
-  { kind: "stat", items: [{ value: "5+ yrs", label: "experience" }, { value: "800+", label: "projects" }, { value: "5★", label: "Fiverr & Upwork" }] },
-  { kind: "text", text: "Think of this as my whole studio in one chat. Ask me anything, or just jump straight in below. Whatever's easiest for you 👇" },
+  { kind: "stat", items: siteConfig.stats.map(s => ({ value: s.value, label: s.label })) },
+  { kind: "text", text: "Think of this as my whole studio in one chat. Ask me anything (type or tap 🎤 to talk, English or Urdu), or just jump straight in below 👇" },
   { kind: "actions", items: [{ label: "📅 Book a call", panel: "book" }, { label: "🚀 Start a project", panel: "project" }, { label: "👀 See my work", panel: "portfolio" }, { label: "💰 Pricing", panel: "pricing" }] },
 ];
 
@@ -55,7 +71,7 @@ const TOPICS: Topic[] = [
   {
     id: "about", chip: "About me 👋",
     bubbles: [
-      { kind: "text", text: "Sure, quick version. I'm Atif, an AI video production and automation specialist. I've been doing this for over 5 years now, shipped 800+ projects for clients all over the world, and I'm 5-star rated on Fiverr and Upwork." },
+      { kind: "text", text: `Sure, quick version. I'm Atif, an AI video production and automation specialist. I've been doing this for ${STAT_YEARS} years now, shipped ${STAT_PROJECTS} projects for clients all over the world, and I'm 5-star rated on Fiverr and Upwork.` },
       { kind: "text", text: "Here's what makes me different. I don't just hand you a pretty website or video. I build the smart stuff behind it too — the AI and automation that actually captures leads and turns them into clients. So your system earns its keep." },
     ],
     followups: ["services", "work", "process", "hire"],
@@ -64,16 +80,17 @@ const TOPICS: Topic[] = [
     id: "services", chip: "Services 🛠️",
     bubbles: [
       { kind: "text", text: "Happy to walk you through it. Here's everything I build 👇" },
-      { kind: "text", text: "🎬 AI Video Production\n⚙️ AI Automation (n8n)\n💬 AI Chatbots\n🤖 AI Agents\n📊 GoHighLevel CRM\n🌐 Websites & Web Apps\n📈 Lead & Sales Automation\n🔧 Custom AI Systems" },
-      { kind: "text", text: "Most folks end up combining a few of these. The website and the automation system that runs it usually ship together." },
+      { kind: "text", text: siteConfig.services.map(s => `${SERVICE_EMOJI[s.id] ?? "✨"} ${s.title}`).join("\n") },
+      { kind: "text", text: "Most folks end up combining a few of these. The website and the automation system that runs it usually ship together. Ask me about any one and I'll go deeper." },
     ],
     followups: ["work", "pricing", "hire", "process"],
   },
   {
     id: "work", chip: "My work 👀",
     bubbles: [
-      { kind: "text", text: "Love showing this off 😄 I've done 800+ projects across all kinds of industries. A few highlights:" },
-      { kind: "text", text: "🎬 AI Commercial for The Optician Project — cinematic 30s ad\n📖 Bayou Savage — full AI graphic novel (120 pages)\n⚡ n8n Lead Automation — 40hrs/wk saved\n💬 WhatsApp AI Chatbot — 80% automated\n🎓 Academic Support Platform — 40 routes, full-stack\n🛠️ ToolVault — AI tools marketplace SaaS" },
+      { kind: "text", text: `Love showing this off 😄 ${STAT_PROJECTS} projects so far. Here are the featured builds from my portfolio:` },
+      { kind: "text", text: siteConfig.portfolio.map(p => `${CATEGORY_EMOJI[p.category] ?? "✨"} ${p.title} — ${p.result}`).join("\n") },
+      { kind: "text", text: "Ask me about any of these and I'll break down the challenge, the build, and the results 👇" },
       { kind: "actions", items: [{ label: "👀 See full portfolio", panel: "portfolio" }, { label: "🚀 Start a project", panel: "project" }] },
     ],
     followups: ["services", "pricing", "hire"],
@@ -82,8 +99,8 @@ const TOPICS: Topic[] = [
     id: "pricing", chip: "Pricing 💰",
     bubbles: [
       { kind: "text", text: "Straight to the point, I like it 😅 I've got clear packages:" },
-      { kind: "stat", items: [{ value: "$300+", label: "AI Starter" }, { value: "$1,500+", label: "Full System" }, { value: "Custom", label: "Enterprise" }] },
-      { kind: "text", text: "AI Starter gets you one focused system (video, chatbot, or automation). Full AI System is the complete build — multiple workflows, chatbot, CRM, the works. Custom builds are scoped individually." },
+      { kind: "stat", items: [...siteConfig.pricingTiers.map(t => ({ value: `${t.setup}+`, label: t.name })), { value: "Custom", label: "Custom AI Build" }] },
+      { kind: "text", text: `${siteConfig.pricingTiers.map(t => `${t.name}: ${t.setup} setup + ${t.monthly}. ${t.desc}`).join("\n\n")}\n\nBigger or unique projects get a custom quote.` },
       { kind: "actions", items: [{ label: "💰 See detailed pricing", panel: "pricing" }, { label: "📅 Book a call", panel: "book" }] },
     ],
     followups: ["work", "services", "hire"],
@@ -113,6 +130,55 @@ function getTime() {
 }
 
 const wait = (ms: number) => new Promise(r => setTimeout(r, ms));
+
+/* ── Rich text: strip stray markdown from LLM replies + make links clickable ── */
+const LINK_RE = /(https?:\/\/[^\s<]+|(?:www\.)?atifmalik\.me(?:\/[^\s<]*)?|[\w.+-]+@[\w-]+\.[\w.]+)/g;
+function cleanMarkdown(text: string) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/__(.+?)__/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^\s*[-*]\s+/gm, "• ")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, "$1 $2");
+}
+function RichText({ text }: { text: string }) {
+  const parts = cleanMarkdown(text).split(LINK_RE);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (i % 2 === 0) return <span key={i}>{part}</span>;
+        const trail = part.match(/[.,!?;:)]+$/)?.[0] ?? "";
+        const core = trail ? part.slice(0, -trail.length) : part;
+        const isEmail = core.includes("@") && !core.startsWith("http");
+        const href = isEmail ? `mailto:${core}` : core.startsWith("http") ? core : `https://${core}`;
+        return (
+          <span key={i}>
+            <a href={href} target={isEmail ? undefined : "_blank"} rel="noopener noreferrer"
+              className="underline underline-offset-2 font-semibold break-all" style={{ color: "inherit" }}>{core}</a>{trail}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
+/** Pick an audio format the browser can record that Gemini can understand */
+function pickAudioMime() {
+  if (typeof MediaRecorder === "undefined") return "";
+  return ["audio/webm;codecs=opus", "audio/webm", "audio/ogg;codecs=opus", "audio/mp4", "audio/aac"]
+    .find(t => MediaRecorder.isTypeSupported(t)) ?? "";
+}
+
+function blobToBase64(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(String(reader.result).split(",")[1] ?? "");
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+const MAX_RECORD_SECONDS = 60;
 
 /* ── Sound system (Yasir exact — Web Audio API) ── */
 let audioCtx: AudioContext | null = null;
@@ -215,6 +281,119 @@ export function ChatPageContent() {
   const inputRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  /* ── Voice input state ── */
+  const [recording, setRecording] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const [recSeconds, setRecSeconds] = useState(0);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const recTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const cancelRecRef = useRef(false);
+  /* Always-fresh refs so async callbacks (recorder.onstop) never use stale state */
+  const messagesRef = useRef<ChatMsg[]>([]);
+  const sendRef = useRef<(text: string) => void>(() => {});
+  useEffect(() => { messagesRef.current = messages; }, [messages]);
+
+  function pushAtifNote(text: string) {
+    setMessages(prev => [...prev, { senderId: "atif", bubbles: [{ kind: "text", text }], time: getTime() }]);
+  }
+
+  function cleanupRecording() {
+    if (recTimerRef.current) { clearInterval(recTimerRef.current); recTimerRef.current = null; }
+    streamRef.current?.getTracks().forEach(t => t.stop());
+    streamRef.current = null;
+    recorderRef.current = null;
+    setRecording(false);
+  }
+
+  async function startRecording() {
+    if (recording || transcribing || loading) return;
+    if (typeof window === "undefined" || !navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+      pushAtifNote("Voice messages aren't supported in this browser 😕 Please type your message, or try Chrome / Edge / Safari.");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } });
+      streamRef.current = stream;
+      const mime = pickAudioMime();
+      const rec = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+      chunksRef.current = [];
+      cancelRecRef.current = false;
+
+      rec.ondataavailable = e => { if (e.data && e.data.size > 0) chunksRef.current.push(e.data); };
+      rec.onstop = async () => {
+        const type = rec.mimeType || mime || "audio/webm";
+        cleanupRecording();
+        if (cancelRecRef.current) return;
+        const blob = new Blob(chunksRef.current, { type });
+        chunksRef.current = [];
+        if (blob.size < 2000) { pushAtifNote("That was a bit too short 🙂 Hold on a second longer and speak, then tap the button again to send."); return; }
+        await transcribeAndSend(blob, type);
+      };
+
+      rec.start(250);
+      recorderRef.current = rec;
+      setRecSeconds(0);
+      setRecording(true);
+      setEmojiOpen(false);
+      recTimerRef.current = setInterval(() => setRecSeconds(s => s + 1), 1000);
+    } catch (err) {
+      cleanupRecording();
+      const name = (err as DOMException)?.name;
+      pushAtifNote(
+        name === "NotAllowedError" || name === "SecurityError"
+          ? "I need microphone permission to hear you 🎤 Click the 🔒 / mic icon in your browser's address bar, allow the microphone, and try again."
+          : name === "NotFoundError"
+            ? "I couldn't find a microphone on this device 🎤 Please connect one or type your message."
+            : "Couldn't start the microphone. Please try again or type your message."
+      );
+    }
+  }
+
+  function stopRecording(cancel = false) {
+    cancelRecRef.current = cancel;
+    const rec = recorderRef.current;
+    if (rec && rec.state !== "inactive") rec.stop();
+    else cleanupRecording();
+  }
+
+  async function transcribeAndSend(blob: Blob, mimeType: string) {
+    setTranscribing(true);
+    try {
+      const audio = await blobToBase64(blob);
+      const res = await fetch("/api/transcribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ audio, mimeType }),
+      });
+      const data: { text?: string; error?: string } = await res.json().catch(() => ({}));
+      if (data.text?.trim()) {
+        setTranscribing(false);
+        sendRef.current(data.text.trim());
+        return;
+      }
+      pushAtifNote(data.error || "I couldn't catch that clearly 🎧 Mind trying again or typing it?");
+    } catch {
+      pushAtifNote("Voice message failed to send — please check your connection and try again.");
+    } finally {
+      setTranscribing(false);
+    }
+  }
+
+  /* Auto-stop at the time limit */
+  useEffect(() => {
+    if (recording && recSeconds >= MAX_RECORD_SECONDS) stopRecording();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recSeconds, recording]);
+
+  /* Release the mic if the user leaves the page mid-recording */
+  useEffect(() => () => {
+    cancelRecRef.current = true;
+    if (recTimerRef.current) clearInterval(recTimerRef.current);
+    streamRef.current?.getTracks().forEach(t => t.stop());
+  }, []);
+
   const scrollToBottom = useCallback(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, []);
@@ -263,7 +442,7 @@ export function ChatPageContent() {
     setTyping(true);
 
     try {
-      const history = messages
+      const history = messagesRef.current
         .filter(m => m.senderId !== "sys")
         .flatMap(m => m.bubbles.filter((b): b is { kind: "text"; text: string } => b.kind === "text")
           .map(b => ({ role: m.senderId === "me" ? "user" as const : "assistant" as const, content: b.text })))
@@ -283,12 +462,15 @@ export function ChatPageContent() {
         const reader = res.body?.getReader();
         const decoder = new TextDecoder();
         let accumulated = "";
+        let buffer = "";
         if (reader) {
           while (true) {
             const { done, value } = await reader.read();
             if (done) break;
-            const chunk = decoder.decode(value, { stream: true });
-            for (const line of chunk.split("\n")) {
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop() ?? ""; // keep the incomplete trailing line for the next chunk
+            for (const line of lines) {
               if (line.startsWith("data: ")) {
                 const data = line.slice(6);
                 if (data === "[DONE]") continue;
@@ -316,6 +498,7 @@ export function ChatPageContent() {
       setLoading(false);
     }
   }
+  useEffect(() => { sendRef.current = sendMessage; });
 
   /* Trigger predefined topic response — Yasir exact: local, no API */
   async function triggerTopic(topicId: string) {
@@ -341,7 +524,7 @@ export function ChatPageContent() {
   function renderBubble(bubble: BubbleKind) {
     switch (bubble.kind) {
       case "text":
-        return <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words">{bubble.text}</p>;
+        return <p className="text-[15px] leading-relaxed whitespace-pre-wrap break-words"><RichText text={bubble.text} /></p>;
       case "stat":
         return (
           <div className="grid grid-cols-3 gap-3 py-1">
@@ -567,7 +750,7 @@ export function ChatPageContent() {
                   <div className="flex flex-col items-start" style={{ maxWidth: "min(78%, 520px)" }}>
                     <span className="text-[12px] font-semibold ml-1 mb-0.5" style={{ color: "rgba(0,0,0,0.4)" }}>Atif Malik</span>
                     <div className="cg rounded-3xl rounded-tl-md px-4 py-2.5 text-[15px] whitespace-pre-wrap leading-relaxed break-words" style={{ color: "#444" }}>
-                      {streamingText}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse rounded-sm" style={{ background: "rgba(224,122,95,0.4)" }} />
+                      {cleanMarkdown(streamingText)}<span className="inline-block w-1.5 h-4 ml-0.5 animate-pulse rounded-sm" style={{ background: "rgba(224,122,95,0.4)" }} />
                     </div>
                   </div>
                 </div>
@@ -647,18 +830,43 @@ export function ChatPageContent() {
                   style={{ color: "rgba(0,0,0,0.4)" }}>GIF</button>
                 <button type="button" onClick={() => fileRef.current?.click()}
                   className="w-10 h-10 rounded-full text-lg flex items-center justify-center hover:bg-black/5 transition active:scale-90 cursor-pointer">📎</button>
-                <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)}
-                  onFocus={() => setEmojiOpen(false)} placeholder="Message Atif's Studio…" disabled={loading}
-                  className="flex-1 bg-transparent px-3 py-2.5 text-[15px] placeholder:opacity-40 outline-none min-w-0" style={{ color: "#1a1a1a" }} />
-                {input.trim() ? (
+                {recording ? (
+                  /* Live recording bar replaces the text input */
+                  <div className="flex-1 flex items-center gap-2.5 px-3 py-2.5 min-w-0" role="status" aria-live="polite">
+                    <motion.span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: "#EF4444" }}
+                      animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1, repeat: Infinity }} />
+                    <span className="text-[14px] font-semibold tabular-nums" style={{ color: "#EF4444" }}>
+                      {Math.floor(recSeconds / 60)}:{String(recSeconds % 60).padStart(2, "0")}
+                    </span>
+                    <span className="text-[13px] truncate" style={{ color: "rgba(0,0,0,0.45)" }}>Listening… tap ✓ to send</span>
+                    <button type="button" onClick={() => stopRecording(true)}
+                      className="ml-auto text-[12px] font-semibold px-2.5 py-1 rounded-full hover:bg-black/5 transition cursor-pointer shrink-0"
+                      style={{ color: "rgba(0,0,0,0.45)" }} aria-label="Cancel recording">Cancel</button>
+                  </div>
+                ) : (
+                  <input ref={inputRef} type="text" value={input} onChange={e => setInput(e.target.value)}
+                    onFocus={() => setEmojiOpen(false)}
+                    placeholder={transcribing ? "Understanding your voice message…" : "Message Atif's Studio… or tap 🎤"}
+                    disabled={loading || transcribing}
+                    className="flex-1 bg-transparent px-3 py-2.5 text-[15px] placeholder:opacity-40 outline-none min-w-0" style={{ color: "#1a1a1a" }} />
+                )}
+                {input.trim() && !recording ? (
                   <button type="submit" disabled={loading} className="cg-accent cg-gold w-11 h-11 rounded-full flex items-center justify-center text-white disabled:opacity-40 transition-transform active:scale-90 shrink-0 cursor-pointer" aria-label="Send">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7z" /></svg>
                   </button>
+                ) : recording ? (
+                  <button type="button" onClick={() => stopRecording(false)}
+                    className="relative w-11 h-11 rounded-full flex items-center justify-center text-white transition-transform active:scale-90 shrink-0 cursor-pointer"
+                    style={{ background: "#EF4444", boxShadow: "0 0 0 4px rgba(239,68,68,0.18)" }} aria-label="Stop and send voice message" title="Send voice message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                  </button>
                 ) : (
-                  <button type="button"
-                    className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#E07A5F]/15 transition-transform active:scale-90 shrink-0 cursor-pointer" style={{ color: "#E07A5F" }} aria-label="Voice"
-                    title="Type a message to send">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
+                  <button type="button" onClick={startRecording} disabled={loading || transcribing}
+                    className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#E07A5F]/15 transition-transform active:scale-90 shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-wait"
+                    style={{ color: "#E07A5F" }} aria-label="Record a voice message" title="Tap to talk (English, Urdu or Roman Urdu)">
+                    {transcribing ? <Loader2 size={20} className="animate-spin" /> : (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
+                    )}
                   </button>
                 )}
               </form>
