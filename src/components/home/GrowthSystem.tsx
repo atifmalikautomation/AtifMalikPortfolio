@@ -71,13 +71,14 @@ export function GrowthSystem() {
               transition={{ delay: i * 0.1, duration: 0.4 }}
               className="relative rounded-2xl p-5 md:p-6 overflow-hidden group"
               style={{
-                background: `rgba(224,122,95,${0.9 - i * 0.15})`,
+                background: ["#B94E33", "#C85A3E", "#D4664A", "#E07A5F"][i],
+                boxShadow: "0 10px 30px -12px rgba(185, 78, 51, 0.45)",
               }}
             >
               <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-white/5 blur-2xl pointer-events-none" />
 
               <div className="relative z-10">
-                <stage.icon size={20} style={{ color: "rgba(255,255,255,0.6)" }} className="mb-3" />
+                <stage.icon size={20} style={{ color: "rgba(255,255,255,0.85)" }} className="mb-3" />
 
                 <div className="font-display font-extrabold text-3xl mb-1" style={{ color: "#FFFFFF" }}>
                   {stage.number}
@@ -87,13 +88,13 @@ export function GrowthSystem() {
                   {stage.name}
                 </h3>
 
-                <p className="text-xs leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.75)" }}>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.92)" }}>
                   {stage.desc}
                 </p>
 
                 <span
                   className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold"
-                  style={{ background: "rgba(255,255,255,0.15)", color: "#FFFFFF" }}
+                  style={{ background: "rgba(255,255,255,0.2)", color: "#FFFFFF" }}
                 >
                   &#x2713; {stage.stat}
                 </span>
