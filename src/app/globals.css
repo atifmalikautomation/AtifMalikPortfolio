@@ -16,8 +16,8 @@
   --gr: #B5A99A;
   --dm: #7A6E62;
   --dm2: #4A4035;
-  --bd: rgba(245, 240, 232, 0.14);
-  --bd2: rgba(245, 240, 232, 0.24);
+  --bd: rgba(224, 122, 95, 0.18);
+  --bd2: rgba(224, 122, 95, 0.32);
   --r: 16px;
   --fd: 'Bricolage Grotesque', sans-serif;
   --fb: var(--font-inter), 'Inter', sans-serif;
@@ -38,8 +38,8 @@ html.light {
   --gr: #5C4A3A;
   --dm: #A09080;
   --dm2: #D5CBBD;
-  --bd: rgba(44, 30, 16, 0.08);
-  --bd2: rgba(44, 30, 16, 0.14);
+  --bd: rgba(224, 122, 95, 0.22);
+  --bd2: rgba(224, 122, 95, 0.38);
 }
 
 /* ═══ THEME: TEAL GREEN ═══ */
