@@ -63,20 +63,22 @@ export async function POST(req: NextRequest) {
 
   const genAI = new GoogleGenerativeAI(apiKey);
   // Transcription needs speed, not reasoning: use a short, fast chain (benchmarked Oct 2026).
+  // gemini-3.5-flash first: fastest + most reliable for audio (~1.5-2s). 3.8-flash was frequently
+  // 503-overloaded in production, which made every voice message wait for a failover.
   // gemini-3.7-flash (frequent 503s) and 2.5-* (retired, 404) are deliberately skipped here.
   const models = Array.from(
     new Set([
-      process.env.GEMINI_MODEL || chatbotConfig.defaultModel,
       "gemini-3.5-flash",
       "gemini-flash-lite-latest",
+      process.env.GEMINI_MODEL || chatbotConfig.defaultModel,
     ])
   );
 
   let lastErr: unknown = null;
   for (const modelName of models) {
     try {
-      // 8s cap per model so one stuck/overloaded model can't make the visitor wait 15s+
-      const model = genAI.getGenerativeModel({ model: modelName }, { timeout: 8000 });
+      // 6s cap per model (normal ≈2s) so one stuck/overloaded model can't make the visitor wait
+      const model = genAI.getGenerativeModel({ model: modelName }, { timeout: 6000 });
       const result = await model.generateContent({
         contents: [
           {
