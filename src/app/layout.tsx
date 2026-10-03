@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { siteConfig } from "@/lib/site-config";
 import { EmojiProvider } from "@/components/layout/EmojiProvider";
 import { LayoutShell } from "@/components/layout/LayoutShell";
+import { VisitorTracker } from "@/components/analytics/VisitorTracker";
 import "./globals.css";
 
 const inter = Inter({
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <LayoutShell>{children}</LayoutShell>
         <EmojiProvider />
+        <VisitorTracker />
       </body>
     </html>
   );

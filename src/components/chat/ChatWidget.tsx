@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { trackEvent } from "@/lib/tracker-client";
 
 const quickButtons = [
   "What do you do?",
@@ -25,7 +26,7 @@ export function ChatWidget() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.4 }}
-          onClick={() => setOpen(true)}
+          onClick={() => { setOpen(true); trackEvent("chatbot_opened", { where: "widget" }); }}
           className="flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-card border border-bd shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:border-[rgba(224,122,95,0.3)] transition-all cursor-pointer animate-float-gentle"
         >
           <div className="relative">

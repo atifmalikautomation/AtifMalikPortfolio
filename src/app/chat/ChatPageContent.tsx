@@ -8,6 +8,7 @@ import { clsx } from "clsx";
 import Link from "next/link";
 import { BookCallModal, ProjectModal, PortfolioModal, PricingModal, InviteModal } from "./ChatModals";
 import { siteConfig } from "@/lib/site-config";
+import { getTrackingIds } from "@/lib/tracker-client";
 
 /* ── Types ── */
 type BubbleKind =
@@ -292,8 +293,10 @@ export function ChatPageContent() {
   const cancelRecRef = useRef(false);
   /* Always-fresh refs so async callbacks (recorder.onstop) never use stale state */
   const messagesRef = useRef<ChatMsg[]>([]);
-  const sendRef = useRef<(text: string) => void>(() => {});
+  const sendRef = useRef<(text: string, opts?: { voice?: boolean }) => void>(() => {});
   useEffect(() => { messagesRef.current = messages; }, [messages]);
+  /* One id per chat session, so the admin panel can group this visitor's messages */
+  const conversationIdRef = useRef("");
 
   function pushAtifNote(text: string) {
     setMessages(prev => [...prev, { senderId: "atif", bubbles: [{ kind: "text", text }], time: getTime() }]);
@@ -370,7 +373,7 @@ export function ChatPageContent() {
       const data: { text?: string; error?: string } = await res.json().catch(() => ({}));
       if (data.text?.trim()) {
         setTranscribing(false);
-        sendRef.current(data.text.trim());
+        sendRef.current(data.text.trim(), { voice: true });
         return;
       }
       pushAtifNote(data.error || "I couldn't catch that clearly 🎧 Mind trying again or typing it?");
@@ -407,6 +410,25 @@ export function ChatPageContent() {
     let cancelled = false;
 
     (async () => {
+      // Start a new conversation record for the admin panel (fire-and-forget)
+      if (!conversationIdRef.current) {
+        conversationIdRef.current =
+          typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+                (Number(c) ^ (Math.random() * 16) >> (Number(c) / 4)).toString(16));
+        fetch("/api/chat/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            conversationId: conversationIdRef.current,
+            ...(() => { const t = getTrackingIds(); return t ? { visitorId: t.visitorId, sessionId: t.sessionId } : {}; })(),
+            visitor: { name: userName, email: userEmail, referrer: document.referrer || undefined },
+          }),
+          keepalive: true,
+        }).catch(() => { /* logging is best-effort */ });
+      }
+
       // System message: "X joined the chat 🎉"
       setMessages([{ senderId: "sys", bubbles: [{ kind: "system", text: `${userName} joined the chat 🎉` }], time: getTime() }]);
       if (soundOn) playJoinSound();
@@ -431,7 +453,7 @@ export function ChatPageContent() {
   }, [joined, userName]);
 
   /* Send user message to AI */
-  async function sendMessage(text: string) {
+  async function sendMessage(text: string, opts: { voice?: boolean } = {}) {
     if (!text.trim() || loading) return;
     const userMsg: ChatMsg = { senderId: "me", bubbles: [{ kind: "text", text: text.trim() }], time: getTime() };
     setMessages(prev => [...prev, userMsg]);
@@ -451,7 +473,13 @@ export function ChatPageContent() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history }),
+        body: JSON.stringify({
+          messages: history,
+          conversationId: conversationIdRef.current || undefined,
+          ...(() => { const t = getTrackingIds(); return t ? { visitorId: t.visitorId, sessionId: t.sessionId } : {}; })(),
+          visitor: { name: userName, email: userEmail },
+          isVoice: opts.voice === true,
+        }),
       });
       if (!res.ok) throw new Error("Failed");
 

@@ -1,6 +1,7 @@
-import { NextRequest } from "next/server";
+import { NextRequest, after } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { systemPrompt, chatbotConfig } from "@/lib/chatbot/knowledge";
+import { isValidConversationId, logMessage, requestMeta, upsertConversation, type VisitorInfo } from "@/lib/chat-log";
 
 const rateLimitMap = new Map<string, { count: number; reset: number }>();
 const RATE_LIMIT = 20;
@@ -43,9 +44,24 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Resolved with the final bot reply (or fallback) so the background logger can save it.
+  let finishReply: (reply: { text: string; model?: string }) => void = () => {};
+  const replyDone = new Promise<{ text: string; model?: string; latencyMs: number }>((resolve) => {
+    const startedAt = Date.now();
+    finishReply = (reply) => resolve({ ...reply, latencyMs: Date.now() - startedAt });
+  });
+
   try {
     // ── Safely parse the request body ──
-    let body: { messages?: { role: string; content: string }[] };
+    let body: {
+      messages?: { role: string; content: string }[];
+      /** Optional: lets the admin panel record this conversation */
+      conversationId?: string;
+      visitor?: VisitorInfo;
+      visitorId?: string;
+      sessionId?: string;
+      isVoice?: boolean;
+    };
     try {
       body = await req.json();
     } catch (parseErr) {
@@ -95,6 +111,22 @@ export async function POST(req: NextRequest) {
     const history = merged;
     const lastMessage = last.parts[0].text;
 
+    // ── Admin panel logging: runs after the response, never slows the reply ──
+    const conversationId = body.conversationId;
+    if (isValidConversationId(conversationId)) {
+      const meta = requestMeta(req.headers);
+      const visitorText = messages[messages.length - 1].content;
+      const visitor = body.visitor ?? {};
+      const ids = { visitorId: body.visitorId, sessionId: body.sessionId, page: "/chat" };
+      const isVoice = body.isVoice === true;
+      after(async () => {
+        await upsertConversation(conversationId, visitor, meta, ids);
+        await logMessage(conversationId, "user", visitorText, { isVoice, page: "/chat" });
+        const reply = await replyDone;
+        await logMessage(conversationId, "assistant", reply.text, { model: reply.model, latencyMs: reply.latencyMs, page: "/chat" });
+      });
+    }
+
     // ── Failover model chain (benchmarked Oct 2026) ──
     // Working + fast models first. The configured model (GEMINI_MODEL) stays in the chain
     // but no longer goes first: it was hitting 429 quota limits and stalling every reply.
@@ -114,6 +146,7 @@ export async function POST(req: NextRequest) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let result: any = null;
     let lastErr: unknown = null;
+    let usedModel = "";
 
     for (const modelName of ordered) {
       try {
@@ -131,6 +164,7 @@ export async function POST(req: NextRequest) {
         });
 
         result = await chat.sendMessageStream(lastMessage);
+        usedModel = modelName;
         break; // Stream successfully started
       } catch (err: unknown) {
         lastErr = err;
@@ -148,10 +182,12 @@ export async function POST(req: NextRequest) {
 
     const readable = new ReadableStream({
       async start(controller) {
+        let full = "";
         try {
           for await (const chunk of result.stream) {
             const text = chunk.text();
             if (text) {
+              full += text;
               controller.enqueue(
                 encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
               );
@@ -159,15 +195,22 @@ export async function POST(req: NextRequest) {
           }
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
+          finishReply({ text: full, model: usedModel });
         } catch (err) {
           console.error("Stream error:", err);
-          controller.enqueue(
-            encoder.encode(
-              `data: ${JSON.stringify({ text: "Hey! We're experiencing momentary high demand. Feel free to explore the topics above, or connect directly on WhatsApp (+92 319 6780720)!" })}\n\n`
-            )
-          );
-          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-          controller.close();
+          const fallback = "Hey! We're experiencing momentary high demand. Feel free to explore the topics above, or connect directly on WhatsApp (+92 319 6780720)!";
+          finishReply({ text: full + fallback, model: `${usedModel} (stream error)` });
+          try {
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({ text: fallback })}\n\n`
+              )
+            );
+            controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+            controller.close();
+          } catch {
+            /* visitor already disconnected */
+          }
         }
       },
     });
@@ -181,10 +224,12 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("Chat API error:", error);
+    const fallback =
+      "Hey! We are currently experiencing high server traffic. Atif specializes in AI Video Production, n8n Automation, and AI Agents. Feel free to use the topics below or reach out directly via WhatsApp (+92 319 6780720) or /book!";
+    finishReply({ text: fallback, model: "fallback (all models failed)" });
     return new Response(
       JSON.stringify({
-        content:
-          "Hey! We are currently experiencing high server traffic. Atif specializes in AI Video Production, n8n Automation, and AI Agents. Feel free to use the topics below or reach out directly via WhatsApp (+92 319 6780720) or /book!",
+        content: fallback,
       }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );

@@ -11,8 +11,9 @@ import { FloatingEmojis } from "./FloatingEmojis";
 export function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isChatPage = pathname === "/chat";
+  const isAdmin = pathname === "/admin" || pathname?.startsWith("/admin/");
 
-  if (isChatPage) {
+  if (isChatPage || isAdmin) {
     return <>{children}</>;
   }
 

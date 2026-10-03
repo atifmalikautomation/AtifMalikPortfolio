@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site-config";
 import { Mail, MessageCircle, Send } from "lucide-react";
+import { getTrackingIds } from "@/lib/tracker-client";
 
 export function ContactContent() {
   const [form, setForm] = useState({
@@ -16,11 +17,28 @@ export function ContactContent() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: Connect to CRM webhook / email service
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, source: "contact-form", ...(getTrackingIds() ?? {}) }),
+      });
+      const data: { error?: string } = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Failed to send.");
+      setSubmitted(true);
+    } catch (err) {
+      setError((err as Error).message || "Failed to send. Please try WhatsApp instead.");
+    } finally {
+      setSending(false);
+    }
   }
 
   return (
@@ -107,8 +125,16 @@ export function ContactContent() {
                       className="w-full bg-bg-surface border border-border rounded-[var(--radius)] px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:border-accent/40 focus:outline-none transition-colors resize-none"
                     />
                   </div>
-                  <Button type="submit" className="w-full" size="lg">
-                    Send Message
+                  {error && (
+                    <p role="alert" className="text-sm text-red-500">
+                      {error}{" "}
+                      <a href={siteConfig.contact.whatsapp} target="_blank" rel="noopener noreferrer" className="underline">
+                        WhatsApp
+                      </a>
+                    </p>
+                  )}
+                  <Button type="submit" className="w-full" size="lg" disabled={sending}>
+                    {sending ? "Sending..." : "Send Message"}
                     <Send size={16} />
                   </Button>
                 </form>

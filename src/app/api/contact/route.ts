@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { saveContactLead } from "@/lib/chat-log";
 
 const RATE_LIMIT_WINDOW = 60_000; // 1 minute
 const MAX_REQUESTS = 5;
@@ -33,34 +34,42 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
 
+    // 1) Store in the admin panel database
+    const saved = await saveContactLead(
+      { name, email, service, business, message, source: source || "contact-form" },
+      { visitorId: body.visitorId, sessionId: body.sessionId }
+    );
+
+    // 2) Optionally forward to a CRM / n8n webhook
+    let forwarded = false;
     const webhookUrl = process.env.CRM_WEBHOOK_URL;
-
     if (webhookUrl) {
-      // Send to CRM/n8n webhook
-      const response = await fetch(webhookUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          service: service || "Not specified",
-          business: business || "Not specified",
-          message,
-          source: source || "contact-form",
-          timestamp: new Date().toISOString(),
-          ip,
-        }),
-      });
-
-      if (!response.ok) {
-        console.error("Webhook failed:", response.status);
-        return NextResponse.json({ error: "Failed to submit. Please try WhatsApp instead." }, { status: 500 });
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            service: service || "Not specified",
+            business: business || "Not specified",
+            message,
+            source: source || "contact-form",
+            timestamp: new Date().toISOString(),
+            ip,
+          }),
+          signal: AbortSignal.timeout(8000),
+        });
+        forwarded = response.ok;
+        if (!response.ok) console.error("Webhook failed:", response.status);
+      } catch (err) {
+        console.error("Webhook error:", err);
       }
-    } else {
-      // Log to console when no webhook configured (dev mode)
-      console.log("=== NEW CONTACT FORM SUBMISSION ===");
-      console.log(JSON.stringify({ name, email, service, business, message, source, timestamp: new Date().toISOString() }, null, 2));
-      console.log("=== Set CRM_WEBHOOK_URL in .env.local to forward to your CRM ===");
+    }
+
+    if (!saved && !forwarded) {
+      console.error("=== CONTACT SUBMISSION NOT STORED ===", JSON.stringify({ name, email, service, business, message }));
+      return NextResponse.json({ error: "Failed to submit. Please try WhatsApp instead." }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
