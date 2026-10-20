@@ -332,6 +332,13 @@ h1, h2, h3, h4, h5, h6 {
 .animate-scroll-down { animation: scroll-down 25s linear infinite; }
 .animate-scroll-up:hover, .animate-scroll-down:hover { animation-play-state: paused; }
 
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-scroll-left { animation: scroll-left 30s linear infinite; }
+.animate-scroll-left:hover { animation-play-state: paused; }
+
 /* ═══ Float Gentle (chat widget) ═══ */
 @keyframes float-gentle {
   0%, 100% { transform: translateY(0); }

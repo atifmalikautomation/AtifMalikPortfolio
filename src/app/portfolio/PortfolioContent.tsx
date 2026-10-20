@@ -131,20 +131,18 @@ export function PortfolioContent() {
 
           {/* 3-column grid — Yasir style */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <AnimatePresence mode="popLayout">
               {filtered.map((project, i) => {
                 const isOpen = expanded === project.slug;
 
                 return (
                   <motion.div
                     key={project.slug}
-                    layout
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.35, delay: i * 0.05 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
                     className={clsx(
-                      "rounded-2xl border border-bd bg-card overflow-hidden transition-all duration-300",
+                      "rounded-2xl border border-bd bg-card overflow-hidden hover:border-pink/30 hover:-translate-y-1 transition-all duration-300",
                       isOpen && "lg:col-span-3 md:col-span-2"
                     )}
                   >
@@ -299,7 +297,6 @@ export function PortfolioContent() {
                   </motion.div>
                 );
               })}
-            </AnimatePresence>
           </div>
         </div>
       </section>
