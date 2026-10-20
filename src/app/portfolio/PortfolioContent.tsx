@@ -83,14 +83,14 @@ export function PortfolioContent() {
       : projects.filter((p) => p.category === filter);
 
   return (
-    <div className="pt-24">
-      <section className="section-padding">
+    <div className="pt-20">
+      <section className="py-8 md:py-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-8">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-6"
+            className="text-center mb-4"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-sm font-display font-semibold text-wh">
               Portfolio
@@ -101,7 +101,7 @@ export function PortfolioContent() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh text-center mb-4 leading-[1.1]"
+            className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh text-center mb-2 leading-[1.1]"
           >
             Real AI Systems,{" "}
             <span
@@ -120,13 +120,13 @@ export function PortfolioContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-gr text-base md:text-lg text-center max-w-xl mx-auto mb-10"
+            className="text-gr text-base md:text-lg text-center max-w-xl mx-auto mb-6"
           >
             Each project solves a specific business problem with AI automation, chatbots, video, or custom development.
           </motion.p>
 
           {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
             {categories.map((cat) => (
               <button
                 key={cat}
