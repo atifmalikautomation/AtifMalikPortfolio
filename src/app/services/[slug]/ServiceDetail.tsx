@@ -2,9 +2,36 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/lib/site-config";
 import type { Service } from "@/lib/site-config";
-import { Check, X, ArrowRight, Sparkles, Clock, Shield, Zap, Plus, Phone, Video, ChevronDown, MessageCircle } from "lucide-react";
+import { Check, X, ArrowRight, ArrowUpRight, Sparkles, Clock, Shield, Zap, Plus, Phone, Video, ChevronDown, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+
+const serviceToCategoryMap: Record<string, string[]> = {
+  "ai-video": ["AI Video"],
+  "ai-automation": ["AI Automation"],
+  "ai-agents": ["AI Chatbot", "AI Automation"],
+  "ai-chatbots": ["AI Chatbot"],
+  "ai-content": ["AI Content"],
+  "ai-websites": ["Web Development"],
+  "lead-automation": ["Lead Automation"],
+  "custom-ai": ["AI Automation", "AI Chatbot", "Web Development"],
+};
+
+function PortfolioImage({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-pink/20 to-purple-500/20">
+        <span className="font-display font-bold text-wh/70 text-sm text-center px-4">{alt}</span>
+      </div>
+    );
+  }
+  return (
+    <Image src={src} alt={alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" onError={() => setFailed(true)} />
+  );
+}
 
 export function ServiceDetail({ service }: { service: Service }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -234,32 +261,42 @@ export function ServiceDetail({ service }: { service: Service }) {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { name: "Bayou Savage", category: "AI Graphic Novel", desc: "Complete AI-generated comic book with character consistency across 50+ pages.", color: "from-pink/20 to-purple-500/20" },
-              { name: "The Optician Project", category: "AI Commercial", desc: "30-second cinematic AI commercial for optical business with professional editing.", color: "from-blue-500/20 to-cyan-500/20" },
-              { name: "DaCount Brand", category: "AI Design", desc: "Gothic t-shirt brand design with AI-generated split face artwork and branding.", color: "from-orange-500/20 to-red-500/20" },
-              { name: "Sara AI Agent", category: "AI Sales Agent", desc: "GHL + Gemini powered text agent for lead qualification and appointment booking.", color: "from-green-500/20 to-teal-500/20" },
-              { name: "Helping Hopes", category: "Web Development", desc: "Education conversion website with Next.js, Tailwind and Framer Motion.", color: "from-yellow-500/20 to-amber-500/20" },
-              { name: "Academic Support", category: "Web App", desc: "Full platform for AIOU students with 40 routes, dashboards and order system.", color: "from-indigo-500/20 to-violet-500/20" },
-            ].map((project, i) => (
-              <motion.div
-                key={project.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group bg-card border border-bd rounded-2xl overflow-hidden hover:border-pink/40 hover:-translate-y-1 transition-all"
-              >
-                <div className={`aspect-[16/10] bg-gradient-to-br ${project.color} flex items-center justify-center`}>
-                  <span className="font-display font-extrabold text-2xl text-wh/90 text-center px-4">{project.name}</span>
-                </div>
-                <div className="p-5">
-                  <p className="text-[10px] uppercase tracking-widest text-pink font-display font-bold mb-2">{project.category}</p>
-                  <h3 className="font-display font-bold text-lg text-wh mb-2 group-hover:text-pink transition">{project.name}</h3>
-                  <p className="text-sm text-gr leading-relaxed">{project.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+            {(() => {
+              const cats = serviceToCategoryMap[service.id] || [];
+              const filtered = siteConfig.portfolio.filter((p) => cats.some((c) => p.category === c));
+              const items = filtered.length > 0 ? filtered : [...siteConfig.portfolio].slice(0, 6);
+              return items.slice(0, 6).map((project, i) => (
+                <motion.div
+                  key={project.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <Link
+                    href={`/portfolio/${project.slug}`}
+                    className="group block bg-card border border-bd rounded-2xl overflow-hidden hover:border-pink/40 hover:-translate-y-1 transition-all"
+                  >
+                    <div className="aspect-[16/10] relative overflow-hidden bg-bg2">
+                      <PortfolioImage src={project.image} alt={project.title} />
+                    </div>
+                    <div className="p-5">
+                      <p className="text-[10px] uppercase tracking-widest text-pink font-display font-bold mb-2">{project.category}</p>
+                      <h3 className="font-display font-bold text-lg text-wh mb-2 group-hover:text-pink transition">{project.title}</h3>
+                      <p className="text-sm text-gr leading-relaxed line-clamp-2 mb-3">{project.description}</p>
+                      <div className="flex items-center justify-between pt-3 border-t border-bd">
+                        <span className="text-xs text-pink font-display font-bold">{project.result}</span>
+                        {!!(project as Record<string, unknown>).liveUrl && (
+                          <span className="inline-flex items-center gap-1 text-[10px] font-display font-bold text-pink">
+                            Live <ArrowUpRight className="w-3 h-3" />
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ));
+            })()}
           </div>
         </div>
       </section>

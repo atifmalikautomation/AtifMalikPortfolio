@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2e05"/>
+      <stop offset="100%" style="stop-color:#4d7c0f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a3e635;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#a3e635;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06" stroke="white" stroke-width="1">
+    <line x1="0" y1="0" x2="0" y2="675"/>
+    <line x1="60" y1="0" x2="60" y2="675"/>
+    <line x1="120" y1="0" x2="120" y2="675"/>
+    <line x1="180" y1="0" x2="180" y2="675"/>
+    <line x1="240" y1="0" x2="240" y2="675"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="360" y1="0" x2="360" y2="675"/>
+    <line x1="420" y1="0" x2="420" y2="675"/>
+    <line x1="480" y1="0" x2="480" y2="675"/>
+    <line x1="540" y1="0" x2="540" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="660" y1="0" x2="660" y2="675"/>
+    <line x1="720" y1="0" x2="720" y2="675"/>
+    <line x1="780" y1="0" x2="780" y2="675"/>
+    <line x1="840" y1="0" x2="840" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+    <line x1="960" y1="0" x2="960" y2="675"/>
+    <line x1="1020" y1="0" x2="1020" y2="675"/>
+    <line x1="1080" y1="0" x2="1080" y2="675"/>
+    <line x1="1140" y1="0" x2="1140" y2="675"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/>
+    <line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="480" x2="1200" y2="480"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+    <line x1="0" y1="660" x2="1200" y2="660"/>
+  </g>
+
+  <!-- Accent glow circle -->
+  <circle cx="900" cy="340" r="250" fill="#a3e635" opacity="0.07"/>
+  <circle cx="200" cy="100" r="150" fill="#a3e635" opacity="0.04"/>
+
+  <!-- Icon circle -->
+  <circle cx="600" cy="240" r="60" fill="white" opacity="0.08"/>
+  <g transform="translate(576, 216)" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7">
+    <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+  </g>
+
+  <!-- Category pill -->
+  <rect x="460" y="330" rx="14" ry="14" width="280" height="28" fill="#a3e635" opacity="0.2"/>
+  <text x="600" y="349" text-anchor="middle" fill="#a3e635" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="3" text-transform="uppercase">AI CONTENT</text>
+
+  <!-- Title -->
+  <text x="600" y="415" text-anchor="middle" fill="white" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="800" letter-spacing="-0.5">Content Pipeline</text>
+
+  <!-- Bottom line -->
+  <rect x="500" y="460" width="200" height="2" rx="1" fill="#a3e635" opacity="0.4"/>
+
+  <!-- Brand -->
+  <text x="600" y="510" text-anchor="middle" fill="white" opacity="0.35" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" letter-spacing="4">ATIF MALIK</text>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="670" width="1200" height="5" fill="#a3e635" opacity="0.5"/>
+</svg>

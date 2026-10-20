@@ -572,7 +572,7 @@ export const siteConfig = {
         "Education conversion website for a UK-based tutoring service — subject catalogue across 14 subjects and 3 exam boards, multi-step enquiry form, and responsive design optimized for parent conversions.",
       technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel"],
       result: "Complete education platform with 14 subjects",
-      image: "/portfolio/helping-hopes-academy.jpg",
+      image: "/portfolio/helping-hopes-academy.svg",
       caseStudy: {
         challenge: "Helping Hopes Academy needed a professional website to showcase their tutoring services across 14 subjects and 3 UK exam boards (GCSE, A-Level, 11+). Their existing setup was a simple social media page with no way to capture leads or display their full offering.",
         solution: "Built a modern, conversion-focused education website with a clean subject catalogue, pricing transparency, and a multi-step enquiry form that qualifies leads before submission. The design builds trust with parents through professional presentation and clear information architecture.",
@@ -590,7 +590,7 @@ export const siteConfig = {
         "Interactive SaaS admin dashboard with real-time KPIs, 4 chart types, role-based access control, searchable user management, and CSV export — a fully functional demo of what a custom business dashboard looks like.",
       technologies: ["JavaScript", "Chart.js", "CSS Variables", "localStorage", "RBAC"],
       result: "5 live KPIs, 4 charts, 3 access roles",
-      image: "/portfolio/pulseboard-saas-demo.jpg",
+      image: "/portfolio/pulseboard-saas-demo.svg",
       caseStudy: {
         challenge: "SaaS companies often rely on scattered tools for user management, revenue tracking, and analytics. This demo showcases how a unified admin dashboard eliminates tool-switching and provides instant operational visibility.",
         solution: "Built an interactive dashboard demo with live KPI cards (MRR, users, churn, growth), 4 chart visualizations (line, bar, doughnut, area), a searchable 248-row user table with inline actions, and role-based access (Admin, Manager, Viewer) that dynamically adjusts the UI.",
@@ -608,7 +608,7 @@ export const siteConfig = {
         "Live AI receptionist demo for a dental clinic — answers patient questions from a knowledge base, captures leads with a 4-field form, and supports English, Urdu, and Roman Urdu conversations.",
       technologies: ["Google Gemini API", "Vercel Serverless", "JavaScript", "Prompt Engineering"],
       result: "24/7 AI receptionist in 3 languages",
-      image: "/portfolio/brightsmile-ai-chatbot.jpg",
+      image: "/portfolio/brightsmile-ai-chatbot.svg",
       caseStudy: {
         challenge: "Dental clinics lose potential patients when calls go unanswered after hours. Front desk staff spend significant time answering repetitive questions about services, pricing, and availability instead of managing appointments.",
         solution: "Built an AI receptionist chatbot powered by Google Gemini that answers patient questions from a custom dental knowledge base, captures lead information through a natural conversation flow, and operates 24/7 in English, Urdu, and Roman Urdu.",
@@ -626,7 +626,7 @@ export const siteConfig = {
         "Interactive n8n workflow visualization — submit a test lead and watch it flow through AI scoring, 3-branch routing (hot/warm/cold), CRM sync, and automated notifications in real-time.",
       technologies: ["n8n", "Webhooks", "OpenAI", "HubSpot", "Slack", "Gmail", "Google Sheets"],
       result: "17 workflow nodes, 3-branch AI lead routing",
-      image: "/portfolio/leadflow-n8n.jpg",
+      image: "/portfolio/leadflow-n8n-demo.svg",
       caseStudy: {
         challenge: "Businesses waste hours manually sorting leads, deciding who to contact first, and copying data between tools. Without automation, hot leads go cold while teams manually process low-priority inquiries.",
         solution: "Built an interactive demo of a complete n8n lead automation workflow. Visitors can submit a test lead and watch it flow through AI-powered scoring, intelligent routing (hot/warm/cold), and automated actions — CRM updates, Slack notifications, and email sequences.",
