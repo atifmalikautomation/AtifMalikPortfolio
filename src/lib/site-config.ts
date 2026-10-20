@@ -416,7 +416,7 @@ export const siteConfig = {
       slug: "ai-product-video",
       category: "AI Video",
       kind: "case-study",
-      liveUrl: "https://gotze-portfolio-sage.vercel.app/",
+      liveUrl: "https://ai-video-showcase.vercel.app",
       liveLabel: "Live Demo",
       description:
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
