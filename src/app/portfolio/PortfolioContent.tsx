@@ -3,35 +3,9 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
-import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
-import { ArrowUpRight } from "lucide-react";
-
-function PortfolioImage({ src, alt, category }: { src: string; alt: string; category: string }) {
-  const [failed, setFailed] = useState(false);
-  const onError = useCallback(() => setFailed(true), []);
-  const gradient = gradientFallbacks[category] || gradientFallbacks["Web Development"];
-
-  if (failed) {
-    return (
-      <div className="absolute inset-0 flex items-center justify-center" style={{ background: gradient }}>
-        <span className="font-display font-bold text-white/60 text-sm text-center px-4">{alt}</span>
-      </div>
-    );
-  }
-
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      fill
-      className="object-cover group-hover:scale-105 transition-transform duration-500"
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      onError={onError}
-    />
-  );
-}
+import { ArrowUpRight, ExternalLink, ChevronDown, CheckCircle2, X } from "lucide-react";
 
 type Project = {
   title: string;
@@ -55,45 +29,73 @@ type Project = {
 const projects: Project[] = siteConfig.portfolio as unknown as Project[];
 
 const categories = [
-  "All",
+  "All Projects",
   ...new Set(projects.map((p) => p.category)),
 ];
 
-const kindBadge: Record<string, { label: string; color: string }> = {
-  client: { label: "Client Project", color: "#10b981" },
-  "case-study": { label: "Case Study", color: "#6366f1" },
-  "live-demo": { label: "Live Demo", color: "#0ea5e9" },
-};
+function PortfolioImage({ src, alt, category }: { src: string; alt: string; category: string }) {
+  const [failed, setFailed] = useState(false);
+  const onError = useCallback(() => setFailed(true), []);
+  const gradients: Record<string, string> = {
+    "AI Automation": "linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%)",
+    "AI Video": "linear-gradient(135deg, #4a0020 0%, #be185d 100%)",
+    "AI Chatbot": "linear-gradient(135deg, #042f2e 0%, #0d9488 100%)",
+    "Lead Automation": "linear-gradient(135deg, #1c1917 0%, #78716c 100%)",
+    "AI Content": "linear-gradient(135deg, #1a2e05 0%, #4d7c0f 100%)",
+    "Web Development": "linear-gradient(135deg, #0A0008 0%, #3D0028 100%)",
+  };
+  const gradient = gradients[category] || gradients["Web Development"];
 
-const gradientFallbacks: Record<string, string> = {
-  "AI Automation": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
-  "AI Video": "linear-gradient(135deg, #4a0020 0%, #831843 50%, #be185d 100%)",
-  "AI Chatbot": "linear-gradient(135deg, #042f2e 0%, #115e59 50%, #0d9488 100%)",
-  "Lead Automation": "linear-gradient(135deg, #1c1917 0%, #44403c 50%, #78716c 100%)",
-  "AI Content": "linear-gradient(135deg, #1a2e05 0%, #365314 50%, #4d7c0f 100%)",
-  "Web Development": "linear-gradient(135deg, #0c0a09 0%, #292524 50%, #57534e 100%)",
-};
+  if (failed) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center" style={{ background: gradient }}>
+        <span className="font-display font-bold text-white/60 text-lg text-center px-6">{alt}</span>
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover group-hover:scale-105 transition-transform duration-700"
+      sizes="(max-width: 768px) 100vw, 50vw"
+      onError={onError}
+    />
+  );
+}
+
+function extractMetrics(result: string): { value: string; label: string }[] {
+  const parts = result.split(",").map((s) => s.trim());
+  return parts.map((p) => {
+    const match = p.match(/^([\d.]+[%x×+K]*\+?)\s+(.+)$/i) || p.match(/^(.+?)\s+([\d.]+[%x×+K]*\+?)$/i);
+    if (match) return { value: match[1], label: match[2] };
+    return { value: p, label: "" };
+  });
+}
 
 export function PortfolioContent() {
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("All Projects");
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   const filtered =
-    filter === "All"
+    filter === "All Projects"
       ? projects
       : projects.filter((p) => p.category === filter);
 
   return (
     <div className="pt-4">
       <section>
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
-          {/* Header */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-8">
+          {/* Header — Yasir style */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-4"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-sm font-display font-semibold text-wh">
-              💼 Portfolio
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-xs font-display font-bold uppercase tracking-widest text-pink mb-5">
+              💼 Real Work. Real Results.
             </span>
           </motion.div>
 
@@ -103,7 +105,7 @@ export function PortfolioContent() {
             transition={{ delay: 0.1 }}
             className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh text-center mb-2 leading-[1.1]"
           >
-            Real AI Systems,{" "}
+            Projects that{" "}
             <span
               className="text-pink"
               style={{
@@ -112,7 +114,7 @@ export function PortfolioContent() {
                 fontWeight: 600,
               }}
             >
-              Real Results.
+              transformed businesses.
             </span>
           </motion.h1>
 
@@ -120,21 +122,21 @@ export function PortfolioContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-gr text-base md:text-lg text-center max-w-xl mx-auto mb-6"
+            className="text-gr text-base md:text-lg text-center max-w-2xl mx-auto mb-8"
           >
-            Each project solves a specific business problem with AI automation, chatbots, video, or custom development.
+            Every project started with a real problem. Every one ended with a system that scaled. Filter by what you need most.
           </motion.p>
 
-          {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
+          {/* Filter tabs — Yasir style */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setFilter(cat)}
+                onClick={() => { setFilter(cat); setExpanded(null); }}
                 className={clsx(
                   "px-4 py-2 text-sm rounded-full border transition-all cursor-pointer font-display font-semibold",
                   filter === cat
-                    ? "border-pink bg-pink/10 text-pink"
+                    ? "border-pink bg-pink text-white"
                     : "border-bd text-gr hover:border-pink/30 hover:text-wh"
                 )}
               >
@@ -143,84 +145,166 @@ export function PortfolioContent() {
             ))}
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Project cards — Yasir expandable style */}
+          <div className="space-y-6">
             <AnimatePresence mode="popLayout">
-              {filtered.map((project) => (
-                <motion.div
-                  key={project.slug}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="group block rounded-2xl border border-bd bg-card overflow-hidden hover:border-pink/30 hover:-translate-y-1 transition-all duration-300">
-                    {/* Image */}
-                    <Link href={`/portfolio/${project.slug}`}>
-                      <div className="aspect-video relative overflow-hidden bg-bg2">
-                        <PortfolioImage src={project.image} alt={project.title} category={project.category} />
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center">
-                            <ArrowUpRight className="w-5 h-5 text-black" />
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
+              {filtered.map((project, i) => {
+                const isOpen = expanded === project.slug;
 
-                    {/* Content */}
-                    <div className="p-5">
-                      <span
-                        className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold uppercase tracking-wider text-white mb-2.5"
-                        style={{ background: "var(--pink)" }}
-                      >
-                        {project.category}
-                      </span>
-                      <Link href={`/portfolio/${project.slug}`}>
-                        <h3 className="text-lg font-display font-bold text-wh mb-2 group-hover:text-pink transition-colors leading-tight">
-                          {project.title}
-                        </h3>
-                      </Link>
-                      <p className="text-sm text-gr leading-relaxed mb-3 line-clamp-2">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {project.technologies.slice(0, 4).map((t) => (
+                return (
+                  <motion.div
+                    key={project.slug}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                    className="rounded-2xl border border-bd bg-card overflow-hidden"
+                  >
+                    {/* Card — 2 column on desktop */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2">
+                      {/* Image */}
+                      <div className="aspect-video lg:aspect-auto relative overflow-hidden group">
+                        <PortfolioImage src={project.image} alt={project.title} category={project.category} />
+                        {/* Category badges */}
+                        <div className="absolute top-3 left-3 flex gap-2 z-10">
                           <span
-                            key={t}
-                            className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-pink/5 border border-pink/10 text-pink/80"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                        {project.technologies.length > 4 && (
-                          <span className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-card border border-bd text-dm">
-                            +{project.technologies.length - 4}
-                          </span>
-                        )}
-                      </div>
-                      <div className="pt-3 mt-3 border-t border-bd space-y-2">
-                        <div className="text-xs text-pink font-display font-bold">
-                          {project.result}
-                        </div>
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] font-display font-bold text-white transition-all hover:scale-105 hover:shadow-[0_4px_16px_rgba(224,0,138,0.3)]"
+                            className="px-2.5 py-1 rounded-full text-[10px] font-display font-bold text-white backdrop-blur-sm"
                             style={{ background: "var(--pink)" }}
-                            onClick={(e) => e.stopPropagation()}
                           >
-                            Live Demo <ArrowUpRight className="w-3.5 h-3.5" />
-                          </a>
-                        )}
+                            {project.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-5 md:p-7 flex flex-col justify-between">
+                        <div>
+                          <h3 className="font-display font-extrabold text-xl md:text-2xl text-wh mb-1.5 leading-tight">
+                            {project.title}
+                          </h3>
+                          <p className="text-sm text-gr leading-relaxed mb-4">
+                            {project.description}
+                          </p>
+
+                          {/* Metric highlight */}
+                          <div className="rounded-xl bg-pink/5 border border-pink/10 p-4 mb-4">
+                            <div className="font-display font-extrabold text-xl text-pink">
+                              {project.result}
+                            </div>
+                          </div>
+
+                          {/* Tech pills */}
+                          <div className="flex flex-wrap gap-1.5 mb-4">
+                            {project.technologies.map((t) => (
+                              <span
+                                key={t}
+                                className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-pink/5 border border-pink/10 text-pink/80"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="flex items-center gap-3 pt-3 border-t border-bd">
+                          <button
+                            onClick={() => setExpanded(isOpen ? null : project.slug)}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-display font-bold border border-bd text-wh hover:border-pink/30 transition-all cursor-pointer"
+                          >
+                            {isOpen ? "Close" : "View project"}
+                            <ChevronDown className={clsx("w-3.5 h-3.5 transition-transform", isOpen && "rotate-180")} />
+                          </button>
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-display font-bold text-white transition-all hover:scale-105"
+                              style={{ background: "var(--pink)" }}
+                            >
+                              Live Demo <ArrowUpRight className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+
+                    {/* Expanded case study — Yasir style */}
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="border-t border-bd px-5 md:px-8 py-6 md:py-8 space-y-8">
+                            {/* Challenge */}
+                            <div>
+                              <h4 className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">The Challenge</h4>
+                              <p className="text-gr text-sm leading-relaxed">{project.caseStudy.challenge}</p>
+                            </div>
+
+                            {/* What was built */}
+                            <div>
+                              <h4 className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">What Was Built</h4>
+                              <p className="text-gr text-sm leading-relaxed mb-4">{project.caseStudy.solution}</p>
+                              <div className="space-y-2">
+                                {project.caseStudy.build.split(". ").filter(Boolean).map((point, idx) => (
+                                  <div key={idx} className="flex items-start gap-2.5">
+                                    <CheckCircle2 className="w-4 h-4 text-pink shrink-0 mt-0.5" />
+                                    <span className="text-sm text-gr">{point.endsWith(".") ? point : point + "."}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Results */}
+                            <div>
+                              <h4 className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">The Results</h4>
+                              <div className="rounded-xl bg-pink/5 border border-pink/10 p-5">
+                                <div className="space-y-2.5">
+                                  {project.caseStudy.resultDetail.split(". ").filter(Boolean).map((point, idx) => (
+                                    <div key={idx} className="flex items-start gap-2.5">
+                                      <CheckCircle2 className="w-4 h-4 text-pink shrink-0 mt-0.5" />
+                                      <span className="text-sm text-gr">{point.endsWith(".") ? point : point + "."}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* CTA */}
+                            <div className="flex items-center gap-4 pt-4 border-t border-bd">
+                              <span className="text-sm font-display font-bold text-wh">Want results like this?</span>
+                              <a
+                                href="/book"
+                                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-display font-bold text-white transition-all hover:scale-105"
+                                style={{ background: "var(--pink)" }}
+                              >
+                                Book free audit <ArrowUpRight className="w-3.5 h-3.5" />
+                              </a>
+                              {project.liveUrl && (
+                                <a
+                                  href={project.liveUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-xs font-display font-bold text-pink hover:underline"
+                                >
+                                  Live Demo <ExternalLink className="w-3 h-3" />
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </div>
         </div>
