@@ -402,6 +402,7 @@ export const siteConfig = {
         "End-to-end Shopify order processing pipeline using n8n — automatic order validation, Google Sheets logging, WhatsApp customer confirmations, and Gmail error alerts. Zero manual intervention.",
       technologies: ["n8n", "Shopify API", "WhatsApp Business", "Google Sheets", "Gmail"],
       result: "90% reduction in order processing time",
+      metrics: [{ value: "90%", label: "Faster Processing" }, { value: "6hrs", label: "Saved Daily" }, { value: "0", label: "Manual Errors" }],
       image: "/portfolio/ecommerce-automation.svg",
       caseStudy: {
         challenge: "The client's e-commerce team was manually processing 200+ orders daily — copying data to spreadsheets, sending confirmation messages, and tracking errors. This took 6+ hours daily and led to frequent mistakes, missed confirmations, and frustrated customers.",
@@ -421,6 +422,7 @@ export const siteConfig = {
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
       result: "500K+ combined views across platforms",
+      metrics: [{ value: "500K+", label: "Views" }, { value: "340%", label: "ROAS" }, { value: "8", label: "Videos" }],
       image: "/portfolio/ai-product-video.svg",
       caseStudy: {
         challenge: "The brand needed high-quality video ads for product launches but traditional production quoted $5,000–$15,000 per video with 3-week turnaround. They needed 8 videos across different styles and platforms within 10 days.",
@@ -440,6 +442,7 @@ export const siteConfig = {
         "Intelligent AI chatbot deployed across Website, WhatsApp, and Instagram — handling product inquiries, qualifying leads, and booking appointments automatically with CRM sync.",
       technologies: ["OpenAI GPT-4", "WhatsApp Business API", "Instagram API", "n8n", "CRM"],
       result: "80% reduction in response time",
+      metrics: [{ value: "80%", label: "Faster Response" }, { value: "24/7", label: "Availability" }, { value: "23%", label: "More Sales" }],
       image: "/portfolio/multi-platform-chatbot.svg",
       caseStudy: {
         challenge: "A fashion e-commerce brand was losing sales because customer inquiries across WhatsApp, Instagram DMs, and website chat went unanswered for hours. The small support team couldn't handle 300+ daily messages across 3 platforms, leading to 60% inquiry abandonment.",
@@ -459,6 +462,7 @@ export const siteConfig = {
         "Complete CRM-powered lead automation system for a real estate agency — automated capture, AI qualification, follow-up sequences, pipeline management, and performance analytics.",
       technologies: ["GoHighLevel", "n8n", "WhatsApp", "Email Sequences", "Webhooks"],
       result: "3x increase in qualified leads",
+      metrics: [{ value: "3×", label: "More Leads" }, { value: "30s", label: "Response Time" }, { value: "18%", label: "Close Rate" }],
       image: "/portfolio/real-estate-leads.svg",
       caseStudy: {
         challenge: "A growing real estate agency was spending $8K/month on lead generation ads but converting less than 3% of leads. Agents manually followed up via phone, often 24-48 hours after inquiry. 70% of leads went cold before first contact, and there was zero visibility into pipeline performance.",
@@ -478,6 +482,7 @@ export const siteConfig = {
         "Fully automated content production system — AI generates, schedules, and publishes social media content across Instagram, TikTok, YouTube, and LinkedIn daily without manual work.",
       technologies: ["OpenAI GPT-4", "n8n", "Instagram API", "TikTok API", "YouTube API", "LinkedIn API"],
       result: "Daily content with zero manual work",
+      metrics: [{ value: "28+", label: "Posts/Week" }, { value: "67%", label: "More Engagement" }, { value: "1hr", label: "Weekly Input" }],
       image: "/portfolio/content-pipeline.svg",
       caseStudy: {
         challenge: "A tech startup's marketing team spent 15+ hours weekly creating social media content for 4 platforms. Content quality was inconsistent, posting schedule was irregular, and they had no system for repurposing long-form content into shorts, reels, and posts.",
@@ -497,6 +502,7 @@ export const siteConfig = {
         "Custom-built SaaS admin dashboard with real-time analytics, user management, subscription tracking, MRR reporting, and automated notifications — built with Next.js and React.",
       technologies: ["Next.js", "React", "PostgreSQL", "Tailwind CSS", "REST APIs"],
       result: "Centralized ops for 7,400+ users",
+      metrics: [{ value: "7.4K+", label: "Active Users" }, { value: "60%", label: "More Efficient" }, { value: "99.9%", label: "Uptime" }],
       image: "/portfolio/saas-dashboard.svg",
       caseStudy: {
         challenge: "A growing SaaS company with 7,000+ users had no centralized dashboard. Admins used 5 different tools to manage users, track revenue, and handle support. Monthly reporting took 8 hours of manual data compilation. There was no real-time visibility into churn, MRR trends, or user engagement.",
@@ -516,6 +522,7 @@ export const siteConfig = {
         "Complete GoHighLevel setup for a fitness studio chain — sales funnel builder, email nurture sequences, opportunity pipeline, appointment calendar, and automated member onboarding.",
       technologies: ["GoHighLevel", "Funnel Builder", "Email Automation", "Calendar", "Pipeline"],
       result: "28.75% funnel conversion rate",
+      metrics: [{ value: "28.7%", label: "Conversion" }, { value: "42%", label: "Open Rate" }, { value: "$22K", label: "Monthly Rev" }],
       image: "/portfolio/ghl-fitness-crm.svg",
       caseStudy: {
         challenge: "A fitness studio chain with 3 locations had no unified CRM. Lead data was scattered across spreadsheets, follow-ups were manual, and membership onboarding took 45 minutes per new member. They were spending $12K/month on ads but had no visibility into which campaigns actually drove sign-ups.",
@@ -535,6 +542,7 @@ export const siteConfig = {
         "Complete email marketing automation system — welcome series, abandoned cart recovery, and re-engagement campaigns with conditional logic, behavioral triggers, and A/B testing.",
       technologies: ["n8n", "Email API", "Shopify", "Conditional Logic", "A/B Testing"],
       result: "42% open rate, 12% cart recovery",
+      metrics: [{ value: "42%", label: "Open Rate" }, { value: "12%", label: "Cart Recovery" }, { value: "450%", label: "Revenue Lift" }],
       image: "/portfolio/email-automation.svg",
       caseStudy: {
         challenge: "An e-commerce fashion brand was losing $35K/month in abandoned carts (68% abandonment rate). Their email marketing was limited to manual promotional blasts with 15% open rates. No automated sequences existed for welcome, cart recovery, or win-back flows.",
@@ -554,6 +562,7 @@ export const siteConfig = {
         "Premium WordPress website for a consulting firm — modern design, services showcase, case studies section, contact forms, and SEO optimization for local search visibility.",
       technologies: ["WordPress", "Elementor Pro", "SEO", "Contact Forms", "Google Analytics"],
       result: "180% increase in organic traffic",
+      metrics: [{ value: "180%", label: "More Traffic" }, { value: "1.8s", label: "Load Time" }, { value: "25+", label: "Monthly Leads" }],
       image: "/portfolio/wordpress-consulting.svg",
       caseStudy: {
         challenge: "A business consulting firm's outdated website was losing them credibility. Page load time was 8+ seconds, mobile experience was broken, and they ranked on page 4+ for all target keywords. The site generated zero organic leads — all business came from referrals and cold outreach.",
@@ -572,6 +581,7 @@ export const siteConfig = {
         "Education conversion website for a UK-based tutoring service — subject catalogue across 14 subjects and 3 exam boards, multi-step enquiry form, and responsive design optimized for parent conversions.",
       technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel"],
       result: "14 subjects across 3 exam boards",
+      metrics: [{ value: "14", label: "Subjects" }, { value: "3", label: "Exam Boards" }, { value: "<2s", label: "Load Time" }],
       image: "/portfolio/helping-hopes-academy.svg",
       caseStudy: {
         challenge: "Helping Hopes Academy needed a professional website to showcase their tutoring services across 14 subjects and 3 UK exam boards (GCSE, A-Level, 11+). Their existing setup was a simple social media page with no way to capture leads or display their full offering.",
@@ -590,6 +600,7 @@ export const siteConfig = {
         "Interactive SaaS admin dashboard with real-time KPIs, 4 chart types, role-based access control, searchable user management, and CSV export — a fully functional demo of what a custom business dashboard looks like.",
       technologies: ["JavaScript", "Chart.js", "CSS Variables", "localStorage", "RBAC"],
       result: "5 live KPIs, 3 access roles",
+      metrics: [{ value: "5", label: "Live KPIs" }, { value: "3", label: "Access Roles" }, { value: "CSV", label: "Export" }],
       image: "/portfolio/pulseboard-saas-demo.svg",
       caseStudy: {
         challenge: "SaaS companies often rely on scattered tools for user management, revenue tracking, and analytics. This demo showcases how a unified admin dashboard eliminates tool-switching and provides instant operational visibility.",
@@ -608,6 +619,7 @@ export const siteConfig = {
         "Live AI receptionist demo for a dental clinic — answers patient questions from a knowledge base, captures leads with a 4-field form, and supports English, Urdu, and Roman Urdu conversations.",
       technologies: ["Google Gemini API", "Vercel Serverless", "JavaScript", "Prompt Engineering"],
       result: "24/7 AI receptionist, 3 languages",
+      metrics: [{ value: "24/7", label: "AI Reception" }, { value: "3", label: "Languages" }, { value: "<2s", label: "Response" }],
       image: "/portfolio/brightsmile-ai-chatbot.svg",
       caseStudy: {
         challenge: "Dental clinics lose potential patients when calls go unanswered after hours. Front desk staff spend significant time answering repetitive questions about services, pricing, and availability instead of managing appointments.",
@@ -626,6 +638,7 @@ export const siteConfig = {
         "Interactive n8n workflow visualization — submit a test lead and watch it flow through AI scoring, 3-branch routing (hot/warm/cold), CRM sync, and automated notifications in real-time.",
       technologies: ["n8n", "Webhooks", "OpenAI", "HubSpot", "Slack", "Gmail", "Google Sheets"],
       result: "17 nodes, 3-branch lead routing",
+      metrics: [{ value: "17", label: "Workflow Nodes" }, { value: "3", label: "Lead Branches" }, { value: "0-100", label: "AI Scoring" }],
       image: "/portfolio/leadflow-n8n-demo.svg",
       caseStudy: {
         challenge: "Businesses waste hours manually sorting leads, deciding who to contact first, and copying data between tools. Without automation, hot leads go cold while teams manually process low-priority inquiries.",
@@ -759,6 +772,7 @@ export type PortfolioItem = {
   description: string;
   technologies: readonly string[];
   result: string;
+  metrics?: readonly { value: string; label: string }[];
   image: string;
   caseStudy: {
     challenge: string;
