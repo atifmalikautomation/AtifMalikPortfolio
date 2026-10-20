@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
-import Image from "next/image";
 import { clsx } from "clsx";
 import { ExternalLink, ChevronUp, CheckCircle2, MessageCircle, Flame } from "lucide-react";
 
@@ -18,7 +17,6 @@ type Project = {
   technologies: readonly string[];
   result: string;
   metrics?: readonly { value: string; label: string }[];
-  image: string;
   caseStudy: {
     challenge: string;
     solution: string;
@@ -33,23 +31,6 @@ const categories = [
   "All Projects",
   ...new Set(projects.map((p) => p.category)),
 ];
-
-function PortfolioImage({ src, alt }: { src: string; alt: string }) {
-  const [failed, setFailed] = useState(false);
-  const onError = useCallback(() => setFailed(true), []);
-
-  if (failed) {
-    return (
-      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-pink/10 to-purple-500/10">
-        <span className="font-display font-bold text-wh/40 text-sm text-center px-4">{alt}</span>
-      </div>
-    );
-  }
-
-  return (
-    <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" onError={onError} />
-  );
-}
 
 const categoryEmoji: Record<string, string> = {
   "AI Automation": "⚙️",
@@ -144,10 +125,6 @@ export function PortfolioContent() {
                             expanded === project.slug ? "border-pink" : "border-bd hover:border-pink/30"
                           )}
                         >
-                          <div className="aspect-video relative overflow-hidden bg-bg2">
-                            <PortfolioImage src={project.image} alt={project.title} />
-                          </div>
-
                           <div className="p-5">
                             <div className="flex items-center gap-2 mb-3">
                               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold border border-pink/30 text-pink">
