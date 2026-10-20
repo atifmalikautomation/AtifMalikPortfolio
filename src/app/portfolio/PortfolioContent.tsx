@@ -189,31 +189,31 @@ export function PortfolioContent() {
                         {project.technologies.slice(0, 4).map((t) => (
                           <span
                             key={t}
-                            className="px-2 py-0.5 text-[10px] font-mono rounded border border-bd text-dm"
+                            className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-pink/5 border border-pink/10 text-pink/80"
                           >
                             {t}
                           </span>
                         ))}
                         {project.technologies.length > 4 && (
-                          <span className="px-2 py-0.5 text-[10px] font-mono rounded border border-bd text-dm">
+                          <span className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-card border border-bd text-dm">
                             +{project.technologies.length - 4}
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-bd">
-                        <span className="text-xs text-pink font-display font-bold">
+                      <div className="pt-3 mt-3 border-t border-bd space-y-2">
+                        <div className="text-xs text-pink font-display font-bold">
                           {project.result}
-                        </span>
+                        </div>
                         {project.liveUrl && (
                           <a
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-display font-bold text-white transition-opacity hover:opacity-80"
+                            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[11px] font-display font-bold text-white transition-all hover:scale-105 hover:shadow-[0_4px_16px_rgba(224,0,138,0.3)]"
                             style={{ background: "var(--pink)" }}
                             onClick={(e) => e.stopPropagation()}
                           >
-                            {project.liveLabel || "Live Demo"} <ArrowUpRight className="w-3 h-3" />
+                            Live Demo <ArrowUpRight className="w-3.5 h-3.5" />
                           </a>
                         )}
                       </div>
