@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="30%" r="55%">
+      <stop offset="0%" style="stop-color:#E07A5F;stop-opacity:0.07"/>
+      <stop offset="100%" style="stop-color:#141210;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="bottomGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" style="stop-color:#1C1914"/>
+      <stop offset="100%" style="stop-color:#141210"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="675" fill="#141210"/>
+  <rect width="1200" height="675" fill="url(#glow)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.025" stroke="#E07A5F" stroke-width="0.5">
+    <line x1="0" y1="0" x2="0" y2="675"/>
+    <line x1="60" y1="0" x2="60" y2="675"/>
+    <line x1="120" y1="0" x2="120" y2="675"/>
+    <line x1="180" y1="0" x2="180" y2="675"/>
+    <line x1="240" y1="0" x2="240" y2="675"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="360" y1="0" x2="360" y2="675"/>
+    <line x1="420" y1="0" x2="420" y2="675"/>
+    <line x1="480" y1="0" x2="480" y2="675"/>
+    <line x1="540" y1="0" x2="540" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="660" y1="0" x2="660" y2="675"/>
+    <line x1="720" y1="0" x2="720" y2="675"/>
+    <line x1="780" y1="0" x2="780" y2="675"/>
+    <line x1="840" y1="0" x2="840" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+    <line x1="960" y1="0" x2="960" y2="675"/>
+    <line x1="1020" y1="0" x2="1020" y2="675"/>
+    <line x1="1080" y1="0" x2="1080" y2="675"/>
+    <line x1="1140" y1="0" x2="1140" y2="675"/>
+    <line x1="1200" y1="0" x2="1200" y2="675"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/>
+    <line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="480" x2="1200" y2="480"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+    <line x1="0" y1="660" x2="1200" y2="660"/>
+  </g>
+
+  <!-- Top accent line -->
+  <rect width="1200" height="4" fill="#E07A5F"/>
+
+  <!-- Category pill (centered) -->
+  <rect x="540.5" y="36" width="119" height="28" rx="14" fill="none" stroke="#E07A5F" stroke-width="1.2" opacity="0.55"/>
+  <text x="600" y="55" text-anchor="middle" fill="#E07A5F" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700" letter-spacing="2.5">AI CHATBOT</text>
+
+  <!-- Icon glow circles -->
+  <circle cx="600" cy="155" r="72" fill="#E07A5F" opacity="0.07"/>
+  <circle cx="600" cy="155" r="48" fill="#E07A5F" opacity="0.06"/>
+
+  <!-- Icon (24×24 scaled 2× centered at 600,155) -->
+  <g transform="translate(576,131) scale(2)" fill="none" stroke="#E07A5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="278" text-anchor="middle" fill="#F5F0E8" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="48" font-weight="800" letter-spacing="-1">BrightSmile</text>
+  <text x="600" y="334" text-anchor="middle" fill="#F5F0E8" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="48" font-weight="800" letter-spacing="-1">AI Receptionist</text>
+
+  <!-- Tagline -->
+  <text x="600" y="383" text-anchor="middle" fill="#B5A99A" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="15" font-weight="500">Gemini API  ·  3 Languages</text>
+
+  <!-- Metric boxes -->
+  <rect x="334" y="418" width="168" height="78" rx="14" fill="#201C16" stroke="#F5B49B" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="418" y="452" text-anchor="middle" fill="#E07A5F" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="24" font-weight="800">3</text>
+    <text x="418" y="474" text-anchor="middle" fill="#7A6E62" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">LANGUAGES</text>
+    <rect x="516" y="418" width="168" height="78" rx="14" fill="#201C16" stroke="#F5B49B" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="600" y="452" text-anchor="middle" fill="#E07A5F" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="24" font-weight="800">24/7</text>
+    <text x="600" y="474" text-anchor="middle" fill="#7A6E62" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">ACTIVE</text>
+    <rect x="698" y="418" width="168" height="78" rx="14" fill="#201C16" stroke="#F5B49B" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="782" y="452" text-anchor="middle" fill="#E07A5F" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="24" font-weight="800">90%</text>
+    <text x="782" y="474" text-anchor="middle" fill="#7A6E62" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">BOOKINGS</text>
+
+  <!-- Bottom bar -->
+  <rect y="545" width="1200" height="130" fill="url(#bottomGrad)"/>
+  <line x1="0" y1="545" x2="1200" y2="545" stroke="#E07A5F" stroke-opacity="0.2" stroke-width="1"/>
+
+  <!-- AM avatar -->
+  <rect x="50" y="570" width="52" height="52" rx="12" fill="#E07A5F" opacity="0.14"/>
+  <text x="76" y="603" text-anchor="middle" fill="#E07A5F" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="18" font-weight="800">AM</text>
+
+  <!-- Name + subtitle -->
+  <text x="118" y="590" fill="#F5F0E8" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="16" font-weight="700">Atif Malik</text>
+  <text x="118" y="610" fill="#E07A5F" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="10" font-weight="600" letter-spacing="2">AI VIDEO &amp; AUTOMATION</text>
+
+  <!-- Website URL -->
+  <circle cx="1142" cy="596" r="3.5" fill="#E07A5F" opacity="0.4"/>
+  <text x="1130" y="600" text-anchor="end" fill="#7A6E62" font-family="'Bricolage Grotesque',system-ui,-apple-system,sans-serif" font-size="13" font-weight="500">atifmalik.me</text>
+
+  <!-- Bottom accent line -->
+  <rect y="671" width="1200" height="4" fill="#E07A5F"/>
+</svg>

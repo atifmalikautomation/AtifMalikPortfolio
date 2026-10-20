@@ -394,6 +394,7 @@ export const siteConfig = {
     {
       title: "Shopify Order Automation Pipeline",
       slug: "ecommerce-automation",
+      image: "/portfolio/ecommerce-automation.svg",
       category: "AI Automation",
       kind: "case-study",
       liveUrl: "https://next-js-admin-panel-demo.vercel.app/",
@@ -413,6 +414,7 @@ export const siteConfig = {
     {
       title: "AI Product Video Campaign",
       slug: "ai-product-video",
+      image: "/portfolio/ai-product-video.svg",
       category: "AI Video",
       kind: "case-study",
       liveUrl: "https://ai-video-showcase.vercel.app",
@@ -432,6 +434,7 @@ export const siteConfig = {
     {
       title: "Multi-Platform AI Chatbot",
       slug: "multi-platform-chatbot",
+      image: "/portfolio/multi-platform-chatbot.svg",
       category: "AI Chatbot",
       kind: "case-study",
       liveUrl: "https://brightsmile-ai-demo.vercel.app/",
@@ -451,6 +454,7 @@ export const siteConfig = {
     {
       title: "Real Estate Lead Automation System",
       slug: "real-estate-leads",
+      image: "/portfolio/real-estate-leads.svg",
       category: "Lead Automation",
       kind: "case-study",
       liveUrl: "https://crm-dashboard-demo.vercel.app",
@@ -470,6 +474,7 @@ export const siteConfig = {
     {
       title: "AI Content Production Pipeline",
       slug: "content-pipeline",
+      image: "/portfolio/content-pipeline.svg",
       category: "AI Content",
       kind: "case-study",
       liveUrl: "https://ai-content-generator-demo.vercel.app",
@@ -489,6 +494,7 @@ export const siteConfig = {
     {
       title: "SaaS Admin Dashboard & Analytics Panel",
       slug: "saas-dashboard",
+      image: "/portfolio/saas-dashboard.svg",
       category: "Web Development",
       kind: "case-study",
       liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
@@ -508,6 +514,7 @@ export const siteConfig = {
     {
       title: "Fitness Studio GHL CRM & Funnel System",
       slug: "ghl-fitness-crm",
+      image: "/portfolio/ghl-fitness-crm.svg",
       category: "Lead Automation",
       kind: "case-study",
       liveUrl: "https://getgymflow.vercel.app/",
@@ -527,6 +534,7 @@ export const siteConfig = {
     {
       title: "E-Commerce Email Marketing Automation",
       slug: "email-automation",
+      image: "/portfolio/email-automation.svg",
       category: "AI Automation",
       kind: "case-study",
       liveUrl: "https://workflow-editor-kargul.vercel.app/",
@@ -546,6 +554,7 @@ export const siteConfig = {
     {
       title: "Business Consulting WordPress Website",
       slug: "wordpress-consulting",
+      image: "/portfolio/wordpress-consulting.svg",
       category: "Web Development",
       kind: "case-study",
       liveUrl: "https://wordpress-developer-portfolio.vercel.app",
@@ -565,6 +574,7 @@ export const siteConfig = {
     {
       title: "Helping Hopes Academy",
       slug: "helping-hopes-academy",
+      image: "/portfolio/helping-hopes-academy.svg",
       category: "Web Development",
       kind: "client",
       liveUrl: "https://helping-hopes-academy.vercel.app/",
@@ -583,6 +593,7 @@ export const siteConfig = {
     {
       title: "Pulseboard — SaaS Admin Dashboard",
       slug: "pulseboard-saas-demo",
+      image: "/portfolio/pulseboard-saas-demo.svg",
       category: "Web Development",
       kind: "live-demo",
       liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
@@ -601,6 +612,7 @@ export const siteConfig = {
     {
       title: "BrightSmile — AI Receptionist Chatbot",
       slug: "brightsmile-ai-demo",
+      image: "/portfolio/brightsmile-ai-chatbot.svg",
       category: "AI Chatbot",
       kind: "live-demo",
       liveUrl: "https://brightsmile-ai-demo.vercel.app/",
@@ -619,6 +631,7 @@ export const siteConfig = {
     {
       title: "LeadFlow — n8n Lead Automation",
       slug: "leadflow-n8n-demo",
+      image: "/portfolio/leadflow-n8n-demo.svg",
       category: "AI Automation",
       kind: "live-demo",
       liveUrl: "https://leadflow-n8n-demo.vercel.app/",
@@ -760,6 +773,7 @@ export type PortfolioItem = {
   technologies: readonly string[];
   result: string;
   metrics?: readonly { value: string; label: string }[];
+  image: string;
   caseStudy: {
     challenge: string;
     solution: string;
