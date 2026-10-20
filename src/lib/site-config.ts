@@ -396,8 +396,8 @@ export const siteConfig = {
       slug: "ecommerce-automation",
       category: "AI Automation",
       kind: "case-study",
-      liveUrl: "https://shopify-dashboard-demo.vercel.app",
-      liveLabel: "Try Shopify Dashboard",
+      liveUrl: "https://next-js-admin-panel-demo.vercel.app/",
+      liveLabel: "Try E-Commerce Dashboard",
       description:
         "End-to-end Shopify order processing pipeline using n8n — automatic order validation, Google Sheets logging, WhatsApp customer confirmations, and Gmail error alerts. Zero manual intervention.",
       technologies: ["n8n", "Shopify API", "WhatsApp Business", "Google Sheets", "Gmail"],
@@ -415,8 +415,8 @@ export const siteConfig = {
       slug: "ai-product-video",
       category: "AI Video",
       kind: "case-study",
-      liveUrl: "https://ai-video-showcase.vercel.app",
-      liveLabel: "View AI Video Showcase",
+      liveUrl: "https://veo3-today.vercel.app/",
+      liveLabel: "Explore AI Video Gallery",
       description:
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
@@ -529,8 +529,8 @@ export const siteConfig = {
       slug: "email-automation",
       category: "AI Automation",
       kind: "case-study",
-      liveUrl: "https://email-automation-demo.vercel.app",
-      liveLabel: "Try Email Automation Demo",
+      liveUrl: "https://workflow-editor-kargul.vercel.app/",
+      liveLabel: "Try Workflow Builder",
       description:
         "Complete email marketing automation system — welcome series, abandoned cart recovery, and re-engagement campaigns with conditional logic, behavioral triggers, and A/B testing.",
       technologies: ["n8n", "Email API", "Shopify", "Conditional Logic", "A/B Testing"],
