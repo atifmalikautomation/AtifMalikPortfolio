@@ -1,99 +1,119 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#FFFAF6"/>
-      <stop offset="100%" style="stop-color:#FFF5EE"/>
-    </linearGradient>
-    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#E0008A"/>
-      <stop offset="100%" style="stop-color:#B8006F"/>
-    </linearGradient>
-    <clipPath id="avatarClip">
-      <rect x="60" y="510" width="70" height="70" rx="16"/>
-    </clipPath>
+    <pattern id="dotgrid" x="0" y="0" width="44" height="44" patternUnits="userSpaceOnUse">
+      <circle cx="22" cy="22" r="1.4" fill="#059669" opacity="0.07"/>
+    </pattern>
+    <filter id="cshadow" x="-8%" y="-8%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="22" flood-color="#000000" flood-opacity="0.07"/>
+    </filter>
   </defs>
 
-  <!-- Light background -->
-  <rect width="1200" height="675" fill="url(#bg)"/>
+  <!-- Warm off-white background -->
+  <rect width="1200" height="675" fill="#F8F6F3"/>
+  <!-- Dot pattern -->
+  <rect width="600" height="555" fill="url(#dotgrid)"/>
+  <!-- Large soft circle accent left -->
+  <circle cx="120" cy="490" r="220" fill="#059669" opacity="0.03"/>
 
-  <!-- Subtle grid -->
-  <g opacity="0.04" stroke="#E0008A" stroke-width="0.5">
-    <line x1="0" y1="0" x2="0" y2="675"/>
-    <line x1="60" y1="0" x2="60" y2="675"/>
-    <line x1="120" y1="0" x2="120" y2="675"/>
-    <line x1="180" y1="0" x2="180" y2="675"/>
-    <line x1="240" y1="0" x2="240" y2="675"/>
-    <line x1="300" y1="0" x2="300" y2="675"/>
-    <line x1="360" y1="0" x2="360" y2="675"/>
-    <line x1="420" y1="0" x2="420" y2="675"/>
-    <line x1="480" y1="0" x2="480" y2="675"/>
-    <line x1="540" y1="0" x2="540" y2="675"/>
-    <line x1="600" y1="0" x2="600" y2="675"/>
-    <line x1="660" y1="0" x2="660" y2="675"/>
-    <line x1="720" y1="0" x2="720" y2="675"/>
-    <line x1="780" y1="0" x2="780" y2="675"/>
-    <line x1="840" y1="0" x2="840" y2="675"/>
-    <line x1="900" y1="0" x2="900" y2="675"/>
-    <line x1="960" y1="0" x2="960" y2="675"/>
-    <line x1="1020" y1="0" x2="1020" y2="675"/>
-    <line x1="1080" y1="0" x2="1080" y2="675"/>
-    <line x1="1140" y1="0" x2="1140" y2="675"/>
-    <line x1="1200" y1="0" x2="1200" y2="675"/>
-    <line x1="0" y1="0" x2="1200" y2="0"/>
-    <line x1="0" y1="60" x2="1200" y2="60"/>
-    <line x1="0" y1="120" x2="1200" y2="120"/>
-    <line x1="0" y1="180" x2="1200" y2="180"/>
-    <line x1="0" y1="240" x2="1200" y2="240"/>
-    <line x1="0" y1="300" x2="1200" y2="300"/>
-    <line x1="0" y1="360" x2="1200" y2="360"/>
-    <line x1="0" y1="420" x2="1200" y2="420"/>
-    <line x1="0" y1="480" x2="1200" y2="480"/>
-    <line x1="0" y1="540" x2="1200" y2="540"/>
-    <line x1="0" y1="600" x2="1200" y2="600"/>
-    <line x1="0" y1="660" x2="1200" y2="660"/>
-  </g>
-
-  <!-- Pink accent glow -->
-  <circle cx="1000" cy="200" r="300" fill="#E0008A" opacity="0.04"/>
-  <circle cx="150" cy="500" r="200" fill="#E0008A" opacity="0.03"/>
-
-  <!-- Top pink bar -->
-  <rect x="0" y="0" width="1200" height="4" fill="url(#pinkGrad)"/>
+  <!-- Top accent bar -->
+  <rect width="1200" height="5" fill="#059669"/>
 
   <!-- Category pill -->
-  <rect x="60" y="50" rx="20" ry="20" width="150" height="36" fill="none" stroke="#E0008A" stroke-width="1.5" opacity="0.6"/>
-  <text x="135" y="74" text-anchor="middle" fill="#E0008A" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="2.5">AI CONTENT</text>
+  <rect x="58" y="42" width="114" height="29" rx="14.5" fill="#D1FAE5"/>
+  <text x="115" y="62" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="800" letter-spacing="2">AI CONTENT</text>
 
-  <!-- Main icon -->
-  <circle cx="600" cy="220" r="80" fill="#E0008A" opacity="0.08"/>
-  <circle cx="600" cy="220" r="55" fill="#E0008A" opacity="0.06"/>
-  <g transform="translate(576, 196)" fill="none" stroke="#E0008A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Main title -->
+  <text x="58" y="158" fill="#0D0D0D" font-family="system-ui,-apple-system,sans-serif" font-size="54" font-weight="800" letter-spacing="-1.5">AI Content</text>
+  <text x="58" y="224" fill="#0D0D0D" font-family="system-ui,-apple-system,sans-serif" font-size="54" font-weight="800" letter-spacing="-1.5">Pipeline</text>
+
+  <!-- Tagline -->
+  <text x="58" y="270" fill="#888" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="500">GPT-4 · n8n · Social APIs</text>
+
+  <!-- Horizontal rule -->
+  <line x1="58" y1="300" x2="360" y2="300" stroke="#E0DCD7" stroke-width="1"/>
+
+  <!-- Metric rows -->
+  <circle cx="64" cy="328" r="4" fill="#059669"/>
+    <text x="78" y="333" fill="#0A0A0A" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="800">50+</text>
+    <text x="78" y="348" fill="#888" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="500" letter-spacing="0.5">POSTS/MONTH</text>
+    <circle cx="64" cy="376" r="4" fill="#059669"/>
+    <text x="78" y="381" fill="#0A0A0A" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="800">8 hrs</text>
+    <text x="78" y="396" fill="#888" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="500" letter-spacing="0.5">SAVED WEEKLY</text>
+    <circle cx="64" cy="424" r="4" fill="#059669"/>
+    <text x="78" y="429" fill="#0A0A0A" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="800">3×</text>
+    <text x="78" y="444" fill="#888" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="500" letter-spacing="0.5">ENGAGEMENT</text>
+
+  <!-- Tech tags -->
+  <rect x="58" y="468" width="67" height="26" rx="13" fill="none" stroke="#059669" stroke-width="1.2" opacity="0.55"/>
+    <text x="91.5" y="485" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600">GPT-4o</text>
+    <rect x="134" y="468" width="44.5" height="26" rx="13" fill="none" stroke="#059669" stroke-width="1.2" opacity="0.55"/>
+    <text x="156.25" y="485" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600">n8n</text>
+    <rect x="187.5" y="468" width="104.5" height="26" rx="13" fill="none" stroke="#059669" stroke-width="1.2" opacity="0.55"/>
+    <text x="239.75" y="485" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600">Social APIs</text>
+
+  <!-- ── RIGHT SIDE CARD ── -->
+  <rect x="640" y="28" width="518" height="497" rx="22" fill="white" filter="url(#cshadow)"/>
+
+  <!-- Card colored header -->
+  <rect x="640" y="28" width="518" height="54" rx="22" fill="#059669"/>
+  <rect x="640" y="58" width="518" height="24" fill="#059669"/>
+
+  <!-- Window chrome dots -->
+  <circle cx="671" cy="55" r="5.5" fill="white" opacity="0.35"/>
+  <circle cx="693" cy="55" r="5.5" fill="white" opacity="0.35"/>
+  <circle cx="715" cy="55" r="5.5" fill="white" opacity="0.35"/>
+
+  <!-- URL bar placeholder -->
+  <rect x="740" y="46" width="180" height="12" rx="6" fill="white" opacity="0.2"/>
+
+  <!-- Icon display area -->
+  <circle cx="899" cy="230" r="108" fill="#059669" opacity="0.07"/>
+  <circle cx="899" cy="230" r="74" fill="#D1FAE5" opacity="0.9"/>
+
+  <!-- SVG icon scaled 2.2× centered at 899,230 (icon drawn in 24×24 box) -->
+  <g transform="translate(872.6,203.6) scale(2.2)" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
   </g>
 
-  <!-- Title -->
-  <text x="600" y="360" text-anchor="middle" fill="#1A0010" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="800" letter-spacing="-1">AI Content
-Pipeline</text>
-  <text x="600" y="415" text-anchor="middle" fill="#1A0010" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="800" letter-spacing="-1"></text>
+  <!-- Separator -->
+  <line x1="658" y1="380" x2="1140" y2="380" stroke="#F0EBE5" stroke-width="1"/>
 
-  <!-- Tagline -->
-  <text x="600" y="465" text-anchor="middle" fill="#E0008A" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" letter-spacing="1" opacity="0.7">GPT-4 + n8n + Social APIs</text>
+  <!-- 3 metric cards inside the card -->
+  <rect x="642" y="405" width="116" height="72" rx="12" fill="#D1FAE5"/>
+    <text x="700" y="438" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="24" font-weight="800">50+</text>
+    <text x="700" y="457" text-anchor="middle" fill="#777" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="0.8">POSTS/MONTH</text>
+    <rect x="797" y="405" width="116" height="72" rx="12" fill="#D1FAE5"/>
+    <text x="855" y="438" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="24" font-weight="800">8 hrs</text>
+    <text x="855" y="457" text-anchor="middle" fill="#777" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="0.8">SAVED WEEKLY</text>
+    <rect x="952" y="405" width="116" height="72" rx="12" fill="#D1FAE5"/>
+    <text x="1010" y="438" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="24" font-weight="800">3×</text>
+    <text x="1010" y="457" text-anchor="middle" fill="#777" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" letter-spacing="0.8">ENGAGEMENT</text>
 
-  <!-- Bottom section -->
-  <rect x="0" y="495" width="1200" height="180" fill="#E0008A" opacity="0.03"/>
+  <!-- Bottom "Live Demo" button inside card -->
+  <rect x="658" y="492" width="150" height="18" rx="9" fill="#D1FAE5" opacity="0.7"/>
+  <text x="733" y="505" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700">Live Demo Available →</text>
 
-  <!-- Avatar placeholder circle -->
-  <rect x="60" y="520" width="60" height="60" rx="14" fill="#E0008A" opacity="0.12"/>
-  <text x="90" y="556" text-anchor="middle" fill="#E0008A" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800">AM</text>
+  <!-- ── DARK BOTTOM BAR ── -->
+  <rect y="555" width="1200" height="120" fill="#0D0D0D"/>
+  <!-- Pink accent line -->
+  <rect y="555" width="1200" height="2.5" fill="#E0008A"/>
 
-  <!-- Brand name -->
-  <text x="140" y="546" fill="#1A0010" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="800">Atif Malik</text>
-  <text x="140" y="568" fill="#E0008A" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" letter-spacing="1.5" opacity="0.7">AI VIDEO &amp; AUTOMATION</text>
+  <!-- AM Avatar -->
+  <rect x="50" y="575" width="58" height="58" rx="13" fill="#E0008A"/>
+  <text x="79" y="611" text-anchor="middle" fill="white" font-family="system-ui,-apple-system,sans-serif" font-size="19" font-weight="800">AM</text>
 
-  <!-- Pink dot -->
-  <circle cx="1100" y="545" r="6" fill="#E0008A" opacity="0.5"/>
-  <text x="1080" y="550" text-anchor="end" fill="#888" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="500">atifmalik.me</text>
+  <!-- Name + subtitle -->
+  <text x="124" y="597" fill="white" font-family="system-ui,-apple-system,sans-serif" font-size="17" font-weight="700">Atif Malik</text>
+  <text x="124" y="618" fill="#E0008A" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="600" letter-spacing="1.8">AI VIDEO &amp; AUTOMATION</text>
 
-  <!-- Bottom pink bar -->
-  <rect x="0" y="671" width="1200" height="4" fill="url(#pinkGrad)"/>
+  <!-- Separator dot -->
+  <circle cx="318" cy="605" r="2.5" fill="#3a3a3a"/>
+
+  <!-- Category label in bar -->
+  <rect x="330" y="590" width="90" height="28" rx="14" fill="#059669" opacity="0.18"/>
+  <text x="375" y="609" text-anchor="middle" fill="#059669" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="800" letter-spacing="1.5">AI CONTENT</text>
+
+  <!-- Website URL right side -->
+  <circle cx="1158" cy="601" r="3.5" fill="#E0008A" opacity="0.55"/>
+  <text x="1148" y="606" text-anchor="end" fill="#555" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="500">atifmalik.me</text>
 </svg>
