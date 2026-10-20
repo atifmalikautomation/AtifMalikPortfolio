@@ -397,7 +397,7 @@ export const siteConfig = {
       category: "AI Automation",
       kind: "case-study",
       liveUrl: "https://next-js-admin-panel-demo.vercel.app/",
-      liveLabel: "Try E-Commerce Dashboard",
+      liveLabel: "Live Demo",
       description:
         "End-to-end Shopify order processing pipeline using n8n — automatic order validation, Google Sheets logging, WhatsApp customer confirmations, and Gmail error alerts. Zero manual intervention.",
       technologies: ["n8n", "Shopify API", "WhatsApp Business", "Google Sheets", "Gmail"],
@@ -416,7 +416,7 @@ export const siteConfig = {
       category: "AI Video",
       kind: "case-study",
       liveUrl: "https://gotze-portfolio-sage.vercel.app/",
-      liveLabel: "View AI Video Portfolio",
+      liveLabel: "Live Demo",
       description:
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
@@ -435,7 +435,7 @@ export const siteConfig = {
       category: "AI Chatbot",
       kind: "case-study",
       liveUrl: "https://brightsmile-ai-demo.vercel.app/",
-      liveLabel: "Try AI Chatbot Demo",
+      liveLabel: "Live Demo",
       description:
         "Intelligent AI chatbot deployed across Website, WhatsApp, and Instagram — handling product inquiries, qualifying leads, and booking appointments automatically with CRM sync.",
       technologies: ["OpenAI GPT-4", "WhatsApp Business API", "Instagram API", "n8n", "CRM"],
@@ -454,7 +454,7 @@ export const siteConfig = {
       category: "Lead Automation",
       kind: "case-study",
       liveUrl: "https://crm-dashboard-demo.vercel.app",
-      liveLabel: "Try CRM Dashboard",
+      liveLabel: "Live Demo",
       description:
         "Complete CRM-powered lead automation system for a real estate agency — automated capture, AI qualification, follow-up sequences, pipeline management, and performance analytics.",
       technologies: ["GoHighLevel", "n8n", "WhatsApp", "Email Sequences", "Webhooks"],
@@ -473,7 +473,7 @@ export const siteConfig = {
       category: "AI Content",
       kind: "case-study",
       liveUrl: "https://ai-content-generator-demo.vercel.app",
-      liveLabel: "Try Content Generator",
+      liveLabel: "Live Demo",
       description:
         "Fully automated content production system — AI generates, schedules, and publishes social media content across Instagram, TikTok, YouTube, and LinkedIn daily without manual work.",
       technologies: ["OpenAI GPT-4", "n8n", "Instagram API", "TikTok API", "YouTube API", "LinkedIn API"],
@@ -492,7 +492,7 @@ export const siteConfig = {
       category: "Web Development",
       kind: "case-study",
       liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
-      liveLabel: "Try Dashboard Demo",
+      liveLabel: "Live Demo",
       description:
         "Custom-built SaaS admin dashboard with real-time analytics, user management, subscription tracking, MRR reporting, and automated notifications — built with Next.js and React.",
       technologies: ["Next.js", "React", "PostgreSQL", "Tailwind CSS", "REST APIs"],
@@ -511,7 +511,7 @@ export const siteConfig = {
       category: "Lead Automation",
       kind: "case-study",
       liveUrl: "https://getgymflow.vercel.app/",
-      liveLabel: "Try Fitness CRM Demo",
+      liveLabel: "Live Demo",
       description:
         "Complete GoHighLevel setup for a fitness studio chain — sales funnel builder, email nurture sequences, opportunity pipeline, appointment calendar, and automated member onboarding.",
       technologies: ["GoHighLevel", "Funnel Builder", "Email Automation", "Calendar", "Pipeline"],
@@ -530,7 +530,7 @@ export const siteConfig = {
       category: "AI Automation",
       kind: "case-study",
       liveUrl: "https://workflow-editor-kargul.vercel.app/",
-      liveLabel: "Try Workflow Builder",
+      liveLabel: "Live Demo",
       description:
         "Complete email marketing automation system — welcome series, abandoned cart recovery, and re-engagement campaigns with conditional logic, behavioral triggers, and A/B testing.",
       technologies: ["n8n", "Email API", "Shopify", "Conditional Logic", "A/B Testing"],
@@ -549,7 +549,7 @@ export const siteConfig = {
       category: "Web Development",
       kind: "case-study",
       liveUrl: "https://wordpress-developer-portfolio.vercel.app",
-      liveLabel: "View WordPress Portfolio",
+      liveLabel: "Live Demo",
       description:
         "Premium WordPress website for a consulting firm — modern design, services showcase, case studies section, contact forms, and SEO optimization for local search visibility.",
       technologies: ["WordPress", "Elementor Pro", "SEO", "Contact Forms", "Google Analytics"],
