@@ -55,7 +55,7 @@ export function FiveStepClimb() {
         >
           {/* Pill badge */}
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-sm font-display font-semibold text-wh mb-6">
-            The Process
+            ⚙️ The Process
           </span>
 
           <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-3 leading-tight">

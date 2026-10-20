@@ -25,8 +25,6 @@ const reels = [
   { id: "cool-paws-rev", src: "/videos/cool-paws-mat-revision.mp4", category: "Product Video" },
 ];
 
-const doubled = [...reels, ...reels];
-
 function VideoThumb({ src }: { src: string }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -66,8 +64,16 @@ export function VideoGallery() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [muted, setMuted] = useState(true);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<number | null>(null);
+  const isPausedRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const scrollStartRef = useRef(0);
+  const hasDraggedRef = useRef(false);
 
   const openVideo = useCallback((src: string) => {
+    if (hasDraggedRef.current) return;
     setActiveVideo(src);
     setMuted(false);
   }, []);
@@ -75,6 +81,74 @@ export function VideoGallery() {
   const closeVideo = useCallback(() => {
     setActiveVideo(null);
     setMuted(true);
+  }, []);
+
+  // Auto-scroll with requestAnimationFrame
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const speed = 0.8; // px per frame
+    let lastTime = 0;
+
+    const tick = (time: number) => {
+      if (!isPausedRef.current && !isDraggingRef.current) {
+        const delta = lastTime ? (time - lastTime) : 16;
+        lastTime = time;
+        el.scrollLeft += speed * (delta / 16);
+
+        // Seamless loop: when scrolled past half (the duplicated content), reset
+        const halfScroll = el.scrollWidth / 2;
+        if (el.scrollLeft >= halfScroll) {
+          el.scrollLeft -= halfScroll;
+        }
+      } else {
+        lastTime = 0;
+      }
+      autoScrollRef.current = requestAnimationFrame(tick);
+    };
+
+    autoScrollRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (autoScrollRef.current) cancelAnimationFrame(autoScrollRef.current);
+    };
+  }, []);
+
+  // Pause auto-scroll on hover (desktop)
+  const handleMouseEnter = useCallback(() => { isPausedRef.current = true; }, []);
+  const handleMouseLeave = useCallback(() => {
+    isPausedRef.current = false;
+    isDraggingRef.current = false;
+  }, []);
+
+  // Mouse drag to scroll (desktop)
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false;
+    dragStartXRef.current = e.clientX;
+    scrollStartRef.current = scrollRef.current?.scrollLeft ?? 0;
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDraggingRef.current) return;
+    const dx = e.clientX - dragStartXRef.current;
+    if (Math.abs(dx) > 5) hasDraggedRef.current = true;
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollStartRef.current - dx;
+    }
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    isDraggingRef.current = false;
+    // Reset drag flag after a tick so click handler can check it
+    setTimeout(() => { hasDraggedRef.current = false; }, 50);
+  }, []);
+
+  // Touch: pause auto-scroll while touching, allow native scroll
+  const handleTouchStart = useCallback(() => { isPausedRef.current = true; }, []);
+  const handleTouchEnd = useCallback(() => {
+    // Resume auto-scroll after a short delay
+    setTimeout(() => { isPausedRef.current = false; }, 2000);
   }, []);
 
   // Block right-click on videos
@@ -96,6 +170,7 @@ export function VideoGallery() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [closeVideo]);
+
 
   return (
     <>
@@ -131,54 +206,63 @@ export function VideoGallery() {
           </motion.div>
         </div>
 
-        {/* Auto-scrolling reels */}
-        <div className="relative">
-          {/* No side shadows — clean edge-to-edge scroll */}
+        {/* Scrollable reels — auto-scroll + manual touch/drag */}
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {[...reels, ...reels].map((reel, i) => (
+            <div
+              key={`${reel.id}-${i}`}
+              className="flex-shrink-0 w-[180px] sm:w-[220px] md:w-[260px] group cursor-pointer select-none"
+              onClick={() => openVideo(reel.src)}
+            >
+              <div className="video-protected aspect-[9/16] rounded-2xl border border-bd overflow-hidden relative bg-black">
+                <VideoThumb src={reel.src} />
 
-          <div className="flex gap-4 animate-scroll-left">
-            {doubled.map((reel, i) => (
-              <div
-                key={`${reel.id}-${i}`}
-                className="flex-shrink-0 w-[220px] md:w-[260px] group cursor-pointer"
-                onClick={() => openVideo(reel.src)}
-              >
-                <div className="video-protected aspect-[9/16] rounded-2xl border border-bd overflow-hidden relative bg-black">
-                  {/* Video thumbnail — autoplay muted loop */}
-                  <VideoThumb src={reel.src} />
+                {/* Download protection overlay */}
+                <div className="absolute inset-0 z-[1]" />
 
-                  {/* Download protection overlay */}
-                  <div className="absolute inset-0 z-[1]" />
-
-                  {/* Play button overlay */}
-                  <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
-                    <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
-                      <Play className="w-6 h-6 text-white ml-0.5" fill="white" />
-                    </div>
-                  </div>
-
-                  {/* Category label — bottom left corner */}
-                  <div className="absolute bottom-3 left-3 z-[3] pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-full text-white text-[10px] font-display font-bold uppercase tracking-wider bg-pink">{reel.category}</span>
+                {/* Play button overlay */}
+                <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
+                  <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
+                    <Play className="w-6 h-6 text-white ml-0.5" fill="white" />
                   </div>
                 </div>
+
+                {/* Category label */}
+                <div className="absolute bottom-3 left-3 z-[3] pointer-events-none">
+                  <span className="px-2.5 py-1 rounded-full text-white text-[10px] font-display font-bold uppercase tracking-wider bg-pink">{reel.category}</span>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
 
-        {/* View All Videos */}
+        {/* View All Videos + My Idea */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-10 flex items-center justify-center gap-4"
+          className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-4"
         >
           <Link href="/videos" className="hero-cta-btn inline-flex !p-[2px]">
-            <span className="hero-cta-inner-btn !py-3 !px-8 !text-base !font-display !font-bold">
+            <span className="hero-cta-inner-btn !py-3 !px-6 sm:!px-8 !text-sm sm:!text-base !font-display !font-bold">
               View All Videos <ArrowRight size={18} />
             </span>
           </Link>
-          <Link href="/videos#idea" className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-bd bg-card text-wh text-base font-display font-bold hover:border-pink/40 hover:text-pink transition-all">
+          <Link
+            href="/videos#idea"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full border border-bd bg-card text-wh text-sm sm:text-base font-display font-bold hover:border-pink/40 hover:text-pink transition-all"
+          >
             💡 My Idea
           </Link>
         </motion.div>
