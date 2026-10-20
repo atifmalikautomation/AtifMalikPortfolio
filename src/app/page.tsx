@@ -15,7 +15,6 @@ import { Testimonials } from "@/components/home/Testimonials";
 import { Pricing } from "@/components/home/Pricing";
 import { FAQ } from "@/components/home/FAQ";
 import { ContactCTA } from "@/components/home/ContactCTA";
-import { AffiliateSection } from "@/components/home/AffiliateSection";
 import { CallPopup } from "@/components/home/CallPopup";
 import { JsonLd } from "@/components/seo/JsonLd";
 

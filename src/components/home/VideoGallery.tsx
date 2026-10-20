@@ -25,38 +25,70 @@ const reels = [
   { id: "cool-paws-rev", src: "/videos/cool-paws-mat-revision.mp4", category: "Product Video" },
 ];
 
-function VideoThumb({ src }: { src: string }) {
-  const ref = useRef<HTMLVideoElement>(null);
+// Lazy video: only loads src when near viewport, pauses + unloads when far away
+function LazyVideoThumb({ src, onClick }: { src: string; onClick: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isNear, setIsNear] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
+  // Near observer: start loading video when within 400px of viewport
   useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.3 }
+    const el = containerRef.current;
+    if (!el) return;
+    const nearObserver = new IntersectionObserver(
+      ([entry]) => setIsNear(entry.isIntersecting),
+      { rootMargin: "200px 400px 200px 400px" }
     );
-    observer.observe(video);
-    return () => observer.disconnect();
+    nearObserver.observe(el);
+    return () => nearObserver.disconnect();
   }, []);
 
+  // Visible observer: play only when actually on screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const visObserver = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    visObserver.observe(el);
+    return () => visObserver.disconnect();
+  }, []);
+
+  // Play/pause based on visibility
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isVisible && isNear) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVisible, isNear]);
+
   return (
-    <video
-      ref={ref}
-      src={src}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      controlsList="nodownload nofullscreen noremoteplayback"
-      disablePictureInPicture
-      className="w-full h-full object-cover"
-    />
+    <div ref={containerRef} className="w-full h-full" onClick={onClick}>
+      {isNear ? (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          controlsList="nodownload nofullscreen noremoteplayback"
+          disablePictureInPicture
+          onLoadedData={() => setHasLoaded(true)}
+          className="w-full h-full object-cover"
+        />
+      ) : null}
+      {/* Gradient placeholder while video hasn't loaded */}
+      {!hasLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] to-[#16213e] animate-pulse" />
+      )}
+    </div>
   );
 }
 
@@ -88,7 +120,7 @@ export function VideoGallery() {
     const el = scrollRef.current;
     if (!el) return;
 
-    const speed = 0.8; // px per frame
+    const speed = 0.8;
     let lastTime = 0;
 
     const tick = (time: number) => {
@@ -97,7 +129,6 @@ export function VideoGallery() {
         lastTime = time;
         el.scrollLeft += speed * (delta / 16);
 
-        // Seamless loop: when scrolled past half (the duplicated content), reset
         const halfScroll = el.scrollWidth / 2;
         if (el.scrollLeft >= halfScroll) {
           el.scrollLeft -= halfScroll;
@@ -114,14 +145,12 @@ export function VideoGallery() {
     };
   }, []);
 
-  // Pause auto-scroll on hover (desktop)
   const handleMouseEnter = useCallback(() => { isPausedRef.current = true; }, []);
   const handleMouseLeave = useCallback(() => {
     isPausedRef.current = false;
     isDraggingRef.current = false;
   }, []);
 
-  // Mouse drag to scroll (desktop)
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     isDraggingRef.current = true;
     hasDraggedRef.current = false;
@@ -140,14 +169,11 @@ export function VideoGallery() {
 
   const handleMouseUp = useCallback(() => {
     isDraggingRef.current = false;
-    // Reset drag flag after a tick so click handler can check it
     setTimeout(() => { hasDraggedRef.current = false; }, 50);
   }, []);
 
-  // Touch: pause auto-scroll while touching, allow native scroll
   const handleTouchStart = useCallback(() => { isPausedRef.current = true; }, []);
   const handleTouchEnd = useCallback(() => {
-    // Resume auto-scroll after a short delay
     setTimeout(() => { isPausedRef.current = false; }, 2000);
   }, []);
 
@@ -223,13 +249,12 @@ export function VideoGallery() {
             <div
               key={`${reel.id}-${i}`}
               className="flex-shrink-0 w-[180px] sm:w-[220px] md:w-[260px] group cursor-pointer select-none"
-              onClick={() => openVideo(reel.src)}
             >
               <div className="video-protected aspect-[9/16] rounded-2xl border border-bd overflow-hidden relative bg-black">
-                <VideoThumb src={reel.src} />
+                <LazyVideoThumb src={reel.src} onClick={() => openVideo(reel.src)} />
 
                 {/* Download protection overlay */}
-                <div className="absolute inset-0 z-[1]" />
+                <div className="absolute inset-0 z-[1] pointer-events-none" />
 
                 {/* Play button overlay */}
                 <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
@@ -286,7 +311,6 @@ export function VideoGallery() {
               className="relative max-w-[400px] w-full max-h-[90vh] video-protected"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
               <button
                 onClick={closeVideo}
                 className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
@@ -294,7 +318,6 @@ export function VideoGallery() {
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              {/* Mute toggle */}
               <button
                 onClick={() => setMuted(!muted)}
                 className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors z-10"
@@ -315,7 +338,6 @@ export function VideoGallery() {
                 style={{ maxHeight: "85vh" }}
               />
 
-              {/* Invisible overlay to block drag-save */}
               <div className="absolute inset-0 rounded-2xl" />
             </motion.div>
           </motion.div>

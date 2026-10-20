@@ -2,8 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, X, Volume2, VolumeX, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import { Play, X, Volume2, VolumeX } from "lucide-react";
 
 const reels = [
   { id: "ig1", src: "/videos/ig_dxxqi7fk_aj.mp4", category: "Social Content" },
@@ -25,38 +24,66 @@ const reels = [
   { id: "cool-paws-rev", src: "/videos/cool-paws-mat-revision.mp4", category: "Product Video" },
 ];
 
-function VideoThumb({ src }: { src: string }) {
-  const ref = useRef<HTMLVideoElement>(null);
+// Lazy video: only loads when near viewport
+function LazyVideoThumb({ src, onClick }: { src: string; onClick: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isNear, setIsNear] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
-    const video = ref.current;
-    if (!video) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.3 }
+    const el = containerRef.current;
+    if (!el) return;
+    const nearObserver = new IntersectionObserver(
+      ([entry]) => setIsNear(entry.isIntersecting),
+      { rootMargin: "200px" }
     );
-    observer.observe(video);
-    return () => observer.disconnect();
+    nearObserver.observe(el);
+    return () => nearObserver.disconnect();
   }, []);
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const visObserver = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    visObserver.observe(el);
+    return () => visObserver.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isVisible && isNear) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVisible, isNear]);
+
   return (
-    <video
-      ref={ref}
-      src={src}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      controlsList="nodownload nofullscreen noremoteplayback"
-      disablePictureInPicture
-      className="w-full h-full object-cover"
-    />
+    <div ref={containerRef} className="w-full h-full" onClick={onClick}>
+      {isNear ? (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          controlsList="nodownload nofullscreen noremoteplayback"
+          disablePictureInPicture
+          onLoadedData={() => setHasLoaded(true)}
+          className="w-full h-full object-cover"
+        />
+      ) : null}
+      {!hasLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] to-[#16213e] animate-pulse" />
+      )}
+    </div>
   );
 }
 
@@ -141,12 +168,11 @@ export default function VideosPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
                 className="group cursor-pointer"
-                onClick={() => openVideo(reel.src)}
               >
                 <div className="video-protected aspect-[9/16] rounded-2xl border border-bd overflow-hidden relative bg-black">
-                  <VideoThumb src={reel.src} />
+                  <LazyVideoThumb src={reel.src} onClick={() => openVideo(reel.src)} />
 
-                  <div className="absolute inset-0 z-[1]" />
+                  <div className="absolute inset-0 z-[1] pointer-events-none" />
 
                   <div className="absolute inset-0 z-[2] flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors pointer-events-none">
                     <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 group-hover:scale-110 transition-all">
