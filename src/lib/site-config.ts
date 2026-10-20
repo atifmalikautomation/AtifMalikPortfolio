@@ -415,8 +415,8 @@ export const siteConfig = {
       slug: "ai-product-video",
       category: "AI Video",
       kind: "case-study",
-      liveUrl: "https://veo3-today.vercel.app/",
-      liveLabel: "Explore AI Video Gallery",
+      liveUrl: "https://gotze-portfolio-sage.vercel.app/",
+      liveLabel: "View AI Video Portfolio",
       description:
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
