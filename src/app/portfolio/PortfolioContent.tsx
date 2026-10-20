@@ -83,8 +83,8 @@ export function PortfolioContent() {
       : projects.filter((p) => p.category === filter);
 
   return (
-    <div className="pt-16">
-      <section className="py-4 md:py-6">
+    <div className="pt-12">
+      <section className="py-2 md:py-3">
         <div className="max-w-6xl mx-auto px-4 sm:px-8">
           {/* Header */}
           <motion.div
