@@ -93,7 +93,7 @@ export function PortfolioContent() {
             className="text-center mb-4"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-sm font-display font-semibold text-wh">
-              Portfolio
+              💼 Portfolio
             </span>
           </motion.div>
 
