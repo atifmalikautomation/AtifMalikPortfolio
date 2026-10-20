@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { target: 600, suffix: "+", label: "Projects Completed" },
-  { target: 4.5, suffix: "", label: "Years of Experience" },
-  { target: 98, suffix: "%", label: "Client Satisfaction Rate" },
-  { target: 10, suffix: "\u00D7", label: "Faster Than Traditional Agencies" },
+  { target: 800, suffix: "+", label: "Projects Delivered" },
+  { target: 5, suffix: "+", label: "Years Experience" },
+  { target: 98, suffix: "%", label: "Client Satisfaction" },
+  { target: 30, suffix: "+", label: "Industries Served" },
 ];
 
 function AnimatedNumber({ target, suffix }: { target: number; suffix: string }) {

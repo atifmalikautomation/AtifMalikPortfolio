@@ -77,7 +77,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                 { value: "800+", label: "Projects Shipped", emoji: "🚀" },
                 { value: "14", label: "Day Avg Launch", emoji: "⚡" },
                 { value: "5+", label: "Years Experience", emoji: "🗓️" },
-                { value: "5★", label: "Rated Worldwide", emoji: "⭐" },
+                { value: "98%", label: "Client Satisfaction", emoji: "🎯" },
               ].map((stat, i) => (
                 <div
                   key={stat.label}

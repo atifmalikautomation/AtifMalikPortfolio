@@ -26,7 +26,7 @@ const journey = [
   {
     year: "2021",
     title: "Started Freelancing",
-    desc: "Began with web development and graphic design on Fiverr. Quickly realized the power of automation.",
+    desc: "Began with web development and graphic design as a freelancer. Quickly realized the power of automation.",
   },
   {
     year: "2023",
@@ -81,7 +81,7 @@ const stats = [
   { value: "800+", label: "Projects Shipped", emoji: "🚀" },
   { value: "5+", label: "Years Experience", emoji: "🗓️" },
   { value: "30+", label: "Industries Served", emoji: "🌍" },
-  { value: "5★", label: "Rated Worldwide", emoji: "⭐" },
+  { value: "98%", label: "Client Satisfaction", emoji: "🎯" },
 ];
 
 const toolPills = [

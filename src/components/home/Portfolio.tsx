@@ -1,202 +1,142 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
+import { motion } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
-import { ArrowRight, X, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
-const categories = [
-  "All",
-  ...Array.from(new Set(siteConfig.portfolio.map((p) => p.category))),
-];
+const featured = siteConfig.portfolio.filter((_, i) => i < 6);
 
-export function Portfolio() {
-  const [filter, setFilter] = useState("All");
-  const [lightbox, setLightbox] = useState<number | null>(null);
+const gradientFallbacks: Record<string, string> = {
+  "AI Automation": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
+  "AI Video": "linear-gradient(135deg, #4a0020 0%, #831843 50%, #be185d 100%)",
+  "AI Chatbot": "linear-gradient(135deg, #042f2e 0%, #115e59 50%, #0d9488 100%)",
+  "Lead Automation": "linear-gradient(135deg, #1c1917 0%, #44403c 50%, #78716c 100%)",
+  "AI Content": "linear-gradient(135deg, #1a2e05 0%, #365314 50%, #4d7c0f 100%)",
+  "Web Development": "linear-gradient(135deg, #0c0a09 0%, #292524 50%, #57534e 100%)",
+};
 
-  const filtered =
-    filter === "All"
-      ? siteConfig.portfolio
-      : siteConfig.portfolio.filter((p) => p.category === filter);
+function PortfolioImage({ src, alt, category }: { src: string; alt: string; category: string }) {
+  const [failed, setFailed] = useState(false);
+  const onError = useCallback(() => setFailed(true), []);
+  const gradient = gradientFallbacks[category] || gradientFallbacks["Web Development"];
 
-  const closeLightbox = useCallback(() => setLightbox(null), []);
+  if (failed) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center" style={{ background: gradient }}>
+        <span className="font-display font-bold text-white/60 text-sm text-center px-4">{alt}</span>
+      </div>
+    );
+  }
 
   return (
-    <section className="section-padding bg-bg-elevated" id="work">
-      <div className="container-narrow mx-auto">
-        <SectionHeading
-          label="Portfolio"
-          title="Selected Work"
-          subtitle="Real systems and productions built for real businesses. Every project delivered a measurable outcome."
-        />
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover group-hover:scale-105 transition-transform duration-500"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      onError={onError}
+    />
+  );
+}
 
-        {/* Filter bar */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-4 py-2 text-sm rounded-full border transition-all duration-200 cursor-pointer ${
-                filter === cat
-                  ? "border-accent bg-accent-dim text-accent"
-                  : "border-border text-text-muted hover:text-text-secondary hover:border-border-hover"
-              }`}
+export function Portfolio() {
+  return (
+    <section className="section-padding" id="work">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-10 md:mb-14"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-xs font-display font-bold uppercase tracking-widest text-pink mb-6">
+            Portfolio
+          </span>
+
+          <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-3 leading-tight">
+            Real AI Systems,{" "}
+            <span
+              className="text-pink"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 600,
+              }}
             >
-              {cat}
-            </button>
+              Real Results.
+            </span>
+          </h2>
+
+          <p className="text-gr text-base md:text-lg max-w-2xl mx-auto">
+            Each project solves a specific business problem with AI automation, chatbots, video, or custom development.
+          </p>
+        </motion.div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {featured.map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+            >
+              <Link
+                href={`/portfolio/${project.slug}`}
+                className="group block rounded-2xl border border-bd bg-card overflow-hidden hover:border-pink/30 hover:-translate-y-1 transition-all duration-300"
+              >
+                {/* Image */}
+                <div className="aspect-video relative overflow-hidden bg-bg2">
+                  <PortfolioImage src={project.image} alt={project.title} category={project.category} />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center">
+                      <ArrowUpRight className="w-5 h-5 text-black" />
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <span
+                    className="inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-display font-bold uppercase tracking-wider text-white mb-2.5"
+                    style={{ background: "var(--pink)" }}
+                  >
+                    {project.category}
+                  </span>
+                  <h3 className="text-lg font-display font-bold text-wh mb-2 group-hover:text-pink transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-gr leading-relaxed mb-3 line-clamp-2">
+                    {project.description}
+                  </p>
+                  <div className="text-xs text-pink font-display font-bold pt-3 mt-3 border-t border-bd">
+                    {project.result}
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
 
-        {/* Grid */}
+        {/* View all */}
         <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-10 text-center"
         >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <motion.div
-                key={project.slug}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-              >
-                <div
-                  onClick={() => setLightbox(siteConfig.portfolio.indexOf(project))}
-                  className="group block rounded-[var(--radius-lg)] border border-border bg-bg-primary overflow-hidden hover:border-accent/30 transition-all duration-300 cursor-pointer"
-                >
-                  {/* Thumbnail */}
-                  <div className="aspect-video bg-bg-surface relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent flex items-center justify-center">
-                      <span className="font-mono text-xs text-text-muted/40">
-                        [[PROJECT IMAGE]]
-                      </span>
-                    </div>
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-300 flex items-center justify-center">
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-sm text-text-primary font-medium bg-bg-primary/80 backdrop-blur-sm px-4 py-2 rounded-full">
-                        View Details
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="p-5">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-accent">
-                      {project.category}
-                    </span>
-                    <h3 className="text-lg font-semibold mt-1.5 mb-2 group-hover:text-accent transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-text-secondary leading-relaxed mb-3 line-clamp-2">
-                      {project.description}
-                    </p>
-                    <div className="text-xs text-accent font-medium">
-                      {project.result}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          <Link href="/portfolio" className="hero-cta-btn inline-flex !p-[2px]">
+            <span className="hero-cta-inner-btn !py-3 !px-8 !text-base !font-display !font-bold">
+              View All Projects <ArrowRight size={18} />
+            </span>
+          </Link>
         </motion.div>
-
-        <div className="mt-10 text-center">
-          <Button href="/portfolio" variant="outline">
-            View All Projects
-            <ArrowRight size={16} />
-          </Button>
-        </div>
       </div>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {lightbox !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={closeLightbox}
-            className="fixed inset-0 z-[60] bg-bg-primary/90 backdrop-blur-md flex items-center justify-center p-4"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-bg-elevated border border-border rounded-[var(--radius-xl)] max-w-2xl w-full max-h-[85vh] overflow-y-auto"
-            >
-              {(() => {
-                const project = siteConfig.portfolio[lightbox];
-                return (
-                  <>
-                    {/* Preview area */}
-                    <div className="aspect-video bg-bg-surface relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent flex items-center justify-center">
-                        <span className="font-mono text-sm text-text-muted/40">
-                          [[PROJECT MEDIA]]
-                        </span>
-                      </div>
-                      <button
-                        onClick={closeLightbox}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-bg-primary/80 backdrop-blur-sm border border-border hover:border-accent/30 transition-colors cursor-pointer"
-                        aria-label="Close lightbox"
-                      >
-                        <X size={18} className="text-text-secondary" />
-                      </button>
-                    </div>
-
-                    <div className="p-6 md:p-8">
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-accent">
-                        {project.category}
-                      </span>
-                      <h3 className="text-2xl font-bold mt-2 mb-3">
-                        {project.title}
-                      </h3>
-                      <p className="text-text-secondary leading-relaxed mb-5">
-                        {project.description}
-                      </p>
-
-                      {/* Result */}
-                      <div className="mb-5 p-4 rounded-[var(--radius)] bg-accent-dim border border-accent/20">
-                        <span className="text-xs font-mono uppercase tracking-widest text-accent/70">
-                          Result
-                        </span>
-                        <p className="text-accent font-bold text-lg mt-1">
-                          {project.result}
-                        </p>
-                      </div>
-
-                      {/* Tech stack */}
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {project.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 text-xs font-mono rounded-full border border-border text-text-muted"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      <Link
-                        href={`/portfolio/${project.slug}`}
-                        className="inline-flex items-center gap-2 text-sm text-accent hover:text-accent-hover transition-colors font-medium"
-                      >
-                        View Full Case Study
-                        <ExternalLink size={14} />
-                      </Link>
-                    </div>
-                  </>
-                );
-              })()}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

@@ -85,12 +85,6 @@ export function JsonLd() {
     },
     email: siteConfig.contact.email,
     telephone: siteConfig.contact.phone,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5",
-      reviewCount: "800",
-      bestRating: "5",
-    },
   };
 
   const websiteSchema = {

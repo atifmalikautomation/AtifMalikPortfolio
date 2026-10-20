@@ -1,10 +1,46 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import type { PortfolioItem } from "@/lib/site-config";
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle2, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+
+const gradients: Record<string, string> = {
+  "AI Automation": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
+  "AI Video": "linear-gradient(135deg, #4a0020 0%, #831843 50%, #be185d 100%)",
+  "AI Chatbot": "linear-gradient(135deg, #042f2e 0%, #115e59 50%, #0d9488 100%)",
+  "Lead Automation": "linear-gradient(135deg, #1c1917 0%, #44403c 50%, #78716c 100%)",
+  "AI Content": "linear-gradient(135deg, #1a2e05 0%, #365314 50%, #4d7c0f 100%)",
+  "Web Development": "linear-gradient(135deg, #0c0a09 0%, #292524 50%, #57534e 100%)",
+};
+
+function HeroImage({ src, alt, category }: { src: string; alt: string; category: string }) {
+  const [failed, setFailed] = useState(false);
+  const onError = useCallback(() => setFailed(true), []);
+  const gradient = gradients[category] || gradients["Web Development"];
+
+  if (failed) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center" style={{ background: gradient }}>
+        <span className="font-display font-bold text-white/50 text-lg text-center px-8">{alt}</span>
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover"
+      sizes="(max-width: 896px) 100vw, 896px"
+      priority
+      onError={onError}
+    />
+  );
+}
 
 export function CaseStudyContent({ project }: { project: PortfolioItem }) {
   return (
@@ -39,20 +75,29 @@ export function CaseStudyContent({ project }: { project: PortfolioItem }) {
             </h1>
 
             {/* Description */}
-            <p className="text-lg text-gr leading-relaxed mb-8">
+            <p className="text-lg text-gr leading-relaxed mb-5">
               {project.description}
             </p>
 
+            {/* Live demo link */}
+            {project.liveUrl ? (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero-cta-btn inline-flex !p-[2px] mb-8"
+              >
+                <span className="hero-cta-inner-btn !py-2.5 !px-6 !text-sm !font-display !font-bold">
+                  {project.liveLabel || "View Live Demo"} <ExternalLink size={16} />
+                </span>
+              </a>
+            ) : (
+              <div className="mb-3" />
+            )}
+
             {/* Hero image */}
             <div className="aspect-video rounded-2xl overflow-hidden border border-bd mb-12 relative">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 896px) 100vw, 896px"
-                priority
-              />
+              <HeroImage src={project.image} alt={project.title} category={project.category} />
             </div>
           </motion.div>
 

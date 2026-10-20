@@ -9,6 +9,7 @@ import { CalculatorEmbed } from "@/components/home/CalculatorEmbed";
 import { ProblemsSection } from "@/components/home/ProblemsSection";
 import { FiveStepClimb } from "@/components/home/FiveStepClimb";
 import { GrowthSystem } from "@/components/home/GrowthSystem";
+import { VideoGallery } from "@/components/home/VideoGallery";
 import { Portfolio } from "@/components/home/Portfolio";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Pricing } from "@/components/home/Pricing";
@@ -33,7 +34,8 @@ export default function Home() {
       <ProblemsSection />
       <FiveStepClimb />
       <GrowthSystem />
-      {/* Portfolio removed from homepage — available at /portfolio */}
+      <VideoGallery />
+      <Portfolio />
       <Testimonials />
       <Pricing />
       <FAQ />

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Lock } from "lucide-react";
+import { Lock } from "lucide-react";
 
 const problems = [
   "No consistent lead flow, feast or famine every month",
@@ -35,18 +35,25 @@ export function ProblemsSection() {
           viewport={{ once: true }}
           className="mb-10 md:mb-14 text-center"
         >
-          {/* Down arrow icon */}
-          <div className="flex justify-center mb-4">
-            <span className="w-10 h-10 rounded-full border border-bd flex items-center justify-center text-gr">
-              <ChevronDown size={20} />
-            </span>
-          </div>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-xs font-display font-bold uppercase tracking-widest text-pink mb-6">
+            Diagnosis
+          </span>
 
-          <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-3">
-            The Problems Holding You Back
+          <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-3 leading-tight">
+            The Problems{" "}
+            <span
+              className="text-pink"
+              style={{
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 600,
+              }}
+            >
+              Holding You Back
+            </span>
           </h2>
-          <p className="text-gr text-base md:text-lg">
-            (And The Systems That Fix Them)
+          <p className="text-gr text-base md:text-lg max-w-2xl mx-auto">
+            And the AI systems that fix them — permanently.
           </p>
         </motion.div>
 

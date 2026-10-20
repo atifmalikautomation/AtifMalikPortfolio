@@ -18,7 +18,6 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/atifmalik_ai/",
     linkedin: "https://www.linkedin.com/in/atif-malik-745096324/",
     tiktok: "https://www.tiktok.com/@atifmalikautomation",
-    fiverr: "https://fiverr.com/atifmalik",
     facebook: "https://web.facebook.com/profile.php?id=100087796622999",
   },
 
@@ -41,7 +40,7 @@ export const siteConfig = {
   stats: [
     { label: "Projects Delivered", value: "800+", emoji: "\uD83D\uDE80" },
     { label: "Years Experience", value: "5+", emoji: "\uD83C\uDFC6" },
-    { label: "Fiverr & Upwork", value: "5\u2605", emoji: "\u2B50" },
+    { label: "Client Satisfaction", value: "98%", emoji: "\uD83C\uDFAF" },
   ],
 
   services: [
@@ -396,6 +395,9 @@ export const siteConfig = {
       title: "Shopify Order Automation Pipeline",
       slug: "ecommerce-automation",
       category: "AI Automation",
+      kind: "case-study",
+      liveUrl: "https://shopify-dashboard-demo.vercel.app",
+      liveLabel: "Try Shopify Dashboard",
       description:
         "End-to-end Shopify order processing pipeline using n8n — automatic order validation, Google Sheets logging, WhatsApp customer confirmations, and Gmail error alerts. Zero manual intervention.",
       technologies: ["n8n", "Shopify API", "WhatsApp Business", "Google Sheets", "Gmail"],
@@ -412,6 +414,9 @@ export const siteConfig = {
       title: "AI Product Video Campaign",
       slug: "ai-product-video",
       category: "AI Video",
+      kind: "case-study",
+      liveUrl: "https://ai-video-showcase.vercel.app",
+      liveLabel: "View AI Video Showcase",
       description:
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
@@ -428,6 +433,9 @@ export const siteConfig = {
       title: "Multi-Platform AI Chatbot",
       slug: "multi-platform-chatbot",
       category: "AI Chatbot",
+      kind: "case-study",
+      liveUrl: "https://brightsmile-ai-demo.vercel.app/",
+      liveLabel: "Try AI Chatbot Demo",
       description:
         "Intelligent AI chatbot deployed across Website, WhatsApp, and Instagram — handling product inquiries, qualifying leads, and booking appointments automatically with CRM sync.",
       technologies: ["OpenAI GPT-4", "WhatsApp Business API", "Instagram API", "n8n", "CRM"],
@@ -444,6 +452,9 @@ export const siteConfig = {
       title: "Real Estate Lead Automation System",
       slug: "real-estate-leads",
       category: "Lead Automation",
+      kind: "case-study",
+      liveUrl: "https://crm-dashboard-demo.vercel.app",
+      liveLabel: "Try CRM Dashboard",
       description:
         "Complete CRM-powered lead automation system for a real estate agency — automated capture, AI qualification, follow-up sequences, pipeline management, and performance analytics.",
       technologies: ["GoHighLevel", "n8n", "WhatsApp", "Email Sequences", "Webhooks"],
@@ -460,6 +471,9 @@ export const siteConfig = {
       title: "AI Content Production Pipeline",
       slug: "content-pipeline",
       category: "AI Content",
+      kind: "case-study",
+      liveUrl: "https://ai-content-generator-demo.vercel.app",
+      liveLabel: "Try Content Generator",
       description:
         "Fully automated content production system — AI generates, schedules, and publishes social media content across Instagram, TikTok, YouTube, and LinkedIn daily without manual work.",
       technologies: ["OpenAI GPT-4", "n8n", "Instagram API", "TikTok API", "YouTube API", "LinkedIn API"],
@@ -476,6 +490,9 @@ export const siteConfig = {
       title: "SaaS Admin Dashboard & Analytics Panel",
       slug: "saas-dashboard",
       category: "Web Development",
+      kind: "case-study",
+      liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
+      liveLabel: "Try Dashboard Demo",
       description:
         "Custom-built SaaS admin dashboard with real-time analytics, user management, subscription tracking, MRR reporting, and automated notifications — built with Next.js and React.",
       technologies: ["Next.js", "React", "PostgreSQL", "Tailwind CSS", "REST APIs"],
@@ -492,6 +509,9 @@ export const siteConfig = {
       title: "Fitness Studio GHL CRM & Funnel System",
       slug: "ghl-fitness-crm",
       category: "Lead Automation",
+      kind: "case-study",
+      liveUrl: "https://getgymflow.vercel.app/",
+      liveLabel: "Try Fitness CRM Demo",
       description:
         "Complete GoHighLevel setup for a fitness studio chain — sales funnel builder, email nurture sequences, opportunity pipeline, appointment calendar, and automated member onboarding.",
       technologies: ["GoHighLevel", "Funnel Builder", "Email Automation", "Calendar", "Pipeline"],
@@ -508,6 +528,9 @@ export const siteConfig = {
       title: "E-Commerce Email Marketing Automation",
       slug: "email-automation",
       category: "AI Automation",
+      kind: "case-study",
+      liveUrl: "https://email-automation-demo.vercel.app",
+      liveLabel: "Try Email Automation Demo",
       description:
         "Complete email marketing automation system — welcome series, abandoned cart recovery, and re-engagement campaigns with conditional logic, behavioral triggers, and A/B testing.",
       technologies: ["n8n", "Email API", "Shopify", "Conditional Logic", "A/B Testing"],
@@ -524,6 +547,9 @@ export const siteConfig = {
       title: "Business Consulting WordPress Website",
       slug: "wordpress-consulting",
       category: "Web Development",
+      kind: "case-study",
+      liveUrl: "https://wordpress-developer-portfolio.vercel.app",
+      liveLabel: "View WordPress Portfolio",
       description:
         "Premium WordPress website for a consulting firm — modern design, services showcase, case studies section, contact forms, and SEO optimization for local search visibility.",
       technologies: ["WordPress", "Elementor Pro", "SEO", "Contact Forms", "Google Analytics"],
@@ -534,6 +560,78 @@ export const siteConfig = {
         solution: "Redesigned the entire website with a modern, conversion-focused layout: clean hero with clear value proposition, services grid with icons, testimonials carousel, and prominent contact CTAs. Full SEO overhaul including technical optimization, local SEO, and content strategy.",
         build: "Built on WordPress with Elementor Pro for a fully responsive, drag-and-drop editable design. Performance optimized: image compression, lazy loading, CDN setup, and caching (load time: 1.8s). SEO implementation: schema markup, meta optimization, local business listings, and 12 keyword-targeted service pages. Google Analytics 4 + Search Console integration for tracking. Contact forms with CRM auto-sync.",
         resultDetail: "Page load time improved from 8s to 1.8s. Organic traffic increased 180% within 4 months. The site now ranks on page 1 for 8 local keywords including 'business consulting [city]'. Monthly organic leads grew from 0 to 25+. Google Business Profile views increased 340%. The client's credibility perception improved dramatically based on client feedback.",
+      },
+    },
+    {
+      title: "Helping Hopes Academy",
+      slug: "helping-hopes-academy",
+      category: "Web Development",
+      kind: "client",
+      liveUrl: "https://helping-hopes-academy.vercel.app/",
+      description:
+        "Education conversion website for a UK-based tutoring service — subject catalogue across 14 subjects and 3 exam boards, multi-step enquiry form, and responsive design optimized for parent conversions.",
+      technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel"],
+      result: "Complete education platform with 14 subjects",
+      image: "/portfolio/helping-hopes-academy.jpg",
+      caseStudy: {
+        challenge: "Helping Hopes Academy needed a professional website to showcase their tutoring services across 14 subjects and 3 UK exam boards (GCSE, A-Level, 11+). Their existing setup was a simple social media page with no way to capture leads or display their full offering.",
+        solution: "Built a modern, conversion-focused education website with a clean subject catalogue, pricing transparency, and a multi-step enquiry form that qualifies leads before submission. The design builds trust with parents through professional presentation and clear information architecture.",
+        build: "Frontend built with React + TypeScript + Vite for fast load times. Tailwind CSS for responsive styling. Subject pages dynamically generated from a structured data model. Multi-step form captures student details, subject interest, and preferred schedule. Deployed on Vercel with automatic previews.",
+        resultDetail: "The website showcases 14 subjects across 3 exam boards with clear pricing. The multi-step enquiry form increased lead quality. Mobile-first design ensures parents can browse and enquire from any device. The site loads in under 2 seconds globally via Vercel's edge network.",
+      },
+    },
+    {
+      title: "Pulseboard — SaaS Admin Dashboard",
+      slug: "pulseboard-saas-demo",
+      category: "Web Development",
+      kind: "live-demo",
+      liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
+      description:
+        "Interactive SaaS admin dashboard with real-time KPIs, 4 chart types, role-based access control, searchable user management, and CSV export — a fully functional demo of what a custom business dashboard looks like.",
+      technologies: ["JavaScript", "Chart.js", "CSS Variables", "localStorage", "RBAC"],
+      result: "5 live KPIs, 4 charts, 3 access roles",
+      image: "/portfolio/pulseboard-saas-demo.jpg",
+      caseStudy: {
+        challenge: "SaaS companies often rely on scattered tools for user management, revenue tracking, and analytics. This demo showcases how a unified admin dashboard eliminates tool-switching and provides instant operational visibility.",
+        solution: "Built an interactive dashboard demo with live KPI cards (MRR, users, churn, growth), 4 chart visualizations (line, bar, doughnut, area), a searchable 248-row user table with inline actions, and role-based access (Admin, Manager, Viewer) that dynamically adjusts the UI.",
+        build: "Pure JavaScript with Chart.js for data visualization. CSS custom properties enable instant dark/light theme switching. localStorage persists user preferences. RBAC system toggles UI elements based on selected role. CSV export generates downloadable user reports. No framework dependencies for maximum performance.",
+        resultDetail: "The demo features 5 real-time KPI cards, 4 interactive chart types, a searchable user table with 248 entries, 3 role-based access levels, CSV export functionality, and instant dark/light theme switching. Everything runs client-side with zero backend dependencies.",
+      },
+    },
+    {
+      title: "BrightSmile — AI Receptionist Chatbot",
+      slug: "brightsmile-ai-demo",
+      category: "AI Chatbot",
+      kind: "live-demo",
+      liveUrl: "https://brightsmile-ai-demo.vercel.app/",
+      description:
+        "Live AI receptionist demo for a dental clinic — answers patient questions from a knowledge base, captures leads with a 4-field form, and supports English, Urdu, and Roman Urdu conversations.",
+      technologies: ["Google Gemini API", "Vercel Serverless", "JavaScript", "Prompt Engineering"],
+      result: "24/7 AI receptionist in 3 languages",
+      image: "/portfolio/brightsmile-ai-chatbot.jpg",
+      caseStudy: {
+        challenge: "Dental clinics lose potential patients when calls go unanswered after hours. Front desk staff spend significant time answering repetitive questions about services, pricing, and availability instead of managing appointments.",
+        solution: "Built an AI receptionist chatbot powered by Google Gemini that answers patient questions from a custom dental knowledge base, captures lead information through a natural conversation flow, and operates 24/7 in English, Urdu, and Roman Urdu.",
+        build: "The chatbot runs on Vercel serverless functions with the Gemini API. A carefully engineered system prompt contains the clinic's complete knowledge base (services, pricing, hours, insurance, procedures). The lead capture flow naturally collects name, phone, email, and preferred appointment time during conversation. Language detection auto-switches between English, Urdu, and Roman Urdu.",
+        resultDetail: "The AI receptionist handles patient inquiries 24/7 without human intervention. It captures leads through natural conversation instead of forms. Supports 3 languages for diverse patient demographics. Response time is under 2 seconds. The system reduces front desk call volume while ensuring no patient inquiry goes unanswered.",
+      },
+    },
+    {
+      title: "LeadFlow — n8n Lead Automation",
+      slug: "leadflow-n8n-demo",
+      category: "AI Automation",
+      kind: "live-demo",
+      liveUrl: "https://leadflow-n8n-demo.vercel.app/",
+      description:
+        "Interactive n8n workflow visualization — submit a test lead and watch it flow through AI scoring, 3-branch routing (hot/warm/cold), CRM sync, and automated notifications in real-time.",
+      technologies: ["n8n", "Webhooks", "OpenAI", "HubSpot", "Slack", "Gmail", "Google Sheets"],
+      result: "17 workflow nodes, 3-branch AI lead routing",
+      image: "/portfolio/leadflow-n8n.jpg",
+      caseStudy: {
+        challenge: "Businesses waste hours manually sorting leads, deciding who to contact first, and copying data between tools. Without automation, hot leads go cold while teams manually process low-priority inquiries.",
+        solution: "Built an interactive demo of a complete n8n lead automation workflow. Visitors can submit a test lead and watch it flow through AI-powered scoring, intelligent routing (hot/warm/cold), and automated actions — CRM updates, Slack notifications, and email sequences.",
+        build: "The demo recreates a 17-node n8n workflow as an interactive web visualization. The workflow processes leads through: Webhook capture, data enrichment, OpenAI-powered scoring (0-100), conditional routing (Hot: 70+, Warm: 40-69, Cold: 0-39), and parallel actions per branch. Hot leads trigger Slack alerts + priority email. Warm leads enter nurture sequences. Cold leads get logged to Google Sheets for batch review.",
+        resultDetail: "The workflow demonstrates 17 connected nodes processing leads in real-time. AI scoring assigns 0-100 lead scores based on multiple signals. 3-branch routing ensures the right response for every lead. The demo includes a downloadable n8n workflow JSON for direct import. CSV export captures all processed test leads.",
       },
     },
   ],
@@ -651,6 +749,23 @@ export const siteConfig = {
 } as const;
 
 export type Service = (typeof siteConfig.services)[number];
-export type PortfolioItem = (typeof siteConfig.portfolio)[number];
+export type PortfolioItem = {
+  title: string;
+  slug: string;
+  category: string;
+  kind: string;
+  liveUrl?: string;
+  liveLabel?: string;
+  description: string;
+  technologies: readonly string[];
+  result: string;
+  image: string;
+  caseStudy: {
+    challenge: string;
+    solution: string;
+    build: string;
+    resultDetail: string;
+  };
+};
 export type Testimonial = (typeof siteConfig.testimonials)[number];
 export type InsightMeta = (typeof siteConfig.insights)[number];

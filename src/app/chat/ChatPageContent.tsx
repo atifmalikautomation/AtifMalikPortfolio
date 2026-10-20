@@ -72,7 +72,7 @@ const TOPICS: Topic[] = [
   {
     id: "about", chip: "About me 👋",
     bubbles: [
-      { kind: "text", text: `Sure, quick version. I'm Atif, an AI video production and automation specialist. I've been doing this for ${STAT_YEARS} years now, shipped ${STAT_PROJECTS} projects for clients all over the world, and I'm 5-star rated on Fiverr and Upwork.` },
+      { kind: "text", text: `Sure, quick version. I'm Atif, an AI video production and automation specialist. I've been doing this for ${STAT_YEARS} years now, shipped ${STAT_PROJECTS} projects for clients across 30+ industries worldwide.` },
       { kind: "text", text: "Here's what makes me different. I don't just hand you a pretty website or video. I build the smart stuff behind it too — the AI and automation that actually captures leads and turns them into clients. So your system earns its keep." },
     ],
     followups: ["services", "work", "process", "hire"],

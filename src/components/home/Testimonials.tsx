@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 
 const allTestimonials = [
   {
-    initials: "DR", name: "Dean R.", role: "Author & Creative Director", platform: "Fiverr",
+    initials: "DR", name: "Dean R.", role: "Author & Creative Director", platform: "Verified Client",
     text: "Atif delivered a complete AI graphic novel with incredible detail. His understanding of cinematic composition and character consistency was next level.",
   },
   {
-    initials: "RC", name: "Robert C.", role: "Business Owner", platform: "Fiverr",
+    initials: "RC", name: "Robert C.", role: "Business Owner", platform: "Verified Client",
     text: "The AI commercial Atif produced looked like it came from a real production studio. Fast delivery and the result exceeded expectations.",
   },
   {
-    initials: "SA", name: "Sarah A.", role: "E-commerce Founder", platform: "Upwork",
+    initials: "SA", name: "Sarah A.", role: "E-commerce Founder", platform: "Verified Client",
     text: "Atif automated our entire order processing workflow with n8n. What used to take 4 hours daily now runs on autopilot.",
   },
   {
@@ -24,19 +24,19 @@ const allTestimonials = [
     text: "Atif built our AI chatbot and lead qualification system. It handles 80% of our inbound inquiries automatically.",
   },
   {
-    initials: "LW", name: "Lisa W.", role: "Digital Consultant", platform: "Fiverr",
+    initials: "LW", name: "Lisa W.", role: "Digital Consultant", platform: "Verified Client",
     text: "The AI chatbot he built handles our customer support 24/7. Saved us $3K/month in staff costs immediately.",
   },
   {
-    initials: "AK", name: "Ahmed K.", role: "Moving Company Owner", platform: "Upwork",
+    initials: "AK", name: "Ahmed K.", role: "Moving Company Owner", platform: "Verified Client",
     text: "Atif automated our entire lead follow-up. We went from missing 60% of inquiries to booking every single one automatically.",
   },
   {
-    initials: "NK", name: "Nadia K.", role: "Med Spa Owner", platform: "Upwork",
+    initials: "NK", name: "Nadia K.", role: "Med Spa Owner", platform: "Verified Client",
     text: "Best investment we made. Atif built our entire CRM + funnel in days. We're now generating leads while we sleep.",
   },
   {
-    initials: "DO", name: "David O.", role: "Transport Company", platform: "Fiverr",
+    initials: "DO", name: "David O.", role: "Transport Company", platform: "Verified Client",
     text: "The n8n automation he built saves our team 40+ hours every week. Absolutely game-changing.",
   },
 ];
@@ -124,7 +124,7 @@ export function Testimonials() {
                 fontWeight: 600,
               }}
             >
-              300+ businesses
+              growing businesses
             </span>{" "}
             across logistics, SaaS &amp; coaching.
           </h2>
