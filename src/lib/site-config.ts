@@ -394,7 +394,7 @@ export const siteConfig = {
     {
       title: "Shopify Order Automation Pipeline",
       slug: "ecommerce-automation",
-      image: "/portfolio/ecommerce-automation.svg",
+      image: "/portfolio/ecommerce-automation.png",
       category: "AI Automation",
       kind: "case-study",
       liveUrl: "https://next-js-admin-panel-demo.vercel.app/",
@@ -414,11 +414,11 @@ export const siteConfig = {
     {
       title: "AI Product Video Campaign",
       slug: "ai-product-video",
-      image: "/portfolio/ai-product-video.svg",
+      image: "/portfolio/ai-product-video.png",
       category: "AI Video",
       kind: "case-study",
-      liveUrl: "https://ai-video-showcase.vercel.app",
-      liveLabel: "Live Demo",
+      liveUrl: "/videos",
+      liveLabel: "Watch Videos",
       description:
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
@@ -434,7 +434,7 @@ export const siteConfig = {
     {
       title: "Multi-Platform AI Chatbot",
       slug: "multi-platform-chatbot",
-      image: "/portfolio/multi-platform-chatbot.svg",
+      image: "/portfolio/multi-platform-chatbot.png",
       category: "AI Chatbot",
       kind: "case-study",
       liveUrl: "https://brightsmile-ai-demo.vercel.app/",
@@ -454,7 +454,7 @@ export const siteConfig = {
     {
       title: "Real Estate Lead Automation System",
       slug: "real-estate-leads",
-      image: "/portfolio/real-estate-leads.svg",
+      image: "/portfolio/real-estate-leads.png",
       category: "Lead Automation",
       kind: "case-study",
       liveUrl: "https://crm-dashboard-demo.vercel.app",
@@ -474,7 +474,7 @@ export const siteConfig = {
     {
       title: "AI Content Production Pipeline",
       slug: "content-pipeline",
-      image: "/portfolio/content-pipeline.svg",
+      image: "/portfolio/content-pipeline.png",
       category: "AI Content",
       kind: "case-study",
       liveUrl: "https://ai-content-generator-demo.vercel.app",
@@ -494,7 +494,7 @@ export const siteConfig = {
     {
       title: "SaaS Admin Dashboard & Analytics Panel",
       slug: "saas-dashboard",
-      image: "/portfolio/saas-dashboard.svg",
+      image: "/portfolio/saas-dashboard.png",
       category: "Web Development",
       kind: "case-study",
       liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
@@ -514,7 +514,7 @@ export const siteConfig = {
     {
       title: "Fitness Studio GHL CRM & Funnel System",
       slug: "ghl-fitness-crm",
-      image: "/portfolio/ghl-fitness-crm.svg",
+      image: "/portfolio/ghl-fitness-crm.png",
       category: "Lead Automation",
       kind: "case-study",
       liveUrl: "https://getgymflow.vercel.app/",
@@ -534,7 +534,7 @@ export const siteConfig = {
     {
       title: "E-Commerce Email Marketing Automation",
       slug: "email-automation",
-      image: "/portfolio/email-automation.svg",
+      image: "/portfolio/email-automation.png",
       category: "AI Automation",
       kind: "case-study",
       liveUrl: "https://workflow-editor-kargul.vercel.app/",
@@ -554,7 +554,7 @@ export const siteConfig = {
     {
       title: "Business Consulting WordPress Website",
       slug: "wordpress-consulting",
-      image: "/portfolio/wordpress-consulting.svg",
+      image: "/portfolio/wordpress-consulting.png",
       category: "Web Development",
       kind: "case-study",
       liveUrl: "https://wordpress-developer-portfolio.vercel.app",
@@ -574,7 +574,7 @@ export const siteConfig = {
     {
       title: "Helping Hopes Academy",
       slug: "helping-hopes-academy",
-      image: "/portfolio/helping-hopes-academy.svg",
+      image: "/portfolio/helping-hopes-academy.png",
       category: "Web Development",
       kind: "client",
       liveUrl: "https://helping-hopes-academy.vercel.app/",
@@ -593,7 +593,7 @@ export const siteConfig = {
     {
       title: "Pulseboard — SaaS Admin Dashboard",
       slug: "pulseboard-saas-demo",
-      image: "/portfolio/pulseboard-saas-demo.svg",
+      image: "/portfolio/pulseboard-saas-demo.png",
       category: "Web Development",
       kind: "live-demo",
       liveUrl: "https://pulseboard-saas-demo.vercel.app/?demo",
@@ -612,7 +612,7 @@ export const siteConfig = {
     {
       title: "BrightSmile — AI Receptionist Chatbot",
       slug: "brightsmile-ai-demo",
-      image: "/portfolio/brightsmile-ai-chatbot.svg",
+      image: "/portfolio/brightsmile-ai-chatbot.png",
       category: "AI Chatbot",
       kind: "live-demo",
       liveUrl: "https://brightsmile-ai-demo.vercel.app/",
@@ -631,7 +631,7 @@ export const siteConfig = {
     {
       title: "LeadFlow — n8n Lead Automation",
       slug: "leadflow-n8n-demo",
-      image: "/portfolio/leadflow-n8n-demo.svg",
+      image: "/portfolio/leadflow-n8n-demo.png",
       category: "AI Automation",
       kind: "live-demo",
       liveUrl: "https://leadflow-n8n-demo.vercel.app/",
