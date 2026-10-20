@@ -402,7 +402,7 @@ export const siteConfig = {
         "End-to-end Shopify order processing pipeline using n8n — automatic order validation, Google Sheets logging, WhatsApp customer confirmations, and Gmail error alerts. Zero manual intervention.",
       technologies: ["n8n", "Shopify API", "WhatsApp Business", "Google Sheets", "Gmail"],
       result: "90% reduction in order processing time",
-      image: "/portfolio/ecommerce-automation.jpg",
+      image: "/portfolio/ecommerce-automation.svg",
       caseStudy: {
         challenge: "The client's e-commerce team was manually processing 200+ orders daily — copying data to spreadsheets, sending confirmation messages, and tracking errors. This took 6+ hours daily and led to frequent mistakes, missed confirmations, and frustrated customers.",
         solution: "Built a multi-branch n8n automation pipeline triggered by Shopify webhooks. Every new order is automatically validated (filtering orders above $50), logged to Google Sheets, and a WhatsApp Business confirmation is sent to the customer. Error handling routes failures to Gmail admin alerts with full error context.",
@@ -421,7 +421,7 @@ export const siteConfig = {
         "Cinematic AI-generated product advertisement videos for social media campaigns — product reveals, lifestyle shots, and brand storytelling using frontier AI video models.",
       technologies: ["Veo 3", "Kling 3.0", "Higgsfield", "ElevenLabs", "Premiere Pro"],
       result: "500K+ combined views across platforms",
-      image: "/portfolio/ai-product-video.jpg",
+      image: "/portfolio/ai-product-video.svg",
       caseStudy: {
         challenge: "The brand needed high-quality video ads for product launches but traditional production quoted $5,000–$15,000 per video with 3-week turnaround. They needed 8 videos across different styles and platforms within 10 days.",
         solution: "Produced 8 cinematic AI videos using frontier models — Veo 3 for photorealistic product shots, Kling 3.0 for dynamic motion sequences, and Higgsfield for character-driven UGC-style content. ElevenLabs provided professional voiceovers, and final editing was done in Premiere Pro.",
@@ -440,7 +440,7 @@ export const siteConfig = {
         "Intelligent AI chatbot deployed across Website, WhatsApp, and Instagram — handling product inquiries, qualifying leads, and booking appointments automatically with CRM sync.",
       technologies: ["OpenAI GPT-4", "WhatsApp Business API", "Instagram API", "n8n", "CRM"],
       result: "80% reduction in response time",
-      image: "/portfolio/multi-platform-chatbot.jpg",
+      image: "/portfolio/multi-platform-chatbot.svg",
       caseStudy: {
         challenge: "A fashion e-commerce brand was losing sales because customer inquiries across WhatsApp, Instagram DMs, and website chat went unanswered for hours. The small support team couldn't handle 300+ daily messages across 3 platforms, leading to 60% inquiry abandonment.",
         solution: "Built a unified AI chatbot powered by GPT-4 with a custom-trained knowledge base of 500+ products. The bot handles category browsing, size recommendations, order tracking, and cart recovery — all in natural conversation. Complex queries are seamlessly escalated to human agents with full context.",
@@ -459,7 +459,7 @@ export const siteConfig = {
         "Complete CRM-powered lead automation system for a real estate agency — automated capture, AI qualification, follow-up sequences, pipeline management, and performance analytics.",
       technologies: ["GoHighLevel", "n8n", "WhatsApp", "Email Sequences", "Webhooks"],
       result: "3x increase in qualified leads",
-      image: "/portfolio/real-estate-leads.jpg",
+      image: "/portfolio/real-estate-leads.svg",
       caseStudy: {
         challenge: "A growing real estate agency was spending $8K/month on lead generation ads but converting less than 3% of leads. Agents manually followed up via phone, often 24-48 hours after inquiry. 70% of leads went cold before first contact, and there was zero visibility into pipeline performance.",
         solution: "Deployed a full lead automation ecosystem: instant capture from all ad channels, AI-powered qualification scoring, automated WhatsApp + email follow-up sequences, and a visual pipeline with deal stages (New → Contacted → Qualified → Proposal → Won). Custom analytics dashboard tracks every metric in real-time.",
@@ -478,7 +478,7 @@ export const siteConfig = {
         "Fully automated content production system — AI generates, schedules, and publishes social media content across Instagram, TikTok, YouTube, and LinkedIn daily without manual work.",
       technologies: ["OpenAI GPT-4", "n8n", "Instagram API", "TikTok API", "YouTube API", "LinkedIn API"],
       result: "Daily content output with zero manual work",
-      image: "/portfolio/content-pipeline.jpg",
+      image: "/portfolio/content-pipeline.svg",
       caseStudy: {
         challenge: "A tech startup's marketing team spent 15+ hours weekly creating social media content for 4 platforms. Content quality was inconsistent, posting schedule was irregular, and they had no system for repurposing long-form content into shorts, reels, and posts.",
         solution: "Built an AI-powered content engine that takes a single content brief or blog post and automatically generates platform-specific variations: Instagram carousels, TikTok scripts, YouTube Shorts descriptions, and LinkedIn thought-leadership posts. Everything auto-schedules to a weekly calendar.",
@@ -497,7 +497,7 @@ export const siteConfig = {
         "Custom-built SaaS admin dashboard with real-time analytics, user management, subscription tracking, MRR reporting, and automated notifications — built with Next.js and React.",
       technologies: ["Next.js", "React", "PostgreSQL", "Tailwind CSS", "REST APIs"],
       result: "Centralized operations for 7,400+ users",
-      image: "/portfolio/saas-dashboard.jpg",
+      image: "/portfolio/saas-dashboard.svg",
       caseStudy: {
         challenge: "A growing SaaS company with 7,000+ users had no centralized dashboard. Admins used 5 different tools to manage users, track revenue, and handle support. Monthly reporting took 8 hours of manual data compilation. There was no real-time visibility into churn, MRR trends, or user engagement.",
         solution: "Built a custom admin dashboard that consolidates all operational data into a single interface. Real-time analytics cards show MRR ($84K+), active users, churn rate, and new signups. User management table with search, filter, and inline actions. Automated notification system for key events.",
@@ -516,7 +516,7 @@ export const siteConfig = {
         "Complete GoHighLevel setup for a fitness studio chain — sales funnel builder, email nurture sequences, opportunity pipeline, appointment calendar, and automated member onboarding.",
       technologies: ["GoHighLevel", "Funnel Builder", "Email Automation", "Calendar", "Pipeline"],
       result: "28.75% funnel conversion rate",
-      image: "/portfolio/ghl-fitness-crm.jpg",
+      image: "/portfolio/ghl-fitness-crm.svg",
       caseStudy: {
         challenge: "A fitness studio chain with 3 locations had no unified CRM. Lead data was scattered across spreadsheets, follow-ups were manual, and membership onboarding took 45 minutes per new member. They were spending $12K/month on ads but had no visibility into which campaigns actually drove sign-ups.",
         solution: "Implemented a full GoHighLevel ecosystem: high-converting lead generation funnel (Fitness Workshop opt-in), automated email nurture series (Welcome → Discover → Value Offer), visual opportunity pipeline (New Lead → Qualified → Demo Scheduled → Proposal → Won), and integrated appointment calendar for consultations.",
@@ -535,7 +535,7 @@ export const siteConfig = {
         "Complete email marketing automation system — welcome series, abandoned cart recovery, and re-engagement campaigns with conditional logic, behavioral triggers, and A/B testing.",
       technologies: ["n8n", "Email API", "Shopify", "Conditional Logic", "A/B Testing"],
       result: "42% open rate, 12% cart recovery",
-      image: "/portfolio/email-automation.jpg",
+      image: "/portfolio/email-automation.svg",
       caseStudy: {
         challenge: "An e-commerce fashion brand was losing $35K/month in abandoned carts (68% abandonment rate). Their email marketing was limited to manual promotional blasts with 15% open rates. No automated sequences existed for welcome, cart recovery, or win-back flows.",
         solution: "Designed and implemented a comprehensive email automation system with 3 core flows: Welcome Journey (4 emails over 7 days), Abandoned Cart Recovery (3 emails with escalating urgency + discount), and Re-engagement Campaign (triggered after 90 days of inactivity). Each flow uses conditional branching based on customer behavior.",
@@ -554,7 +554,7 @@ export const siteConfig = {
         "Premium WordPress website for a consulting firm — modern design, services showcase, case studies section, contact forms, and SEO optimization for local search visibility.",
       technologies: ["WordPress", "Elementor Pro", "SEO", "Contact Forms", "Google Analytics"],
       result: "180% increase in organic traffic",
-      image: "/portfolio/wordpress-consulting.jpg",
+      image: "/portfolio/wordpress-consulting.svg",
       caseStudy: {
         challenge: "A business consulting firm's outdated website was losing them credibility. Page load time was 8+ seconds, mobile experience was broken, and they ranked on page 4+ for all target keywords. The site generated zero organic leads — all business came from referrals and cold outreach.",
         solution: "Redesigned the entire website with a modern, conversion-focused layout: clean hero with clear value proposition, services grid with icons, testimonials carousel, and prominent contact CTAs. Full SEO overhaul including technical optimization, local SEO, and content strategy.",
