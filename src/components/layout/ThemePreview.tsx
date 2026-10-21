@@ -204,18 +204,18 @@ function injectTheme(t: ThemePalette) {
       background: linear-gradient(135deg, ${t.primary}, ${t.g1}, ${t.g2}) !important;
       -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important;
     }
-    .glow { box-shadow: 0 0 40px rgba(${rgb},0.15) !important; }
-    .glow-text { text-shadow: 0 0 30px rgba(${rgb},0.3) !important; }
-    .btn-p:hover { box-shadow: 0 8px 24px rgba(${rgb},0.3) !important; }
+    .glow { box-shadow: 0 0 30px rgba(${rgb},0.08) !important; }
+    .glow-text { text-shadow: 0 0 20px rgba(${rgb},0.15) !important; }
+    .btn-p:hover { box-shadow: 0 6px 18px rgba(${rgb},0.18) !important; }
     .hero-cta-btn {
       background: linear-gradient(135deg, ${t.primary}, ${t.g1} 22%, ${t.primary}, ${t.g1} 78%, ${t.primary}) !important;
-      box-shadow: 0 14px 36px -10px rgba(${rgb},0.45), 0 0 24px rgba(${rgb},0.25) !important;
+      box-shadow: 0 10px 28px -10px rgba(${rgb},0.25), 0 0 16px rgba(${rgb},0.12) !important;
     }
-    .hero-cta-btn:hover { box-shadow: 0 22px 50px -10px rgba(${rgb},0.55), 0 0 32px rgba(${rgb},0.35) !important; }
+    .hero-cta-btn:hover { box-shadow: 0 14px 36px -10px rgba(${rgb},0.35), 0 0 20px rgba(${rgb},0.18) !important; }
     .hero-cta-inner-btn { background: linear-gradient(135deg, ${t.primary}, ${t.g1}) !important; }
     .cw-glass-pink {
       background: linear-gradient(135deg, ${t.primary}eb, ${t.g2}eb) !important;
-      box-shadow: 0 4px 16px rgba(${g2Rgb},0.2), inset 0 1px rgba(255,255,255,0.3) !important;
+      box-shadow: 0 4px 16px rgba(${g2Rgb},0.15), inset 0 1px rgba(255,255,255,0.1) !important;
     }
     .cw-pink-ring { box-shadow: 0 0 0 1.5px rgba(${rgb},0.7), 0 0 0 4px rgba(${rgb},0.15) !important; }
     .chat-dot { background: rgba(${rgb},0.5) !important; }

@@ -135,7 +135,7 @@ export function WhatsAppButton() {
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full text-white flex items-center justify-center cursor-pointer transition-all hover:scale-110"
         style={{
           background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
-          boxShadow: open ? "0 0 0 rgba(37,211,102,0)" : "0 4px 20px rgba(37,211,102,0.4)",
+          boxShadow: open ? "0 0 0 rgba(37,211,102,0)" : "0 4px 16px rgba(37,211,102,0.2)",
         }}
         aria-label="Chat on WhatsApp"
       >

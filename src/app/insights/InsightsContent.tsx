@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function InsightsContent() {
   return (
-    <div className="pt-24">
+    <div className="pt-4">
       <section className="section-padding">
         <div className="container-narrow mx-auto">
           <SectionHeading
@@ -27,23 +27,23 @@ export function InsightsContent() {
               >
                 <Link
                   href={`/insights/${article.slug}`}
-                  className="group block rounded-[var(--radius-lg)] border border-border bg-bg-elevated p-6 hover:border-accent/30 transition-all duration-300"
+                  className="group block rounded-2xl border border-bd bg-card p-6 hover:border-pink/30 transition-all duration-300"
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-accent">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-pink">
                       {article.category}
                     </span>
-                    <span className="text-[10px] text-text-muted">
+                    <span className="text-[10px] text-dm">
                       {article.date}
                     </span>
-                    <span className="text-[10px] text-text-muted">
+                    <span className="text-[10px] text-dm">
                       {article.readTime}
                     </span>
                   </div>
-                  <h2 className="text-lg md:text-xl font-bold group-hover:text-accent transition-colors mb-2">
+                  <h2 className="text-lg md:text-xl font-display font-bold text-wh group-hover:text-pink transition-colors mb-2">
                     {article.title}
                   </h2>
-                  <p className="text-sm text-text-secondary leading-relaxed">
+                  <p className="text-sm text-gr leading-relaxed">
                     {article.excerpt}
                   </p>
                 </Link>

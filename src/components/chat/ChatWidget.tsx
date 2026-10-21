@@ -66,7 +66,7 @@ export function ChatWidget() {
             boxShadow: "0 16px 50px rgba(0,0,0,0.14)",
           }}
         >
-          <div style={{ borderRadius: 20, overflow: "hidden", background: "#FBF8F4", width: "100%" }}>
+          <div style={{ borderRadius: 20, overflow: "hidden", background: "var(--card)", width: "100%" }}>
           {/* Header */}
           <div style={{ padding: "20px 20px 8px 20px", display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -74,7 +74,7 @@ export function ChatWidget() {
                 <Image src="/images/atif-face.jpeg" alt="Atif Malik" width={44} height={44} className="w-full h-full object-cover object-top" />
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: 15, color: "#2a1520", lineHeight: 1.2, fontFamily: "var(--fd)" }}>
+                <div style={{ fontWeight: 700, fontSize: 15, color: "var(--wh)", lineHeight: 1.2, fontFamily: "var(--fd)" }}>
                   Atif Malik
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 5, marginTop: 3 }}>
@@ -90,7 +90,7 @@ export function ChatWidget() {
                 border: "none",
                 cursor: "pointer",
                 fontSize: 20,
-                color: "#bbb",
+                color: "var(--dm)",
                 lineHeight: 1,
                 padding: "2px 4px",
                 marginTop: -2,
@@ -101,19 +101,19 @@ export function ChatWidget() {
           </div>
 
           {/* Divider line */}
-          <div style={{ margin: "0 20px", height: 1, background: "rgba(0,0,0,0.07)" }} />
+          <div style={{ margin: "0 20px", height: 1, background: "var(--bd)" }} />
 
           {/* Chat bubble */}
           <div style={{ padding: "14px 20px 16px" }}>
             <div
               style={{
-                background: "#ffffff",
+                background: "var(--bg2)",
                 borderRadius: "16px 16px 16px 4px",
                 padding: "14px 16px",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
                 fontSize: 13.5,
                 lineHeight: 1.65,
-                color: "#333",
+                color: "var(--gr)",
               }}
             >
               Hey &#x1F44B; I&apos;m Atif&apos;s site — let&apos;s skip the boring scroll. Ask me anything.
@@ -121,11 +121,11 @@ export function ChatWidget() {
           </div>
 
           {/* Divider line */}
-          <div style={{ margin: "0 20px", height: 1, background: "rgba(0,0,0,0.07)" }} />
+          <div style={{ margin: "0 20px", height: 1, background: "var(--bd)" }} />
 
           {/* Quick Start */}
           <div style={{ padding: "12px 20px 16px" }}>
-            <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "#baa8b5", marginBottom: 10 }}>
+            <div style={{ fontSize: 9.5, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--dm)", marginBottom: 10 }}>
               Quick Start
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
@@ -139,12 +139,12 @@ export function ChatWidget() {
                     justifyContent: "center",
                     padding: "9px 14px",
                     borderRadius: 9999,
-                    background: "#ffffff",
-                    border: "2px solid #e0c8d8",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+                    background: "var(--bg2)",
+                    border: "1px solid var(--bd)",
+                    boxShadow: "none",
                     fontSize: 12.5,
                     fontWeight: 500,
-                    color: "#4a3545",
+                    color: "var(--gr)",
                     textDecoration: "none",
                     textAlign: "center",
                     transition: "border-color 0.2s",
@@ -157,7 +157,7 @@ export function ChatWidget() {
           </div>
 
           {/* Divider line */}
-          <div style={{ margin: "0 20px", height: 1, background: "rgba(0,0,0,0.07)" }} />
+          <div style={{ margin: "0 20px", height: 1, background: "var(--bd)" }} />
 
           {/* CTA Button */}
           <div style={{ padding: "14px 20px 20px" }}>
@@ -179,7 +179,7 @@ export function ChatWidget() {
                 Open the full chat &rarr;
               </span>
             </Link>
-            <p style={{ textAlign: "center", fontSize: 10.5, color: "#c0a8b8", marginTop: 10, fontWeight: 500 }}>
+            <p style={{ textAlign: "center", fontSize: 10.5, color: "var(--dm)", marginTop: 10, fontWeight: 500 }}>
               Opens Atif&apos;s Studio — instant, no forms.
             </p>
           </div>

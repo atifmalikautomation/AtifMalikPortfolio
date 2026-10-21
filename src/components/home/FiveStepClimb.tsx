@@ -75,7 +75,7 @@ export function FiveStepClimb() {
           </h2>
 
           <p className="text-gr text-base md:text-lg max-w-xl mx-auto">
-            The same playbook we&apos;ve run across 600+ projects.
+            The same playbook we&apos;ve run across 800+ projects.
           </p>
         </motion.div>
 

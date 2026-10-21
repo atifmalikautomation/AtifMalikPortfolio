@@ -29,12 +29,12 @@ export default function Home() {
       <FrontierModels />
       <BusinessPain />
       <ServicesGrid />
+      <VideoGallery />
+      <Portfolio />
       <CalculatorEmbed />
       <ProblemsSection />
       <FiveStepClimb />
       <GrowthSystem />
-      <VideoGallery />
-      <Portfolio />
       <Testimonials />
       <Pricing />
       <FAQ />

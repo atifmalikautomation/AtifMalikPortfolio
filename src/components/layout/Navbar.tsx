@@ -100,7 +100,7 @@ export function Navbar() {
                                   { icon: MessageSquareText, name: "AI Chatbots", desc: "WhatsApp, web & Messenger bots", slug: "ai-chatbots" },
                                   { icon: Target, name: "GoHighLevel CRM", desc: "Funnels, pipelines & follow-ups", slug: "lead-sales-automation" },
                                   { icon: Globe, name: "Web Development", desc: "Custom sites built to convert", slug: "ai-web-development" },
-                                  { icon: ShoppingCart, name: "E-commerce Solutions", desc: "Stores + retention + CRO", slug: "ai-content-systems" },
+                                  { icon: ShoppingCart, name: "E-commerce Solutions", desc: "Stores + retention + CRO", slug: "ai-web-development" },
                                   { icon: Share2, name: "AI Agents", desc: "Custom agents that handle tasks", slug: "ai-agents" },
                                   { icon: Mail, name: "Custom AI Systems", desc: "End-to-end AI infrastructure", slug: "custom-ai-systems" },
                                 ].map((s) => (

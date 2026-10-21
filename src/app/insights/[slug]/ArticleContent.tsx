@@ -248,7 +248,7 @@ export function ArticleContent({ article }: { article: InsightMeta }) {
   const body = articleBodies[article.slug] || "[Article content to be written]";
 
   return (
-    <div className="pt-24">
+    <div className="pt-4">
       <article className="section-padding">
         <div className="container-narrow mx-auto max-w-3xl">
           <motion.div
@@ -259,7 +259,7 @@ export function ArticleContent({ article }: { article: InsightMeta }) {
             {/* Back link */}
             <Link
               href="/insights"
-              className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-dm hover:text-pink transition-colors mb-8"
             >
               <ArrowLeft size={14} />
               Back to Insights
@@ -268,20 +268,20 @@ export function ArticleContent({ article }: { article: InsightMeta }) {
             {/* Header */}
             <div className="mb-10">
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-xs font-mono uppercase tracking-widest text-accent">
+                <span className="text-xs font-mono uppercase tracking-widest text-pink">
                   {article.category}
                 </span>
-                <span className="text-xs text-text-muted">{article.date}</span>
-                <span className="text-xs text-text-muted">
+                <span className="text-xs text-dm">{article.date}</span>
+                <span className="text-xs text-dm">
                   {article.readTime}
                 </span>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-wh tracking-tight mb-4">
                 {article.title}
               </h1>
-              <p className="text-lg text-text-secondary">{article.excerpt}</p>
-              <div className="mt-4 text-sm text-text-muted">
-                By <span className="text-text-secondary">Atif Malik</span>
+              <p className="text-lg text-gr">{article.excerpt}</p>
+              <div className="mt-4 text-sm text-dm">
+                By <span className="text-gr">Atif Malik</span>
               </div>
             </div>
           </motion.div>
@@ -322,9 +322,9 @@ export function ArticleContent({ article }: { article: InsightMeta }) {
                     {trimmed.split("\n").map((line, j) => (
                       <li
                         key={j}
-                        className="text-text-secondary leading-relaxed flex items-start gap-2"
+                        className="text-gr leading-relaxed flex items-start gap-2"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-pink mt-2 flex-shrink-0" />
                         {line.replace(/^- \*\*(.+?)\*\*:/, "$1:").replace(/^- /, "")}
                       </li>
                     ))}
@@ -334,12 +334,12 @@ export function ArticleContent({ article }: { article: InsightMeta }) {
               return (
                 <p
                   key={i}
-                  className="text-text-secondary leading-relaxed my-4"
+                  className="text-gr leading-relaxed my-4"
                   dangerouslySetInnerHTML={{
                     __html: trimmed
                       .replace(
                         /\*\*(.+?)\*\*/g,
-                        '<strong class="text-text-primary font-semibold">$1</strong>'
+                        '<strong class="text-wh font-semibold">$1</strong>'
                       ),
                   }}
                 />
@@ -352,12 +352,12 @@ export function ArticleContent({ article }: { article: InsightMeta }) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="mt-16 rounded-[var(--radius-xl)] border border-border bg-bg-elevated p-8 text-center"
+            className="mt-16 rounded-2xl border border-bd bg-card p-8 text-center"
           >
-            <h2 className="text-2xl font-bold mb-3">
+            <h2 className="text-2xl font-display font-bold text-wh mb-3">
               Need Help Implementing This?
             </h2>
-            <p className="text-text-secondary mb-6 max-w-md mx-auto">
+            <p className="text-gr mb-6 max-w-md mx-auto">
               I build these systems for businesses every day. Let&apos;s discuss
               how to apply these concepts to your specific situation.
             </p>

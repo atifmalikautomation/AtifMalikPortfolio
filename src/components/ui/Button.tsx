@@ -20,13 +20,13 @@ interface ButtonProps {
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-accent text-white hover:bg-accent-hover font-semibold shadow-[0_0_20px_rgba(224,122,95,0.2)] hover:shadow-[0_0_30px_rgba(224,122,95,0.3)] hover:brightness-115 hover:-translate-y-0.5",
+    "bg-pink text-white hover:bg-pink-hover font-semibold shadow-[0_0_20px_rgba(224,122,95,0.2)] hover:shadow-[0_0_30px_rgba(224,122,95,0.3)] hover:brightness-115 hover:-translate-y-0.5",
   secondary:
-    "bg-bg-surface text-text-primary hover:bg-surface-hover border border-border hover:border-border-hover",
+    "bg-bg3 text-wh hover:bg-bg2 border border-bd hover:border-bd2",
   ghost:
-    "text-text-secondary hover:text-text-primary hover:bg-bg-surface",
+    "text-gr hover:text-wh hover:bg-bg3",
   outline:
-    "border border-accent/40 text-accent hover:bg-accent-dim hover:border-accent",
+    "border border-pink/40 text-pink hover:bg-pink12 hover:border-pink",
 };
 
 const sizes: Record<Size, string> = {
@@ -47,7 +47,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const cls = clsx(
-    "inline-flex items-center justify-center gap-2 rounded-[var(--radius)] font-medium transition-all duration-200 cursor-pointer whitespace-nowrap",
+    "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 cursor-pointer whitespace-nowrap font-display",
     variants[variant],
     sizes[size],
     disabled && "opacity-50 pointer-events-none",

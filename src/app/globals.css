@@ -497,6 +497,28 @@ html.light .nav-book-btn:hover {
   100% { background-position: 250% 0; }
 }
 
+/* ═══ Dark mode: premium rotating gradient border ═══ */
+html:not(.light) .hero-cta-btn {
+  background: conic-gradient(from var(--cta-angle, 0deg), #E07A5F, #C05A35, #8B3A1F, #E07A5F, #F5A68A, #E07A5F);
+  box-shadow: 0 4px 20px -6px rgba(224, 122, 95, 0.25);
+  animation: hero-cta-spin 3s linear infinite;
+}
+html:not(.light) .hero-cta-btn::after {
+  display: none;
+}
+html:not(.light) .hero-cta-btn:hover {
+  box-shadow: 0 6px 28px -4px rgba(224, 122, 95, 0.35);
+  transform: translateY(-2px);
+}
+@property --cta-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes hero-cta-spin {
+  to { --cta-angle: 360deg; }
+}
+
 /* ═══ Hero glow ═══ */
 .hero-glow {
   position: absolute;
@@ -615,10 +637,17 @@ html.light .nav-book-btn:hover {
 
 /* ═══ Light mode overrides ═══ */
 html.light .hero-cta-btn {
-  box-shadow: 0 14px 36px -10px rgba(208, 104, 66, 0.35), 0 0 24px rgba(208, 104, 66, 0.15);
+  background: #F8C2AC;
+  box-shadow: 0 14px 36px -10px rgba(208, 104, 66, 0.45), 0 0 24px rgba(208, 104, 66, 0.25);
+  animation: hero-cta-pulse 2.5s ease-in-out infinite;
+}
+html.light .hero-cta-btn::after {
+  background: linear-gradient(120deg, transparent 25%, rgba(255, 255, 255, 0.6) 50%, transparent 75%);
+  background-size: 200% 100%;
+  display: block;
 }
 html.light .hero-cta-btn:hover {
-  box-shadow: 0 22px 50px -10px rgba(208, 104, 66, 0.45), 0 0 32px rgba(208, 104, 66, 0.25);
+  box-shadow: 0 22px 50px -10px rgba(208, 104, 66, 0.55), 0 0 32px rgba(208, 104, 66, 0.35);
 }
 html.light .glow {
   box-shadow: 0 0 40px rgba(208, 104, 66, 0.1);

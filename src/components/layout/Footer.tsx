@@ -83,8 +83,8 @@ export function Footer() {
       }}
     >
       {/* Glow blobs */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ background: "rgba(255, 200, 50, 0.2)" }} />
-      <div className="absolute -bottom-32 -right-32 w-[28rem] h-[28rem] rounded-full blur-[100px] pointer-events-none" style={{ background: "rgba(255, 255, 255, 0.1)" }} />
+      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ background: "rgba(255, 200, 50, 0.1)" }} />
+      <div className="absolute -bottom-32 -right-32 w-[28rem] h-[28rem] rounded-full blur-[100px] pointer-events-none" style={{ background: "rgba(255, 255, 255, 0.04)" }} />
       {/* Grain */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url(/grain.svg)", backgroundRepeat: "repeat" }} />
       {/* Top shimmer */}
@@ -200,7 +200,7 @@ export function Footer() {
               }}
             >
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 rounded-full" style={{ background: "#fde68a", boxShadow: "0 0 8px rgba(253,232,138,0.6)" }} />
+                <div className="w-2 h-2 rounded-full" style={{ background: "#fde68a", boxShadow: "0 0 6px rgba(253,232,138,0.3)" }} />
                 <h4 className="font-display font-bold text-lg" style={{ color: "#fff" }}>Ready to Grow?</h4>
               </div>
               <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.85)" }}>
@@ -212,7 +212,7 @@ export function Footer() {
                 style={{
                   background: "#ffffff",
                   color: "#C05A35",
-                  boxShadow: "0 4px 20px rgba(255,255,255,0.25)",
+                  boxShadow: "0 4px 16px rgba(255,255,255,0.1)",
                 }}
               >
                 Book a Free Call
@@ -238,7 +238,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-6 pb-3 flex flex-col sm:flex-row justify-between items-center gap-4 text-[13px]" style={{ color: "rgba(255,255,255,0.55)" }}>
           <div className="flex items-center gap-2.5">
-            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#4ade80", boxShadow: "0 0 6px rgba(74,222,128,0.5)" }} />
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#4ade80", boxShadow: "0 0 4px rgba(74,222,128,0.25)" }} />
             <span>Available for new projects</span>
             <span style={{ color: "rgba(255,255,255,0.2)" }}>&middot;</span>
             <span>&copy; {new Date().getFullYear()} Atif Malik</span>

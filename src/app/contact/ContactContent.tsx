@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site-config";
 import { Mail, MessageCircle, Send } from "lucide-react";
 import { getTrackingIds } from "@/lib/tracker-client";
@@ -42,7 +41,7 @@ export function ContactContent() {
   }
 
   return (
-    <div className="pt-24">
+    <div className="pt-4">
       <section className="section-padding">
         <div className="container-narrow mx-auto">
           <SectionHeading
@@ -53,18 +52,18 @@ export function ContactContent() {
 
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10">
             {/* Form */}
-            <div className="rounded-[var(--radius-xl)] border border-border bg-bg-elevated p-6 md:p-8">
+            <div className="rounded-2xl border border-bd bg-card p-6 md:p-8">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="text-center py-12"
                 >
-                  <div className="w-16 h-16 rounded-full bg-accent-dim border border-accent/30 mx-auto mb-4 flex items-center justify-center">
-                    <Send size={24} className="text-accent" />
+                  <div className="w-16 h-16 rounded-full bg-pink12 border border-pink/30 mx-auto mb-4 flex items-center justify-center">
+                    <Send size={24} className="text-pink" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Message Sent!</h3>
-                  <p className="text-text-secondary">
+                  <h3 className="text-xl font-display font-bold text-wh mb-2">Message Sent!</h3>
+                  <p className="text-gr">
                     I&apos;ll review your message and get back to you within 24 hours.
                   </p>
                 </motion.div>
@@ -91,7 +90,7 @@ export function ContactContent() {
                     onChange={(v) => setForm({ ...form, business: v })}
                   />
                   <div>
-                    <label className="block text-sm text-text-secondary mb-2">
+                    <label className="block text-sm text-gr mb-2">
                       What do you need?
                     </label>
                     <select
@@ -99,7 +98,7 @@ export function ContactContent() {
                       onChange={(e) =>
                         setForm({ ...form, service: e.target.value })
                       }
-                      className="w-full bg-bg-surface border border-border rounded-[var(--radius)] px-4 py-3 text-sm text-text-primary focus:border-accent/40 focus:outline-none transition-colors"
+                      className="w-full bg-bg2 border border-bd rounded-xl px-4 py-3 text-sm text-wh focus:border-pink/40 focus:outline-none transition-colors"
                     >
                       <option value="">Select a service</option>
                       {siteConfig.services.map((s) => (
@@ -111,7 +110,7 @@ export function ContactContent() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm text-text-secondary mb-2">
+                    <label className="block text-sm text-gr mb-2">
                       Tell me about your project
                     </label>
                     <textarea
@@ -122,7 +121,7 @@ export function ContactContent() {
                       rows={5}
                       required
                       placeholder="What are you trying to achieve? What's the current problem?"
-                      className="w-full bg-bg-surface border border-border rounded-[var(--radius)] px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:border-accent/40 focus:outline-none transition-colors resize-none"
+                      className="w-full bg-bg2 border border-bd rounded-xl px-4 py-3 text-sm text-wh placeholder:text-dm focus:border-pink/40 focus:outline-none transition-colors resize-none"
                     />
                   </div>
                   {error && (
@@ -133,22 +132,22 @@ export function ContactContent() {
                       </a>
                     </p>
                   )}
-                  <Button type="submit" className="w-full" size="lg" disabled={sending}>
+                  <button type="submit" disabled={sending} className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-display font-bold text-white transition-all hover:scale-[1.02] hover:brightness-110 disabled:opacity-50" style={{ background: "var(--pink)" }}>
                     {sending ? "Sending..." : "Send Message"}
                     <Send size={16} />
-                  </Button>
+                  </button>
                 </form>
               )}
             </div>
 
             {/* Sidebar */}
             <div className="space-y-5">
-              <div className="rounded-[var(--radius-lg)] border border-border bg-bg-elevated p-6">
-                <h3 className="text-sm font-semibold mb-4">Direct Contact</h3>
+              <div className="rounded-2xl border border-bd bg-card p-6">
+                <h3 className="text-sm font-display font-semibold text-wh mb-4">Direct Contact</h3>
                 <div className="space-y-3">
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="flex items-center gap-3 text-sm text-text-secondary hover:text-accent transition-colors"
+                    className="flex items-center gap-3 text-sm text-gr hover:text-pink transition-colors"
                   >
                     <Mail size={16} />
                     {siteConfig.contact.email}
@@ -157,7 +156,7 @@ export function ContactContent() {
                     href={siteConfig.contact.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-sm text-text-secondary hover:text-accent transition-colors"
+                    className="flex items-center gap-3 text-sm text-gr hover:text-pink transition-colors"
                   >
                     <MessageCircle size={16} />
                     WhatsApp
@@ -165,20 +164,20 @@ export function ContactContent() {
                 </div>
               </div>
 
-              <div className="rounded-[var(--radius-lg)] border border-accent/20 bg-accent-dim/10 p-6">
-                <h3 className="text-sm font-semibold text-accent mb-2">
+              <div className="rounded-2xl border border-pink/20 bg-pink/5 p-6">
+                <h3 className="text-sm font-display font-semibold text-pink mb-2">
                   Free AI Audit
                 </h3>
-                <p className="text-xs text-text-secondary leading-relaxed">
+                <p className="text-xs text-gr leading-relaxed">
                   Not sure where to start? Request a free AI automation audit.
                   I&apos;ll analyze your business processes and identify the highest-impact
                   automation opportunities.
                 </p>
               </div>
 
-              <div className="rounded-[var(--radius-lg)] border border-border bg-bg-elevated p-6">
-                <h3 className="text-sm font-semibold mb-2">Response Time</h3>
-                <p className="text-xs text-text-secondary">
+              <div className="rounded-2xl border border-bd bg-card p-6">
+                <h3 className="text-sm font-display font-semibold text-wh mb-2">Response Time</h3>
+                <p className="text-xs text-gr">
                   I typically respond within 24 hours. For urgent projects,
                   reach out via WhatsApp.
                 </p>
@@ -206,13 +205,13 @@ function FormField({
 }) {
   return (
     <div>
-      <label className="block text-sm text-text-secondary mb-2">{label}</label>
+      <label className="block text-sm text-gr mb-2">{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
-        className="w-full bg-bg-surface border border-border rounded-[var(--radius)] px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:border-accent/40 focus:outline-none transition-colors"
+        className="w-full bg-bg2 border border-bd rounded-xl px-4 py-3 text-sm text-wh placeholder:text-dm focus:border-pink/40 focus:outline-none transition-colors"
       />
     </div>
   );

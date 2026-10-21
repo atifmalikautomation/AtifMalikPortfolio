@@ -144,9 +144,9 @@ export function AboutSection() {
                   key={stat.label}
                   className="rounded-xl p-3 text-center"
                   style={{
-                    backgroundColor: "#ffffff",
-                    border: "1px solid rgba(224, 122, 95, 0.2)",
-                    boxShadow: "0 4px 20px rgba(224, 122, 95, 0.15)",
+                    backgroundColor: "var(--card)",
+                    border: "1px solid var(--bd)",
+                    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
                   }}
                 >
                   <span className="text-base block mb-0.5">{stat.emoji}</span>
@@ -213,9 +213,9 @@ export function AboutSection() {
             <div
               className="absolute -top-4 -right-3 lg:-right-5 z-20 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[10px] sm:text-[11px] font-display font-bold uppercase tracking-[0.12em] text-pink whitespace-nowrap"
               style={{
-                backgroundColor: "#ffffff",
-                border: "1px solid rgba(224, 122, 95, 0.2)",
-                boxShadow: "0 4px 20px rgba(224, 122, 95, 0.15)",
+                backgroundColor: "var(--card)",
+                border: "1px solid var(--bd)",
+                boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
               }}
             >
               <Sparkles size={12} className="flex-shrink-0" /> No.1 AI Agency in Pakistan
@@ -235,9 +235,9 @@ export function AboutSection() {
                     key={stat.label}
                     className="rounded-2xl p-3 text-center min-w-[88px]"
                     style={{
-                      backgroundColor: "#ffffff",
-                      border: "1px solid rgba(224, 122, 95, 0.2)",
-                      boxShadow: "0 4px 20px rgba(224, 122, 95, 0.15)",
+                      backgroundColor: "var(--card)",
+                      border: "1px solid var(--bd)",
+                      boxShadow: "0 4px 16px rgba(0, 0, 0, 0.12)",
                     }}
                   >
                     <span className="text-lg block mb-0.5">{stat.emoji}</span>

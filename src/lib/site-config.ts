@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Premium AI video production, cinematic content creation, and end-to-end automation systems. Pakistan's leading AI video and automation agency \u2014 turning vision into revenue worldwide.",
   url: "https://atifmalik.me",
-  ogImage: "/og.png",
+  ogImage: "/opengraph-image",
 
   contact: {
     email: "atifmalikfreelancer@gmail.com",
@@ -39,7 +39,7 @@ export const siteConfig = {
 
   stats: [
     { label: "Projects Delivered", value: "800+", emoji: "\uD83D\uDE80" },
-    { label: "Years Experience", value: "5+", emoji: "\uD83C\uDFC6" },
+    { label: "Years Experience", value: "5+", emoji: "\uD83D\uDDD3\uFE0F" },
     { label: "Client Satisfaction", value: "98%", emoji: "\uD83C\uDFAF" },
   ],
 

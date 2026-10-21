@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
 import type { Service } from "@/lib/site-config";
-import { Check, X, ArrowRight, ArrowUpRight, Sparkles, Clock, Shield, Zap, Plus, Phone, Video, ChevronDown, MessageCircle } from "lucide-react";
+import { Check, X, ArrowRight, ArrowUpRight, Sparkles, Clock, Shield, Zap, Plus, Phone, Video, ChevronDown, MessageCircle, TrendingUp, Users, DollarSign, Timer } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -56,8 +56,9 @@ export function ServiceDetail({ service }: { service: Service }) {
     <div className="pt-2 pb-16">
 
       {/* ═══ 1. HERO ═══ */}
-      <section className="section-padding">
-        <div className="max-w-6xl mx-auto px-4">
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-pink/[0.04] blur-[150px] pointer-events-none" />
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* Left */}
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
@@ -87,9 +88,10 @@ export function ServiceDetail({ service }: { service: Service }) {
                 </a>
               </div>
 
-              <div className="mt-7 flex items-center gap-2 text-sm text-dm">
-                <Check className="w-4 h-4 text-[#22C55E]" />
-                <span>14-day launch · Milestone billing · Cancel anytime</span>
+              <div className="mt-7 flex flex-wrap items-center gap-4 text-sm text-dm">
+                {["14-day launch", "Milestone billing", "Cancel anytime"].map((t) => (
+                  <span key={t} className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-[#22C55E]" /> {t}</span>
+                ))}
               </div>
             </motion.div>
 
@@ -98,7 +100,7 @@ export function ServiceDetail({ service }: { service: Service }) {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="hidden lg:grid grid-cols-2 gap-3"
+              className="hidden lg:grid grid-cols-2 gap-4"
             >
               {[
                 { value: "800+", label: "Projects Shipped", emoji: "🚀" },
@@ -108,7 +110,7 @@ export function ServiceDetail({ service }: { service: Service }) {
               ].map((stat, i) => (
                 <div
                   key={stat.label}
-                  className={`rounded-2xl p-5 border transition-all hover:-translate-y-1 ${
+                  className={`rounded-2xl p-6 border transition-all hover:-translate-y-1 hover:shadow-lg ${
                     i % 2 === 1 ? "text-white border-transparent" : "bg-card border-bd"
                   }`}
                   style={i % 2 === 1 ? { background: "var(--pink)" } : undefined}
@@ -124,29 +126,71 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
       {/* ═══ 2. TRUSTED BY ═══ */}
-      <section className="py-10 px-4 border-y border-bd bg-bg2/40">
+      <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <p className="text-center text-[10px] uppercase tracking-[0.3em] text-dm font-bold mb-5">
+          <p className="text-center text-[10px] uppercase tracking-[0.3em] text-dm font-bold mb-8">
             Trusted by businesses worldwide
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-4 items-start justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 justify-items-center">
             {[
-              { name: "Dean Russell", role: "Author & Publisher" },
-              { name: "Robert Chery", role: "Business Owner" },
-              { name: "Sarah Ahmed", role: "E-commerce Founder" },
-              { name: "Michael K.", role: "Agency Owner" },
-              { name: "Ahmed K.", role: "Moving Company" },
-              { name: "Nadia K.", role: "Med Spa Owner" },
+              { name: "Dean Russell", role: "Author & Publisher", i: "DR" },
+              { name: "Robert Chery", role: "Business Owner", i: "RC" },
+              { name: "Sarah Ahmed", role: "E-commerce Founder", i: "SA" },
+              { name: "Michael K.", role: "Agency Owner", i: "MK" },
+              { name: "Ahmed K.", role: "Moving Company", i: "AK" },
+              { name: "Nadia K.", role: "Med Spa Owner", i: "NK" },
             ].map((client) => (
-              <div key={client.name} className="text-center">
-                <span className="block font-display font-extrabold text-base text-wh/75 tracking-tight">{client.name}</span>
-                <span className="mt-0.5 inline-block text-xs font-semibold text-dm">{client.role}</span>
+              <div key={client.name} className="flex flex-col items-center text-center">
+                <div className="w-11 h-11 rounded-full flex items-center justify-center mb-2.5 text-xs font-display font-bold text-white" style={{ background: "var(--pink)" }}>{client.i}</div>
+                <span className="block font-display font-bold text-sm text-wh tracking-tight">{client.name}</span>
+                <span className="mt-0.5 text-[11px] text-dm">{client.role}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ═══ INDUSTRY STATS ═══ */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-bg2/40 pointer-events-none" />
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-10">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">The reality</p>
+            <h2 className="font-display font-extrabold text-3xl lg:text-4xl tracking-tight leading-[1.05] text-wh">
+              Why most businesses{" "}
+              <span className="text-pink" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}>stay stuck.</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: Timer, value: "40+", unit: "hrs/week", desc: "Wasted on manual tasks that AI handles in seconds" },
+              { icon: DollarSign, value: "$3K–8K", unit: "/month", desc: "Revenue leaked from slow follow-ups and missed leads" },
+              { icon: Users, value: "60%", unit: "of leads", desc: "Lost because no one replied within the first 5 minutes" },
+              { icon: TrendingUp, value: "3.2x", unit: "growth", desc: "Average revenue increase after AI automation in 90 days" },
+            ].map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div key={stat.desc} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                  className="rounded-2xl border border-bd bg-card p-6 text-center hover:-translate-y-1 transition-all group">
+                  <div className="w-12 h-12 rounded-xl bg-pink/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-pink/20 transition-colors">
+                    <Icon className="w-6 h-6 text-pink" strokeWidth={1.5} />
+                  </div>
+                  <div className="font-display font-extrabold text-3xl lg:text-4xl text-pink leading-none">{stat.value}</div>
+                  <div className="text-xs font-display font-bold text-dm uppercase tracking-wider mt-1 mb-3">{stat.unit}</div>
+                  <p className="text-sm text-gr leading-relaxed">{stat.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
 
       {/* ═══ 3. WHO I HELP ═══ */}
       <section className="section-padding">
@@ -189,53 +233,138 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
-      {/* ═══ 3. BEFORE & AFTER ═══ */}
-      <section id="included" className="section-padding">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">Before &amp; After</p>
+      {/* ═══ HOW IT WORKS ═══ */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-bg2/40 pointer-events-none" />
+        <div className="max-w-5xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-12">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">How it works</p>
             <h2 className="font-display font-extrabold text-3xl lg:text-5xl tracking-tight leading-[1.05] text-wh">
-              What&apos;s broken vs what you{" "}
+              Three steps to{" "}
+              <span className="text-pink" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}>launch day.</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { step: "01", title: "Free Audit Call", desc: "30 minutes. You tell me the biggest bottleneck. I map the fastest fix — you keep the plan even if you never hire me.", icon: Phone },
+              { step: "02", title: "Build & Ship", desc: "I build your system in 14-21 days. Milestone billing — you only pay when each stage is approved and shipped.", icon: Zap },
+              { step: "03", title: "Launch & Scale", desc: "Your system goes live. I monitor, optimize, and ensure everything runs at peak — for 90 days.", icon: Sparkles },
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div key={item.step} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>
+                  <div className="bg-card border border-bd rounded-2xl p-7 hover:-translate-y-1 hover:border-pink/30 transition-all h-full group">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="w-14 h-14 rounded-2xl flex items-center justify-center font-display font-extrabold text-xl text-white shadow-lg" style={{ background: "var(--pink)" }}>{item.step}</span>
+                      <Icon className="w-5 h-5 text-dm group-hover:text-pink transition-colors" />
+                    </div>
+                    <h3 className="font-display font-extrabold text-xl text-wh mb-3">{item.title}</h3>
+                    <p className="text-sm text-gr leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
+      {/* ═══ 3. TRANSFORMATION ═══ */}
+      <section id="included" className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-bg2/40 pointer-events-none" />
+        <div className="max-w-5xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-12">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">The Transformation</p>
+            <h2 className="font-display font-extrabold text-3xl lg:text-5xl tracking-tight leading-[1.05] text-wh">
+              From chaos to{" "}
               <span className="text-pink" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}>
-                actually get.
+                clockwork.
               </span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              className="rounded-2xl border border-red-500/20 bg-red-500/[0.06] p-6">
-              <h3 className="text-sm font-display font-bold text-red-400 mb-5 flex items-center gap-2">
-                <X size={18} /> The Pain Right Now
-              </h3>
-              <ul className="space-y-4">
-                {service.problems.map((p, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-gr">
-                    <span className="w-5 h-5 rounded-full bg-red-500/15 flex items-center justify-center shrink-0 mt-0.5">
-                      <X size={12} className="text-red-400" />
-                    </span>
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+          <div className="rounded-3xl border border-bd overflow-hidden bg-card">
+            {/* Header */}
+            <div className="grid grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_60px_1fr] items-center border-b border-bd">
+              <div className="px-5 md:px-8 py-4">
+                <span className="text-[10px] uppercase tracking-[0.25em] font-display font-bold text-red-400 flex items-center gap-2"><X size={12} /> Before</span>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-8 h-8 rounded-full bg-pink/10 border border-pink/20 flex items-center justify-center"><ArrowRight size={14} className="text-pink" /></div>
+              </div>
+              <div className="px-5 md:px-8 py-4">
+                <span className="text-[10px] uppercase tracking-[0.25em] font-display font-bold text-[#22C55E] flex items-center gap-2"><Sparkles size={12} /> After</span>
+              </div>
+            </div>
+            {/* Rows */}
+            {service.problems.map((problem, i) => (
+              <motion.div key={i} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                className={`grid grid-cols-[1fr_40px_1fr] md:grid-cols-[1fr_60px_1fr] items-center group hover:bg-bg2/60 transition-colors ${i < service.problems.length - 1 ? "border-b border-bd" : ""}`}>
+                <div className="px-5 md:px-8 py-5">
+                  <div className="flex items-start gap-3">
+                    <span className="w-5 h-5 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center shrink-0 mt-0.5"><X size={10} className="text-red-400" /></span>
+                    <span className="text-sm text-gr/70 leading-relaxed line-through decoration-red-400/30">{problem}</span>
+                  </div>
+                </div>
+                <div className="flex justify-center"><div className="w-6 h-px bg-gradient-to-r from-red-400/30 via-pink to-[#22C55E]/30" /></div>
+                <div className="px-5 md:px-8 py-5">
+                  <div className="flex items-start gap-3">
+                    <span className="w-5 h-5 rounded-full bg-[#22C55E]/10 border border-[#22C55E]/20 flex items-center justify-center shrink-0 mt-0.5"><Check size={10} className="text-[#22C55E]" /></span>
+                    <span className="text-sm text-wh font-medium leading-relaxed">{service.outcomes[i] || "Fully automated"}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+            {/* Bottom CTA */}
+            <div className="border-t border-bd px-5 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4" style={{ background: "rgba(224, 122, 95, 0.04)" }}>
+              <p className="text-sm text-gr">Ready to make the switch? <span className="text-pink font-display font-bold">Average time: 14 days.</span></p>
+              <Link href="/book" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-display font-bold text-white hover:scale-105 transition-all" style={{ background: "var(--pink)" }}>
+                Start my transformation <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              className="rounded-2xl border border-[#22C55E]/20 bg-[#22C55E]/[0.06] p-6">
-              <h3 className="text-sm font-display font-bold text-[#22C55E] mb-5 flex items-center gap-2">
-                <Check size={18} /> After Atif Builds It
-              </h3>
-              <ul className="space-y-4">
-                {service.outcomes.map((o, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-gr">
-                    <span className="w-5 h-5 rounded-full bg-[#22C55E]/15 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check size={12} className="text-[#22C55E]" />
-                    </span>
-                    {o}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
+      {/* ═══ WHAT'S INCLUDED ═══ */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+            <div className="lg:sticky lg:top-24">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">What&apos;s included</p>
+              <h2 className="font-display font-extrabold text-3xl lg:text-4xl tracking-tight leading-[1.05] text-wh mb-4">
+                Everything in{" "}
+                <span className="text-pink" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}>your build.</span>
+              </h2>
+              <p className="text-gr leading-relaxed mb-6">No hidden costs, no surprise add-ons. This is exactly what ships when you hire me for {service.title}.</p>
+              <div className="flex items-center gap-3 text-sm text-dm"><Shield className="w-5 h-5 text-pink" /><span>You own 100% of everything from day one</span></div>
+            </div>
+            <div className="space-y-3">
+              {[
+                { title: "Discovery & Strategy", items: ["Business process audit", "Competitor analysis", "Custom system architecture", "Tech stack selection"] },
+                { title: "Design & Build", items: ["UI/UX design (Figma)", "Frontend development", "Backend & API integration", "AI model configuration"] },
+                { title: "Testing & Launch", items: ["Full QA testing", "Performance optimization", "Deployment & DNS setup", "Launch day support"] },
+                { title: "Post-Launch Care", items: ["90-day bug fixes included", "Performance monitoring", "Monthly strategy call", "Priority WhatsApp support"] },
+              ].map((group, i) => (
+                <motion.div key={group.title} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                  className="bg-card border border-bd rounded-2xl p-5 hover:border-pink/20 transition-all">
+                  <h4 className="font-display font-bold text-base text-wh mb-3 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-extrabold text-white" style={{ background: "var(--pink)" }}>{i + 1}</span>
+                    {group.title}
+                  </h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {group.items.map((item) => (
+                      <div key={item} className="flex items-center gap-2 text-sm text-gr"><Check className="w-3.5 h-3.5 text-pink shrink-0" />{item}</div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -301,6 +430,66 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
+      {/* ═══ CLIENT RESULTS ═══ */}
+      <section className="section-padding relative overflow-hidden">
+        <div className="absolute inset-0 bg-bg2/40 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-pink/[0.03] blur-[150px] pointer-events-none" />
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-10">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">Results</p>
+            <h2 className="font-display font-extrabold text-3xl lg:text-5xl tracking-tight leading-[1.05] text-wh">
+              Numbers that{" "}
+              <span className="text-pink" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic", fontWeight: 500 }}>speak louder.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+            {[
+              { value: "40+", label: "Hours Saved Weekly", sub: "per client average" },
+              { value: "3.2x", label: "Revenue Increase", sub: "within 90 days" },
+              { value: "14", label: "Days to Launch", sub: "average delivery" },
+              { value: "98%", label: "Client Retention", sub: "come back for more" },
+            ].map((metric, i) => (
+              <motion.div key={metric.label} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                className="text-center p-6 rounded-2xl border border-bd bg-card hover:-translate-y-1 transition-all">
+                <div className="font-display font-extrabold text-4xl lg:text-5xl text-pink mb-1">{metric.value}</div>
+                <div className="font-display font-bold text-sm text-wh mb-0.5">{metric.label}</div>
+                <div className="text-[11px] text-dm">{metric.sub}</div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Testimonial */}
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-3xl mx-auto">
+            <div className="relative rounded-3xl overflow-hidden">
+              <div className="absolute inset-0 rounded-3xl" style={{ background: "conic-gradient(from 180deg, var(--pink), #C05A35, #8B3A1F, var(--pink), #F5A68A, var(--pink))", padding: "1px" }} />
+              <div className="relative bg-card rounded-3xl p-8 md:p-10 m-px">
+                <div className="absolute top-4 right-6 md:top-6 md:right-10 select-none pointer-events-none">
+                  <span className="font-display text-[120px] leading-none text-pink/[0.07]">&ldquo;</span>
+                </div>
+                <div className="relative z-10">
+                  <div className="flex gap-1 mb-5">{[...Array(5)].map((_, i) => <span key={i} className="text-base" style={{ color: "#F59E0B" }}>&#x2B50;</span>)}</div>
+                  <p className="text-lg md:text-xl text-wh leading-relaxed font-display font-medium mb-6">
+                    &ldquo;Atif delivered a complete system that transformed our operations. What used to take 4 hours daily now runs on autopilot. The ROI was visible within the first week.&rdquo;
+                  </p>
+                  <div className="flex items-center gap-4 pt-5 border-t border-bd">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center font-display font-bold text-sm text-white" style={{ background: "var(--pink)" }}>DR</div>
+                    <div>
+                      <div className="font-display font-bold text-wh">Dean Russell</div>
+                      <div className="text-sm text-gr">Author & Creative Director</div>
+                    </div>
+                    <span className="ml-auto px-3 py-1 rounded-full bg-pink/10 border border-pink/20 text-[10px] font-display font-bold uppercase tracking-widest text-pink hidden sm:block">Verified</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ TECH STACK ═══ */}
       <section className="section-padding">
         <div className="max-w-5xl mx-auto px-4">
@@ -323,14 +512,20 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
       {/* ═══ 5. THE PROMISE ═══ */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="relative overflow-hidden rounded-3xl p-10 md:p-14 text-center"
-            style={{ background: "var(--pink)" }}>
-            <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+          <div className="relative overflow-hidden rounded-3xl p-10 md:p-16 text-center"
+            style={{ background: "linear-gradient(135deg, #E07A5F 0%, #C05A35 50%, #E07A5F 100%)" }}>
+            <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-white/5 blur-3xl pointer-events-none" />
             <div className="relative z-10">
-              <Check className="w-14 h-14 mx-auto mb-5 text-white/80" strokeWidth={1.5} />
+              <div className="w-20 h-20 rounded-2xl bg-white/15 flex items-center justify-center mx-auto mb-6">
+                <Shield className="w-10 h-10 text-white" strokeWidth={1.2} />
+              </div>
               <p className="text-[10px] uppercase tracking-[0.3em] font-bold mb-3 text-white/80">The promise</p>
               <h2 className="font-display font-extrabold text-3xl lg:text-5xl tracking-tight leading-[1] mb-5" style={{ color: "#FFFFFF" }}>
                 Live in 14 days.<br />
@@ -415,6 +610,9 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
       {/* ═══ 7. FAQ ═══ */}
       <section className="section-padding">
         <div className="max-w-4xl mx-auto px-4">
@@ -453,9 +651,12 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-pink/20 to-transparent" />
+
       {/* ═══ 8. GET STARTED — 2 cards ═══ */}
       <section className="section-padding relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full bg-pink/[0.05] blur-[160px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full bg-pink/[0.06] blur-[180px]" />
         <div className="relative max-w-5xl mx-auto px-4">
           <div className="text-center mb-10">
             <p className="text-[10px] uppercase tracking-[0.3em] text-pink font-display font-bold mb-3">Get started</p>
@@ -472,7 +673,7 @@ export function ServiceDetail({ service }: { service: Service }) {
 
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
             {/* Book the call */}
-            <div className="bg-card border border-bd rounded-3xl p-8 hover:border-pink/30 transition">
+            <div className="bg-card border border-bd rounded-3xl p-8 hover:border-pink/30 hover:shadow-[0_8px_40px_rgba(224,122,95,0.06)] transition-all">
               <div className="w-12 h-12 rounded-xl bg-pink/10 flex items-center justify-center mb-5">
                 <Phone className="w-6 h-6 text-pink" />
               </div>
@@ -488,7 +689,7 @@ export function ServiceDetail({ service }: { service: Service }) {
             </div>
 
             {/* WhatsApp */}
-            <div className="bg-card border border-bd rounded-3xl p-8 hover:border-[#25D366]/30 transition">
+            <div className="bg-card border border-bd rounded-3xl p-8 hover:border-[#25D366]/30 hover:shadow-[0_8px_40px_rgba(37,211,102,0.06)] transition-all">
               <div className="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center mb-5">
                 <MessageCircle className="w-6 h-6 text-[#25D366]" />
               </div>
