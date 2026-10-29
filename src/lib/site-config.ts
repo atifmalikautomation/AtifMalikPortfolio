@@ -196,6 +196,310 @@ export const siteConfig = {
         "Scalable custom architecture",
       ],
     },
+    {
+      id: "gohighlevel-crm",
+      number: "09",
+      title: "GoHighLevel CRM",
+      slug: "gohighlevel-crm",
+      description:
+        "Full GoHighLevel account setup — pipelines, automations, sub-accounts, funnels, and follow-up sequences configured for your exact sales process.",
+      tools: ["GoHighLevel", "Twilio", "Stripe", "Calendly", "Zapier", "Webhooks"],
+      problems: [
+        "CRM is set up wrong and generates no pipeline",
+        "Leads enter GHL but never get followed up automatically",
+        "Funnels and automation workflows sit unused or broken",
+      ],
+      outcomes: [
+        "Fully configured GHL pipeline that captures and closes leads",
+        "Automated follow-up sequences running 24/7",
+        "Integrated funnels, bookings, and payments in one system",
+      ],
+    },
+    {
+      id: "wordpress-development",
+      number: "10",
+      title: "WordPress Development",
+      slug: "wordpress-development",
+      description:
+        "Custom WordPress builds — pixel-perfect themes, bespoke plugins, WooCommerce stores, and performance optimization for Core Web Vitals.",
+      tools: ["WordPress", "WooCommerce", "ACF", "Elementor", "WP Rocket", "Cloudflare"],
+      problems: [
+        "Site loads slowly and tanks SEO rankings",
+        "Generic template looks cheap and doesn't convert",
+        "WooCommerce setup is broken or missing key features",
+      ],
+      outcomes: [
+        "Sub-2s load times with Core Web Vitals passing",
+        "Custom-designed site that reflects the brand premium",
+        "WooCommerce store with full checkout and inventory automation",
+      ],
+    },
+    {
+      id: "youtube-automation",
+      number: "11",
+      title: "YouTube Automation",
+      slug: "youtube-automation",
+      description:
+        "End-to-end YouTube automation pipeline — AI-generated thumbnails, bulk uploading, SEO-optimized metadata, and analytics dashboards.",
+      tools: ["YouTube API", "n8n", "OpenAI", "Canva API", "TubeBuddy", "Airtable"],
+      problems: [
+        "Uploading and optimizing videos manually kills hours per week",
+        "Thumbnails and titles aren't tested so CTR stays flat",
+        "No system for tracking what content actually performs",
+      ],
+      outcomes: [
+        "Automated upload pipeline from script to published video",
+        "AI-generated thumbnails with A/B testing built in",
+        "Analytics dashboard showing CTR, watch time, and revenue per video",
+      ],
+    },
+    {
+      id: "email-marketing-automation",
+      number: "12",
+      title: "Email Marketing Automation",
+      slug: "email-marketing-automation",
+      description:
+        "Automated email sequences, broadcast campaigns, list segmentation, and A/B testing systems that convert subscribers into paying customers.",
+      tools: ["Klaviyo", "ActiveCampaign", "Mailchimp", "n8n", "Postmark", "Airtable"],
+      problems: [
+        "Email list is large but open rates and revenue are low",
+        "No onboarding sequence turns new subscribers into buyers",
+        "Campaigns are manually sent instead of running automatically",
+      ],
+      outcomes: [
+        "Automated welcome, nurture, and win-back sequences live",
+        "Segmented lists with targeted messaging per audience segment",
+        "Measurable lift in email-attributed revenue within 30 days",
+      ],
+    },
+    {
+      id: "funnels-landing-pages",
+      number: "13",
+      title: "Funnels & Landing Pages",
+      slug: "funnels-landing-pages",
+      description:
+        "High-converting sales funnels and landing pages — lead magnets, upsell flows, A/B testing frameworks, and full analytics instrumentation.",
+      tools: ["ClickFunnels", "GoHighLevel", "Webflow", "Hotjar", "Google Optimize", "Stripe"],
+      problems: [
+        "Paid traffic lands on the site but conversion rate is under 2%",
+        "No upsell or follow-up flow captures additional revenue",
+        "Landing pages are untested and based on guesswork",
+      ],
+      outcomes: [
+        "Conversion-engineered funnel designed to hit 4-8% opt-in rates",
+        "Upsell and email sequences that increase average order value",
+        "A/B testing framework so every iteration improves performance",
+      ],
+    },
+    {
+      id: "booking-systems",
+      number: "14",
+      title: "Booking Systems",
+      slug: "booking-systems",
+      description:
+        "Automated appointment scheduling with calendar sync, pre-meeting reminders, intake forms, and no-show follow-up sequences.",
+      tools: ["Calendly", "Cal.com", "GoHighLevel", "Google Calendar", "Twilio", "n8n"],
+      problems: [
+        "Back-and-forth scheduling wastes time every day",
+        "No-show rates are high with no automated reminder system",
+        "Booking confirmation and intake are manual and slow",
+      ],
+      outcomes: [
+        "Self-service booking live and embedded across website and campaigns",
+        "Automated SMS/email reminders that cut no-shows by 60%+",
+        "Intake forms, confirmations, and CRM sync handled automatically",
+      ],
+    },
+    {
+      id: "saas-mvp-development",
+      number: "15",
+      title: "SaaS MVP Development",
+      slug: "saas-mvp-development",
+      description:
+        "Rapid SaaS MVP builds — user auth, billing, dashboards, and core feature set shipped in weeks so you can validate before investing further.",
+      tools: ["Next.js", "Supabase", "Prisma", "Stripe", "Clerk", "Vercel"],
+      problems: [
+        "Idea is stuck in planning because building feels too expensive",
+        "No working product means no investor conversations or user validation",
+        "Offshore builds are slow, over-budget, and miss the spec",
+      ],
+      outcomes: [
+        "Working MVP with auth, billing, and core features in 4-6 weeks",
+        "Production-ready codebase you own outright",
+        "Launchable product for user testing and early revenue",
+      ],
+    },
+    {
+      id: "social-media-automation",
+      number: "16",
+      title: "Social Media Automation",
+      slug: "social-media-automation",
+      description:
+        "Automated content scheduling, cross-platform publishing, engagement monitoring, and performance reporting across Instagram, TikTok, LinkedIn, and more.",
+      tools: ["n8n", "Buffer", "Make", "Instagram API", "LinkedIn API", "Airtable"],
+      problems: [
+        "Posting is inconsistent because it's done manually when time allows",
+        "Content sits on one platform instead of reaching every channel",
+        "No data on which posts actually drive followers or leads",
+      ],
+      outcomes: [
+        "Automated publishing pipeline posting daily without manual effort",
+        "Single piece of content repurposed across 4+ platforms automatically",
+        "Weekly analytics report showing top-performing content and growth",
+      ],
+    },
+    {
+      id: "revops-systems",
+      number: "17",
+      title: "RevOps Systems",
+      slug: "revops-systems",
+      description:
+        "Revenue operations infrastructure — pipeline analytics, forecasting models, attribution tracking, and dashboards that make every deal visible.",
+      tools: ["HubSpot", "Salesforce", "Looker Studio", "n8n", "BigQuery", "Stripe"],
+      problems: [
+        "No one knows which channel actually drives closed revenue",
+        "Sales forecasts are gut-feel rather than data-driven",
+        "Marketing and sales operate in silos with no shared pipeline view",
+      ],
+      outcomes: [
+        "Full-funnel attribution showing exact revenue per channel",
+        "Live forecasting dashboard with pipeline stage accuracy",
+        "Unified RevOps system aligning marketing, sales, and finance data",
+      ],
+    },
+    {
+      id: "document-automation",
+      number: "18",
+      title: "Document Automation",
+      slug: "document-automation",
+      description:
+        "Automated generation of proposals, contracts, invoices, and reports — personalized, formatted, and delivered without touching a keyboard.",
+      tools: ["n8n", "PandaDoc", "DocuSign", "Google Docs API", "OpenAI", "Airtable"],
+      problems: [
+        "Writing proposals and contracts manually consumes hours per deal",
+        "Documents contain errors because they're copy-pasted from templates",
+        "Invoicing is delayed, leading to late payments and cash flow issues",
+      ],
+      outcomes: [
+        "Proposals auto-generated from CRM data in under 60 seconds",
+        "Contracts sent for e-signature without manual intervention",
+        "Invoices auto-created and delivered on project milestone triggers",
+      ],
+    },
+    {
+      id: "ai-identity-design",
+      number: "19",
+      title: "AI Identity Design",
+      slug: "ai-identity-design",
+      description:
+        "AI-generated brand identities — logos, colour palettes, typography systems, brand kits, and social media templates built for visual consistency at scale.",
+      tools: ["Midjourney", "Adobe Firefly", "Figma", "Canva API", "Ideogram", "Recraft"],
+      problems: [
+        "Brand looks inconsistent across platforms and materials",
+        "Professional design agency quotes are out of budget",
+        "Social templates take too long to produce for each post",
+      ],
+      outcomes: [
+        "Complete brand kit with logo, colours, and typography delivered in days",
+        "50+ ready-to-use social media templates in brand style",
+        "Visual identity guidelines so every asset stays on-brand",
+      ],
+    },
+    {
+      id: "analytics-tracking",
+      number: "20",
+      title: "Analytics & Tracking",
+      slug: "analytics-tracking",
+      description:
+        "GA4 setup, conversion event tracking, UTM management, custom Looker Studio dashboards, and attribution models that show exactly where revenue comes from.",
+      tools: ["GA4", "Google Tag Manager", "Looker Studio", "Hotjar", "Meta Pixel", "Segment"],
+      problems: [
+        "GA4 is installed but firing incorrectly so data can't be trusted",
+        "No visibility on which ad campaigns are producing actual conversions",
+        "Marketing decisions are made without reliable performance data",
+      ],
+      outcomes: [
+        "Accurate GA4 and conversion tracking validated and fully firing",
+        "Custom Looker Studio dashboard updated in real time",
+        "Attribution model that maps every sale back to its source channel",
+      ],
+    },
+    {
+      id: "zapier-make-setup",
+      number: "21",
+      title: "Zapier / Make Setup",
+      slug: "zapier-make-setup",
+      description:
+        "Professional Zapier and Make workflow builds — multi-step automations, error handling, filters, and cross-app data routing.",
+      tools: ["Zapier", "Make", "Webhooks", "Google Sheets", "Slack", "Airtable"],
+      problems: [
+        "Zaps keep breaking and no one knows until data is already lost",
+        "Workflows are single-step hacks that don't handle edge cases",
+        "Tools are connected but data doesn't map correctly between them",
+      ],
+      outcomes: [
+        "Robust multi-step workflows with error handling and alerting",
+        "Reliable data flow between all key business tools",
+        "Documented automation map so the team can maintain and extend it",
+      ],
+    },
+    {
+      id: "crm-implementation",
+      number: "22",
+      title: "CRM Implementation",
+      slug: "crm-implementation",
+      description:
+        "Full CRM implementation — system selection, data migration, pipeline design, automation rules, and team onboarding for HubSpot, Salesforce, or Pipedrive.",
+      tools: ["HubSpot", "Salesforce", "Pipedrive", "n8n", "Zapier", "Google Sheets"],
+      problems: [
+        "Leads and deals are tracked in spreadsheets with no pipeline visibility",
+        "CRM was set up once but the team doesn't actually use it",
+        "Historical contact data is stuck in old tools and can't be migrated",
+      ],
+      outcomes: [
+        "CRM configured to mirror the real sales process end-to-end",
+        "Historical data migrated and deduplicated cleanly",
+        "Team trained and actively working deals inside the CRM from day one",
+      ],
+    },
+    {
+      id: "lead-generation",
+      number: "23",
+      title: "Lead Generation",
+      slug: "lead-generation",
+      description:
+        "End-to-end lead generation systems — lead magnets, capture forms, instant qualification, and automated nurture sequences that move leads to booked calls.",
+      tools: ["GoHighLevel", "n8n", "ActiveCampaign", "Typeform", "Meta Ads API", "Calendly"],
+      problems: [
+        "Website gets traffic but generates almost no inbound leads",
+        "Lead forms collect contacts but no one follows up systematically",
+        "Unqualified leads waste sales team time on discovery calls",
+      ],
+      outcomes: [
+        "Lead magnet and capture system generating daily inbound leads",
+        "Automated qualification flow filtering leads before any human touch",
+        "Nurture sequence moving cold leads to booked calls on autopilot",
+      ],
+    },
+    {
+      id: "automation-strategy",
+      number: "24",
+      title: "Automation Strategy",
+      slug: "automation-strategy",
+      description:
+        "A structured automation audit and roadmap — mapping your current processes, identifying high-ROI opportunities, selecting the right tools, and delivering a prioritised implementation plan.",
+      tools: ["Miro", "Notion", "Loom", "Airtable", "Google Sheets", "Custom Frameworks"],
+      problems: [
+        "Don't know where to start with automation or which tools to choose",
+        "Teams are buying tools that overlap and solve nothing cohesively",
+        "Previous automation projects failed without clear ROI or adoption",
+      ],
+      outcomes: [
+        "Full process audit identifying top 5 automation opportunities by ROI",
+        "Tool stack recommendation tailored to budget and existing infrastructure",
+        "90-day implementation roadmap with effort, cost, and payback estimates",
+      ],
+    },
   ],
 
   process: [
