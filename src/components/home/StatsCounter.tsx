@@ -10,11 +10,14 @@ const stats = [
 ];
 
 function AnimatedNumber({ target, suffix }: { target: number; suffix: string }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
+    // Reset to 0 for animation on client only
+    setCount(0);
+
     const el = ref.current;
     if (!el) return;
 
