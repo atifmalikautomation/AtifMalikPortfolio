@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { CalculatorPage } from "./CalculatorPage";
+import { SchemaScript } from "@/components/seo/SchemaScript";
+import { buildCalculatorSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "AI Automation ROI Calculator — Free Tool by Atif Malik",
@@ -9,5 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default function Calculator() {
-  return <CalculatorPage />;
+  return (
+    <>
+      <SchemaScript data={buildCalculatorSchema()} />
+      <CalculatorPage />
+    </>
+  );
 }

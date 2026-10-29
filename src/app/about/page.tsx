@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { AboutContent } from "./AboutContent";
+import { SchemaScript } from "@/components/seo/SchemaScript";
+import { buildAboutSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "About Atif Malik — AI Growth Systems Expert",
@@ -14,5 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutContent />;
+  return (
+    <>
+      <SchemaScript data={buildAboutSchema()} />
+      <AboutContent />
+    </>
+  );
 }

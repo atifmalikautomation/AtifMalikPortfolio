@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { ArticleContent } from "./ArticleContent";
+import { SchemaScript } from "@/components/seo/SchemaScript";
+import { buildInsightPageSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return siteConfig.insights.map((a) => ({ slug: a.slug }));
@@ -39,5 +41,10 @@ export default async function ArticlePage({
   const { slug } = await params;
   const article = siteConfig.insights.find((a) => a.slug === slug);
   if (!article) notFound();
-  return <ArticleContent article={article} />;
+  return (
+    <>
+      <SchemaScript data={buildInsightPageSchema(article)} />
+      <ArticleContent article={article} />
+    </>
+  );
 }
