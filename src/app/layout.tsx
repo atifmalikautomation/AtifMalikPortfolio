@@ -69,8 +69,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Non-render-blocking font load: Inter already via next/font; load display fonts async */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Playfair+Display:ital,wght@1,500;1,600;1,700&display=swap"
           rel="stylesheet"
         />
       </head>
