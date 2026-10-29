@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ContactContent } from "./ContactContent";
+import { SchemaScript } from "@/components/seo/SchemaScript";
+import { buildContactSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Contact — Let's Build Your AI System",
@@ -9,5 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactContent />;
+  return (
+    <>
+      <SchemaScript data={buildContactSchema()} />
+      <ContactContent />
+    </>
+  );
 }

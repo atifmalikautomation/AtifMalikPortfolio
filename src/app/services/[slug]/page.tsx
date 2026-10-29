@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { ServiceDetail } from "./ServiceDetail";
+import { SchemaScript } from "@/components/seo/SchemaScript";
+import { buildServicePageSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return siteConfig.services.map((s) => ({ slug: s.slug }));
@@ -37,5 +39,10 @@ export default async function ServicePage({
   const { slug } = await params;
   const service = siteConfig.services.find((s) => s.slug === slug);
   if (!service) notFound();
-  return <ServiceDetail service={service} />;
+  return (
+    <>
+      <SchemaScript data={buildServicePageSchema(service)} />
+      <ServiceDetail service={service} />
+    </>
+  );
 }

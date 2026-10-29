@@ -13,6 +13,7 @@ Atif Malik is Pakistan's No.1 AI Video Production and Automation specialist with
 - AI Websites & Web Apps: Premium Next.js sites, SaaS MVPs, dashboards, custom tools
 - Lead & Sales Automation: Lead capture, qualification, follow-up sequences, CRM, booking automation
 - Custom AI Systems: Bespoke architecture for complex requirements
+- AI Graphic Novels: Full novel-to-graphic-novel conversion, character design, 300 DPI print-ready pages for Amazon KDP
 
 ## Key Pages
 - Home: https://atifmalik.me/
@@ -23,11 +24,12 @@ Atif Malik is Pakistan's No.1 AI Video Production and Automation specialist with
 - Book a Call: https://atifmalik.me/book
 - ROI Calculator: https://atifmalik.me/calculator
 - Insights / Blog: https://atifmalik.me/insights
+- Video Portfolio: https://atifmalik.me/videos
 
 ## Pricing
-- AI Starter: From $500 (single automation/chatbot, 2-week delivery, 30-day support)
-- AI Growth System: From $2,000 (up to 5 workflows + multi-platform chatbot, 4-week delivery, 60-day support)
-- AI Scale System: From $5,000 (unlimited workflows + AI agents + video pipeline, 6-8 weeks, 90-day support)
+- AI Starter: From $500 setup + $99/mo (1 automation workflow, basic chatbot, CRM integration, 2-week delivery, 30-day support)
+- AI Growth System: From $2,500 setup + $249/mo (up to 10 workflows, AI video production, multi-platform chatbot, full CRM + pipeline, 4-week delivery, 90-day support)
+- AI Scale System: From $5,000 (unlimited workflows, AI agent deployment, full sales automation, AI video pipeline, custom dashboards, 6-8 weeks, 90-day support + optimization)
 - Custom AI Build: Custom quote for bespoke architecture
 
 ## Location

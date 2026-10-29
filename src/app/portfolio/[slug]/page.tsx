@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 import { CaseStudyContent } from "./CaseStudyContent";
+import { SchemaScript } from "@/components/seo/SchemaScript";
+import { buildPortfolioPageSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
   return siteConfig.portfolio.map((p) => ({ slug: p.slug }));
@@ -37,5 +39,10 @@ export default async function CaseStudyPage({
   const { slug } = await params;
   const project = siteConfig.portfolio.find((p) => p.slug === slug);
   if (!project) notFound();
-  return <CaseStudyContent project={project} />;
+  return (
+    <>
+      <SchemaScript data={buildPortfolioPageSchema(project)} />
+      <CaseStudyContent project={project} />
+    </>
+  );
 }
