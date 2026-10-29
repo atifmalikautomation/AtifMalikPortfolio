@@ -92,21 +92,21 @@ export function FAQ() {
                   />
                 </button>
 
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 md:px-6 pb-5 md:pb-6 pl-[4.75rem]">
-                        <p className="text-gr text-sm md:text-base leading-relaxed">{item.a}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* SSR-visible answer for crawlers, visually toggled for users */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
+                  aria-hidden={!isOpen}
+                >
+                  <div className="px-5 md:px-6 pb-5 md:pb-6 pl-[4.75rem]">
+                    <p className="text-gr text-sm md:text-base leading-relaxed">{item.a}</p>
+                  </div>
+                </div>
+                {/* Hidden SSR fallback so bots always see the answer text */}
+                <noscript>
+                  <div className="px-5 md:px-6 pb-5 md:pb-6 pl-[4.75rem]">
+                    <p className="text-gr text-sm md:text-base leading-relaxed">{item.a}</p>
+                  </div>
+                </noscript>
               </motion.div>
             );
           })}

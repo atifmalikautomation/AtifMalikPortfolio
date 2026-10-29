@@ -41,7 +41,7 @@ export function ServicesGrid() {
           className="text-center mb-6"
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-sm font-display font-semibold text-wh">
-            🛠️ What I Build
+            <span aria-hidden="true">🛠️</span> What I Build
           </span>
         </motion.div>
 

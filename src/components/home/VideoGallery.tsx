@@ -209,7 +209,7 @@ export function VideoGallery() {
             className="text-center"
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-xs font-display font-bold uppercase tracking-widest text-pink mb-6">
-              🎬 AI Video Production
+              <span aria-hidden="true">🎬</span> AI Video Production
             </span>
 
             <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-3 leading-tight">

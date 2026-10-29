@@ -20,7 +20,7 @@ export function Pricing() {
           className="text-center mb-12 md:mb-14"
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-sm font-display font-semibold text-wh mb-6">
-            💰 Investment
+            <span aria-hidden="true">💰</span> Investment
           </span>
 
           <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-4 leading-tight">

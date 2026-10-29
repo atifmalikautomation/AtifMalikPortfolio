@@ -82,8 +82,6 @@ function TestimonialCard({ t }: { t: typeof allTestimonials[0] }) {
 }
 
 function ScrollColumn({ items, direction }: { items: typeof allTestimonials; direction: "up" | "down" }) {
-  const doubled = [...items, ...items, ...items];
-
   return (
     <div className="h-[500px] overflow-hidden relative">
       {/* Fade top/bottom */}
@@ -91,8 +89,17 @@ function ScrollColumn({ items, direction }: { items: typeof allTestimonials; dir
       <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-bg to-transparent z-10 pointer-events-none" />
 
       <div className={`flex flex-col ${direction === "up" ? "animate-scroll-up" : "animate-scroll-down"}`}>
-        {doubled.map((t, i) => (
-          <TestimonialCard key={`${t.initials}-${i}`} t={t} />
+        {/* Canonical copy — visible to crawlers */}
+        {items.map((t) => (
+          <TestimonialCard key={t.initials} t={t} />
+        ))}
+        {/* Animation clones — hidden from crawlers */}
+        {[1, 2].map((clone) => (
+          <div key={clone} aria-hidden="true">
+            {items.map((t, i) => (
+              <TestimonialCard key={`${t.initials}-clone-${clone}-${i}`} t={t} />
+            ))}
+          </div>
         ))}
       </div>
     </div>
@@ -111,7 +118,7 @@ export function Testimonials() {
           className="text-center mb-10 md:mb-14"
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-bd text-xs font-display font-bold uppercase tracking-widest text-pink mb-6">
-            🧾 Receipts
+            <span aria-hidden="true">🧾</span> Receipts
           </span>
 
           <h2 className="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-wh mb-3 leading-tight">
