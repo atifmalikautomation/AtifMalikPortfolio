@@ -2,7 +2,16 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, X, Volume2, VolumeX } from "lucide-react";
+import { Play, X, Volume2, VolumeX, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+
+const bayouSamples = [
+  { id: "bs1", src: "/images/bayou-savage/page-01.jpeg", caption: "Page 1" },
+  { id: "bs2", src: "/images/bayou-savage/page-02.jpeg", caption: "Page 2" },
+  { id: "bs3", src: "/images/bayou-savage/page-03.jpeg", caption: "Page 3" },
+  { id: "bs4", src: "/images/bayou-savage/page-04.jpeg", caption: "Page 4" },
+  { id: "bs5", src: "/images/bayou-savage/page-05.png", caption: "Page 5" },
+];
 
 const reels = [
   { id: "ig1", src: "/videos/ig_dxxqi7fk_aj.mp4", category: "Social Content" },
@@ -84,6 +93,101 @@ function LazyVideoThumb({ src, onClick }: { src: string; onClick: () => void }) 
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a2e] to-[#16213e] animate-pulse" />
       )}
     </div>
+  );
+}
+
+function BayouGallery() {
+  const [activeIdx, setActiveIdx] = useState<number | null>(null);
+
+  return (
+    <>
+      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+        {bayouSamples.map((page, i) => (
+          <motion.div
+            key={page.id}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="group cursor-pointer flex-shrink-0 snap-start"
+            onClick={() => setActiveIdx(i)}
+          >
+            <div className="w-[150px] sm:w-[180px] md:w-[200px] aspect-[2/3] rounded-xl border-2 border-bd overflow-hidden relative bg-black hover:border-pink transition-colors duration-200 shadow-lg hover:shadow-pink/20">
+              <Image
+                src={page.src}
+                alt={page.caption}
+                fill
+                className="object-cover group-hover:scale-[1.03] transition-transform duration-300"
+                sizes="200px"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2 pt-6">
+                <span className="text-white text-[11px] font-display font-bold">{page.caption}</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {activeIdx !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setActiveIdx(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="relative max-w-md w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setActiveIdx(null)}
+                className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
+              >
+                <X className="w-5 h-5 text-white" />
+              </button>
+
+              <button
+                onClick={() => setActiveIdx(Math.max(0, activeIdx - 1))}
+                className="absolute left-2 sm:left-[-48px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 sm:bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
+                style={{ display: activeIdx === 0 ? "none" : "flex" }}
+              >
+                <ChevronLeft className="w-5 h-5 text-white" />
+              </button>
+
+              <button
+                onClick={() => setActiveIdx(Math.min(bayouSamples.length - 1, activeIdx + 1))}
+                className="absolute right-2 sm:right-[-48px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 sm:bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors z-10"
+                style={{ display: activeIdx === bayouSamples.length - 1 ? "none" : "flex" }}
+              >
+                <ChevronRight className="w-5 h-5 text-white" />
+              </button>
+
+              <div className="relative aspect-[2/3] w-full rounded-2xl overflow-hidden border border-white/10">
+                <Image
+                  src={bayouSamples[activeIdx].src}
+                  alt={bayouSamples[activeIdx].caption}
+                  fill
+                  className="object-contain bg-black"
+                  sizes="(max-width: 640px) 90vw, 450px"
+                  priority
+                />
+              </div>
+
+              <p className="text-center text-white/70 text-xs font-display mt-3">
+                {bayouSamples[activeIdx].caption} of 145
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -191,6 +295,42 @@ export default function VideosPage() {
           </div>
         </div>
 
+        {/* Bayou Savage - AI Graphic Novel */}
+        <div className="max-w-6xl mx-auto px-5 mt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-center mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink/10 border border-pink/20 text-xs font-display font-bold uppercase tracking-widest text-pink mb-3">
+                Featured Case Study
+              </span>
+              <h2 className="font-display font-extrabold text-2xl md:text-3xl text-wh mb-2">
+                Bayou Savage:{" "}
+                <span
+                  className="text-pink"
+                  style={{
+                    fontFamily: "'Playfair Display', Georgia, serif",
+                    fontStyle: "italic",
+                    fontWeight: 600,
+                  }}
+                >
+                  Guitar Ghost Fighter
+                </span>
+              </h2>
+              <p className="text-gr text-sm max-w-xl mx-auto">
+                145-page graphic novel — novel-to-comic adaptation delivered as print-ready PDF + EPUB for Amazon KDP publishing.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-pink/20 bg-gradient-to-br from-card to-card/80 p-5 md:p-7">
+              <BayouGallery />
+            </div>
+          </motion.div>
+        </div>
+
         {/* Write Your Idea */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -242,6 +382,7 @@ export default function VideosPage() {
             </form>
           </div>
         </motion.div>
+
       </div>
 
       {/* Fullscreen Modal */}
