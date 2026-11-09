@@ -7,7 +7,7 @@ export const siteConfig = {
   ogImage: "/opengraph-image",
 
   contact: {
-    email: "atifmalikfreelancer@gmail.com",
+    email: "info@atifmalik.me",
     phone: "+92-319-678-0720",
     whatsapp: "https://wa.me/923196780720",
     calendly: "https://cal.com/atifmalik/30min",

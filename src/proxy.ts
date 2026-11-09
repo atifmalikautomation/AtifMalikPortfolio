@@ -11,14 +11,12 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const host = req.headers.get("host") || "";
 
-  // Redirect non-canonical hosts to canonical
-  // TODO: Remove .vercel.app exception once DNS points atifmalik.me to Vercel
+  // Redirect non-canonical hosts to canonical (atifmalik.me)
   if (
     host &&
     host !== CANONICAL_HOST &&
     host !== `www.${CANONICAL_HOST}` &&
-    !host.startsWith("localhost") &&
-    !host.endsWith(".vercel.app")
+    !host.startsWith("localhost")
   ) {
     const url = new URL(req.url);
     url.host = CANONICAL_HOST;

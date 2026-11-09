@@ -79,7 +79,7 @@ export function BookCallModal({ open, onClose }: { open: boolean; onClose: () =>
       footer={
         <div className="flex items-center justify-between gap-3 text-sm">
           <a href="https://cal.com/atifmalik/30min" target="_blank" rel="noreferrer" className="font-semibold transition" style={{ color: "#E07A5F" }}>Open in new tab ↗</a>
-          <a href="mailto:atifmalikfreelancer@gmail.com?subject=Booking%20a%20call" className="font-semibold transition" style={{ color: "rgba(0,0,0,0.4)" }}>Prefer email?</a>
+          <a href="mailto:info@atifmalik.me?subject=Booking%20a%20call" className="font-semibold transition" style={{ color: "rgba(0,0,0,0.4)" }}>Prefer email?</a>
         </div>
       }
     >

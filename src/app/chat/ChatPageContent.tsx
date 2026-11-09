@@ -120,7 +120,7 @@ const TOPICS: Topic[] = [
     bubbles: [
       { kind: "text", text: "Let's build something good together 🙌 Easiest way in is to grab a quick call, or just drop me your project details right here. I'll scope it out and get back to you within 24 hours." },
       { kind: "actions", items: [{ label: "📅 Book a call", panel: "book" }, { label: "🚀 Start a project", panel: "project" }] },
-      { kind: "text", text: "Or reach me directly:\n📧 atifmalikfreelancer@gmail.com\n📱 WhatsApp: +92-319-678-0720" },
+      { kind: "text", text: "Or reach me directly:\n📧 info@atifmalik.me\n📱 WhatsApp: +92-319-678-0720" },
     ],
     followups: ["pricing", "work", "services"],
   },
